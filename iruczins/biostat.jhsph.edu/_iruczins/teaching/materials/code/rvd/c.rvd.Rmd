@@ -1,0 +1,273 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+options(width=110)
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Random Variables                                       
+
+### The Binomial distribution
+
+The example from class: the number of red balls in 9 draws with replacement from an urn for which the proportion of red balls is 20%.
+
+##### The Binomial coefficient
+
+One red ball.
+
+```{r}
+choose(9,1)
+```
+
+Two red balls.
+
+```{r}
+choose(9,2)
+factorial(9)
+factorial(2)
+factorial(9-2)
+factorial(9)/(factorial(2)*factorial(9-2))
+```
+
+All possibilities.
+
+```{r}
+choose(9,0:9)
+```
+
+##### The outcome probabilities
+
+No red balls.
+ 
+```{r}
+(1-0.2)^9
+choose(9,0)*(0.2^0)*(0.8^9)
+dbinom(0,9,0.2)
+```
+
+All red balls.
+
+```{r}
+0.2^9
+choose(9,9)*(0.2^9)*(0.8^0)
+dbinom(9,9,0.2)
+```
+
+One red ball.
+
+```{r}
+choose(9,1)*(0.2^1)*(0.8^8)
+dbinom(1,9,0.2)
+```
+
+All possibilities.
+
+```{r}
+dbinom(0:9,9,0.2)
+barplot(dbinom(0:9,9,0.2),names=0:9)
+```
+
+##### The cumulative distribution function
+
+```{r}
+dbinom(0:4,9,0.2)
+sum(dbinom(0:4,9,0.2))
+pbinom(4,9,0.2)
+1- pbinom(4,9,0.2)
+pbinom(4,9,0.2,lower=FALSE)
+```
+
+##### Simulate Binomial outcomes
+
+```{r}
+set.seed(4)
+rbinom(1,9,0.2)
+rbinom(10,9,0.2)
+x <- rbinom(100,9,0.2)
+table(x)
+prop.table(table(x))
+table(x)/length(x)
+round(dbinom(0:9,9,0.2),2)
+```
+
+### Poisson distribution
+
+##### The probability function
+
+```{r}
+dpois(3,5)
+exp(-5)*(5^3)/factorial(3)
+dpois(0:15,5)
+barplot(dpois(0:15,5),names=0:15)
+```
+
+##### The cumulative distribution function
+
+```{r}
+dpois(0:7,5)
+sum(dpois(0:7,5))
+ppois(7,5)
+1 - ppois(7,5)
+ppois(7,5,lower=FALSE)
+```
+
+##### Simulate Poisson outcomes
+
+```{r}
+rpois(1,5)
+rpois(20,5)
+x <- rpois(100,5)
+table(x)
+prop.table(table(x))
+round(dpois(0:10,5),2)
+```
+
+### Poisson approximation for the Binomial
+
+```{r}
+n <- 50000
+p <- 1/100000
+lambda <- n*p
+lambda
+dbinom(0:5,n,p)
+dpois(0:5,lambda)
+dbinom(0:5,n,p) - dpois(0:5,lambda)
+```
+
+### The Gaussian distribution
+
+##### The N(0,1) density function
+
+```{r}
+curve(dnorm(x), from=-3, to=3)
+curve(dnorm(x), from=-3, to=3, ylab="f(x)", main="Standard Gaussian")
+dnorm(0)
+dnorm(1)
+dnorm(3)
+```
+
+##### The N(0,1) cumulative distribution function
+
+```{r}
+curve(pnorm(x), from=-3, to=3, ylab="P(X < x)", main="CDF")
+pnorm(0)
+pnorm(2)
+pnorm(-2)
+pnorm(2) - pnorm(-2)
+```
+
+##### The N(0,1) inverse cumulative distribution function
+
+```{r}
+curve(qnorm(x), from=0, to=1, main="Inverse CDF", xlab="p", ylab="qnorm(p)")
+qnorm(0.5)
+qnorm(0.95)
+qnorm(0.975)
+qnorm(0.025)
+```
+
+##### Area under the curve
+
+Highlight 95% of the area under the standard Gaussian N(0,1).
+
+```{r}
+L <- qnorm(0.025)
+L
+U <- qnorm(0.975)
+U
+curve(dnorm(x), from=-4, to=4)
+abline(h=0)
+abline(v=c(L,U), col="red", lty="dotted")
+```
+
+##### Simulation
+
+Simulate some standard Gaussian data, plot the histogram, and superimpose the density.
+
+```{r}
+rnorm(10)
+hist(rnorm(100), breaks=11)
+y <- rnorm(10000)
+hist(y, breaks=seq(-4.5,4.5,by=0.25))
+hist(y, breaks=seq(-4.5,4.5,by=0.25), prob=TRUE)
+curve(dnorm(x), from=-4.5, to=4.5, add=TRUE, col="red", lwd=2)
+```
+
+##### The Normal with a mean of 5 and standard deviation of 2
+
+```{r}
+curve(dnorm(x,mean=5,sd=2), from=-2, to=12, ylab="f(x)", main="Normal(mean=5,sd=2)")
+curve(pnorm(x,mean=5,sd=2), from=-2, to=12, ylab="P(X < x)", main="CDF")
+curve(qnorm(x,mean=5,sd=2), from=0, to=1, main="Inverse CDF", xlab="p", ylab="qnorm(p)")
+```
+
+##### Examples from class
+
+```{r}
+curve(dnorm(x,mean=69,sd=3), from=57, to=81, ylab="f(x)", main="Normal(mean=69,sd=3)")
+```
+
+What proportion of men are taller than 5’7”?
+
+```{r}
+pnorm(67,mean=69,sd=3,lower=FALSE)
+pnorm(67,69,3,lower=FALSE)
+1 - pnorm(67,69,3)
+pnorm((67-69)/3,lower=FALSE)
+pnorm(2/3)
+```
+
+What proportion of men are between 5’3” and 6’?
+
+```{r}
+pnorm(72,69,3)
+pnorm(63,69,3)
+pnorm(72,69,3) - pnorm(63,69,3)
+pnorm((72-69)/3) - pnorm((63-69)/3)
+pnorm(1) - pnorm(-2)
+```
+
+### The Uniform distribution
+
+##### The Uniform (0,1) density function
+
+```{r}
+curve(dunif(x), from=-1, to=2, ylab="f(x)", main="Uniform(0,1)")
+dunif(1)
+dunif(0)
+dunif(0.5)
+dunif(2)
+dunif(-1)
+```
+
+##### The Uniform (0,1) cumulative distribution function
+
+```{r}
+curve(punif(x), from=-1, to=2, ylab="P(X < x)", main="CDF")
+punif(1)
+punif(0)
+punif(0.5)
+```
+
+##### The Uniform (0,1) inverse cumulative distribution function
+
+```{r}
+curve(qunif(x), main="Inverse CDF")
+qunif(0.5)
+qunif(0.95)
+qunif(0.05)
+```
+
+##### The Uniform (0,360)
+
+```{r}
+curve(dunif(x,0,360), from=-40, to=400, ylab="f(x)", main="Uniform(0,360)")
+1/360
+curve(punif(x,0,360), from=-40, to=400, ylab="P(X < x)", main="CDF")
+curve(qunif(x,0,360), main="Inverse CDF")
+qunif(0.5,0,360)
+```
+
+
+
+

@@ -1,0 +1,398 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Hypothesis Testing - Advanced
+
+### Good plot / bad plot
+
+```{r}
+x <- c(15.1,13.1,21.5)
+y <- c(35.1,39.5,58.8)
+
+par(mar=c(4,4,2,1),mfrow=c(1,2),las=1)
+
+barplot(c(mean(x),mean(y)),width=1,space=c(0.5,0.5),
+        col=c("white","gray40"),xlim=c(0,3),names=c("A","B"),
+        ylim=c(0,76))
+segments(1,mean(x),1,mean(x)+sd(x),lwd=2)
+segments(0.8,mean(x)+sd(x),1.2,mean(x)+sd(x),lwd=2)
+segments(2.5,mean(y),2.5,mean(y)+sd(y),lwd=2)
+segments(2.3,mean(y)+sd(y),2.7,mean(y)+sd(y),lwd=2)
+mtext("Bad plot",cex=1.5,line=0.5)
+
+plot(rep(0:1,c(3,3)),c(x,y),xaxt="n",ylim=c(0,76),xlim=c(-0.5,1.5),ylab="",xlab="")
+abline(v=0:1,col="gray40",lty=2)
+points(rep(0:1,c(3,3)),c(x,y),lwd=2)
+mtext("Good plot",cex=1.5,line=0.5)
+xci <- t.test(x)$conf.int
+yci <- t.test(y)$conf.int
+segments(0.25,xci[1],0.25,xci[2],lwd=2,col="blue")
+segments(c(0.23,0.23,0.2),c(xci,mean(x)),c(0.27,0.27,0.3),c(xci,mean(x)),lwd=2,col="blue")
+segments(1-0.25,yci[1],1-0.25,yci[2],lwd=2,col="red")
+segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),c(yci,mean(y)),lwd=2,col="red")
+u <- par("usr")
+segments(0:1,u[3],0:1,u[3]-diff(u[3:4])*0.03,xpd=TRUE)
+text(0:1,u[3]-diff(u[3:4])*0.08,c("A","B"),xpd=TRUE)
+```
+
+### Null and alternative distributions
+
+Simulate ten cases, ten controls, under the **null** of no difference in population means (here the population means are zero, and the population standard deviations are one in each group).
+
+```{r,fig.width=3}
+set.seed(5)
+n <- 10
+x <- rnorm(n)  
+y <- rnorm(n)
+par(las=1)
+stripchart(list(x,y),vertical=T,pch=20,col=rgb(0,0,0,0.5),cex=2,xlim=c(0.5,2.5),method="jitter",jitter=0.05)
+segments(0.8,mean(x),1.2,mean(x),col="red",lwd=3)
+segments(1.8,mean(y),2.2,mean(y),col="blue",lwd=3)
+t.test(x,y,var.equal=TRUE)
+attributes(t.test(x,y,var.equal=TRUE))
+t.test(x,y,var.equal=TRUE)$stat
+t.test(x,y,var.equal=TRUE)$p.val
+```
+
+Do this ten times, and look at the test statistics and the p-values.
+
+```{r}
+for(k in 1:10){
+  x <- rnorm(n)  
+  y <- rnorm(n)
+  tst <- round(t.test(x,y,var.equal=TRUE)$stat,3)
+  pvl <- round(t.test(x,y,var.equal=TRUE)$p.val,3)
+  print(c(tst,pvl))
+}
+```
+
+Now let's do this 10,000 times, and make histograms of the test statistics and the p-values. Note that the type I error is protected!
+
+```{r,fig.width=9,fig.height=5}
+nit <- 10000
+p1 <- t1 <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  x <- rnorm(n)  
+  y <- rnorm(n)
+  tmp <- t.test(x,y,var.equal=TRUE)
+  t1[j] <- tmp$stat
+  p1[j] <- tmp$p.value
+}
+
+mean(ifelse(p1<0.05,1,0))
+
+cval <- qt(0.975,2*n-2)
+mean(ifelse(t1<(-cval),1,0))
+mean(ifelse(t1>cval,1,0))
+
+par(mfrow=c(1,2),las=1)
+xr <- c(-6,6)
+cval <- qt(0.975,2*n-2)
+hist(t1,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.9),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,2*n-2),col="blue",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="blue",lwd=1.5)
+title("Under the null")
+hist(p1,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Significance level : ",formatC(mean(ifelse(p1<0.05,1,0)),format="f",digits=2)))
+```
+
+Now simulate ten cases, ten controls, under the **alternative**. Here the difference in population means is 0.5, and the population standard deviations are one in each group. How much power do we have to detect the difference in means?
+
+```{r,fig.width=3}
+x <- rnorm(n)  
+y <- rnorm(n)-0.5
+par(las=1)
+stripchart(list(x,y),vertical=T,pch=20,col=rgb(0,0,0,0.5),cex=2,xlim=c(0.5,2.5),method="jitter",jitter=0.05)
+segments(0.8,mean(x),1.2,mean(x),col="red",lwd=3)
+segments(1.8,mean(y),2.2,mean(y),col="blue",lwd=3)
+t.test(x,y,var.equal=TRUE)
+attributes(t.test(x,y,var.equal=TRUE))
+t.test(x,y,var.equal=TRUE)$stat
+t.test(x,y,var.equal=TRUE)$p.val
+```
+
+Do this ten times, and look at the test statistics and the p-values.
+
+```{r}
+for(k in 1:10){
+  x <- rnorm(n)  
+  y <- rnorm(n)-0.5
+  tst <- round(t.test(x,y,var.equal=TRUE)$stat,3)
+  pvl <- round(t.test(x,y,var.equal=TRUE)$p.val,3)
+  print(c(tst,pvl))
+}
+```
+
+Now let's do this 10,000 times, and make histograms of the test statistics and the p-values. How often would we reject the null hypothesis? 
+
+```{r,fig.width=9,fig.height=5}
+p2 <- t2 <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  x <- rnorm(n)  
+  y <- rnorm(n)-0.5
+  tmp <- t.test(x,y,var.equal=TRUE)
+  t2[j] <- tmp$stat
+  p2[j] <- tmp$p.value
+}
+
+mean(ifelse(p2<0.05,1,0))
+
+cval <- qt(0.975,2*n-2)
+mean(ifelse(t2<(-cval),1,0))
+mean(ifelse(t2>cval,1,0))
+
+par(mfrow=c(1,2),las=1)
+cval <- qt(0.975,2*n-2)
+hist(t2,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.95),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,2*n-2,ncp=0.5/sqrt(2/n)),col="red",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="red",lwd=1.5)
+title("Under the alternative") 
+hist(p2,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Power : ",formatC(mean(ifelse(p2<0.05,1,0)),format="f",digits=2)))
+```
+
+### Type I error protection
+
+Simulate five cases, five controls, under the **null** of no difference in population means (here the population means are zero, and the population standard deviations are one in each group). Assume we have three technical replicates for each experimental unit, with technical variability 0.1.
+
+```{r}
+n1 <- 5
+n2 <- 3
+s2 <- 0.1
+
+set.seed(10)
+# ten measurements (the biological replicates) under the null
+m <- rnorm(2*n1)
+m
+# repeat each measure three times (the technical replicates)
+m <- rep(m,rep(n2,2*n1))
+m
+# add experimental error (1/10th of the biological standard deviation)
+m <- m+rnorm(length(m),sd=s2)
+m
+# plot the data
+par(las=1)
+plot(rep(1:10,rep(3,10)),m,pch=20,col=c(rep(rgb(1,0,0,0.5),15),rep(rgb(0,0,1,0.5),15)),cex=2,xlab="",ylab="",xaxt="n")
+abline(v=5.5)
+axis(1,c(3,8),c("cases","contols"))
+```
+
+These data are not independent - technical replicates from an experimental unit are more alike than replicates across experimental units.
+
+Assume we ignore the dependence, and simply carry out a 2-sample t-test.
+
+```{r}
+x <- m[1:(n1*n2)]
+y <- m[-(1:(n1*n2))]
+x
+y
+t.test(x,y,var.equal=TRUE)
+```
+
+Do this ten times, and look at the test statistics and the p-values.
+
+```{r}
+for(k in 1:10){
+  m <- rnorm(2*n1)
+  m <- rep(m,rep(n2,2*n1))
+  m <- m+rnorm(length(m),sd=s2)
+  x <- m[1:(n1*n2)]
+  y <- m[-(1:(n1*n2))]
+  tst <- round(t.test(x,y,var.equal=TRUE)$stat,3)
+  pvl <- round(t.test(x,y,var.equal=TRUE)$p.val,3)
+  print(c(tst,pvl))
+}
+```
+
+Now let's do this 10,000 times, and make histograms of the test statistics and the p-values. How often would we reject the null hypothesis? 
+
+```{r,fig.width=9,fig.height=5}
+p1 <- t1 <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  m <- rnorm(2*n1)
+  m <- rep(m,rep(n2,2*n1))
+  m <- m+rnorm(length(m),sd=s2)
+  x <- m[1:(n1*n2)]
+  y <- m[-(1:(n1*n2))]
+  tmp <- t.test(x,y,var.equal=TRUE)
+  t1[j] <- tmp$stat
+  p1[j] <- tmp$p.value
+}
+
+mean(ifelse(p1<0.05,1,0))
+
+cval <- qt(0.975,2*n1*n2-2)
+mean(ifelse(t1<(-cval),1,0))
+mean(ifelse(t1>cval,1,0))
+
+par(mfrow=c(1,2),las=1)
+hist(t1,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.95),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,2*n1*n2-2),col="blue",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="blue",lwd=1.5)
+title("Ignoring dependence")
+hist(p1,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Significance level : ",formatC(mean(ifelse(p1<0.05,1,0)),format="f",digits=2)))
+```
+
+We have what's called type I error inflation. Since we simulated under the null of no difference between group means, we should be rejecting the null on average in 5% of the simulations, not 30%.
+
+What can we do? In case the number of technical replicates is the same for each experimental unit, we can just take the average across technical replicates, and carry out a two-sample t-test comparing the 5 case averages to the 5 control averages.
+
+```{r}
+set.seed(1)
+m <- rnorm(2*n1)
+m <- rep(m,rep(n2,2*n1))
+m <- m+rnorm(length(m),sd=s2)
+m
+m <- apply(matrix(m,byrow=TRUE,ncol=n2),1,mean)
+plot(1:10,m,pch=20,col=c(rep(rgb(1,0,0,0.5),n1),rep(rgb(0,0,1,0.5),n1)),cex=2,xlab="",ylab="",xaxt="n")
+abline(v=5.5)
+axis(1,c(3,8),c("cases","contols"))
+x <- m[1:(n1)]
+y <- m[-(1:n1)]
+x
+y
+t.test(x,y,var.equal=TRUE)
+```
+
+Now let's do this 10,000 times as well, and make histograms of the test statistics and the p-values. The type I error is protected! **Note** this only works when the number of technical replicates is the same for each experimental unit. In 140.616 you will learn what to do when this is not the case.
+
+```{r,fig.width=9,fig.height=5}
+p2 <- t2 <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  m <- rnorm(2*n1)
+  m <- rep(m,rep(n2,2*n1))
+  m <- m+rnorm(length(m),sd=s2)
+  x <- m[1:(n1*n2)]
+  y <- m[-(1:(n1*n2))]
+  x <- apply(matrix(x,byrow=TRUE,ncol=n2),1,mean)
+  y <- apply(matrix(y,byrow=TRUE,ncol=n2),1,mean)
+  tmp <- t.test(x,y,var.equal=TRUE)
+  t2[j] <- tmp$stat
+  p2[j] <- tmp$p.value
+}
+
+mean(ifelse(p2<0.05,1,0))
+
+cval <- qt(0.975,2*n1-2)
+mean(ifelse(t2<(-cval),1,0))
+mean(ifelse(t2>cval,1,0))
+
+par(mfrow=c(1,2),las=1)
+hist(t2,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.95),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,2*n1-2),col="blue",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="blue",lwd=1.5)
+title("Accounting for dependence")
+hist(p2,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Significance level : ",formatC(mean(ifelse(p2<0.05,1,0)),format="f",digits=2)))
+```
+
+Another example: when you have paired data and ignore the pairing, your type I error will be affected. Assume paired data (before and after vaccination, say) in ten experimental units, and the between unit (biological) standard deviation to be four times as large as the measurement error (1 versus 0.25). Assume there is **no vaccination effect**.
+
+```{r,fig.width=4}
+n <- 10
+s2 <- 0.25
+
+set.seed(1)
+# sample ten measurements
+m <- rnorm(n)
+m 
+# repeat twice (before / after)
+m <- rep(m,2)
+m
+# add measurements error
+m <- m+rnorm(length(m),sd=s2)
+m
+
+par(las=1)
+plot(c(rep(1,n),rep(2,n)),m,pch=20,col=c(rep(rgb(1,0,0,0.5),n),rep(rgb(0,0,1,0.5),n)),cex=2,
+     xlim=c(0.5,2.5),xlab="",ylab="",xaxt="n")
+for(k in 1:n) lines(c(1,2),c(m[k],m[n+k]),lty=2)
+axis(1,1:2,c("before","after"))
+
+x <- m[1:n]
+y <- m[-(1:n)]
+# This is the wrong thing to do - ignoring the pairing!
+t.test(x,y,var.equal=TRUE)
+# This is the correct thing to do
+t.test(x,y,paired=TRUE)
+t.test(x-y)
+```
+
+How often do we reject the null hypothesis if we carried out a 2-sample t-test, instead of a paired t-test (or equivalently, a one-sample t-test on the differences)? Let's do this 10,000 times, and make histograms of the test statistics and the p-values. 
+
+```{r,fig.width=9,fig.height=5}
+p1 <- t1 <- rep(NA,nit)
+p2 <- t2 <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  m <- rnorm(n)
+  m <- rep(m,2)
+  m <- m+rnorm(length(m),sd=s2)
+  x <- m[1:n]
+  y <- m[-(1:n)]
+  tmp <- t.test(x,y,var.equal=TRUE)
+  t1[j] <- tmp$stat
+  p1[j] <- tmp$p.value
+  z <- x-y
+  tmp <- t.test(z)
+  t2[j] <- tmp$stat
+  p2[j] <- tmp$p.value
+}
+
+mean(ifelse(p1<0.05,1,0))
+mean(ifelse(p2<0.05,1,0))
+     
+cval <- qt(0.975,2*n-2)
+mean(ifelse(t1<(-cval),1,0))
+mean(ifelse(t1>cval,1,0))
+cval <- qt(0.975,n-1)
+mean(ifelse(t2<(-cval),1,0))
+mean(ifelse(t2>cval,1,0))
+
+par(mfrow=c(1,2),las=1)
+hist(t1,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.95),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,2*n-2),col="blue",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="blue",lwd=1.5)
+title("Ignoring dependence")
+hist(p1,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Significance level : ",formatC(mean(ifelse(p1<0.05,1,0)),format="f",digits=2)))
+hist(t2,xlim=xr,ylim=c(0,0.45),prob=TRUE,col=grey(0.95),breaks=21,xlab="test statistic",ylab="",main="")
+curve(dt(x,n-1),col="blue",lwd=3,add=TRUE)
+abline(v=c(-cval,cval),lty="dotted",col="blue",lwd=1.5)
+title("Accounting for dependence")
+hist(p2,xlim=c(0,1),ylim=c(0,5),prob=TRUE,col="lightgray",breaks=21,xlab="p-value",ylab="",main="")
+title(paste0("Significance level : ",formatC(mean(ifelse(p2<0.05,1,0)),format="f",digits=2)))
+```
+
+When you ignore the pairing you don't reject the null as often as you should - why is that? You fail to eliminate the between subject variability!
+
+```{r}
+set.seed(1)
+m <- rnorm(n)
+m <- rep(m,2)
+m <- m+rnorm(length(m),sd=s2)
+x <- m[1:n]
+y <- m[-(1:n)]
+
+r <- range(m)
+par(las=1,mfrow=c(1,2))
+plot(c(rep(1,n),rep(2,n)),m,pch=20,col=c(rep(rgb(1,0,0,0.5),n),rep(rgb(0,0,1,0.5),n)),cex=2,
+     xlim=c(0.5,2.5),xlab="",ylab="",xaxt="n",ylim=r)
+for(k in 1:n) lines(c(1,2),c(m[k],m[n+k]),lty=2)
+axis(1,1:2,c("before","after"))
+plot(rep(1,n),x-y,xaxt="n",xlab="",ylab="",ylim=r,pch=20,col=rgb(0,0,0,0.5),cex=2)
+axis(1,1,"difference")
+```

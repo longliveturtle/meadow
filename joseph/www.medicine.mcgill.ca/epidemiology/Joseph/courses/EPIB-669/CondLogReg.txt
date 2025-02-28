@@ -1,0 +1,59 @@
+# Hierarchical Model for effect of HbA1c on CHF
+# Model based on article by Mukherjee
+
+model
+{
+  for (i in 1:2545)       # Loop over 2545 Matched Sets
+  {
+  numerator[i]<-exp(beta1*hba1c_7_8[i,1] + beta2*hba1c_8_9[i,1]
+                    + beta3*hba1c_9_10[i,1] + beta4*hba1c_10[i,1])
+
+ for (j in 1:J[i])
+
+ {
+  denominator[i,j]<-exp(beta1*hba1c_7_8[i,j] + beta2*hba1c_8_9[i,j]
+                     + beta3*hba1c_9_10[i,j] + beta4*hba1c_10[i,j])
+ }
+  likelihood[i]<-numerator[i]/sum(denominator[i, 1:J[i]])
+
+}
+
+ beta1  ~  dnorm(0, 0.01) I(-2, 2)   #  Prior for beta1
+ beta2  ~  dnorm(0, 0.01) I(-2, 2)   #  Prior for beta2
+ beta3  ~  dnorm(0, 0.01) I(-2, 2)   #  Prior for beta3
+ beta4  ~  dnorm(0, 0.01) I(-2, 2)   #  Prior for beta4
+
+#  Create Odds Ratios
+
+or.hba1c_7_8 <- exp(beta1)
+or.hba1c_8_9 <- exp(beta2)
+or.hba1c_9_10 <- exp(beta3)
+or.hba1c_10 <- exp(beta4)
+
+ for (i in 1:2545) {
+                 ones[i] <- 1
+                 p[i] <- likelihood[i]
+                 ones[i] ~ dbern(p[i])
+ }
+
+}
+
+
+# Inits
+
+list(beta1=0.5, beta2=0.5, beta3=0.5, beta4=0.5)
+
+# Results
+
+node                 mean       sd         MC error     2.5%        median    97.5%     start     sample
+beta1                0.02872    0.05431    0.00117      -0.0771     0.02821   0.1343    5001      5000
+beta2                0.3046     0.06069    0.001468      0.1844     0.3047    0.4222    5001      5000
+beta3                0.2553     0.08108    0.001523      0.09364    0.2559    0.4089    5001      5000
+beta4                0.2986     0.08536    0.001567      0.1308     0.2989    0.4637    5001      5000
+likelihood[1]        0.5        0.0        1.414E-12     0.5        0.5       0.5       5001      5000
+likelihood[100]      0.08736    0.00168    4.105E-5      0.0841     0.08736   0.0905    5001      5000
+likelihood[1000]     0.07867    0.00275    7.025E-5      0.07344    0.07865   0.0842    5001      5000
+or.hba1c_10          1.353      0.1153     0.002107      1.14       1.348     1.59      5001      5000
+or.hba1c_7_8         1.031      0.05604    0.001211      0.9258     1.029     1.144     5001      5000
+or.hba1c_8_9         1.359      0.08253    0.001998      1.203      1.356     1.525     5001      5000
+or.hba1c_9_10        1.295      0.1049     0.001977      1.098      1.292     1.505     5001      5000

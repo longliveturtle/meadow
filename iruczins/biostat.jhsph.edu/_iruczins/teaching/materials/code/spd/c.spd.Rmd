@@ -1,0 +1,122 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+options(width=110)
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Summarizing and presenting data
+
+Data from Sokal & Rohlf, exercise 4.2 (pg 59) 
+[ mg glycine per mg creatine in the urine of 37 chimpanzees ]
+
+```{r}
+x <- c(0.008, 0.018, 0.056, 0.055, 0.135,
+       0.052, 0.077, 0.026, 0.044, 0.300,
+       0.025, 0.036, 0.043, 0.100, 0.120,
+       0.110, 0.100, 0.350, 0.100, 0.300,
+       0.011, 0.060, 0.070, 0.050, 0.080,
+       0.110, 0.110, 0.120, 0.133, 0.100,
+       0.100, 0.155, 0.370, 0.019, 0.100,
+       0.100, 0.116)
+x
+length(x)
+str(x)
+class(x)
+```
+
+#### Some summary statistics
+
+```{r}
+mean(x)
+median(x)
+min(x)
+max(x)
+range(x)
+summary(x)
+quantile(x)
+quantile(x,probs=c(0.25,0.75))
+IQR(x)
+sd(x)
+mad(x)
+```
+
+#### Some plots
+
+##### Histograms with different numbers of bins
+
+```{r}
+hist(x)
+hist(x, breaks=5)
+hist(x, breaks=15)
+hist(x, breaks=seq(0,0.4,0.05))
+```
+
+##### Plot values by index
+
+```{r}
+plot(x)
+plot(x, type="l")
+plot(x, type="b")
+```
+
+##### Dot plots
+
+```{r}
+stripchart(x)
+set.seed(1)
+stripchart(x, method="jitter")
+stripchart(x, method="jitter", pch=1)
+stripchart(x, method="jitter", pch=1, cex=1.5)
+stripchart(x, method="jitter", pch=1, cex=1.5, log="x")
+stripchart(x, method="jitter", pch=1, cex=1.5, log="y", vertical=TRUE)
+```
+
+You can change the orientation of the label of the y-axis with the par() graphics function.
+
+```{r}
+par(las=1)
+stripchart(x, method="jitter", pch=1, cex=1.5, log="y", vertical=TRUE)
+```
+
+You can specify the width of the rendered plot in the code chunk start.
+
+```{r, fig.width=3}
+par(las=1)
+stripchart(x, method="jitter", pch=1, cex=1.5, log="y", vertical=TRUE)
+```
+
+##### Boxplots
+
+```{r}
+boxplot(x)
+boxplot(x, range=0)
+boxplot(x, range=0, log="y")
+boxplot(x, range=0, log="y", col="lightblue")
+```
+
+#### Arithmetic and geometric mean
+
+```{r}
+mean(x)
+exp(mean(log(x)))
+```
+
+#### Subsetting and sorting
+
+```{r}
+x[1]
+x[-1]
+x[1:5]
+x[-(1:5)]
+x[c(1,7,22)]
+x<0.1
+x[x<0.1]
+sort(x)
+sort(x, decreasing=TRUE)
+order(x)
+order(x, decreasing=TRUE)
+```
+
+
+

@@ -1,0 +1,1039 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/BICSurvTimeDependent.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:44 GMT -->
+<head>
+<title>SAS macro %BICSurvTimeDependent: Computing the BIC (Bayesian Information Criterion) in Survival Models with time-dependent covariates</title>
+<meta name="description" content=" %BICSurvTimeDependent is a SAS macro to compute Bayesian Information Criterion (BIC) in Survival Models when one or more of the independent variables is (are) time-dependent.">
+<meta name="keywords" content="analysis, BIC, bic.surv, dependent, model, phreg, selection, survival, time, time-dependent, variables">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 4.0.5 (July 2011)</div>
+<div class=title0>SAS macro %BICSurvTimeDependent</div>
+<div class=title>Computing the BIC (Bayesian Information Criterion) in Survival Models with time-dependent covariates</div>
+
+Model selection for Cox proportional hazards models is made easy in R 
+through the use of <a href="http://www.research.att.com/~volinsky/bma.html">Chris Volinsky's bic.surv function</a>.
+However, this function does not accommodate time dependent covariates.  
+When one or more of the independent variables varies with time, however, 
+there is to my knowledge no R or SAS function or macro available, hence the need for <span class=sasmacroname>%BICSurvTimeDependent</span>.
+
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%BICSurvTimeDependent</span> is a SAS macro to compute Bayesian Information Criterion (BIC) in Survival Models when one or more of the independent variables is (are) time-dependent.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br><br>
+Unlike the BIC functions available for R which use Occam's Razor to pare down the total number of models reported,
+<span class=sasmacroname>%BICSurvTimeDependent</span> does not have this capability. 
+Thus, every possible model (i.e., 2<sup>p</sup> models for <i>p</i> covariates) 
+derived from the list of independent variables (see <i>indep</i> in argument's list below) is fit, 
+which may make <span class=sasmacroname>%BICSurvTimeDependent</span> long &#151; or even impossible &#151; to run when the number of independent variables is large.
+
+<br><br>
+<span class=sasmacroname>%BICSurvTimeDependentReport</span> is a SAS macro included in the <a href="#download">downloadable file</a>
+that reports <span class=sasmacroname>%BICSurvTimeDependent</span> output in a reader-friendly fashion. See <a href="#example">example below</a> for an illustration of combined use
+of these two macros.
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><span class=sasmacroname>%BICSurvTimeDependent</span> arguments</a><br>
+<a href="#example">Example</a><br>
+<a href="#interactionterms">Interaction terms</a><br>
+<a href="#download">Download</a><br>
+</div>
+
+
+<a name="syntax"></a>
+<br><br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+
+<div class=pgm>
+%BICSurvTimeDependent(outModels=, outParms=, data=, time0=, time1=, cens=, indep=, force=, ties=exact, level=0.95);
+</div>
+
+<a name="arguments"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main><span class=sasmacroname>%BICSurvTimeDependent</span> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+</tr>
+<tr>
+<td class=rfctargumentname>outModels</td>
+<td class=rfctargumentvalue>
+Name of output dataset where the list of compared models will be saved.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>outParms</td>
+<td class=rfctargumentvalue>
+Name of output dataset where each model's parameter estimates will be saved.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>data</td>
+<td class=rfctargumentvalue>
+Name of the survival data set to be analyzed. 
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>time0</td>
+<td class=rfctargumentvalue>
+Name of the left-end time interval variable.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>time1</td>
+<td class=rfctargumentvalue>
+Name of the right-end time interval variable.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>cens</td>
+<td class=rfctargumentvalue>
+Name of the censoring variable (taking values 1=event, 0=censored value).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>indep</td>
+<td class=rfctargumentvalue>
+List of independent variables.
+<br>
+String variables and formatted variables (variables with value labels) are analyzed as <i>class variables</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>force</td>
+<td class=rfctargumentvalue>
+An optional list of independent variables to be forced in the model (models without any of the variables listed will be discarded).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>ties</td>
+<td class=rfctargumentvalue>
+Tie-handling method: one of BRESLOW, DISCRETE, EFRON, or EXACT. Default is EXACT.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>level</td>
+<td class=rfctargumentvalue>
+Level of Hazard Ratios Credible Intervals reported.
+</td>
+</tr>
+</table>
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+Consider the problem where the survival is modeled through
+age at diagnosis, gender and three time-dependent variables (<i>x, y</i> and <i>z</i>).
+The data set <i>mySurvData</i> was prepared beforehand such that the values for <i>x, y</i> and <i>z</i> 
+are constant over the time intervals delimited by time points <i>time0</i> and <i>time1</i>. Censoring variable
+<i>Deceased</i> was also redefined to indicate patients status at the end of each time interval.
+
+BIC model selection is run through the SAS macro call:
+
+<br><br>
+<div class=pgm>
+%BICSurvTimeDependent(outModels=bicModels, outParms=bicParms, data=mySurvData, time0=time0, time1=time1, cens=Deceased, indep=gender AgeAtDiagnosis x y z);
+</div>
+<br><br>
+
+where the arguments <i>bicModels</i> and <i>bicParms</i> are output data sets, which
+can be printed, used or modified if necessary:
+
+<br><br>
+<div class=pgm>
+proc print data=bicModels; run;
+</div>
+<br>
+
+
+<pre class=ascii>
+                                                                   minus2log            n
+     Obs    Model                          Converged      BIC          L        p    Events
+
+       1    AgeAtDiagnosis,x,y,z,gender        1        548.299     526.327     5      81
+       2    AgeAtDiagnosis,x,y,z               1        549.100     531.522     4      81
+       3    AgeAtDiagnosis,x,y,gender          1        566.694     549.116     4      81
+       4    AgeAtDiagnosis,x,y                 1        568.853     555.670     3      81
+       5    AgeAtDiagnosis,x,z,gender          1        611.691     594.113     4      81
+       6    AgeAtDiagnosis,x,z                 1        611.017     597.834     3      81
+       7    AgeAtDiagnosis,x,gender            1        695.492     682.309     3      81
+       8    AgeAtDiagnosis,x                   1        695.365     686.576     2      81
+       9    AgeAtDiagnosis,y,z,gender          1        544.323     526.745     4      81
+      10    AgeAtDiagnosis,y,z                 1        545.147     531.964     3      81
+      11    AgeAtDiagnosis,y,gender            1        562.592     549.409     3      81
+      12    AgeAtDiagnosis,y                   1        564.691     555.902     2      81
+      13    AgeAtDiagnosis,z,gender            1        607.692     594.509     3      81
+      14    AgeAtDiagnosis,z                   1        606.928     598.139     2      81
+      15    AgeAtDiagnosis,gender              1        697.108     688.319     2      81
+      16    AgeAtDiagnosis                     1        697.058     692.664     1      81
+      17    x,y,z,gender                       1        559.678     542.100     4      81
+      18    x,y,z                              1        563.481     550.298     3      81
+      19    x,y,gender                         1        578.293     565.110     3      81
+      20    x,y                                1        583.515     574.726     2      81
+      21    x,z,gender                         1        646.419     633.236     3      81
+      22    x,z                                1        649.349     640.560     2      81
+      23    x,gender                           1        746.003     737.214     2      81
+      24    x                                  1        749.835     745.441     1      81
+      25    y,z,gender                         1        556.631     543.448     3      81
+      26    y,z                                1        561.146     552.357     2      81
+      27    y,gender                           1        573.899     565.110     2      81
+      28    y                                  1        579.218     574.824     1      81
+      29    z,gender                           1        642.537     633.748     2      81
+      30    z                                  1        645.766     641.372     1      81
+      31    gender                             1        747.543     743.149     1      81
+      32    NULL                               1        750.246     750.246     0      81
+</pre>
+
+<br>
+Note that while running, <span class=sasmacroname>%BICSurvTimeDependent</span> prints <i>proc phreg</i> output (for each of the 32 models) to Sas output window: 
+however, every relevant information for the computation of BIC values
+is stored in the output data sets, and the output window can thus be ignored.
+
+<br><br>
+The sas macro <span class=sasmacroname>%BICSurvTimeDependentReport</span> (included in the downloadable file below) conveniently produces a comprehensive HTML version
+of the BIC output.
+
+<br><br>
+<div class=pgm>
+ods listing close;<br>
+ods html file="c:\users\pbelisle\My Documents\Home\MyProject\log\BICSurvTimeDependent.html" style=mystyle;<br>
+title 'BIC (Bayesian Information Criterion) results';<br>
+<br>
+%BICSurvTimeDependentReport(parms=bicParms, models=bicModels);<br>
+<br>
+ods html close;<br>
+title;<br>
+ods listing;<br>
+</div>
+<br><br>
+
+which should look like this</a>:
+
+<br><br>
+<table border=0>
+<tr><td><a href="SampleOutputFiles/BICSurvTimeDependent.html"><img src="img/BICSurv/BICSurvTimeDependent.gif" border=0></a></td></tr>
+<tr><td>
+Click on above image to view actual Html output file.
+</td></tr>
+</table>
+<br><br>
+
+Note that only 8 (of the 32 possible models) were included in the report, since by default only the models with probability &ge; 1% are printed; to include all models in the report,
+call <span class=sasmacroname>%BICSurvTimeDependentReport</span> with the inclusive option <b>where=</b> (left empty), as in:
+
+<br><br>
+<div class=pgm>
+%BICSurvTimeDependentReport(parms=bicParms, models=bicModels, where=);
+</div>
+
+<a name="interactionterms"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Interaction terms</div>
+<br>
+
+Interaction terms of order 2 are allowed in the model. Class variables, however, are not allowed in interaction terms in the actual version.
+
+<br><br>
+<div class=pgm>
+%BICSurvTimeDependent(outModels=bicModels, outParms=bicParms, data=mySurvData, time0=time0, time1=time1, cens=Deceased, indep=gender AgeAtDiagnosis x y z AgeAtDiagnosis*x);
+</div>
+<br><br>
+
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<span class=sasmacroname>%BICSurvTimeDependent</span> is a free SAS macro. 
+<a href="SasMacros/BIC-survival.zip">Download version 4.0.5 now.</a>
+
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/BICSurvTimeDependent.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:52 GMT -->
+</html>

@@ -1,0 +1,59 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Nested Models
+
+#### Example 1 from class: mosquitos
+
+Read the data, and verify that the ANOVA factors are stored as factors in the R object.
+
+```{r}
+library(SPH.140.615)
+summary(mosq)
+str(mosq)
+```
+
+Plot the data.
+
+```{r,fig.width=8}
+par(las=1)
+stripchart(split(jitter(mosq$length,factor=2), list(mosq$individual, mosq$cage)), ylab="", pch=1, vertical=TRUE)
+abline(v=c(4.5,8.5),lty=2)
+```
+
+Let's give this a go.
+
+```{r}
+mosq.aov <- aov(length ~ cage / individual, data=mosq)
+summary(mosq.aov)
+```
+
+This is wrong. By default, R tests both factors by calculating the mean-squares with the error in the denominator, and there is no option to tell it otherwise. Later, we will learn how to do this analysis with maximum likelihood estimation. For now, we use a custom function for the sums of squares approach, which is available in the SPH.140.615 package.
+
+```{r}
+nested.anova(mosq.aov)
+```
+
+#### Example 2 from class: flies
+
+The data are available in the SPH.140.615 package.
+
+```{r}
+str(flies)
+summary(flies)
+```
+
+Plot the data.
+
+```{r,fig.width=10}
+par(las=2)
+stripchart(split(flies$response, list(flies$jar, flies$strain)), ylab="", pch=1, vertical=TRUE, xlim=c(1.2,23.8))
+abline(v=seq(3.5,24,by=3),lty=2)
+```
+
+```{r}
+nested.anova(aov(response ~ strain / jar, data=flies))
+```

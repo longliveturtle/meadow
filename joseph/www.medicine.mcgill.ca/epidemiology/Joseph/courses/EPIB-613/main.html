@@ -1,0 +1,671 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/courses/EPIB-613/main.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:19:42 GMT -->
+<head><title> EPIB-613 Introduction to Statistical Software </title>
+<style type="text/css">
+a.dumblink:hover
+{
+  text-decoration:underline;
+}
+a.dumblink:link
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink:visited
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink0:visited
+{
+  color:inherit;
+}
+a.dumblink0
+{
+  color:inherit;
+}
+body
+{
+  font-family:Franklin Gothic Medium; font-size:14px;
+}
+div.coursepagecourse
+{
+  color:#6699CC; font-size:20px; padding-top:10px; font-family:haettenschweiler;
+}
+div.coursepagecourse a:hover
+{
+  text-decoration:underline;
+}
+div.coursepagecourse a:link
+{
+  color:#6699CC; text-decoration:none;
+}
+div.coursepagecourse a:visited
+{
+  color:#66CCCC; text-decoration:none;
+}
+div.coursepagetitle
+{
+  color:#6699CC; font-size:32px; padding-bottom:20px; font-family:bookman old style;
+}
+div.items
+{
+  color:#6699CC; font-size:13px; text-align:left; padding-left:75px;
+}
+div.items a:hover
+{
+  color:#6699CC; text-decoration:underline;
+}
+div.items a:link
+{
+  color:#6699CC; text-decoration:none;
+}
+div.items a:visited
+{
+  color:#66CCCC; text-decoration:none;
+}
+div.menuitem1
+{
+  font-size:14px; color:darkgoldenrod; font-weight:bold; padding:0 20px 0 20px;
+}
+div.menuitem1 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem1 a:link
+{
+  text-decoration:none; color:darkgoldenrod;
+}
+div.menuitem1 a:visited
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+div.menuitem2
+{
+  font-size:13px; color:navy; padding:0 20px 0 40px;
+}
+div.menuitem2 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem2 a:link
+{
+  text-decoration:none; color:navy;
+}
+div.menuitem2 a:visited
+{
+  color:navy; text-decoration:none;
+}
+div.menuitem3
+{
+  font-size:12px; color:gray; padding:0 20px 0 50px;
+}
+div.menuitem3 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem3 a:link
+{
+  text-decoration:none; color:gray;
+}
+div.menuitem3 a:visited
+{
+  color:gray; text-decoration:none;
+}
+div.pagesubtitle
+{
+  text-align:left; font-size:20px; font-family:arial black;
+  color:white; padding-left:20px; font-style:italic;
+}
+div.pagetitle
+{
+  text-align:left; font-size:28px; font-family:arial black; font-weight:bold;
+  color:white; padding-left:20px;
+}
+div.topic
+{
+  color:darkgoldenrod; border-style:solid; border-width:1px 0 1px 0; font-size:14px;
+  margin-top:20px; margin-bottom:20px;
+}
+li.normal
+{
+  color:black; font-size:14px;
+}
+li.normal a:link
+{
+  color:black;
+}
+li.normal a:visited
+{
+  color:gray;
+}
+li.point
+{
+  color:darkgoldenrod; font-size:14px;
+}
+li.point a:hover
+{
+  text-decoration:underline;
+}
+li.point a:link
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+li.point a:visited
+{
+  color:goldenrod; text-decoration:none;
+}
+li.topmenu a:hover
+{
+  text-decoration:underline;
+}
+li.topmenu a:link
+{
+  color:black; text-decoration:none;
+}
+li.topmenu a:visited
+{
+  color:gray; text-decoration:underline;
+}
+li.whereami a:hover
+{
+  text-decoration:underline;
+}
+li.whereami a:link
+{
+  color:gray; text-decoration:none;
+}
+li.whereami a:visited
+{
+  color:gray; text-decoration:none;
+}
+table.normal
+{
+  color:black; font-size:14px;
+}
+table.normal a:hover
+{
+  color:#6699CC; text-decoration:underline;
+}
+table.normal a:link
+{
+  color:#6699CC; text-decoration:none;
+}
+table.normal a:visited
+{
+  color:#66CCCC; text-decoration:none;
+}
+td.address
+{
+  color:black; background-color:#6699CC; font-size:14px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 0 1px 0;
+}
+td.assignments
+{
+  text-align:center; vertical-align:top; padding:0 15px 0 15px;
+}
+td.datasets
+{
+  color:darkgoldenrod; font-size:13px; text-align:left; padding-right:40px; vertical-align:top;
+}
+td.datasets a:hover
+{
+  color:#6699CC; text-decoration:underline;
+}
+td.datasets a:link
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+td.datasets a:visited
+{
+  color:goldenrod; text-decoration:none;
+}
+td.menuitems
+{
+  width:400px; vertical-align:top;
+}
+td.pagetitle
+{
+  background-color:#000099; background-image:url(../../img/homepage/idea4i.jpg);
+}
+td.raddress
+{
+  color:black; background-color:#6699CC; font-size:13px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 0;
+}
+td.whereami
+{
+  padding-left:0;
+}
+tr.pagetitle
+{
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 1px;
+}
+ul.topmenu
+{
+  text-align:right;
+}
+ul.topmenu li
+{
+  font-size:14px; color:black; padding-left:20px; display:inline;
+  text-align:right; border-style:solid; border-width:0 1px 0 0;
+  color:#000099;
+}
+ul.whereami
+{
+  text-align:left; border-style:solid; border-width:0 0 1px 0; border-color:darkgoldenrod;
+}
+ul.whereami li
+{
+  font-size:14px; display:inline; text-align:left; color:gray;
+}
+ul.whereami li.here
+{
+  font-size:14px; display:inline; text-align:right; color:crimson;
+}
+</style>
+</head>
+<body>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr><td colspan=3>
+<ul class=topmenu>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/epi-biostat-occh/"> Departement of Epidemiology and Biostatistics </a></li>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/"> McGill University </a></li>
+<li class=topmenu> <a class=dumblink href="../../SiteMap.html"> Site Map </a></li>
+<!-- /ul -->
+</td></tr>
+<tr class=pagetitle>
+<td class=pagetitle>
+<div class=pagetitle> Lawrence Joseph </div>
+<div class=pagesubtitle> Bayesian statistics </div>
+</td>
+<td class=address width="20%" valign=top>
+<a class=dumblink0 href="mailto:lawrence.joseph@mcgill.ca"> </a><br>
+<!--
+-->
+<a class=dumblink href="../../pdf/ljcv.pdf">  </a><br>
+</td>
+<td class=raddress width="20%" valign=top>
+Please Note: Prof. Joseph has retired. <br>
+These pages are left up in case they prove<br>
+useful, but the pages and software will <br>
+no longer be updated. All material and <br>
+software is "as is" with no guarantees <br>
+of functionality or correctness.<br>
+</td>
+</tr>
+<tr><td class=whereami colspan=3>
+<ul class=whereami>
+<li class=whereami> &gt; <a href="../../index.html"> Home </a> </li> &gt <li class=whereami> Courses </li> &gt <li class=here> EPIB-613 Introduction to Statistical Software </li>
+</ul></td></tr>
+</table>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr>
+<td class=menuitems>
+<div class=menuitem1><a href="../../pdf/ljcv.pdf">Complete CV</a></div>
+<div class=menuitem1><a href="../../Research-Interests.html">Research interests</a></div>
+<div class=menuitem1><a href="../../Courses-Taught.html">Courses taught</a></div>
+<div class=menuitem1>Previous courses taught</div>
+<div class=menuitem2><a href="../EPIB-607/main.html">EPIB-607 Principles of Inferential Statistics in Medicine</a></div>
+<div class=menuitem2><a href="main.html">EPIB-613 Introduction to Statistical Software</a></div>
+<div class=menuitem2><a href="../EPIB-621/main.html">EPIB-621 Data Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../EPIB-651/main.html">EPIB-651 Bayesian Analysis in Medicine</a></div>
+<div class=menuitem2><a href="../EPIB-668/main.html">EPIB-668 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../EPIB-669/main.html">EPIB-669 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem2><a href="../EPIB-675/main.html">EPIB-675 Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../EPIB-682/main.html">EPIB-682 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../EPIB-683/main.html">EPIB-683 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem1>Publications</div>
+<div class=menuitem2>Methodological publications</div>
+<div class=menuitem3><a href="../../publications/Methodological/Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Meta-Analysis.html">Meta analysis</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Other-Topics.html">Other topics</a></div>
+<div class=menuitem2>Medical publications</div>
+<div class=menuitem3><a href="../../publications/Medical/Allergy-And-Immunology.html">Allergy and immunology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Asthma.html">Asthma</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Cardiology.html">Cardiology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Gastroenterology.html">Gastroenterology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Osteoporosis.html">Osteoporosis</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Quality-Of-Life.html">Quality of Life</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Rheumatology.html">Rheumatology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Other.html">Other</a></div>
+<div class=menuitem2><a href="../../publications/Book.html">Book</a></div>
+<div class=menuitem1>Bayesian software</div>
+<div class=menuitem2><a href="../../software/Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem2><a href="../../software/Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem2><a href="../../software/Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem2><a href="../../software/Diagnostic-Testing-In-Genetics.html">Diagnostic testing in Genetics</a></div>
+<div class=menuitem1><a href="../../Links.html">Links</a></div>
+</td>
+<td valign=top>
+<div class=coursepagecourse>EPIB-613</div>
+<div class=coursepagetitle>Introduction to Statistical Software</div>
+<ul>
+<li class=point><a href="BasicInfo.html">Basic info</a></li>
+<li class=point><a href="CourseOutline.html">Course outline</a></li>
+<li class=point> Assignments </li>
+<table class=normal><tr>
+<td> Assmt no. </td>
+    <td class=assignments><a href="assignment1.pdf">1</a></td>
+    <td class=assignments><a href="assignment2.pdf">2</a></td>
+    <td class=assignments><a href="assignment3.pdf">3</a></td>
+    <td class=assignments><a href="assignment4.pdf">4</a></td>
+    <td class=assignments><a href="assign1_oct4.pdf">5</a></td>
+    <td class=assignments><a href="assign2_oct11.pdf">6</a></td>
+    <td class=assignments><a href="assign3_oct18.pdf">7</a></td>
+    <td class=assignments><a href="assign4_oct25.pdf">8</a></td>
+    <td class=assignments><a href="assign5_nov1.pdf">9</a></td>
+    <td class=assignments><a href="assign6_nov8.pdf">10</a></td>
+    <td class=assignments><a href="assign7_nov15.pdf">11</a></td>
+    <td class=assignments><a href="assign8_nov22.pdf">12</a></td>
+    <td class=assignments><a href="assign9_nov29.pdf">13</a></td>
+</tr>
+</table>
+<li class=point> Data sets </li>
+<div class=items>
+<a href="ishr3.zip">One-click download</a><br><br>
+<table border=0 cellpadding=0>
+<td class=datasets>
+<a href="admissions.html">admissions.dta</a>
+<br>
+<a href="agemort.html">agemort.dta</a>
+<br>
+<a href="ankle-bp-1.html">ankle-bp-1.dta</a>
+<br>
+<a href="ankle-bp-2.html">ankle-bp-2.dta</a>
+<br>
+<a href="anklebp1.html">anklebp1.dta</a>
+<br>
+<a href="anklebp2.html">anklebp2.dta</a>
+<br>
+<a href="auto2.html">auto2.dta</a>
+<br>
+<a href="autolab.html">autolab.dta</a>
+<br>
+<a href="bkup.html">bkup.ado</a>
+<br>
+<a href="bkup.hlp">bkup.hlp</a>
+<br>
+<a href="bkup-2.html">bkup.sthlp</a>
+<br>
+<a href="cisd1.html">cisd1.ado</a>
+<br>
+<a href="cisd2.html">cisd2.sthlp</a>
+<br>
+<a href="cisd.html">cisd.ado</a>
+<br>
+<a href="cisd-2.html">cisd.sthlp</a>
+<br>
+<a href="clslowbwt.html">clslowbwt.dta</a>
+<br>
+<a href="compliance1.html">compliance1.dta</a>
+<br>
+<a href="compliance2.html">compliance2.dta</a>
+<br>
+<a href="compliance3.html">compliance3.dta</a>
+<br>
+<a href="CountryNames.html">CountryNames.dta</a>
+<br>
+<a href="dates.html">dates.dta</a>
+<br>
+<a href="demographic.html">demographic.dta</a>
+<br>
+<a href="dk1975-2004.html">dk1975-2004.dta</a>
+<br>
+<a href="dk1991-95.html">dk1991-95.dta</a>
+<br>
+<a href="dx1.html">dx1.dta</a>
+<br>
+<a href="dx2.html">dx2.dta</a>
+<br>
+<a href="ecmd.html">ecmd.ado</a>
+<br>
+<a href="ecmd.hlp">ecmd.hlp</a>
+<br>
+<a href="Education_2000_2009.html">Education_2000_2009.dta</a>
+<br>
+<a href="esoph.html">esoph.dta</a>
+<br>
+<a href="gen_auto2.html">gen_auto2.do</a>
+<br>
+<a href="gen_compliance2.html">gen_compliance2.do</a>
+<br>
+<a href="gen_compliance3.html">gen_compliance3.do</a>
+<br>
+<a href="gen_dx2.html">gen_dx2.do</a>
+<br>
+<a href="gen_lbw1.html">gen_lbw1.do</a>
+<br>
+<a href="gen_lbw1_p.html">gen_lbw1_p.do</a>
+<br>
+<a href="gen_oppatients2.html">gen_oppatients2.do</a>
+<br>
+<a href="gen_patnumbers.html">gen_patnumbers.do</a>
+<br>
+<a href="gen_std_europe.html">gen_std_europe.do</a>
+<br>
+<a href="gph_fig11_1.html">gph_fig11_1.do</a>
+<br>
+<a href="gph_fig11_2.html">gph_fig11_2.do</a>
+<br>
+<a href="gph_fig11_3.html">gph_fig11_3.do</a>
+<br>
+<a href="gph_fig11_4.html">gph_fig11_4.do</a>
+<br>
+<a href="gph_fig13_1.html">gph_fig13_1.do</a>
+<br>
+<a href="gph_fig13_2.html">gph_fig13_2.do</a>
+<br>
+<a href="gph_fig13_3.html">gph_fig13_3.do</a>
+</td>
+<td class=datasets>
+<a href="gph_fig13_4.html">gph_fig13_4.do</a>
+<br>
+<a href="gph_fig13_5.html">gph_fig13_5.do</a>
+<br>
+<a href="gph_fig13_6.html">gph_fig13_6.do</a>
+<br>
+<a href="gph_fig13_7.html">gph_fig13_7.do</a>
+<br>
+<a href="gph_fig14_1.html">gph_fig14_1.do</a>
+<br>
+<a href="gph_fig14_2.html">gph_fig14_2.do</a>
+<br>
+<a href="gph_fig14_3.html">gph_fig14_3.do</a>
+<br>
+<a href="gph_fig14_4.html">gph_fig14_4.do</a>
+<br>
+<a href="gph_fig15_1.html">gph_fig15_1.do</a>
+<br>
+<a href="gph_fig15_2.html">gph_fig15_2.do</a>
+<br>
+<a href="gph_fig15_3.html">gph_fig15_3.do</a>
+<br>
+<a href="gph_fig15_4.html">gph_fig15_4.do</a>
+<br>
+<a href="gph_fig15_5.html">gph_fig15_5.do</a>
+<br>
+<a href="gph_fig15_6.html">gph_fig15_6.do</a>
+<br>
+<a href="gph_fig15_7.html">gph_fig15_7.do</a>
+<br>
+<a href="gph_fig17_1.html">gph_fig17_1.do</a>
+<br>
+<a href="gph_fig17_2.html">gph_fig17_2.do</a>
+<br>
+<a href="gph_fig17_3.html">gph_fig17_3.do</a>
+<br>
+<a href="gph_fig17_4.html">gph_fig17_4.do</a>
+<br>
+<a href="gph_fig17_5.html">gph_fig17_5.do</a>
+<br>
+<a href="gph_fig17_6.html">gph_fig17_6.do</a>
+<br>
+<a href="gph_fig17_7.html">gph_fig17_7.do</a>
+<br>
+<a href="gph_fig17_8.html">gph_fig17_8.do</a>
+<br>
+<a href="gph_fig17_9.html">gph_fig17_9.do</a>
+<br>
+<a href="gph_fig17_10.html">gph_fig17_10.do</a>
+<br>
+<a href="gph_fig17_11.html">gph_fig17_11.do</a>
+<br>
+<a href="gph_fig17_12.html">gph_fig17_12.do</a>
+<br>
+<a href="gph_fig17_13.html">gph_fig17_13.do</a>
+<br>
+<a href="gph_fig17_14.html">gph_fig17_14.do</a>
+<br>
+<a href="gph_fig17_15.html">gph_fig17_15.do</a>
+<br>
+<a href="gph_fig17_16.html">gph_fig17_16.do</a>
+<br>
+<a href="gph_fig17_17.html">gph_fig17_17.do</a>
+<br>
+<a href="gph_fig17_18.html">gph_fig17_18.do</a>
+<br>
+<a href="gph_fig17_19.html">gph_fig17_19.do</a>
+<br>
+<a href="gph_fig17_20.html">gph_fig17_20.do</a>
+<br>
+<a href="gph_fig17_21.html">gph_fig17_21.do</a>
+<br>
+<a href="gph_fig17_22.html">gph_fig17_22.do</a>
+<br>
+<a href="gph_fig17_23.html">gph_fig17_23.do</a>
+<br>
+<a href="gph_fig17_24.html">gph_fig17_24.do</a>
+<br>
+<a href="gph_fig17_25.html">gph_fig17_25.do</a>
+<br>
+<a href="gph_fig17_26.html">gph_fig17_26.do</a>
+<br>
+<a href="gph_fig17_27.html">gph_fig17_27.do</a>
+<br>
+<a href="gph_fig17_28.html">gph_fig17_28.do</a>
+<br>
+<a href="gph_fig17_29.html">gph_fig17_29.do</a>
+<br>
+<a href="gph_fig17_30.html">gph_fig17_30.do</a>
+<br>
+<a href="gph_fig17_31.html">gph_fig17_31.do</a>
+</td>
+<td class=datasets>
+<a href="gph_fig17_32.html">gph_fig17_32.do</a>
+<br>
+<a href="gph_fig17_32b.html">gph_fig17_32b.do</a>
+<br>
+<a href="gph_fig17_33.html">gph_fig17_33.do</a>
+<br>
+<a href="gph_fig17_34.html">gph_fig17_34.do</a>
+<br>
+<a href="gph_fig17_35.html">gph_fig17_35.do</a>
+<br>
+<a href="gph_fig17_36.html">gph_fig17_36.do</a>
+<br>
+<a href="gph_fig17_37.html">gph_fig17_37.do</a>
+<br>
+<a href="gph_fig17_38.html">gph_fig17_38.do</a>
+<br>
+<a href="gph_fig17_43.html">gph_fig17_43.do</a>
+<br>
+<a href="gph_fig17_47.html">gph_fig17_47.do</a>
+<br>
+<a href="gph_fig18_1.html">gph_fig18_1.do</a>
+<br>
+<a href="hip.html">hip.dta</a>
+<br>
+<a href="kidney.html">kidney.dta</a>
+<br>
+<a href="lbw1.html">lbw1.dta</a>
+<br>
+<a href="lbw1_p.html">lbw1_p.dta</a>
+<br>
+<a href="lbw_parity.html">lbw_parity.dta</a>
+<br>
+<a href="lowbwt.html">lowbwt.dta</a>
+<br>
+<a href="lprob1.html">lprob1.ado</a>
+<br>
+<a href="lprob2.html">lprob2.ado</a>
+<br>
+<a href="lprob.html">lprob.ado</a>
+<br>
+<a href="lprob.hlp">lprob.hlp</a>
+<br>
+<a href="metricauto.html">metricauto.dta</a>
+<br>
+<a href="MMR_2002_2011.xls">MMR_2002_2011.xls</a>
+<br>
+<a href="neonatal.html">neonatal.dta</a>
+<br>
+<a href="newlog.html">newlog.ado</a>
+<br>
+<a href="newlog.hlp">newlog.hlp</a>
+<br>
+<a href="newlog-2.html">newlog.sthlp</a>
+<br>
+<a href="nlog.html">nlog.ado</a>
+<br>
+<a href="nlog.hlp">nlog.hlp</a>
+<br>
+<a href="nlog-2.html">nlog.sthlp</a>
+<br>
+<a href="nlsw88.html">nlsw88.dta</a>
+<br>
+<a href="oppatients1.html">oppatients1.dta</a>
+<br>
+<a href="oppatients2.html">oppatients2.dta</a>
+<br>
+<a href="patnumbers.html">patnumbers.dta</a>
+<br>
+<a href="pinterval.html">pinterval.ado</a>
+<br>
+<a href="profile.html">profile.do</a>
+<br>
+<a href="ras.html">ras.dta</a>
+<br>
+<a href="sf36.html">sf36.dta</a>
+<br>
+<a href="smoke1x.html">smoke1x.dta</a>
+<br>
+<a href="smoke.html">smoke.dta</a>
+<br>
+<a href="states.html">states.dta</a>
+<br>
+<a href="std_europe.html">std_europe.dta</a>
+<br>
+<a href="stdpops.html">stdpops.dta</a>
+<br>
+<a href="stocks.html">stocks.dta</a>
+<br>
+<a href="U5Mortality_2002_2009.html">U5Mortality_2002_2009.dta</a>
+<br>
+<a href="vlog.html">vlog.ado</a>
+</td>
+</table>
+</div>
+</ul>
+<div class=topic> Links useful for this course </div>
+<ul>
+<li class=normal><a href="http://www.stata.com/links/resources1.html">Stata Corp's online resources</a></li>
+<li class=normal><a href="http://www.stata.com/statalist/index.html">Stata Corp's list-serv</a></li>
+<li class=normal><a href="http://www.stata.com/netcourse/">Stata Corp's net courses</a></li>
+<li class=normal><a href="http://www.stata.com/support/faqs/">Stata Corp's FAQs</a></li>
+<li class=normal><a href="http://www.stata.com/support/faqs/graphics/gph/statagraphs.html">Stata Corp's graphics examples</a></li>
+<li class=normal><a href="http://blog.stata.com/">Stata Corp's blog</a></li>
+<li class=normal><a href="http://www.ats.ucla.edu/stat/stata/">UCLA Stata resources</a></li>
+<li class=normal><a href="http://data.princeton.edu/stata">Germán Rodríguez Stata Tutorial</a></li>
+<li class=normal><a href="http://www.cpc.unc.edu/research/tools/data_analysis/statatutorial/index.html">UNC Stata resources</a></li>
+<li class=normal><a href="../../../../../fmwww.bc.edu/GStat/docs/StataIntro.html">Chris Baum Stata introduction</a></li>
+<li class=normal><a href="../../../../../pped.org/stata/IntroSt.pdf">  Intro to Stata by Austin Nichols (2007)</a></li>
+<li class=normal><a href="http://www.ssc.wisc.edu/sscc/pubs/4-24.htm">  UW-Madison Introduction to Stata Graphics (2008)</a></li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/courses/EPIB-613/main.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:22:31 GMT -->
+</html>

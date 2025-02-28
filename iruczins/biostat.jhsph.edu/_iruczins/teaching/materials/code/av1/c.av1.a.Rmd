@@ -1,0 +1,137 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Advanced
+
+#### Example from class: diets and blood coagulation times 
+
+```{r}
+coag <- c(62, 60, 63, 59,
+          63, 67, 71, 64, 65, 66,
+          68, 66, 71, 67, 68, 68,
+          56, 62, 60, 61, 63, 64, 63, 59)
+ttt <- factor(rep(LETTERS[1:4],c(4,6,6,8)))
+```
+
+The output from the built-in function. Note that 'summary' creates a list, while 'anova' does not.
+
+```{r}
+aov(coag~ttt)
+summary(aov(coag~ttt)) 
+str(summary(aov(coag~ttt))) 
+summary(aov(coag~ttt))[[1]]
+summary(aov(coag~ttt))[[1]][1]
+summary(aov(coag~ttt))[[1]]$Df
+summary(aov(coag~ttt))[[1]][2]
+summary(aov(coag~ttt))[[1]][3]
+summary(aov(coag~ttt))[[1]][4]
+summary(aov(coag~ttt))[[1]][5]
+summary(aov(coag~ttt))[[1]][1:5]
+anova(aov(coag~ttt)) 
+str(anova(aov(coag~ttt)))
+anova(aov(coag~ttt))[1] 
+anova(aov(coag~ttt))$Df
+anova(aov(coag~ttt))[2] 
+anova(aov(coag~ttt))[1,] 
+anova(aov(coag~ttt))[2,] 
+anova(aov(coag~ttt))[1,4] 
+anova(aov(coag~ttt))[1,5] 
+```
+
+#### Example from class: meioses in females and males
+
+The meiosis data used in this lecture are available in the SPH.140.615 R package. 
+
+```{r}
+library(SPH.140.615)
+meioses$family <- as.factor(meioses$family)
+out.fem <- aov(female~family,data=meioses)
+summary(out.fem)
+out.mal <- aov(male~family,data=meioses)
+summary(out.mal)
+```
+
+Permutation tests.
+
+```{r}
+set.seed(1)
+n.sim <- 1000
+perm.fem <- perm.mal <- 1:n.sim
+simdat <- meioses
+for(i in 1:n.sim){
+  simdat$family <- sample(simdat$family)
+  perm.fem[i] <- anova(aov(female~family,data=simdat))[1,4]
+  perm.mal[i] <- anova(aov(male ~ family,data=simdat))[1,4]
+}
+```
+
+The observed F statistics,
+
+```{r}
+obs.fem <- anova(out.fem)[1,4]
+obs.fem
+obs.mal <- anova(out.mal)[1,4]
+obs.mal 
+```
+
+The estimated p-values.
+
+```{r}
+mean(perm.fem>=obs.fem)
+mean(perm.mal>=obs.mal)
+```
+
+Plots of the permutation F statistics, and the parametric F distribution.
+
+```{r}
+hist(perm.fem,breaks=seq(0,5,by=0.25),prob=TRUE)
+curve(df(x,7,84),add=TRUE,col="red",lwd=2)
+abline(v=obs.fem,col="red",lwd=2,lty=2)
+hist(perm.mal,breaks=seq(0,5,by=0.25),prob=TRUE)
+curve(df(x,7,84),add=TRUE,col="blue",lwd=2)
+abline(v=obs.mal,col="blue",lwd=2,lty=2)
+```
+
+Random effects.
+
+```{r}
+k <- 8
+n <- tapply(meioses$female,meioses$family,length)
+n
+N <- sum(n)
+N
+n0 <- (N-sum(n^2)/sum(n))/(k-1)
+n0
+```
+
+Female meioses.
+
+```{r}
+anova(out.fem)
+anova(out.fem)[,3]
+MB <- anova(out.fem)[1,3]
+MB
+MW <- anova(out.fem)[2,3]
+MW
+sig <- sqrt(MW)
+sig
+sigA <- sqrt((MB-MW)/n0)
+sigA
+```
+
+Male meioses.
+
+```{r}
+MB <- anova(out.mal)[1,3]
+MB
+MW <- anova(out.mal)[2,3]
+MW
+sig <- sqrt(MW)
+sig
+sigA <- sqrt((MB-MW)/n0)
+sigA
+```
+

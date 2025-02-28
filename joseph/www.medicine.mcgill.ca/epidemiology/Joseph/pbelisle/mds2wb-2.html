@@ -1,0 +1,1335 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/mds2wb.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:03 GMT -->
+<head>
+<title>SAS macro %mds2wb: Exporting multi-dimensional structures</title>
+<meta name="description" content="%mds2wb saves values for one or more variables (xvars) of input data set (data) to a text file (outfile) as a WinBUGS list; it considers every other variable present in the data set as an index variable (a dimension of each variable in xvars) .">
+<meta name="keywords" content="ASCII, convert, data, export, exporting, files, list, matrix, multi-dimensional, multi-dimensions, prepare, sas, save, structures, table, text, txt, WinBUGS, write">
+<link rel="icon" type="image/png" href="img/favicon-2.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs-2.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook-2.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode-2.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-2.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros-2.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl-2.html">Invitation to Perl</a></li>
+      <li><a href="bic-process-2.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary-2.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript-2.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript-2.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb-2.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary-2.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software-2.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.5 (July 2010)</div>
+<div class=title0> SAS macro %mds2wb</div>
+<div class=title> Exporting multi-dimensional structures </div>
+
+
+<br><br>
+
+If you use SAS to prepare your WinBUGS data, you probably already know about <b>%_lexport</b> and <b>%_sexport</b>
+(see <a href="http://ww2.mcw.edu/pcor/bugs/" target="_blank">Rodney Sparapani's SAS Macros for BUGS webpage</a>),
+used respectively to save lists (one-dimensional objects) and matrices (two-dimensional structures).
+<br><br>
+This document presents the SAS macro
+<b>%mds2wb</b>, which saves <b>multi-dimensional structures</b>.
+<br><br>
+<div class=section>Syntax:</div>
+<div class=download0>
+<a href="SasMacros/mds2wb-2.zip">Download %mds2wb.sas</a>
+</div>
+<div class=pgm>
+%mds2wb(data, xvars, outfile, undef=na, savedim=1, objectname=, format=best12., linesize=100, dimnames=, nvars=, byrow=1);
+</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+%mds2wb saves values for one or more variables (<i>xvars</i>) <br>
+of input data set (<i>data</i>) to a text file (<i>outfile</i>) as a WinBUGS list;<br>
+it considers every other variable present in the data set<br>
+as an index variable (a dimension of each variable in <i>xvars</i>).
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+<br><br>
+It can also be used to save one-dimensional (lists) or two-dimensional structures, as do <b>%_lexport</b> and <b>%_sexport</b>.
+<br>
+Note that all variables in <i>xvars</i> must be numeric.
+<br><br>
+
+<br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#savingone">Saving a multi-dimensional variable</a><br>
+<a href="#savingmultiple">Saving multiple objects by calling <span class=sasmacroname>%msd2wb</span> only once</a><br>
+<a href="#download">Download %mds2wb.sas</a>
+</div>
+
+<a name="savingone"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Saving a multi-dimensional variable</div>
+<br>
+
+To learn how to use the macro <b>%mds2wb</b>, it is instructive to go through some examples.
+
+<br><br>
+<div class=section>Examples</div>
+
+Consider the following data, where <i>z</i> is the variable to be saved, and yy, agegr and gender are index variables that will be used in a WinBUGS program.
+
+<br>
+<pre class=sasoutput>
+The SAS System
+
+Obs     yy     agegr       gender     z
+
+  1    2003    < 25 y/o       0       10
+  2    2003    25-44          0       11
+  3    2003    45-64          0       12
+  4    2003    65+            0       13
+  5    2004    < 25 y/o       0       20
+  6    2004    25-44          0       21
+  7    2004    65+            0       23
+  8    2005    < 25 y/o       0       31
+  9    2005    25-44          0       32
+ 10    2005    45-64          0       33
+ 11    2005    65+            0       34
+ 12    2003    < 25 y/o       1      110
+ 13    2003    25-44          1      111
+ 14    2003    45-64          1      112
+ 15    2003    65+            1      113
+ 16    2004    < 25 y/o       1      120
+ 17    2004    25-44          1      121
+ 18    2004    45-64          1      122
+ 19    2004    65+            1      123
+ 20    2005    < 25 y/o       1      131
+ 21    2005    25-44          1      132
+ 22    2005    45-64          1      133
+ 23    2005    65+            1      134
+</pre>
+<br>
+
+In other words, the data set above describes <i>z(yy,agegr,gender)</i> for 23 pairs of <i>(yy,agegr,gender)</i> values; note that <i>z</i> is undefined for <i>yy=2004, agegr=45-64, gender=0</i>.
+
+The following call to <b>%mds2wb</b><br>
+
+<br><br>
+<div class=pgm>
+%mds2wb(mydata, z, 'c:\tmp\z.txt')
+</div>
+<br>
+
+writes the following to text file <i>c:\tmp\z.txt</i>:
+
+<br>
+<pre class=ascii>
+# z
+# index variables: yy agegr gender
+#
+# yy
+#            1:  2003
+#            2:  2004
+#            3:  2005
+# agegr
+#            1: < 25 y/o
+#            2: 25-44   
+#            3: 45-64   
+#            4: 65+     
+# gender
+#            1:     0
+#            2:     1
+
+list(z.dim = c(3, 4, 2), z = structure(.Data = c(10, 110, 11, 111, 12, 112, 13, 113, 20, 120, 21, 
+121, NA, 122, 23, 123, 31, 131, 32, 132, 33, 133, 34, 134), .Dim = c(3, 4, 2)))
+</pre>
+<br>
+
+Note that:
+ 
+<ul>
+<li> index variable names are given on top of the output file;
+<li> ordered values for each index variable are listed (in ascending order), for ease of reference;
+<li> <i>z</i>-dimensions were saved into the variable <b>z.dim</b>, which may be useful in further WinBUGS programs; this variable can be omitted by calling <b>%mds2wb</b> with the option <b>savedim=0</b>;
+<li> <i>z</i>-dimension/length is saved into the variable <b>z.len</b> when the object saved is unidimensional (that is, when <i>data</i> consists of only <i>z</i> and an index variable);
+<li> undefined values (<i>z(2004,45-64,0)</i>, in this example, could not be found in the data set) are saved as <i>NA</i>'s by default; this can be changed by calling <b>%mds2wb</b> with the option <b>undef=somevalue</b> (see below);
+</ul>
+
+<br><br>
+<div class=pgm>
+%mds2wb(mydata, z, 'c:\tmp\z.txt', undef=0)
+</div>
+<br>
+
+<br>
+<pre class=ascii>
+# z
+# index variables: yy agegr gender
+#
+# yy
+#            1:  2003
+#            2:  2004
+#            3:  2005
+# agegr
+#            1: < 25 y/o
+#            2: 25-44   
+#            3: 45-64   
+#            4: 65+     
+# gender
+#            1:     0
+#            2:     1
+
+list(z.dim = c(3, 4, 2), z = structure(.Data = c(10, 110, 11, 111, 12, 112, 13, 113, 20, 120, 21, 
+121, 0, 122, 23, 123, 31, 131, 32, 132, 33, 133, 34, 134), .Dim = c(3, 4, 2)))
+</pre>
+<br>
+
+The figure below shows how the above data would be read in a WinBUGS program.
+<br><br><br>
+<img src="img/mds2wb/nodeInfo-2.gif">
+<br clear=all><br>
+<br><br>
+
+Finally, <i>z</i>-dimensions can be given variables names, which we may be more natural and more convenient for the WinBUGS programmer,
+as in:
+
+<br><br>
+<div class=pgm>
+%mds2wb(mydata, z, 'c:\tmp\z.txt', undef=0, dimnames=Y A G)
+</div>
+<br>
+
+which will change <b>z.dim = c(3, 4, 2)</b> for <b>Y = 3, A = 4, G = 2</b> in the output file:
+
+<br>
+<pre class=ascii>
+# z
+# index variables: yy agegr gender
+#
+# yy
+#            1:  2003
+#            2:  2004
+#            3:  2005
+# agegr
+#            1: < 25 y/o
+#            2: 25-44   
+#            3: 45-64   
+#            4: 65+     
+# gender
+#            1:     0
+#            2:     1
+
+list(Y = 3, A = 4, G = 2, z = structure(.Data = c(10, 110, 11, 111, 12, 112, 13, 113, 20, 120, 21, 
+121, 0, 122, 23, 123, 31, 131, 32, 132, 33, 133, 34, 134), .Dim = c(3, 4, 2)))
+</pre>
+<br>
+
+For data such as above, one knows in advance that the data will contain two values for gender, that is, that <b>G</b> will take the value 2.
+Consequently, one could prefer to write a WinBUGS program that reflects that. For example, if the program involves a loop on gender as below,
+<br><br>
+<div class=pgm>
+for (gender in 1:G)<br>
+{<br>
+  # some WinBUGS code<br>
+}
+</div>
+<br>
+one might prefer to use the following code, where <b>G</b> is replace by its known value:
+<br><br>
+<div class=pgm>
+for (gender in 1:2)<br>
+{<br>
+  # some WinBUGS code<br>
+}
+</div>
+<br>
+
+In this case, the value for <b>G</b> need not be saved in the <b>%mds2wb</b> output data set, as variable <b>G</b> will not be used in the WinBUGS program;
+<b>G</b> can be omitted by replacing the corresponding dimension name by a tilde (~):
+
+<br><br>
+<div class=pgm>
+%mds2wb(mydata, z, 'c:\tmp\z.txt', undef=0, dimnames=Y A ~)
+</div>
+<br>
+
+<br>
+<pre class=ascii>
+# z
+# index variables: yy agegr gender
+#
+# yy
+#            1:  2003
+#            2:  2004
+#            3:  2005
+# agegr
+#            1: < 25 y/o
+#            2: 25-44   
+#            3: 45-64   
+#            4: 65+     
+# gender
+#            1:     0
+#            2:     1
+
+list(Y = 3, A = 4, z = structure(.Data = c(10, 110, 11, 111, 12, 112, 13, 113, 20, 120, 21, 121, 0, 
+122, 23, 123, 31, 131, 32, 132, 33, 133, 34, 134), .Dim = c(3, 4, 2)))
+</pre>
+
+
+<br><br>
+<div class=section>Order of index variables</div>
+<br>
+
+In the example above, the <i>yy</i> variable is used as the first-dimension index variable, <i>agegr</i> is used second, and then <i>gender</i>.<br>
+Index variables are used in the same order as they appear in the dataset
+(that is, in the same order of VARNUM in
+<i>proc content</i>'s output when applied to it).
+<br><br>
+
+If you plan to use the series of index variables in a given order in your
+WinBUGS program, make sure they appear in the appropriate order in your data set.
+To do so, one could, e.g., use <i>proc sql</i> to select the variables in the desired order, as in
+<br><br>
+<div class=pgm>
+proc sql;<br>
+&nbsp;&nbsp;&nbsp;create table ReorganizedData as<br>
+&nbsp;&nbsp;&nbsp;select xvar, indexvar1, indexvar2, indexvar3<br>
+&nbsp;&nbsp;&nbsp;from OriginalData;<br>
+quit;<br>
+</div>
+<br>
+
+Calling <b>%mds2wb</b> with the reorganized data set
+
+<br><br>
+<div class=pgm>
+%mds2wb(ReorganizedData, xvar,
+'c:\users\pbelisle\My Documents\Home\myproject\WinBUGS\data\xvar.txt');
+</div>
+<br>
+will then save the data with the index variables being used in the same order as they were selected through the <i>proc-sql</i> procedure call.
+
+<a name="savingmultiple"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Saving multiple objects by calling <span class=sasmacroname>%msd2wb</span> only once</div>
+<br>
+
+The next three examples illustrate how to save multiple equally-indexed variables by a single call to <b>%mds2wb</b>;
+the first example saves each variable under its original name while the next two show how to save them under a unique variable name &#151; each variable saved being included as one dimension of the new object saved &#151;
+through the option <b>objectname=</b>. Example 2 saves the data in an order that seems most natural &#150; one observation at a time, through the default option <b>byrow=1</b> &#150;
+while example 3 saves the data in yet a possibly useful order &#150; one variable at a time, through the option <b>byrow=0</b>.
+
+<br><br>
+<div class=section>Saving distinct variables separately</div>
+<br>
+
+Suppose you have a data set (below) consisting of 8 variables, <i>m1--m8</i>, to be saved along with two index variables, ethnicity (taking values 1, 2 and 3) and gender (0/1).
+
+<pre class=sasoutput>
+The SAS System
+
+Obs    ethnicity    gender    m1    m2    m3    m4    m5    m6    m7    m8
+
+ 1         1           0      10    20    30    40    50    60    70    80
+ 2         1           1      11    21    31    41    51    61    71    81
+ 3         2           0      12    22    32    42    52    62    72    82
+ 4         2           1      13    23    33    43    53    63    73    83
+ 5         3           0      14    24    34    44    54    64    74    84
+ 6         3           1      15    25    35    45    55    65    75    85
+</pre>
+
+
+You can save the 8 variables <i>m1-m8</i> by a single call to <b>%mds2wb</b> by specifying the eight variables in the argument <i>xvars</i>, as follows:
+
+<br><br>
+<div class=pgm>
+%mds2wb(example2, m1 m2 m3 m4 m5 m6 m7 m8, 'c:\tmp\m.txt')
+</div>
+<br>
+
+which would save the following file
+
+<pre class=ascii>
+# m1 m2 m3 m4 m5 m6 m7 m8
+# index variables: ethnicity gender
+#
+# ethnicity
+#        1-3:  1-3
+# gender
+#            1:     0
+#            2:     1
+
+list(m1.dim = c(3, 2), m1 = structure(.Data = c(10, 11, 12, 13, 14, 15), .Dim = c(3, 2)),
+m2 = structure(.Data = c(20, 21, 22, 23, 24, 25), .Dim = c(3, 2)),
+m3 = structure(.Data = c(30, 31, 32, 33, 34, 35), .Dim = c(3, 2)),
+m4 = structure(.Data = c(40, 41, 42, 43, 44, 45), .Dim = c(3, 2)),
+m5 = structure(.Data = c(50, 51, 52, 53, 54, 55), .Dim = c(3, 2)),
+m6 = structure(.Data = c(60, 61, 62, 63, 64, 65), .Dim = c(3, 2)),
+m7 = structure(.Data = c(70, 71, 72, 73, 74, 75), .Dim = c(3, 2)),
+m8 = structure(.Data = c(80, 81, 82, 83, 84, 85), .Dim = c(3, 2)))
+</pre>
+
+Note that the dimensions of the first object only were saved (m1.dim), as all variables have the same dimensions.
+As was the case when only one variable was saved, dimensions can be saved under constants through the <b>dimnames=</b> option,
+or simply not be saved through the option <b>savedim=0</b>.
+<br><br>
+
+
+
+<br><br>
+<div class=section>Saving distinct variables as a single structure</div>
+<br>
+
+While it may be interesting to save a series of variables separately, as shown above, the variables to be saved may consist in dimensions
+of an higher-level object; in this example, e.g., if the variables <i>m1--m8</i> are the 8 subscales (or dimensions) of variable <i>m</i>, we can
+save the values of variables <i>m1--m8</i> into a single object, which name is given through the <b>objectname=</b> option, as in 
+
+<br><br>
+<div class=pgm>
+%mds2wb(example2, m1 m2 m3 m4 m5 m6 m7 m8, 'c:\tmp\m.txt', objectname=m)
+</div>
+<br>
+
+which would save the data below.
+
+<pre class=ascii>
+# m
+# index variables: ethnicity gender original_variable
+#
+# ethnicity
+#        1-3:  1-3
+# gender
+#            1:     0
+#            2:     1
+# original_
+# variable
+#            1: m1
+#            2: m2
+#            3: m3
+#            4: m4
+#            5: m5
+#            6: m6
+#            7: m7
+#            8: m8
+
+list(m.dim = c(3, 2, 8), m = structure(.Data = c(10, 20, 30, 40, 50, 60, 70, 80, 11, 21, 31, 41, 51
+, 61, 71, 81, 12, 22, 32, 42, 52, 62, 72, 82, 13, 23, 33, 43, 53, 63, 73, 83, 14, 24, 34, 44, 54, 64
+, 74, 84, 15, 25, 35, 45, 55, 65, 75, 85), .Dim = c(3, 2, 8)))
+</pre>
+
+Note that the original variables names saved are listed under the pseudo-index name <i>original_variable</i>.
+<br><br>
+
+<b>objectname=</b> options has no effect when <i>xvars</i> consists of only one variable (that is, when only one variable is saved through <b>%mds2wb</b>,
+you cannot change the variable name under which it is going to be saved in a WinBUGS list [other than by renaming it through a data set or a call to proc datasets prior to calling <b>%mds2wb</b>]).
+<br><br>
+
+The number of variables saved can be written to a constant, which name will be given through the <b>nvars=</b> option, as in
+
+<br><br>
+<div class=pgm>
+%mds2wb(example2, m1 m2 m3 m4 m5 m6 m7 m8, 'c:\tmp\m.txt', objectname=m, nvars=K)
+</div>
+<br>
+
+which would save the data as shown below.
+
+<pre class=ascii>
+# m
+# index variables: ethnicity gender original_variable
+#
+# ethnicity
+#        1-3:  1-3
+# gender
+#            1:     0
+#            2:     1
+# original_
+# variable
+#            1: m1
+#            2: m2
+#            3: m3
+#            4: m4
+#            5: m5
+#            6: m6
+#            7: m7
+#            8: m8
+
+list(K = 8, m.dim = c(3, 2, 8), m = structure(.Data = c(10, 20, 30, 40, 50, 60, 70, 80, 11, 21, 31, 
+41, 51, 61, 71, 81, 12, 22, 32, 42, 52, 62, 72, 82, 13, 23, 33, 43, 53, 63, 73, 83, 14, 24, 34, 44, 
+54, 64, 74, 84, 15, 25, 35, 45, 55, 65, 75, 85), .Dim = c(3, 2, 8)))
+</pre>
+
+<br><br>
+Note that the values of variables of <i>m1--m8</i> are entered into the object <i>m</i> one line (or observation) at a time, according to the default value
+given to the option <b>byrow=1</b>. (The option name, <b>byrow</b>, was chosen by analogy to the <i>byrow</i> argument in R <i>matrix</i> function; however, it takes values 1 (one, the default value)
+or 0 (zero), while in R it takes a logical value &#150; True or False.)
+<br><br>
+
+
+Although saving data in this order seems natural &#151; as one could, e.g.,
+model the vectors </i>(m1[i], m2[i], ..., m8[i])'</i> as multinomial, as in the WinBUGS code below:
+
+<br><br>
+<div class=pgm>
+p[1:8] ~ ddirch(a[1:8])<br>
+<br>
+for (e in 1:3)<br>
+{<br>
+&#160;&#160;for (g in 1:2)<br>
+&#160;&#160;{<br>
+&#160;&#160;&#160;&#160;n[e,g] <- sum(m[e,g,1:8])<br>
+<br>
+&#160;&#160;&#160;&#160;m[e,g,1:8] ~ dmulti(p[&nbsp;], n[e,g])<br>
+&#160;&#160;}<br>
+}
+</div><br>
+
+&#151; one may also want to save all values in <i>m1</i> first, followed by the values in <i>m2</i>, and so on, to finish with values in <i>m8</i>.
+This option will be discussed in next section.<br>
+
+
+<br><br>
+<div class=section>Saving distinct variables as a single structure, one variable at a time</div>
+<br>
+
+
+The values of a series of variables can appended to each other through the option <b>byrow=0</b>.
+Doing so in the example presented in previous section, values in <i>m1</i> would be entered first, followed by values in <i>m2</i>, etc.
+<br>
+Thus, the call
+
+<br><br>
+<div class=pgm>
+%mds2wb(example2, m1 m2 m3 m4 m5 m6 m7 m8, 'c:\tmp\m.txt', objectname=m, byrow=0)
+</div>
+<br>
+
+would save the data as shown below, where the values in <i>m</i> are, in order, the values in <i>m1</i> (the 10's), followed
+by the values in <i>m2</i> (the 20's), etc.
+
+<pre class=ascii>
+# m
+# index variables: original_variable ethnicity gender
+#
+# original_
+# variable
+#            1: m1
+#            2: m2
+#            3: m3
+#            4: m4
+#            5: m5
+#            6: m6
+#            7: m7
+#            8: m8
+# ethnicity
+#        1-3:  1-3
+# gender
+#            1:     0
+#            2:     1
+
+list(m.dim = c(8, 3, 2), m = structure(.Data = c(10, 11, 12, 13, 14, 15,
+20, 21, 22, 23, 24, 25,
+30, 31, 32, 33, 34, 35,
+40, 41, 42, 43, 44, 45,
+50, 51, 52, 53, 54, 55,
+60, 61, 62, 63, 64, 65,
+70, 71, 72, 73, 74, 75,
+80, 81, 82, 83, 84, 85), .Dim = c(8, 3, 2)))
+</pre>
+
+This data construct, however, would make the modeling presented in previous section &#150; where the 1:8 must come first in the series of <i>m</i> indices in this construct &#150; 
+
+<br><br>
+<div class=pgm>
+p[1:8] ~ ddirch(a[1:8])<br>
+<br>
+for (e in 1:3)<br>
+{<br>
+&#160;&#160;for (g in 1:2)<br>
+&#160;&#160;{<br>
+&#160;&#160;&#160;&#160;n[e,g] <- sum(m[1:8,e,g])<br>
+<br>
+&#160;&#160;&#160;&#160;m[1:8,e,g] ~ dmulti(p[&nbsp;], n[e,g])<br>
+&#160;&#160;}<br>
+}<br>
+</div>
+<br>
+
+impossible to use, as WinBUGS would issue the following error message:
+
+<br><br>
+<div class=wberrormsg>
+vector valued relation m must involve consecutive elements of variable
+</div>
+<br>
+
+We thought, however, that this option &#151; saving a series of variables by column rather than by row &#151; might still show useful for some applications.
+<br>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br><br>
+<a href="SasMacros/mds2wb-2.zip">Download %mds2wb.sas 1.5 now.</a><br><br>
+
+
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/mds2wb.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:05 GMT -->
+</html>

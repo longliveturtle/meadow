@@ -1,0 +1,79 @@
+#!/usr/bin/perl
+
+# Argument: name of file containing the output to 'proc contents'
+#
+# Ex: mymacro.pl contents.lst
+
+
+# ---- Code starts here -------------------------------------------------
+
+$CONTENTS  = $ARGV[0]; # 1st argument given at the DOS-prompt
+
+$MYMACRO = "mymacro"; # <- you can type the name of your sas macro here, or edit the output
+                      #    of this Perl pgm later and change 'mymacro' for your sas macro name.
+
+
+# --- Read the contents output
+
+open(TMP, $CONTENTS) || die "Cannot read output file $CONTENTS. Abort.\n";
+@contents = (<TMP>); # read the whole file and store each line in the 'vector' @contents (in Perl, it is called a table, but I personnaly view it as a vector)
+close TMP;
+
+
+# Read @contents
+
+
+while (@contents)
+{
+  $line = shift @contents;                        # remove 1st component of vector @contents, and store it in variable $line
+  next unless $line =~ /MEMBER\s+NUM\s+VARIABLE/; # repeat previous step(s) [everything between the 'while' and this line]
+                                                  # until we meet a line with words MEMBER, NUM and VARIABLE
+
+  # Now, remove any subsequent empty line (\S is anything but a space)
+  shift @contents until $contents[0] =~ /\S/;
+
+  while (@contents)
+  {
+    $line = shift @contents;
+    last unless $line =~ /\S/;  # exit this while-loop if we meet an empty line
+                                # (as the list of variables may have been printed in multiple blocks)
+
+    @tmp = split(" ", $line); # expand the current line into fields, consecutively saved in vector @tmp
+                              # look at your contents.lst output, 1st field is: dataset name
+                              #                                   2nd field is: variable number
+                              #                                   3rd field is: variable name
+                              # In Perl, vector indices start at 0: thus, 1st field of @tmp is $tmp[0],
+                              # 2nd field is $tmp[1], and so on.
+
+    $variable = lc $tmp[2]; # 3rd field of the current line (lc=lowercase)
+
+    if (substr($variable, -2) eq "97")
+    {
+      # substr($variable, -2) are the last two characters of the string in $variable
+
+      push(@vars97, $variable);
+    }
+    elsif (substr($variable, -2) eq "98")
+    {
+      push(@vars98, $variable);
+    }
+  }
+}
+
+
+# ---- print sas code, with 1997 variables first, followed by 1998-vars
+
+print "/* 1997 variables */\n\n\n";
+
+foreach (@vars97)
+{
+  print "\%$MYMACRO($_)\n"; # \n is the newline character, and % needs to be protected (by the preceding backslash)
+                                   # as % is a particular type of variable in Perl (hash table)
+}
+
+print "\n\n/* 1998 variables */\n\n\n";
+
+foreach (@vars98)
+{
+  print "\%$MYMACRO($_)\n";
+}

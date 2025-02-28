@@ -1,0 +1,1085 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/NewDatasetName.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:44:34 GMT -->
+<head>
+<title>SAS macro %NewDatasetName: A tip on determining a safe temporary data set name</title>
+<meta name="description" content=" %NewDatasetName is a SAS macro that returns a temporary SAS data set name that does not currently exist &#150; that is, thename of a data set you can safely use to store data (or intermediate results) without risking inadvertantly overwriting an already existing data set.">
+<meta name="keywords" content="avoid, data, existing, file, name, new, overwrite, protect, sas, set, temporary, unused">
+<link rel="icon" type="image/png" href="img/favicon-2.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs-2.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook-2.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode-2.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-2.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros-2.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl-2.html">Invitation to Perl</a></li>
+      <li><a href="bic-process-2.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary-2.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript-2.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript-2.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb-2.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary-2.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software-2.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.0 (January 2010)</div>
+<div class=title0>SAS macro %NewDatasetName</div>
+<div class=title>A tip on determining a safe temporary data set name</div>
+
+Inside a SAS macro, one often needs to create temporary data sets; giving them <i>safe</i> names should be job # 1.
+Indeed, when writing temporary data sets, one must make sure that none of the new data sets overwrites an already existing data
+set &#150; e.g. a data set that the user (if you intend to make your macro available to others) or yourself have created
+before calling your macro. Many strategies for doing so are conceivable, with different levels of safety; <span class=sasmacroname>%NewDatasetName</span> 
+is a robust and safe solution, as it compares a proposed data set name to all existing SAS data sets and modifies it if necessary.
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%NewDatasetName</span> is a SAS macro that returns a temporary SAS data set name that does not currently exist &#150; that is, the
+name of a data set you can safely use to store data (or intermediate results) without risking inadvertantly overwriting an already existing data set.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+<br><br>
+
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#example">Example</a><br>
+<a href="#note">Note and limitations</a><br>
+<a href="#code">SAS code</a><br>
+<a href="#download">Download</a>
+</div>
+
+<a name="syntax"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+%NewDatasetName(proposalname)
+</div>
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+Although <span class=sasmacroname>%NewDatasetName</span> can also be used outside of SAS macros, we will illustrate its use through an example
+where it is called from within a macro.
+<br><br>
+As discussed in the introduction,
+many strategies are conceivable when naming temporary data sets.
+The first strategy that comes to mind is probably to use a <i>reserved</i> class of data sets names for your macros, e.g.,
+starting temporay data sets names with underscores within macros.
+
+<br>
+<pre class=example>
+/*******************
+ * (Not suggested) *
+ *                 *
+ *******************/;
+
+
+%macro MyMacro(dataset, xvar, arg3, arg4, etc);
+
+  proc contents data=&dataset out=_contents noprint; 
+  run;
+
+  ---snipped out sas code---
+
+  proc means data=&dataset noprint;
+    var &xvar;
+    output out=_means mean=mean;
+  run;
+
+  ---snipped out sas code---
+
+  * Tidy-up;
+  proc datasets nolist;
+    delete _contents _means;
+  run;
+%mend;
+</pre>
+<br>
+
+This is a <i>relatively</i> safe approach if you intend to use your macro <b>for personal applications only</b>. However,
+if you plan to distribute your macro, it is note safe at all! Indeed, you cannot be sure that someone using your %MyMacro macro
+did not already name a data set either <i>_contents</i> or <i>_means</i>, as it is a relatively common practice to start temporary data set names with underscores.
+Therefore, I conclude that this is not a particularly safe method.<br><br>
+
+One could then think of using two underscores to start temporary data set names in macros: that certainly reduces the risk of
+overwriting data sets, but is not 100%-safe either, especially if you consider the possibility that your macro could be called
+from within another macro: the possibility of conflicts is then considerably raised!<br><br>
+
+A <i>safer</i> strategy would be to start any temporary data set name within a macro with the name of the macro itself, as in:
+
+<br>
+<pre class=example>
+/*******************
+ * (Not suggested) *
+ *                 *
+ *******************/;
+
+
+%macro MyMacro(dataset, xvar, arg3, arg4, etc);
+
+  proc contents data=&dataset out=MyMacro_contents noprint; 
+  run;
+
+  ---snipped out sas code---
+
+  proc means data=&dataset noprint;
+    var &xvar;
+    output out=MyMacro_means mean=mean;
+  run;
+
+  ---snipped out sas code---
+
+  * Tidy-up;
+  proc datasets nolist;
+    delete MyMacro_contents MyMacro_means;
+  run;
+%mend;
+</pre>
+<br>
+
+It is indeed much better than the two strategies presented earlier. 
+The chance that a user already has a data set named MyMacro_contents or MyMacro_means is extremely low!
+However, it is a good practice to use macro names that are illustrative of what they are doing, which often leads
+to using long macro names (unlike <i>MyMacro</i>, which is short but not very illustrative, I must say!). This strategy then
+involves (possibly repetitively) retyping the (possibly long) macro name, followed by some meaningful extension, the whole process
+leading to an increased risk of typing errors.
+Of course, one could always copy-and-paste the macro name whenever one needs to give a name to a temporary data set, but this
+is cumbersome (at least to a lazy programmer as I am!).<br><br>
+
+The best solution would be to have an automatically created data set name, which is exactly what <span class=sasmacroname>%NewDatasetName</span> does.
+Indeed, it takes a proposal data set name and accepts it if it is not already used. 
+If a file with the suggested name already exists, it adds an underscore
+in front of it, and adds a numeric suffix to it (if necessary) 
+until it finds a name not currently being used. 
+Saving the suggested name into a local macro variable 
+(<i>dscontents</i> and <i>dsmeans</i>, in the example below) makes it easy to use as you never really need to know the actual name attributed
+to your temporary data set: you will simply refer to it by using the appropriate macro variable.
+<br><br>
+
+<br>
+<pre class=example>
+/******************
+ * Our suggestion *
+ *                *
+ ******************/;
+
+%include 'c:/your directory/NewDatasetName.sas';
+
+
+%macro MyMacro(dataset, xvar, arg3, arg4, etc);
+
+  %local dscontents dsmeans;
+
+  %let dscontents = %NewDatasetName(contents);
+
+  proc contents data=&dataset out=&dscontents noprint; 
+  run;
+
+  ---snipped out sas code---
+
+  %let dsmeans = %NewDatasetName(means);
+
+  proc means data=&dataset noprint;
+    var &xvar;
+    output out=&dsmeans mean=mean;
+  run;
+
+  ---snipped out sas code---
+
+  * Tidy-up;
+  proc datasets nolist;
+    delete &dscontents &dsmeans;
+  run;
+%mend;
+</pre>
+<br><br>
+
+<a name="note"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Note</div>
+<br>
+It is important that <span class=sasmacroname>%NewDatasetName</span> is called just before the new data set name thus obtained is actually used.
+Indeed, in the first example below, the two local macro variables <i>dstmp1</i> and <i>dstmp2</i> would take the same value (<i>tmp</i>, if the data set <i>tmp</i> did not exist)
+while in the second example <i>dstmp2</i> would have a different value, by being given its own numeric suffix.
+
+<br><br>
+<pre class=example>
+/*****************************
+ * That wouldn't work,       *
+ * as dstmp1 and dstmp2      *
+ * would take the same value *
+ *                           *
+ *****************************/;
+
+
+%macro MyMacro(dataset, xvar, arg3, arg4, etc);
+
+  %local dstmp1 dstmp2;
+
+  %let dstmp1 = %NewDatasetName(tmp);
+  %let dstmp2 = %NewDatasetName(tmp);
+
+  proc contents data=&dataset out=&dstmp1 noprint; 
+  run;
+
+  ---snipped out sas code---
+
+  proc means data=&dataset noprint;
+    var &xvar;
+    output out=&dstmp2 mean=mean;
+  run;
+
+  ---snipped out sas code---
+
+  * Tidy-up;
+  proc datasets nolist;
+    delete &dstmp1 &dstmp2;
+  run;
+%mend;
+</pre>
+<br>
+
+<pre class=example>
+/***************************
+ * That would work better! *
+ *                         *
+ ***************************/;
+
+
+%macro MyMacro(dataset, xvar, arg3, arg4, etc);
+
+  %local dstmp1 dstmp2;
+
+  %let dstmp1 = %NewDatasetName(tmp);
+
+  proc contents data=&dataset out=&dstmp1 noprint; 
+  run;
+
+  ---snipped out sas code---
+
+  %let dstmp2 = %NewDatasetName(tmp);
+
+  proc means data=&dataset noprint;
+    var &xvar;
+    output out=&dstmp2 mean=mean;
+  run;
+
+  ---snipped out sas code---
+
+  * Tidy-up;
+  proc datasets nolist;
+    delete &dstmp1 &dstmp2;
+  run;
+%mend;
+</pre>
+<br><br>
+
+
+<div class=subsection>Limitations</div>
+<br>
+Even though <span class=sasmacroname>%NewDatasetName</span> is a safer way to determine a temporary SAS data set name compared to the others presented above,
+we must underline a potential caveat, easily avoidable if the two simple rules below are followed.
+<br><br>
+<b>Define names just in time</b><br>
+As discussed above, call <span class=sasmacroname>%NewDatasetName</span> just before you actually need a new data set name. Defining temporary data sets names
+too long in advance could lead to overwriting data sets that were created between the call to <span class=sasmacroname>%NewDatasetName</span> and the intended use of the name obtained.
+<br><br>
+
+<b>Tidy-up at the end of each macro</b><br>
+It is good pratice to remove temporary data sets at the end of your macros: efficient memory space management is obviously a good idea anyway.
+<br><br>
+
+A final remark: since data set names lengths are limited to 32 characters, you should limit the proposed names to <span class=sasmacroname>%NewDatasetName</span> to values that are less than 27 characters-long, say.
+Indeed, if you repetitively call a macro or if a few macros call <span class=sasmacroname>%NewDatasetName</span> with the same proposal data set name, the addition of a leading underscore and a numeric suffix (as in <i>_MyProposedDatasetName344</i>, say) adds
+some length to the obtained data set name, as compared to the proposed name. Keeping the proposed names somewhat shorter than the 32 characters-long limit will ensure a successful <span class=sasmacroname>%NewDatasetName</span> return name.
+<br><br>
+
+<a name="code"></a>
+<a href="#top" class=top>Top</a>
+<div class=main>SAS Code</div>
+
+<div class=download0>
+<a href="SasMacros/NewDatasetName-2.zip">Download <span class=sasmacroname>%NewDatasetName</span> 1.0</a>
+</div>
+<div class=pgm>
+%macro NewDatasetName(proposalname);<br>
+&#160;&#160;&#160;&#160;%*Finds the first unused dataset named  *datasetname*, adding a leading underscore and a numeric suffix as large as necessary to make it unique!;<br>
+&#160;&#160;&#160;&#160;%local i newdatasetname;<br>
+&#160;&#160;&#160;&#160;%let proposalname=%sysfunc(compress(&amp;proposalname));<br>
+&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname;<br>
+<br>
+&#160;&#160;&#160;&#160;%do %while(%sysfunc(exist(&amp;newdatasetname)));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let i = %eval(&amp;i+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname&amp;i;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;newdatasetname<br>
+%mend;<br>
+</div>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br><br>
+Download <a href="SasMacros/NewDatasetName-2.zip"><span class=sasmacroname>%NewDatasetName</span> 1.0</a> now.<br><br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/NewDatasetName.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:44:35 GMT -->
+</html>

@@ -1,0 +1,104 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## R as a calculator
+
+The below is based in part on a script from John Fox.
+
+#### Basic arithmetic 
+
+```{r}
+2+3
+2-3
+2*3
+2/3
+2^3
+```
+
+#### Precedence of operators
+
+```{r}
+4^2-3*2
+(4^2)-(3*2) # better: use parentheses to group and clarify
+4^(2-3)*2
+1-6+4
+2^-3
+2^(-3)
+-2--3
+(-2)-(-3)
+```
+
+#### Functions, obtaining help
+
+```{r}
+log(100)
+?log
+help(log)
+log(100,base=10)
+log(100,b=10)
+log(100,10)
+log10(100)
+help.search("log")
+??log
+```
+
+#### Vectorized arithmetic
+
+```{r}
+c(1,2,3,4) 
+1:4   
+4:1
+-1:2 # note the precedence
+(-1):2
+seq(1,4)
+seq(2,8,by=2)
+seq(0,1,by=0.1)
+seq(0,1,length=11)
+c(1,2,3,4)/2    
+c(1,2,3,4)/c(4,3,2,1)
+log10(c(0.1,1,10,100))
+log2(c(1,2,4,8,16,32))
+```
+
+#### Basic summaries.
+
+```{r}
+x <- c(1,3.5,-28.4,10)
+x
+sum(x)
+prod(x)
+mean(x)
+```
+
+#### Missing data points.
+
+```{r}
+x <- c(1,5,10,NA,15)
+x
+sum(x)
+sum(x,na.rm=TRUE)
+prod(x,na.rm=TRUE)
+mean(x,na.rm=TRUE)
+```
+
+#### More on creating simple vectors
+
+```{r}
+rep(2,10)
+rep(1:3,4)
+rep(1:3,c(4,4,4))
+rep(1:3,rep(4,3))
+rep(1:3,each=4)
+rep(c(1,2,3),c(2,4,5))
+```
+
+#### Numeric, character, logic.
+
+```{r}
+c(1,3.5,-28.4,10)
+c("cat","dog","mouse","monkey")
+c(TRUE,TRUE,TRUE,FALSE,FALSE)
+```

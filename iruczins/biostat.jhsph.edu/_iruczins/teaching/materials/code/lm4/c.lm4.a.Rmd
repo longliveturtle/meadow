@@ -1,0 +1,125 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Multiple Linear Regression - Advanced
+
+We are using some data stored in the R package SPH.140.615.
+
+```{r}
+library(SPH.140.615)
+```
+
+
+#### Example: detecting a treatment effect
+
+Imagine we have three different treatments, and we are interested whether treatment has an effect on a response. In this example, the response might also depend on age.
+
+```{r}
+head(dat.anc1)
+summary(dat.anc1)
+```
+
+Plot the response across the treatment levels.
+
+```{r}
+boxplot(split(dat.anc1$rsp,dat.anc1$trt), col=c("red","blue","green3"), ylab="response")
+```
+
+The average response in treatment C seems to be a bit higher than in the two other groups. Let's carry out an ANOVA.
+
+```{r}
+aov.fit <- aov(rsp ~ trt, data=dat.anc1)
+summary(aov.fit)
+```
+
+The differences in means are not significant. However, age is strongly related to the response, but not to treatment.
+
+```{r}
+plot(dat.anc1$age, dat.anc1$rsp, pch=21, bg=c("red","blue","green3")[dat.anc1$trt], xlab="age", ylab="response")
+boxplot(split(dat.anc1$age,dat.anc1$trt), col=c("red","blue","green3"), ylab="age")
+```
+
+Let's look at the residuals after regressing out age.
+
+```{r}
+dat.anc1$res <- residuals(lm(rsp ~ age, data=dat.anc1))
+boxplot(split(dat.anc1$res,dat.anc1$trt), col=c("red","blue","green3"), ylab="residuals")
+```
+
+The differences in means are now much more pronounced. Let's carry out an ANOVA on the residuals.
+
+```{r}
+aov.fit <- aov(res ~ trt, data=dat.anc1)
+summary(aov.fit)
+```
+
+The differences in means are very significant. Let's analyze the data in one wash-up using an ANCOVA.
+
+```{r}
+ancova.fit <- lm(rsp ~ trt + age, data=dat.anc1)
+summary(ancova.fit)
+ancova.fit.red <- lm(rsp ~ age, data=dat.anc1)
+anova(ancova.fit.red, ancova.fit)
+```
+
+Summary: age explained a lot of variability in the response, so by including age in the linear model the residual variability was much smaller, and we had more power to detect the treatment effect.
+
+#### Example: confounding 
+
+Same context as above.
+
+```{r}
+head(dat.anc2)
+summary(dat.anc2)
+```
+
+Plot the response across the treatment levels.
+
+```{r}
+boxplot(split(dat.anc2$rsp,dat.anc2$trt), col=c("red","blue","green3"), ylab="response")
+```
+
+Looks like the response is vastly different across treatment groups. Let's carry out an ANOVA.
+
+```{r}
+aov.fit <- aov(rsp ~ trt, data=dat.anc2)
+summary(aov.fit)
+```
+
+The differences in means are highly significant. However, age is again strongly related to the response, and in this example, age is also related to treatment.
+
+```{r}
+plot(dat.anc2$age, dat.anc2$rsp, pch=21 ,bg=c("red","blue","green3")[dat.anc2$trt], xlab="age" ,ylab="response")
+boxplot(split(dat.anc2$age,dat.anc2$trt), col=c("red","blue","green3"), ylab="age")
+```
+
+Let's look at the residuals after regressing out age.
+
+```{r}
+dat.anc2$res <- residuals(lm(rsp ~ age, data=dat.anc2))
+boxplot(split(dat.anc2$res,dat.anc2$trt), col=c("red","blue","green3"), ylab="residuals")
+```
+
+The means in the treatment groups now look about the same. Let's carry out an ANOVA on the residuals.
+
+```{r}
+aov.fit <- aov(res ~ trt, data=dat.anc2)
+summary(aov.fit)
+```
+
+The differences in means are not significant. Let's analyze the data in one wash-up using an ANCOVA.
+
+```{r}
+ancova.fit <- lm(rsp ~ trt + age, data=dat.anc2)
+summary(ancova.fit)
+ancova.fit.red <- lm(rsp ~ age, data=dat.anc2)
+anova(ancova.fit.red, ancova.fit)
+```
+
+Summary: age explained a lot of variability in the response, but also differed across treatment groups. When we include age in the linear model, treatment is not significant. The differences in the mean responses across the treatment groups we observed initially was solely due to age being associated with both treatment and response (e.g., age is a confounder). 
+
+In linear models over-fitting does not cause bias in your predictor of interest (the standard error can be slightly inflated though), but under-fitting can cause bias. So in general, it is better to over-fit than to under-fit, especially when you have a lot of data.
+

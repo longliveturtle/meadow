@@ -1,0 +1,294 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Contingency Tables
+
+### Examples from class
+
+#### Example 1
+
+The 2x2 table.
+
+```{r}
+x <- rbind(c(18,2),c(11,9))
+x
+```
+
+The margins.
+
+```{r}
+rs <- apply(x,1,sum) 
+rs
+cs <- apply(x,2,sum) 
+cs
+n  <- sum(x)
+n
+```
+
+The expected counts.
+
+```{r}
+e <- outer(rs,cs,"*")/n
+e
+```
+
+The chi-square test.
+
+```{r}
+xsq <- sum((x-e)^2/e) 
+xsq
+pchisq(xsq,1,lower.tail=FALSE) 
+```
+
+The likelihood ratio test.
+
+```{r}
+lrt <- 2*sum(x*log(x/e)) 
+lrt
+pchisq(lrt,1,lower.tail=FALSE)
+```
+
+The built-in function for the chi-square test. Note the correction factor for 2x2 tables, used by default.
+
+```{r}
+chisq.test(x)
+chisq.test(x,correct=FALSE) 
+```
+
+You can also get the expected counts from this function.
+
+```{r}
+chisq.test(x)$expected
+```
+
+Fisher's exact test.
+
+```{r}
+fisher.test(x) 
+fisher.test(x)$p.value
+```
+
+#### Example 2
+
+```{r}
+x <- rbind(c(9,9),c(20,62))
+x
+
+rs <- apply(x,1,sum) 
+cs <- apply(x,2,sum) 
+n  <- sum(x)
+e <- outer(rs,cs,"*")/n
+e
+
+xsq <- sum((x-e)^2/e) 
+xsq
+pchisq(xsq,1,lower.tail=FALSE) 
+
+lrt <- 2*sum(x*log(x/e)) 
+lrt
+pchisq(lrt,1,lower.tail=FALSE)
+
+chisq.test(x)
+chisq.test(x,correct=FALSE) 
+fisher.test(x) 
+```
+
+#### Example 3: paired data
+
+```{r}
+z <- rbind(c(9,9),c(20,62))
+z
+```
+
+McNemar's test.
+
+```{r}
+z[1,2]
+z[2,1]
+xsq <- (z[1,2]-z[2,1])^2/(z[1,2]+z[2,1])
+xsq
+pchisq(xsq,1,lower.tail=FALSE) 
+```
+
+Or use the built-in function. Again, mind the correction factor.
+
+```{r}
+mcnemar.test(z)
+mcnemar.test(z,correct=F)
+```
+
+Another alternative is the exact Binomial test.
+
+```{r}
+binom.test(z[1,2],z[1,2]+z[2,1]) 
+```
+
+#### Example 4: blood groups by state
+
+```{r}
+x <- rbind(c(122,117,19,244),
+           c(1781,1351,288,3301),
+           c(353,269,60,713))
+x
+
+rs <- apply(x,1,sum) 
+rs
+cs <- apply(x,2,sum) 
+cs
+n  <- sum(x)
+n
+e <- outer(rs,cs,"*")/n
+e
+
+chisq.test(x)$expected
+
+df <- (ncol(x)-1)*(nrow(x)-1)
+df
+dim(x)
+dim(x)-1
+prod(dim(x)-1)  
+
+xsq <- sum((x-e)^2/e) 
+xsq
+pchisq(xsq,df,lower.tail=FALSE) 
+
+lrt <- 2*sum(x*log(x/e)) 
+lrt
+pchisq(lrt,df,lower.tail=FALSE)
+```
+
+The asymptotic null distribution should be just fine, but here is Fisher's test anyways, using simulations to estimate the p-value. Using fisher.test(x) won't work - try it!
+
+```{r}
+set.seed(1)
+fisher.test(x,simulate=TRUE)
+fisher.test(x,simulate=TRUE,B=10000)
+```
+
+#### Example 5: survival rates in five strains
+
+```{r}
+x <- rbind(c(15,5),c(17,3),c(10,10),c(17,3),c(16,4))
+x
+
+e <- chisq.test(x)$expected
+e
+
+df <- chisq.test(x)$parameter 
+df
+
+xsq <- sum((x-e)^2/e) 
+xsq
+pchisq(xsq,df,lower.tail=FALSE) 
+
+lrt <- 2*sum(x*log(x/e)) 
+lrt
+pchisq(lrt,df,lower.tail=FALSE)
+
+fisher.test(x)
+```
+
+Note: the correction factor in the built-in function for the chi-square test only applies to 2x2 tables.
+
+```{r}
+chisq.test(x)
+chisq.test(x,correct=FALSE) 
+```
+
+### The Hypergeometric distribution
+
+Consider an urn with 30 balls, of which 12 are white and 18 are black.
+
+Suppose we draw 10 balls *without* replacement and count the number of white balls obtained.
+
+Simulate this.
+
+```{r}
+set.seed(1)
+rhyper(1,12,18,10) 
+```
+
+Simulate this 100 times.
+
+```{r}
+rhyper(100,12,18,10)
+```
+
+What is the probability of getting no white balls in the sample?
+
+```{r}
+dhyper(0,12,18,10)
+```
+
+What is the probability of getting exactly 2 white balls in the sample?
+
+```{r}
+dhyper(2,12,18,10)
+```
+
+What is the probability of getting 2 or fewer white balls in the sample?
+
+```{r}
+phyper(2,12,18,10)
+```
+
+The 2.5th and 97.5th percentiles of the number of white balls drawn.
+
+```{r}
+qhyper(c(0.025, 0.975),12,18,10)
+```
+
+#### Example 1 revisited
+
+The Hypergeometric probabilities from class.
+
+```{r}
+dhyper(20,29,11,20)
+dhyper(19,29,11,20)
+dhyper(18,29,11,20)
+```
+
+The table probabilities from class.
+
+```{r}
+dhyper(20:9,29,11,20)
+sum(dhyper(20:9,29,11,20))
+dhyper(20:18,29,11,20)
+dhyper(11:9,29,11,20)
+```
+
+Fisher's exact test, the pedestrian way.
+
+```{r}
+sum(dhyper(20:18,29,11,20))+sum(dhyper(11:9,29,11,20))
+```
+
+Alternatively, for a two-sided test:
+
+```{r}
+pobs <- dhyper(18,29,11,20)
+pobs
+p <- dhyper(20:9,29,11,20)
+p
+p<=pobs
+p[p<=pobs]
+sum(p[p<=pobs])
+```
+
+Imagine you knew that the survival probability in strain A could not be better than the survival probability in strain B. You would then carry out a one-sided test.
+
+```{r}
+x <- rbind(c(18,2),c(11,9))
+x
+fisher.test(x,alternative="greater")
+```
+
+Using the Hypergeometric distribution, we would only add those tables that are at least as extreme, i.e. have outcome probabilities no bigger than the observed and for which the fraction of survivors in strain A is less than in strain B.
+
+```{r}
+sum(dhyper(20:18,29,11,20))
+```
+

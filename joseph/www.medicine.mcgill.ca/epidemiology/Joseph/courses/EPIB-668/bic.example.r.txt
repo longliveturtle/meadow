@@ -1,0 +1,72 @@
+#  Here is an example of using the BMA model seleciton program
+
+#  First, we will generate some data:
+
+x<- rnorm(1000, mean=0, sd=4)
+z<- rnorm(1000, mean=5, sd=20)
+w<- rnorm(1000, mean=-3, sd=4)
+y<- rnorm(1000, mean = 3*x + 2*z, sd=25)
+
+#  Y will be our independent variable, and we will create a matrix for
+#  the other variables as follows:
+
+data.matrix <- matrix(c(x,w,z), byrow=F, nrow=1000)
+
+#  Note that both x and z contribute to y, but not w.
+
+#  Now run BMA program, which is downloadable from the R website in the
+#  usual way (i.e., from R program, use the packages menu item, find
+#  BMA, then download, and "load package")
+
+#  There are many functions we can use, we will illustrate simple linear
+#  regression model selection here using bicreg.
+
+output<- bicreg(data.matrix, y)
+
+output
+
+
+# Call:
+# bicreg(x = data.matrix, y = y)
+#
+#
+# Posterior probabilities(%):
+#   X1    X2    X3
+# 100.0   6.8 100.0
+#
+# Coefficient posterior expected values:
+# (Intercept)           X1           X2           X3
+#    0.56763      3.19356     -0.01756      1.97760
+
+#  We can also get some more info:
+
+ output$postprob
+[1] 0.93150804 0.06849196
+output$namesx
+[1] "X1" "X2" "X3"
+output$label
+[1] "X1X3"   "X1X2X3"
+output$r2
+ [1] 72.719 72.765
+output$bic
+ [1] -1285.164 -1279.944
+output$size
+ [1] 2 3
+output$probne0
+ [1] 100.0   6.8 100.0
+output$postmean
+ [1]  0.56762931  3.19355682 -0.01756048  1.97759807
+output$postsd
+ [1] 0.85994375 0.20177235 0.08305759 0.04085244
+ output$ols
+            Int       X1         X2       X3
+[1,]  0.6194303 3.192800  0.0000000 1.977538
+[2,] -0.1368776 3.203849 -0.2563875 1.978413
+ output$se
+          Int        X1        X2         X3
+[1,] 0.824321 0.2017452 0.0000000 0.04085239
+[2,] 1.011271 0.2018597 0.1987171 0.04084441
+
+
+
+

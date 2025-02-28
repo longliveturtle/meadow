@@ -1,0 +1,1284 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/BetaParmsFromQuantiles.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:32 GMT -->
+<head>
+<title>beta.parms.from.quantiles: [R] Computing Beta distribution parameters</title>
+<meta name="description" content=" beta.parms.from.quantiles is an R function developped to compute Beta distribution parameters fitting specified quantiles and cumulative probabilities.">
+<meta name="keywords" content="alpha, beta, confidence, credible, distribution, interval, limits, parameters, percentiles, prior, probabilities, quantiles, R">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 7 feb 2017</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.3 (February 2017)</div>
+<div class=title0>beta.parms.from.quantiles</div>
+<div class=title>[R] Computing Beta distribution parameters</div>
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>beta.parms.from.quantiles</b> is an R function developped to compute Beta distribution parameters fitting specified quantiles and cumulative probabilities.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><b>beta.parms.from.quantiles</b> arguments</a><br>
+<a href="#output">Output dimensions</a><br>
+<a href="#code">Code</a><br>
+<a href="#example">Example</a><br>
+<a href="#download">Download</a><br>
+<a href="#seealso">See also</a><br>
+</div>
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="syntax"></a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+beta.parms.from.quantiles <- function(q, p=c(0.025,0.975), precision=0.001, derivative.epsilon=1e-3, start.with.normal.approx=T, start=c(1,1), plot=F)
+</div>
+
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="arguments"></a>
+<div class=main>beta.parms.from.quantiles arguments</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>q</td>
+<td class=rfctargumentvalue>
+Vector of quantiles;
+</td>
+<td class=rfctcomment>
+Vector of length 2;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>p</td>
+<td class=rfctargumentvalue>
+Vector of probabilities;
+</td>
+<td class=rfctcomment>
+Vector of length 2.<br>
+Default is (0.025, 0.975).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>precision</td>
+<td class=rfctargumentvalue>
+Desired precision in Beta distribution parameters;
+</td>
+<td class=rfctcomment>
+The algoritm in <b>beta.parms.from.quantiles</b> is iterative: it will stop when an iteration leads to (a, b) estimates that do not differ from estimates obtained in last iteration by more than <span class=argname>precision</span>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>derivative.epsilon</td>
+<td class=rfctargumentvalue>
+Small value used for &epsilon; in the approximation of the derivatives of a few functions in the algorithm; 
+</td>
+<td class=rfctcomment>
+A few functions (<i>f</i>) have derivates (<i>f'(x)</i>) that are approximated by (f(x+&epsilon;)) - f(x))/&epsilon;) in the algorithm, where
+&epsilon; = <span class=argname>derivative.epsilon</span>.
+If the algorithm fails to return correct Beta distribution parameters, you may want to try again with smaller values than the default (1e-3) for this parameter.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>start.with.normal.approx</td>
+<td class=rfctargumentvalue>
+<i>Logical.</i> Whether or not to start the iterative process with values obtained from a normal approximation to the Beta distribution; 
+</td>
+<td class=rfctcomment>
+Default is T.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>start</td>
+<td class=rfctargumentvalue>
+Vector (of length 2) of initial values for Beta distribution parameters.
+</td>
+<td class=rfctcomment>
+Ignored when <span class=argname>start.with.normal.approx</span> is True.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>plot</td>
+<td class=rfctargumentvalue>
+<i>Logical.</i> Whether or not to plot the resulting Beta distribution, along with tail probabilities obtained. 
+</td>
+<td class=rfctcomment>
+Default is F.</td>
+</tr>
+</table>
+
+<br><br><br>
+<a href="#top" class=top>Top</a>
+<a name="output"></a>
+<div class=main>Output</div>
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Output dimension</td>
+<td class=tableheader>Value</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$a<br>$b</td>
+<td class=rfctargumentvalue>
+parameters of the Beta distribution;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$last.change</td>
+<td class=rfctargumentvalue>
+last change in $a and $b in the iterative algorithm;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$niter</td>
+<td class=rfctargumentvalue>
+number of iterations run before convergence;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$q</td>
+<td class=rfctargumentvalue>
+quantiles;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$p</td>
+<td class=rfctargumentvalue>
+probabilities;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$p.check</td>
+<td class=rfctargumentvalue>
+a quick validation: values for $a and $b returned lead to cumulative probabilities $p.check at the quantiles $q.
+</td>
+</tr>
+</table>
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+The code below reproduces the input and output of an R session involving a call to <b>beta.parms.from.quantiles</b>. The use of option
+<span class=argname>plot=T</span> produces the plot attached below (default is to not produce the plot).<br>
+<br>
+The output shows that a Beta distribution with shape parameters &alpha;=22.04 and &beta;=6.67 lies in range (0.6, 0.9) with probability 95%, with equal probability tails.
+
+<br><br>
+<div class=pgm>
+&gt; source('c:/path/BetaParmsFromQuantiles.R') # load file where beta.parms.from.quantiles R function is defined<br>
+&gt; beta.parms.from.quantiles(c(.6,.9), plot=T)<br>
+<br>
+<table class=rout>
+<tr><td align=left>
+$a<br>
+[1] 22.03648<br>
+<br>
+$b<br>
+[1] 6.672066<br>
+<br>
+$last.change<br>
+[1] -6.551463e-05 -2.695784e-05<br>
+<br>
+$niter<br>
+[1] 5<br>
+<br>
+$q<br>
+[1] 0.6 0.9<br>
+<br>
+$p<br>
+[1] 0.025 0.975<br>
+<br>
+$p.check<br>
+[1] 0.025 0.975<br>
+</td></tr>
+<tr><td align=left>
+<br><br>
+<img src="img/BetaParmsFromQuantiles/dbeta.gif">
+</td>
+</tr>
+</table>
+</div>
+<br><br>
+
+<div class=sub>Use in a Bayesian context</div>
+<br>
+Beta densities are frequently used as prior distributions in Bayesian analysis, 
+as they are the conjugate density to binomial likelihoods. Many parameters whose range is the interval [0,1], for example, 
+the prevalence of a disease or the sensitivity and specificity of a diagnostic test, 
+can be modeled with a binomial likelihood function, and hence are conveniently given Beta prior densities.
+<br><br>
+To illustrate, suppose the prior range of a given parameter is (0.6, 0.9) with probability 95%, then its prior density could be a Beta distribution with parameters
+&alpha;=22.04 and &beta;=6.67, as per above <b>beta.parms.from.quantiles</b> results. 
+<br><br>
+
+
+<a name="code"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="R/BetaParmsFromQuantiles.R">One-click download</a>
+</div>
+<div class=rcode>
+beta.parms.from.quantiles <- function(q, p=c(0.025,0.975),<br>
+&#160;&#160;  precision=0.001, derivative.epsilon=1e-3, start.with.normal.approx=T, start=c(1, 1), plot=F)<br>
+{<br>
+&#160;&#160;  # Version 1.3 (February 2017)<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # Function developed by <br>
+&#160;&#160;  # Lawrence Joseph and pbelisle<br>
+&#160;&#160;  # Division of Clinical Epidemiology<br>
+&#160;&#160;  # Montreal General Hospital<br>
+&#160;&#160;  # Montreal, Qc, Can<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # patrick.belisle@rimuhc.ca<br>
+&#160;&#160;  # http://www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/BetaParmsFromQuantiles.html<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # Please refer to our webpage for details on each argument.<br>
+  <br>
+&#160;&#160;  f <- function(x, theta){dbeta(x, shape1=theta[1], shape2=theta[2])}<br>
+&#160;&#160;  F.inv <- function(x, theta){qbeta(x, shape1=theta[1], shape2=theta[2])}<br>
+&#160;&#160;  f.cum <- function(x, theta){pbeta(x, shape1=theta[1], shape2=theta[2])}<br>
+&#160;&#160;  f.mode <- function(theta){a <- theta[1]; b <- theta[2]; mode <- ifelse(a>1, (a-1)/(a+b-2), NA); mode}<br>
+&#160;&#160;  theta.from.moments <- function(m, v){a <- m*m*(1-m)/v-m; b <- a*(1/m-1); c(a, b)}<br>
+&#160;&#160;  plot.xlim <- c(0, 1)<br>
+  <br>
+&#160;&#160;  dens.label <- 'dbeta'<br>
+&#160;&#160;  parms.names <- c('a', 'b')<br>
+  <br>
+&#160;&#160;  if (length(p) != 2) stop("Vector of probabilities p must be of length 2.")<br>
+&#160;&#160;  if (length(q) != 2) stop("Vector of quantiles q must be of length 2.")<br>
+&#160;&#160;  p <- sort(p); q <- sort(q)<br>
+  <br>
+&#160;&#160;  #_____________________________________________________________________________________________________<br>
+        <br>
+&#160;&#160;  print.area.text <- function(p, p.check, q, f, f.cum, F.inv, theta, mode, cex, plot.xlim, M=30, M0=50)<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    par.usr <- par('usr')<br>
+&#160;&#160;&#160;&#160;    par.din <- par('din')<br>
+<br>
+&#160;&#160;&#160;&#160;    p.string <- as.character(round(c(0,1) + c(1,-1)*p.check, digits=4))<br>
+&#160;&#160;&#160;&#160;    str.width <- strwidth(p.string, cex=cex)<br>
+&#160;&#160;&#160;&#160;    str.height <- strheight("0", cex=cex)<br>
+<br>
+&#160;&#160;&#160;&#160;    J <- matrix(1, nrow=M0, ncol=1)<br>
+    <br>
+&#160;&#160;&#160;&#160;    x.units.1in <- diff(par.usr[c(1,2)])/par.din[1]<br>
+&#160;&#160;&#160;&#160;    y.units.1in <- diff(par.usr[c(3,4)])/par.din[2]<br>
+&#160;&#160;&#160;&#160;    aspect.ratio <- y.units.1in/x.units.1in<br>
+<br>
+&#160;&#160;&#160;&#160;    # --- left area  -----------------------------------------------------------<br>
+<br>
+&#160;&#160;&#160;&#160;    scatter.xlim <- c(max(plot.xlim[1], par.usr[1]), q[1])<br>
+&#160;&#160;&#160;&#160;    scatter.ylim <- c(0, par.usr[4])<br>
+&#160;&#160;&#160;&#160;    x <- seq(from=scatter.xlim[1], to=scatter.xlim[2], length=M)<br>
+&#160;&#160;&#160;&#160;    y <- seq(from=scatter.ylim[1], to=scatter.ylim[2], length=M)<br>
+&#160;&#160;&#160;&#160;    x.grid.index <- rep(seq(M), M)<br>
+&#160;&#160;&#160;&#160;    y.grid.index <- rep(seq(M), rep(M, M))<br>
+<br>
+&#160;&#160;&#160;&#160;    grid.df <- f(x, theta)<br>
+<br>
+&#160;&#160;&#160;&#160;    # Estimate mass center<br>
+&#160;&#160;&#160;&#160;    tmp.p <- seq(from=0, to=p[1], length=M0)<br>
+&#160;&#160;&#160;&#160;    tmp.x <- F.inv(tmp.p, theta)<br>
+&#160;&#160;&#160;&#160;    h <- f(tmp.x, theta)<br>
+&#160;&#160;&#160;&#160;    mass.center <- c(mean(tmp.x), sum(h[-1]*diff(tmp.x))/diff(range(tmp.x)))<br>
+<br>
+&#160;&#160;&#160;&#160;    # Identify points under the curve<br>
+&#160;&#160;&#160;&#160;    # (to eliminate them from the list of candidates)<br>
+&#160;&#160;&#160;&#160;    gridpoint.under.the.curve <- y[y.grid.index] <= grid.df[x.grid.index]<br>
+&#160;&#160;&#160;&#160;    w <- which(gridpoint.under.the.curve)<br>
+&#160;&#160;&#160;&#160;    x <- x[x.grid.index]; y <- y[y.grid.index]<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # Eliminate points to the right of the mode, if any<br>
+&#160;&#160;&#160;&#160;    w <- which(x>mode)<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # Eliminate points for which the text would fall out of the plot area<br>
+&#160;&#160;&#160;&#160;    w <- which((par.usr[1]+str.width[1]) <= x &amp; (y + str.height) <= par.usr[4])<br>
+&#160;&#160;&#160;&#160;    x <- x[w]; y <- y[w]<br>
+<br>
+&#160;&#160;&#160;&#160;    # For each height, eliminate the closest point to the curve<br>
+&#160;&#160;&#160;&#160;    # (we want to stay away from the curve to preserve readability)<br>
+&#160;&#160;&#160;&#160;    w <- which(!duplicated(y, fromLast=T))<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # For each point, compute distance from mass center and pick the closest point<br>
+&#160;&#160;&#160;&#160;    d <- ((x-mass.center[1])^2) + ((y-mass.center[2])/aspect.ratio)^2<br>
+&#160;&#160;&#160;&#160;    w <- which.min(d)<br>
+&#160;&#160;&#160;&#160;    x <- x[w]; y <- y[w]<br>
+    <br>
+&#160;&#160;&#160;&#160;    if (length(x))<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      text(x, y, labels=p.string[1], adj=c(1,0), col='gray', cex=cex)<br>
+&#160;&#160;&#160;&#160;    }<br>
+&#160;&#160;&#160;&#160;    else<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      text(plot.xlim[1], mean(par.usr[c(3,4)]), labels=p.string[1], col='gray', cex=cex, srt=90, adj=c(1,0))<br>
+&#160;&#160;&#160;&#160;    }<br>
+<br>
+&#160;&#160;&#160;&#160;    # --- right area  ----------------------------------------------------------<br>
+<br>
+&#160;&#160;&#160;&#160;    scatter.xlim <- c(q[2], plot.xlim[2])<br>
+&#160;&#160;&#160;&#160;    scatter.ylim <- c(0, par.usr[4])<br>
+&#160;&#160;&#160;&#160;    x <- seq(from=scatter.xlim[1], to=scatter.xlim[2], length=M)<br>
+&#160;&#160;&#160;&#160;    y <- seq(from=scatter.ylim[1], to=scatter.ylim[2], length=M)<br>
+&#160;&#160;&#160;&#160;    x.grid.index <- rep(seq(M), M)<br>
+&#160;&#160;&#160;&#160;    y.grid.index <- rep(seq(M), rep(M, M))<br>
+&#160;&#160;&#160;&#160;    grid.df <- f(x, theta)<br>
+<br>
+&#160;&#160;&#160;&#160;    # Estimate mass center<br>
+&#160;&#160;&#160;&#160;    tmp.p <- seq(from=p[2], to=f.cum(plot.xlim[2], theta), length=M0)<br>
+&#160;&#160;&#160;&#160;    tmp.x <- F.inv(tmp.p, theta)<br>
+&#160;&#160;&#160;&#160;    h <- f(tmp.x, theta)<br>
+&#160;&#160;&#160;&#160;    mass.center <- c(mean(tmp.x), sum(h[-length(h)]*diff(tmp.x))/diff(range(tmp.x)))<br>
+<br>
+&#160;&#160;&#160;&#160;    # Identify points under the curve<br>
+&#160;&#160;&#160;&#160;    # (to eliminate them from the list of candidates)<br>
+&#160;&#160;&#160;&#160;    gridpoint.under.the.curve <- y[y.grid.index] <= grid.df[x.grid.index]<br>
+&#160;&#160;&#160;&#160;    w <- which(gridpoint.under.the.curve)<br>
+&#160;&#160;&#160;&#160;    x <- x[x.grid.index]; y <- y[y.grid.index]<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # Eliminate points to the left of the mode, if any<br>
+&#160;&#160;&#160;&#160;    w <- which(x<mode)<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # Eliminate points for which the text would fall out of the plot area<br>
+&#160;&#160;&#160;&#160;    w <- which((par.usr[2]-str.width[2]) >= x &amp; (y + str.height) <= par.usr[4])<br>
+&#160;&#160;&#160;&#160;    x <- x[w]; y <- y[w]<br>
+<br>
+&#160;&#160;&#160;&#160;    # For each height, eliminate the closest point to the curve<br>
+&#160;&#160;&#160;&#160;    # (we want to stay away from the curve to preserve readability)<br>
+&#160;&#160;&#160;&#160;    w <- which(!duplicated(y))<br>
+&#160;&#160;&#160;&#160;    if (length(w)){x <- x[-w]; y <- y[-w]}<br>
+<br>
+&#160;&#160;&#160;&#160;    # For each point, compute distance from mass center and pick the closest point<br>
+&#160;&#160;&#160;&#160;    d <- ((x-mass.center[1])^2) + ((y-mass.center[2])/aspect.ratio)^2<br>
+&#160;&#160;&#160;&#160;    w <- which.min(d)<br>
+&#160;&#160;&#160;&#160;    x <- x[w]; y <- y[w]<br>
+    <br>
+&#160;&#160;&#160;&#160;    if (length(x))<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      text(x, y, labels=p.string[2], adj=c(0,0), col='gray', cex=cex)<br>
+&#160;&#160;&#160;&#160;    }<br>
+&#160;&#160;&#160;&#160;    else<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      text(plot.xlim[2], mean(par.usr[c(3,4)]), labels=p.string[2], col='gray', cex=cex, srt=-90, adj=c(1,0))<br>
+&#160;&#160;&#160;&#160;    }<br>
+&#160;&#160;  }<br>
+  <br>
+&#160;&#160;  # ......................................................................................................................................<br>
+  <br>
+&#160;&#160;  Newton.Raphson <- function(derivative.epsilon, precision, f.cum, p, q, theta.from.moments, start.with.normal.approx, start)<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    Hessian <- matrix(NA, 2, 2)<br>
+<br>
+&#160;&#160;&#160;&#160;    if (start.with.normal.approx)<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      # Probably not a very good universal choice, but proved good in most cases in practice<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      m <-  diff(q)/diff(p)*(0.5-p[1]) + q[1]<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      v <- (diff(q)/diff(qnorm(p)))^2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      theta <- theta.from.moments(m, v)<br>
+&#160;&#160;&#160;&#160;    }<br>
+&#160;&#160;&#160;&#160;    else theta <- start<br>
+  <br>
+  <br>
+&#160;&#160;&#160;&#160;    change <- precision + 1<br>
+&#160;&#160;&#160;&#160;    niter <- 0<br>
+&#160;&#160;&#160;&#160;    # Newton-Raphson multivariate algorithm<br>
+&#160;&#160;&#160;&#160;    while (max(abs(change)) > precision)<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      Hessian[,1] <- (f.cum(q, theta) - f.cum(q, theta - c(derivative.epsilon, 0))) / derivative.epsilon<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      Hessian[,2] <- (f.cum(q, theta) - f.cum(q, theta - c(0, derivative.epsilon))) / derivative.epsilon<br>
+  <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      f <- f.cum(q, theta) - p<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      change <- solve(Hessian) %*% f<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      last.theta <- theta<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      theta <- last.theta - change<br>
+  <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      # If we step out of limits, reduce change<br>
+  <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      if (any(theta<0))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        w <- which(theta<0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        k <- min(last.theta[w]/change[w])<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        theta <- last.theta - k/2*change<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      }<br>
+      <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      niter <- niter + 1<br>
+&#160;&#160;&#160;&#160;    }<br>
+    <br>
+&#160;&#160;&#160;&#160;    list(theta=as.vector(theta), niter=niter, last.change=as.vector(change))<br>
+&#160;&#160;  }<br>
+  <br>
+&#160;&#160;  # ...............................................................................................................<br>
+  <br>
+&#160;&#160;  plot.density <- function(p, q, f, f.cum, F.inv, mode, theta, plot.xlim, dens.label, parms.names, cex)<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    if (length(plot.xlim) == 0)<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      plot.xlim <- F.inv(c(0, 1), theta)<br>
+      <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      if (is.infinite(plot.xlim[1]))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        tmp <- min(c(0.001, p[1]/10))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        plot.xlim[1] <- F.inv(tmp, theta)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      }  <br>
+      <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      if (is.infinite(plot.xlim[2]))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        tmp <- max(c(0.999, 1 - (1-p[2])/10))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        plot.xlim[2] <- F.inv(tmp, theta)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      }<br>
+&#160;&#160;&#160;&#160;    }<br>
+&#160;&#160;&#160;&#160;    plot.xlim <- sort(plot.xlim)<br>
+  <br>
+  <br>
+&#160;&#160;&#160;&#160;    x <- seq(from=min(plot.xlim), to=max(plot.xlim), length=1000)<br>
+&#160;&#160;&#160;&#160;    h <- f(x, theta)<br>
+&#160;&#160;&#160;&#160;    x0 <- x; f0 <- h<br>
+&#160;&#160;&#160;&#160;    ylab <- paste(c(dens.label, '(x, ', parms.names[1], ' = ', round(theta[1], digits=5), ', ', parms.names[2], ' = ', round(theta[2], digits=5), ')'), collapse='')<br>
+&#160;&#160;&#160;&#160;    plot(x, h, type='l', ylab=ylab)<br>
+<br>
+&#160;&#160;&#160;&#160;    # fill in area on the left side of the distribution<br>
+&#160;&#160;&#160;&#160;    x <- seq(from=plot.xlim[1], to=q[1], length=1000)<br>
+&#160;&#160;&#160;&#160;    y <- f(x, theta)<br>
+&#160;&#160;&#160;&#160;    x <- c(x, q[1], plot.xlim[1]); y <- c(y, 0, 0)<br>
+&#160;&#160;&#160;&#160;    polygon(x, y, col='lightgrey', border='lightgray')<br>
+&#160;&#160;&#160;&#160;    # fill in area on the right side of the distribution<br>
+&#160;&#160;&#160;&#160;    x <- seq(from=max(plot.xlim), to=q[2], length=1000)<br>
+&#160;&#160;&#160;&#160;    y <- f(x, theta)<br>
+&#160;&#160;&#160;&#160;    x <- c(x, q[2], plot.xlim[2]); y <- c(y, 0, 0)<br>
+&#160;&#160;&#160;&#160;    polygon(x, y, col='lightgrey', border='lightgray')<br>
+&#160;&#160;&#160;&#160;    # draw distrn again<br>
+&#160;&#160;&#160;&#160;    points(x0, f0, type='l')<br>
+&#160;&#160;&#160;&#160;    h <- f(q, theta)<br>
+&#160;&#160;&#160;&#160;    points(rep(q[1], 2), c(0, h[1]), type='l', col='orange')<br>
+&#160;&#160;&#160;&#160;    points(rep(q[2], 2), c(0, h[2]), type='l', col='orange')<br>
+&#160;&#160;&#160;&#160;    # place text on both ends areas<br>
+&#160;&#160;&#160;&#160;    print.area.text(p, p.check, q, f, f.cum, F.inv, theta, mode, cex, plot.xlim)  <br>
+<br>
+&#160;&#160;&#160;&#160;    xaxp <- par("xaxp")<br>
+&#160;&#160;&#160;&#160;    x.ticks <- seq(from=xaxp[1], to=xaxp[2], length=xaxp[3]+1)<br>
+&#160;&#160;&#160;&#160;    q2print <- as.double(setdiff(as.character(q), as.character(x.ticks)))<br>
+    <br>
+&#160;&#160;&#160;&#160;    mtext(q2print, side=1, col='orange', at=q2print, cex=0.6, line=2.1)<br>
+&#160;&#160;&#160;&#160;    points(q, rep(par('usr')[3]+0.15*par('cxy')[2], 2), pch=17, col='orange')<br>
+&#160;&#160;  }<br>
+  <br>
+&#160;&#160;  #________________________________________________________________________________________________________________<br>
+<br>
+<br>
+&#160;&#160;  parms <- Newton.Raphson(derivative.epsilon, precision, f.cum, p, q, theta.from.moments, start.with.normal.approx, start=start)<br>
+&#160;&#160;  p.check <- f.cum(q, parms$theta)<br>
+  <br>
+&#160;&#160;  if (plot) plot.density(p, q, f, f.cum, F.inv, f.mode(parms$theta), parms$theta, plot.xlim, dens.label, parms.names, 0.8)<br>
+<br>
+&#160;&#160;  list(a=parms$theta[1], b=parms$theta[2], last.change=parms$last.change, niter=parms$niter, q=q, p=p, p.check=p.check)<br>
+}<br>
+</div>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<b>beta.parms.from.quantiles</b> is a free R function. <a href="R/BetaParmsFromQuantiles.R">Download version 1.3</a> now.
+
+<a name="seealso"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>See also</div>
+<br>
+See also <a href="GammaParmsFromQuantiles-2.html">gamma.parms.from.quantiles</a>, an R function developped to compute Gamma distribution parameters fitting specified quantiles and cumulative probabilities.
+
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/BetaParmsFromQuantiles.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:34 GMT -->
+</html>

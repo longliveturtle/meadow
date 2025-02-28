@@ -1,0 +1,123 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Logistic Regression
+
+#### Example from class: tobacco budworms
+
+The data.
+
+```{r}
+library(SPH.140.615)
+worms
+```
+
+Plot the data.
+
+```{r}
+par(las=1)
+plot(n.dead/n ~ dose, data=worms, col=ifelse(sex=="male","blue","red"), lwd=2, ylim=c(0,1), 
+     ylab="proportion dead")
+u <- par("usr")
+legend(u[2], u[3], c("Male","Female"), pch=1, col=c("blue","red"), xjust=1, yjust=0, cex=1.3)
+```
+
+Fit the model without sex differences.
+
+```{r}
+glm.outA <- glm(n.dead/n ~ dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outA)$coef
+```
+
+Sexes completely different.
+
+```{r}
+glm.outB <- glm(n.dead/n ~ sex*dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outB)$coef
+```
+
+Different slopes but common intercept.
+
+```{r}
+glm.outC <- glm(n.dead/n ~ dose + sex:dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outC)$coef
+```
+
+Plot the data with the fitted curves.
+
+```{r}
+par(las=1)
+plot(n.dead/n ~ dose, data=worms, col=ifelse(sex=="male","blue","red"), lwd=2, ylim=c(0,1), 
+     ylab="proportion dead")
+u <- par("usr")
+x <- seq(0,u[2],len=250)
+y <- predict(glm.outA, data.frame(dose=x), type="response")
+lines(x, y, col="green3")
+ym <- predict(glm.outB, data.frame(dose=x,sex=factor(rep("male",length(x)))), type="response")
+lines(x, ym, col="blue", lty=2)
+yf <- predict(glm.outB, data.frame(dose=x,sex=factor(rep("female",length(x)))), type="response")
+lines(x, yf, col="red", lty=2)
+ym <- predict(glm.outC, data.frame(dose=x,sex=factor(rep("male",length(x)))), type="response")
+lines(x, ym, col="blue")
+yf <- predict(glm.outC, data.frame(dose=x,sex=factor(rep("female",length(x)))), type="response")
+lines(x, yf, col="red")
+legend(u[2], u[3], col=c("blue","blue","red","red","green3"), lty=c(1,2,1,2,1), xjust=1, yjust=0,
+       c("common intercept (M)", "separate intercepts (M)", 
+         "common intercept (F)", "separate intercepts (F)",
+         "same curve"))
+```
+
+The fit is poor, especially at the low doses. Let's convert dose to log2(dose).
+
+```{r}
+worms$log2dose <- log2(worms$dose)
+worms
+```
+
+Fit the model without sex differences.
+
+```{r}
+glm.outA <- glm(n.dead/n ~ log2dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outA)$coef
+```
+
+Sexes completely different.
+
+```{r}
+glm.outB <- glm(n.dead/n ~ sex*log2dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outB)$coef
+```
+
+Different slopes but common intercept.
+
+```{r}
+glm.outC <- glm(n.dead/n ~ log2dose + sex:log2dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.outC)$coef
+```
+
+Plot the data with the fitted curves.
+
+```{r}
+par(las=1)
+plot(n.dead/n ~ log2dose, data=worms, col=ifelse(sex=="male","blue","red"), lwd=2, ylim=c(0,1), 
+     xlab="log2 dose", ylab="proportion dead")
+u <- par("usr")
+x <- seq(0,u[2],len=250)
+y <- predict(glm.outA, data.frame(log2dose=x), type="response")
+lines(x, y, col="green3")
+ym <- predict(glm.outB, data.frame(log2dose=x,sex=factor(rep("male",length(x)))), type="response")
+lines(x, ym, col="blue", lty=2)
+yf <- predict(glm.outB, data.frame(log2dose=x,sex=factor(rep("female",length(x)))), type="response")
+lines(x, yf, col="red", lty=2)
+ym <- predict(glm.outC, data.frame(log2dose=x,sex=factor(rep("male",length(x)))), type="response")
+lines(x, ym, col="blue")
+yf <- predict(glm.outC, data.frame(log2dose=x,sex=factor(rep("female",length(x)))), type="response")
+lines(x, yf, col="red")
+legend(u[2], u[3], col=c("blue","blue","red","red","green3"), lty=c(1,2,1,2,1), xjust=1, yjust=0,
+       c("common intercept (M)", "separate intercepts (M)", 
+         "common intercept (F)", "separate intercepts (F)",
+         "same curve"))
+```

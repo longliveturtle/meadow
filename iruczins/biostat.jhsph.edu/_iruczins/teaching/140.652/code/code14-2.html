@@ -43,7 +43,7 @@ qqnorm(y)
 
 ## ------------------------------------------------------------------------
 # Read the data
-il10 <- read.csv("../../140.615/data/il10.html")
+il10 <- read.csv("../../140.615/data/il10.csv")
 
 # Include log10(IL10) as a column
 il10 <- cbind(il10, logIL10=log10(il10$IL10))

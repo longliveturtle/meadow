@@ -1,0 +1,1506 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/ProportionsDiffCIsNewcombe.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:58 GMT -->
+<head>
+<title>SAS macro %ProportionsDiffCIsNewcombe: Confidence interval(s) for difference between independent proportions</title>
+<meta name="description" content=" %ProportionsDiffCIsNewcombe is a SAS macro to compute confidence interval (s) for difference between independent proportions based on Newcombe's method">
+<meta name="keywords" content="between, binomial, calculation, confidence, difference, estimation, exact, independent, intervals, method, Newcombe, proportions, two">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 12 oct 2016</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.0 (October 2016)</div>
+<div class=title0>SAS macro %ProportionsDiffCIsNewcombe</div>
+<div class=title>Confidence interval(s) for difference between independent proportions</div>
+
+<div class=main>Syntax</div>
+<br>
+
+<div class=pgm>
+%ProportionsDiffCIsNewcombe(dsCellCounts, class, num, denom, rows=, level=0.95, where=, colsepcolor=GWH, f=percent8.2, difffmt=percentn8.2, continuityCorrection=1, titleno=1);<br>
+
+</div>
+
+<br>
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%ProportionsDiffCIsNewcombe</span> is a SAS macro to compute 
+confidence interval(s) for difference between independent proportions based on Newcombe's method
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br><br><br>
+<div class=main><span class=sasmacroname>%ProportionsDiffCIsNewcombe</span> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>dsCellCounts</td>
+<td class=rfctargumentvalue>
+cell counts data set name;
+</td>
+<td class=rfctcomment>
+A data set including a class/group variable <span class=arg>(class)</span>, cell counts as numerators <span class=arg>(num)</span>
+and denominators <span class=arg>(denom)</span> as well as, potentially, a series of grouping variables. 
+</td> 
+</tr>
+<tr>
+<td class=rfctargumentname>class</td>
+<td class=rfctargumentvalue>
+class/group variable name;
+</td>
+<td class=rfctcomment>
+When <span class=arg>class</span> variable takes more than two values in data set, only the lower and upper values will be included
+in the analysis; see <span class=arg>where=</span> option for more control.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>num</td>
+<td class=rfctargumentvalue>
+numerator variable name;
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>denom</td>
+<td class=rfctargumentvalue>
+denominator variable name;
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>rows</td>
+<td class=rfctargumentvalue>
+an optional series of additional grouping variables;
+</td>
+<td class=rfctcomment>
+Optional.<br>
+E.g. ageGroup, if confidence intervals for difference between proportions are to be reported separately for each age group (which would be coded in variable ageGroup, say).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>level</td>
+<td class=rfctargumentvalue>
+level of calculated confidence intervals;
+</td>
+<td class=rfctcomment>
+Optional. <br>
+Default is 95%.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>where</td>
+<td class=rfctargumentvalue>
+sas instructions to select data, if necessary;
+</td>
+<td class=rfctcomment>
+Would be particularly useful when data set presents more than two values in class variable; e.g. one would select
+groups 2 and 5 (for comparisons in proportions) with the option where=class in (2,5).<br>
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>colsepcolor</td>
+<td class=rfctargumentvalue>
+color of groups-separating columns in the output;
+</td>
+<td class=rfctcomment>
+Relevant oly when producing html or rtf output files.<br>
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>f</td>
+<td class=rfctargumentvalue>
+format in which proportions are reported;
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>difffmt</td>
+<td class=rfctargumentvalue>
+format in which difference between proportions are reported;
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>continuityCorrection</td>
+<td class=rfctargumentvalue>
+whether or not Continuity Correction is to be used in the computation of confidence intervals;
+</td>
+<td class=rfctcomment>
+Default is to use Continuity Correction.<br>
+Use <b>continuityCorrection=0</b> if you do not want to use it.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>titleno</td>
+<td class=rfctargumentvalue>
+line number where title should appear on each output file page.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+</table>
+
+
+<br><br>
+<div class=main>Reference</div>
+<br>
+
+The macro <span>ProportionsDiffCIsNewcombe</span> is based on the methods <b>10</b> and <b>11</b> presented in Newcombe's paper:
+<br>
+<br>
+
+Newcombe, Robert G. 
+<a href="https://www.semanticscholar.org/paper/Interval-estimation-for-the-difference-between-of-Newcombe/370b92bc4f61fedfa64e1b50e7a10c7a6dde0a19?p2df">
+Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods</a>,<br>
+Statistics in Medicine, 17, 873-890 (1998).<br><br>
+			
+      
+<br><br>
+<div class=main>Example</div>
+<br>
+Below is an example of a call to <span class=arg>%ProportionsDiffCIsNewcombe</span> followed by its output.<br>
+It reproduces the results found in Table II of Newcombe's paper (above) for method 10.
+
+<br><br>
+<div class=pgm>
+data examples;<br>
+&nbsp;&nbsp; input ex gr m n;<br>
+&nbsp;&nbsp; cards;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 2 56 70<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 1 48 80<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 2 9 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 1 3 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 2 6 7<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 1 2 7<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 4 2 5 56<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 4 1 0 29<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 5 2 0 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 5 1 0 20<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 6 2 0 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 6 1 0 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 7 2 10 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 7 1 0 20<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 8 2 10 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 8 1 0 10<br>
+&nbsp;&nbsp;;
+run;<br>
+<br>
+<br>
+%ProportionsDiffCIsNewcombe(examples, gr, m, n, rows=ex, continuityCorrection=0);<br>
+</div>
+
+<br><br>
+<p align=center>
+<img src="img/ProportionsDiffCIsNewcombe.png">
+</p>
+<br>
+
+
+
+<br><br>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="SasMacros/ProportionsDiffCIsNewcombe.zip">One-click download</a>
+</div>
+<div class=pgm>
+%macro ProportionsDiffCIsNewcombe(dsCellCounts, class, num, denom, rows=, level=0.95, where=, colsepcolor=GWH, f=percent8.2, difffmt=percentn8.2, continuityCorrection=1, titleno=1);<br>
+&#160;&#160;&#160;&#160;%local dsCIs dsTmp;<br>
+&#160;&#160;&#160;&#160;%local alpha level100 prefix z;<br>
+&#160;&#160;&#160;&#160;%local gr0 gr1;<br>
+&#160;&#160;&#160;&#160;%local i nrowvars rowvar;<br>
+&#160;&#160;&#160;&#160;%local delta;<br>
+&#160;&#160;&#160;&#160;%local title2 titleno2;<br>
+<br>
+&#160;&#160;&#160;&#160;* Note: <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where=  can be used to select the two groups to be compared:<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by default, min &amp; max group will be compared;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Source: <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Newcombe, Robert G. "Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods",  Statistics in Medicine, 17, 873-890 (1998).<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;https://pdfs.semanticscholar.org/370b/92bc4f61fedfa64e1b50e7a10c7a6dde0a19.pdf<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;&#160;&#160;&#160;method 10 / Score, not Continuity Correction&#160;&#160;&#160;&#160;when continuityCorrection = 0,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;method 11 / Score, Continuity Correction&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;when continuityCorrection = 1] <br>
+&#160;&#160;&#160;&#160;*/<br>
+<br>
+&#160;&#160;&#160;&#160;ods escapechar="^";<br>
+<br>
+&#160;&#160;&#160;&#160;%let z = probit((1+&amp;level)/2);<br>
+&#160;&#160;&#160;&#160;%let level100&#160;&#160;&#160;&#160;= %sysevalf(100*&amp;level);<br>
+&#160;&#160;&#160;&#160;%let delta= ^{unicode 0394};<br>
+&#160;&#160;&#160;&#160;%let titleno2 = %eval(&amp;titleno+1);<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;continuityCorrection eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let alpha = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let title2 = ("with continuity correction)";<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let alpha = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let title2 = ("without continuity correction)";<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;proc sql noprint; select min(&amp;class), max(&amp;class) into :gr0, :gr1 from &amp;dsCellCounts; quit;<br>
+&#160;&#160;&#160;&#160;%if &amp;gr0 eq &amp;gr1 %then %put ERROR: class variable must take (at least) two different values;<br>
+&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;%DefineSafeVarPrefix(prefix, &amp;dsCellCounts);<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsTmp = %NewDatasetName(tmp);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select %commasep(&amp;rows &amp;class &amp;num &amp;denom), &amp;num/&amp;denom as &amp;prefix.p,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1 + &amp;z*&amp;z/&amp;denom as &amp;prefix.A, <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-2*(calculated &amp;prefix.p) - (&amp;z*&amp;z + &amp;alpha)/&amp;denom as &amp;prefix.BU,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-2*(calculated &amp;prefix.p) - (&amp;z*&amp;z - &amp;alpha)/&amp;denom as &amp;prefix.BL,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(calculated &amp;prefix.p + &amp;alpha/(2*&amp;denom))**2 as &amp;prefix.CU,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(calculated &amp;prefix.p - &amp;alpha/(2*&amp;denom))**2 as &amp;prefix.CL,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sqrt((calculated &amp;prefix.BU)**2-4*(calculated &amp;prefix.A)*(calculated &amp;prefix.CU)) as &amp;prefix.DeltaU,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sqrt((calculated &amp;prefix.BL)**2-4*(calculated &amp;prefix.A)*(calculated &amp;prefix.CL)) as &amp;prefix.DeltaL,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(-(calculated &amp;prefix.BU)-(calculated &amp;prefix.DeltaU))/(2*(calculated &amp;prefix.A)) as &amp;prefix.USoln1a,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(-(calculated &amp;prefix.BU)+(calculated &amp;prefix.DeltaU))/(2*(calculated &amp;prefix.A)) as &amp;prefix.USoln2a,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(-(calculated &amp;prefix.BL)-(calculated &amp;prefix.DeltaL))/(2*(calculated &amp;prefix.A)) as &amp;prefix.LSoln1a,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(-(calculated &amp;prefix.BL)+(calculated &amp;prefix.DeltaL))/(2*(calculated &amp;prefix.A)) as &amp;prefix.LSoln2a,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ifn(calculated &amp;prefix.USoln1a ge calculated &amp;prefix.p and abs(calculated &amp;prefix.USoln1a - calculated &amp;prefix.p) - &amp;alpha/(2*&amp;denom) ge 0, calculated &amp;prefix.USoln1a, .) as &amp;prefix.USoln1b,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ifn(calculated &amp;prefix.USoln2a ge calculated &amp;prefix.p and abs(calculated &amp;prefix.USoln2a - calculated &amp;prefix.p) - &amp;alpha/(2*&amp;denom) ge 0, calculated &amp;prefix.USoln2a, .) as &amp;prefix.USoln2b,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ifn(calculated &amp;prefix.LSoln1a le calculated &amp;prefix.p and abs(calculated &amp;prefix.LSoln1a - calculated &amp;prefix.p) - &amp;alpha/(2*&amp;denom) ge 0, calculated &amp;prefix.LSoln1a, .) as &amp;prefix.LSoln1b,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ifn(calculated &amp;prefix.LSoln2a le calculated &amp;prefix.p and abs(calculated &amp;prefix.LSoln2a - calculated &amp;prefix.p) - &amp;alpha/(2*&amp;denom) ge 0, calculated &amp;prefix.LSoln2a, .) as &amp;prefix.LSoln2b,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coalesce(calculated &amp;prefix.USoln2b, calculated &amp;prefix.USoln1b, 1) as &amp;prefix.USoln,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coalesce(calculated &amp;prefix.LSoln2b, calculated &amp;prefix.LSoln1b, 0) as &amp;prefix.LSoln<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsCellCounts<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where &amp;class in (&amp;gr0, &amp;gr1);<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsCIs = %NewDatasetName(cis);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsCIs as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(rows)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%commasep4sql(a, &amp;rows), . as &amp;prefix.i,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a.&amp;class as &amp;prefix.gr0, a.&amp;num as &amp;prefix.m0, a.&amp;denom as &amp;prefix.n0, a.&amp;prefix.p as &amp;prefix.p0,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;. as &amp;prefix.j,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;b.&amp;class as &amp;prefix.gr1, b.&amp;num as &amp;prefix.m1, b.&amp;denom as &amp;prefix.n1, b.&amp;prefix.p as &amp;prefix.p1,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;. as &amp;prefix.k,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;b.&amp;prefix.p - a.&amp;prefix.p as &amp;prefix.pDiff,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sqrt((b.&amp;prefix.p-b.&amp;prefix.LSoln)**2 + (a.&amp;prefix.p-a.&amp;prefix.USoln)**2) as &amp;prefix.delta,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sqrt((b.&amp;prefix.p-b.&amp;prefix.USoln)**2 + (a.&amp;prefix.p-a.&amp;prefix.LSoln)**2) as &amp;prefix.epsilon,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(calculated &amp;prefix.pDiff) - calculated &amp;prefix.delta as &amp;prefix.LCL,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(calculated &amp;prefix.pDiff) + calculated &amp;prefix.epsilon as &amp;prefix.UCL<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from&#160;&#160;&#160;&#160;(select %commasep(&amp;rows &amp;class &amp;prefix.p &amp;num &amp;denom &amp;prefix.LSoln &amp;prefix.USoln) from &amp;dsTmp where &amp;class eq &amp;gr0) as a,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(select %commasep(&amp;rows &amp;class &amp;prefix.p &amp;num &amp;denom &amp;prefix.LSoln &amp;prefix.USoln) from &amp;dsTmp where &amp;class eq &amp;gr1) as b<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(rows)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where %matching(a b, &amp;rows)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order &amp;rows<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;title&amp;titleno "Confidence interval(s) for the difference between proportions";<br>
+&#160;&#160;&#160;&#160;title&amp;titleno2 &amp;title2;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(rows)) %then %let nrowvars = %ntokens(&amp;rows);<br>
+<br>
+&#160;&#160;&#160;&#160;proc report data=&amp;dsCIs  nofs style={rules=none cellspacing=0}  nowd headskip headline missing split="*";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column &amp;rows<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(rows)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;prefix.i<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;prefix.gr0 &amp;prefix.m0 &amp;prefix.n0 &amp;prefix.p0 &amp;prefix.j<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;prefix.gr1 &amp;prefix.m1 &amp;prefix.n1 &amp;prefix.p1 &amp;prefix.k<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;prefix.pDiff ("-&amp;level100.% Confidence Interval-" &amp;prefix.LCL &amp;prefix.UCL);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(rows)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nrowvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let rowvar = %scan(&amp;rows, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;rowvar / group order=data;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.i / analysis mean style={foreground=&amp;colsepcolor background=&amp;colsepcolor cellwidth=1pt font_size=1};<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.gr0 / group "&amp;class";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.m0 / analysis mean "m";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.n0 / analysis mean "n";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.p0 / analysis mean "p" f=&amp;f;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.j / analysis mean style={foreground=&amp;colsepcolor background=&amp;colsepcolor cellwidth=1pt font_size=1};<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.gr1 / group "&amp;class";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.m1 / analysis mean "m";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.n1 / analysis mean "n";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.p1 / analysis mean "p" f=&amp;f;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.k / analysis mean style={foreground=&amp;colsepcolor background=&amp;colsepcolor cellwidth=1pt font_size=1};<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.pDiff / analysis mean "&amp;delta p*(Right-Left)" f=&amp;difffmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.LCL / analysis mean "LCL" f=&amp;difffmt ;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;prefix.UCL / analysis mean "UCL" f=&amp;difffmt ;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;title&amp;titleno;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCIs &amp;dsTmp; quit;<br>
+%mend ProportionsDiffCIsNewcombe;<br>
+<br>
+<br>
+/* completed by the following 8 macros:<br>
+&#160;&#160;&#160;&#160;commasep<br>
+&#160;&#160;&#160;&#160;commasep4sql<br>
+&#160;&#160;&#160;&#160;DefineSafeVarPrefix<br>
+&#160;&#160;&#160;&#160;matching<br>
+&#160;&#160;&#160;&#160;MultiAppend<br>
+&#160;&#160;&#160;&#160;NewDatasetName<br>
+&#160;&#160;&#160;&#160;ntokens<br>
+&#160;&#160;&#160;&#160;Touch<br>
+*/<br>
+<br>
+%macro commasep(lov);<br>
+&#160;&#160;&#160;   %sysfunc(tranwrd(%Qsysfunc(compbl(%sysfunc(strip(&amp;lov)))), %str( ), %str(, )))<br>
+%mend commasep;<br>
+<br>
+<br>
+%macro commasep4sql(datasetindex, lov);<br>
+&#160;&#160;&#160;&#160;&amp;datasetindex..%sysfunc(tranwrd(%Qsysfunc(compbl(%sysfunc(strip(&amp;lov)))), %str( ), %str(, &amp;datasetindex..)))<br>
+%mend commasep4sql;<br>
+<br>
+<br>
+%macro DefineSafeVarPrefix(outprefix, datasets, errorLength=11);<br>
+&#160;&#160;&#160;&#160;%local dsContents dsContents0 dsTmp dsUnavailablePrefixes;<br>
+&#160;&#160;&#160;&#160;%local d nds nvarnames tmpds tmpprefix ;<br>
+&#160;&#160;&#160;&#160;%local i j k;<br>
+&#160;&#160;&#160;&#160;%local files2append;<br>
+<br>
+&#160;&#160;&#160;&#160;%let nds = %ntokens(&amp;datasets);<br>
+<br>
+&#160;&#160;&#160;&#160;%do d = 1 %to &amp;nds;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let tmpds = %scan(&amp;datasets, &amp;d, %str( ));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsContents&#160;&#160;&#160;&#160;= %NewDatasetName(contents);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc contents data=&amp;tmpds out=&amp;dsContents (keep=name) noprint; run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let files2append=&amp;files2append &amp;dsContents;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsContents0 = %NewDatasetName(contents0);<br>
+&#160;&#160;&#160;&#160;%MultiAppend(&amp;dsContents0, &amp;files2append);<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsContents&#160;&#160;&#160;&#160;= %NewDatasetName(contents);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsContents as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select distinct(name)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContents0;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select N(name) into :nvarnames<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContents;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;* find the maximum length for safe prefix;<br>
+&#160;&#160;&#160;&#160;%let j = %eval(1 + %sysfunc(floor(%sysevalf(%sysfunc(log(&amp;nvarnames))/%sysfunc(log(27))))));<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsTmp = %NewDatasetName(tmp);<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;j;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a&amp;i = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsTmp (keep=l varp);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length varp $ &amp;j;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;array a{*} a1-a&amp;j;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do l = 1 to &amp;j;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;kmax = 27**l;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do k = 1 to kmax;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;varp = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do j = 1 to l;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a{j} = mod(floor((k-1)/(27**(j-1))), 27) + 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;varp = cats(varp, substr("_abcdefghijklmnopqrstuvwxyz", a{j}, 1));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;* List prefixes already present in at least one variable name;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsUnavailablePrefixes = %NewDatasetName(unavailablepref);<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsUnavailablePrefixes (drop=name l);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsContents;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length varp $ &amp;j;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do l = 1 to &amp;j;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;varp = substr(name, 1, l);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;proc sort data=&amp;dsUnavailablePrefixes; by varp; run;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsUnavailablePrefixes;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsUnavailablePrefixes;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by varp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if first.varp;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sort data=&amp;dsTmp; by varp; run;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;merge &amp;dsTmp (in=in1) &amp;dsUnavailablePrefixes (in=in2);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by varp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if in1 and not in2;<br>
+&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;proc sort data=&amp;dsTmp; by l varp; run;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsTmp; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsTmp (obs=1);<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select l into :lprefix<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length varp $&amp;lprefix;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select varp into :&amp;outprefix<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;lprefix >= &amp;errorLength %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let lprefix = %sysfunc(compress(&amp;lprefix));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: safe prefix is of length (&amp;lprefix) greater or equal than that prescribed by errorLength (&amp;errorLength);<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsContents0 &amp;dsContents &amp;dsTmp &amp;dsUnavailablePrefixes; run;<br>
+%mend DefineSafeVarPrefix;<br>
+<br>
+<br>
+%macro matching(dsIndices, matchingvars);&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;%local d ds ds1 nds;<br>
+&#160;&#160;&#160;&#160;%local nvars v var;<br>
+<br>
+&#160;&#160;&#160;&#160;%let nvars = %ntokens(&amp;matchingvars);<br>
+<br>
+&#160;&#160;&#160;&#160;%let nds = %ntokens(&amp;dsIndices);<br>
+&#160;&#160;&#160;&#160;%let ds1 = %scan(&amp;dsIndices, 1);<br>
+<br>
+&#160;&#160;&#160;&#160;%do v = 1 %to &amp;nvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let var = %scan(&amp;matchingvars, &amp;v);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do d = 2 %to &amp;nds;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let ds = %scan(&amp;dsIndices, &amp;d);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;v gt 1 or &amp;d gt 2 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;ds1..&amp;var eq &amp;ds..&amp;var<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+%mend matching;<br>
+<br>
+<br>
+%macro MultiAppend(dsOut, datasets, clean=1, fileindex=);<br>
+&#160;&#160;&#160;&#160;%local dsCaseCount dsContents dsContentsAll  dsNonMissing dsTmp dsTmpContents  dsVarsDescription;<br>
+&#160;&#160;&#160;&#160;%local d ds nds;<br>
+&#160;&#160;&#160;&#160;%local nvars nvars0 varnames varnames0 varlens vartypes;<br>
+&#160;&#160;&#160;&#160;%local lens0 types0 varsfound0;<br>
+&#160;&#160;&#160;&#160;%local v varin varlen varlen0 varname vartype vartype0;<br>
+&#160;&#160;&#160;&#160;%local nnonmissing nnonmissing0;<br>
+<br>
+&#160;&#160;&#160;&#160;%Touch(&amp;dsOut);<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsContents = %NewDatasetName(contents);<br>
+&#160;&#160;&#160;&#160;%let dsContentsAll = %NewDatasetName(contentsall);<br>
+&#160;&#160;&#160;&#160;%let dsTmpContents = %NewDatasetName(tmpcontents);<br>
+<br>
+&#160;&#160;&#160;&#160;%let nds = %ntokens(&amp;datasets);<br>
+&#160;&#160;&#160;&#160;%do d = 1 %to &amp;nds;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let ds = %scan(&amp;datasets, &amp;d, %str( ));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc contents data=&amp;ds noprint out=&amp;dsContents (keep=name type length varnum); run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmpContents as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select *, lowcase(name) as lcname, &amp;d as FileIndex<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContents;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;d eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; change &amp;dsTmpContents=&amp;dsContentsAll; delete &amp;dsContents; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; append data=&amp;dsTmpContents base=&amp;dsContentsAll; delete &amp;dsContents &amp;dsTmpContents; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsVarsDescription = %NewDatasetName(varsdesc);<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql number;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsVarsDescription as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select lcname, max(type) as type, max(type) eq min(type) as typeConsistent, max(length) as len, min(length) as minLen, max(length) eq min(length) as lenConsistent, min(FileIndex) as FileIndex, N(lcname) as NFiles, (calculated NFiles) eq &amp;nds as InEachds<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContentsAll<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group lcname<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order lcname;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select (sum(typeConsistent) eq N(lcname)) * (sum(lenConsistent) eq N(lcname)) * (sum(InEachds) eq N(lcname)), N(lcname)  into :filesConsistent, :nvars from &amp;dsVarsDescription;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;* Get Variable Names with most frequent case;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsCaseCount = %NewDatasetName(casecount);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsCaseCount as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select lcname, name, N(name) as f<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContentsAll<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group lcname, name<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order lcname, calculated f descending;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsCaseCount;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsCaseCount;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by lcname;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if first.lcname;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsTmp = %NewDatasetName(tmp);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select v.*, k.name<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsVarsDescription as v, &amp;dsCaseCount as k<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where v.lcname eq k.lcname;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCaseCount &amp;dsVarsDescription; change &amp;dsTmp=&amp;dsVarsDescription; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;* Save variable names/types/lens to macro variables;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select name, len, type, N(name)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;into&#160;&#160;&#160;&#160;:varnames separated by ' ', <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:varlens separated by ' ', <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:vartypes separated by ' ',<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:nvars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsVarsDescription<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order lcname;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsNonMissing = %NewDatasetName(nonmissing);<br>
+<br>
+&#160;&#160;&#160;&#160;* Append files;<br>
+<br>
+&#160;&#160;&#160;&#160;%do d = 1 %to &amp;nds;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let ds = %scan(&amp;datasets, &amp;d, %str( ));<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Count the number of non-missing values for each variable;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select lcname, N(lcname) into :varnames0 separated by ' ', :nvars0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContentsAll<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where FileIndex eq &amp;d;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsNonMissing as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do v = 1 %to &amp;nvars0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let varname = %scan(&amp;varnames0, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;v gt 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;outer union corresponding<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select "&amp;varname" as lcname length=32, sum(not missing(&amp;varname)) as NNonMissing from &amp;ds<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select v.name, v.type, c.type as TypeInThisFile, c.lcname is not null as VarFoundInThisFile, c.length as LenInThisFile, coalesce(c.NNonMissing, 0) as NNonMissing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsVarsDescription as v<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left join <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(select a.*, m.NNonMissing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContentsAll as a, &amp;dsNonMissing as m<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where a.lcname eq m.lcname and a.FileIndex eq &amp;d)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;as c<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on v.lcname eq c.lcname<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order v.lcname;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select TypeInThisFile, VarFoundInThisFile, LenInThisFile, NNonMissing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;into&#160;&#160;&#160;&#160;:types0 separated by ' ',<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:varsfound0 separated by ' ',<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:lens0 separated by ' ',<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:nnonmissing separated by ' '<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsNonMissing &amp;dsTmp; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do v = 1 %to &amp;nvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let varname = %scan(&amp;varnames, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let varlen = %scan(&amp;varlens, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let vartype = %scan(&amp;vartypes, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let varin = %scan(&amp;varsfound0, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let vartype0 = %scan(&amp;types0, &amp;v, %str( ));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let varlen0 = %scan(&amp;lens0, &amp;v, %str( ));<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;v ne 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;varin %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;vartype0 ne &amp;vartype %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let nnonmissing0 = %scan(&amp;nnonmissing, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;nnonmissing0 eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"" as &amp;varname length=&amp;varlen<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %if &amp;varlen le 32 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;put(&amp;varname, best&amp;varlen..) as &amp;varname<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;put(&amp;varname, best32.) as &amp;varname<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&amp;varname length=&amp;varlen<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;vartype eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;. as &amp;varname length=&amp;varlen<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %if &amp;vartype eq 2 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"" as &amp;varname length=&amp;varlen<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(fileindex)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;, &amp;d as &amp;fileindex<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;ds;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;d eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsOut; change &amp;dsTmp=&amp;dsOut; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; append data=&amp;dsTmp base=&amp;dsOut; delete &amp;dsTmp; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;clean %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;datasets; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsContentsAll &amp;dsVarsDescription; quit;<br>
+%mend MultiAppend;<br>
+<br>
+<br>
+%macro NewDatasetName(proposalname);<br>
+&#160;&#160;&#160;&#160;%*Finds the first unused dataset named  *datasetname*, adding a leading underscore and a numeric suffix as large as necessary to make it unique!;<br>
+&#160;&#160;&#160;&#160;%local i newdatasetname;<br>
+&#160;&#160;&#160;&#160;%let proposalname=%sysfunc(compress(&amp;proposalname));<br>
+&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname;<br>
+<br>
+&#160;&#160;&#160;&#160;%do %while(%sysfunc(exist(&amp;newdatasetname)));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let i = %eval(&amp;i+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname&amp;i;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;newdatasetname<br>
+%mend NewDatasetName;<br>
+<br>
+<br>
+%macro ntokens(list);<br>
+&#160;&#160;&#160;&#160;%eval(1 + %length(%sysfunc(compbl(&amp;list))) - %length(%sysfunc(compress(&amp;list))))<br>
+%mend ntokens;<br>
+<br>
+<br>
+%macro Touch(newfiles);<br>
+&#160;&#160;&#160;&#160;%local f file nfiles;<br>
+<br>
+&#160;&#160;&#160;&#160;%let nfiles = %ntokens(&amp;newfiles);<br>
+&#160;&#160;&#160;&#160;%do f = 1 %to &amp;nfiles;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let file = %scan(&amp;newfiles, &amp;f, %str( ));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;file; stop; run;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+%mend Touch;<br>
+</div>
+<div class=download1>
+<a href="SasMacros/ProportionsDiffCIsNewcombe.zip">Download version 1.0 now.</a>
+</div>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/ProportionsDiffCIsNewcombe.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:41:14 GMT -->
+</html>

@@ -1,0 +1,23 @@
+model
+{
+    for (i in 1:n)
+      {
+         x[i]   ~   dnorm(mu,tau)    #  Likelihood function for each data point
+       }
+         mu     ~   dnorm(0,0.0001)  #  Prior for mu
+         tau    <- 1                 #  Prior for tau, actually a fixed value
+         sigma  <-  1/sqrt(tau)      #  Prior for sigma (as a function of tau)
+}
+
+# Data
+
+list(x=c(-1.10635822,  0.56352639, -1.62101846,  0.06205707,  0.50183464,
+          0.45905694, -1.00045360, -0.58795638,  1.01602187, -0.26987089,
+          0.18354493 , 1.64605637, -0.96384666,  0.53842310, -1.11685831,
+          0.75908479 , 1.10442473 , -1.71124673, -0.42677894 , 0.68031412),
+     n=20)
+
+# Results
+
+| node |     mean |     sd | MC error |    2.5% |   median |  97.5% | start | sample |
+|   mu | -0.06355 | 0.2235 | 0.002986 | -0.5034 | -0.06203 | 0.3738 |  1001 |  5000  |

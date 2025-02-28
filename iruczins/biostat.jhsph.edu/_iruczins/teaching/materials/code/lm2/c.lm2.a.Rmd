@@ -1,0 +1,115 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Regression and Correlation - Advanced
+
+Loading the SPH.140.615 package.
+
+```{r}
+library(SPH.140.615)
+```
+
+
+#### Fathers' and daughters' heights
+
+The Pearson & Lee (1906) data.
+
+```{r}
+example(pear)
+```
+
+Calculate the regression of daughter's height on father's height (i.e., for predicting daughter from father).
+
+```{r}
+lm.outA <- lm(daughter ~ father, data=pear)
+summary(lm.outA)
+```
+
+Calculate the regression of father's height on daughter's height (i.e., for predicting father from daughter).
+
+```{r}
+lm.outB <- lm(father ~ daughter, data=pear)
+summary(lm.outB)
+```
+
+The intercept and slope for regression A.
+
+```{r}
+coA <- lm.outA$coef
+coA
+```
+
+The intercept and slope for regression B.
+
+```{r}
+coB <- lm.outB$coef 
+coB
+```
+
+Transform regression B coefficients: y = mx + b $\Rightarrow$ x = y/m - b/m
+
+```{r}
+coB[1] <- -coB[1]/coB[2]
+coB[2] <- 1/coB[2]
+coB
+```
+
+Plot the data with the two regression lines.
+
+```{r}
+plot(pear)
+abline(coA, lwd=2, col="green")
+abline(coB, lwd=2, col="orange")
+```
+
+### Span and height example
+
+The data.
+
+```{r}
+plot(span, xlab="span [ inches ]", ylab="height [ inches ]")
+abline(lsfit(span$span,span$stature), col="red", lty=2, lwd=2)
+```
+
+Predicting height from span.
+
+```{r}
+lm.fit <- lm(stature~span, data=span)
+summary(lm.fit)
+summary(lm.fit)$coef[,1]
+```
+
+Residual standard deviation.
+
+```{r}
+summary(lm.fit)$sigma
+```
+
+The correlation.
+
+```{r}
+r <- cor(span$span, span$stature)
+r
+cor(span)
+```
+
+Slope of the regression line.
+
+```{r}
+r * sd(span$stature)/sd(span$span)
+```
+
+Height standard deviation.
+
+```{r}
+sd(span$stature)
+```
+
+Typical prediction error using span to predict height.
+
+```{r}
+sd(span$stature) * sqrt(1-r^2)
+```

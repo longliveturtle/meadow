@@ -1,0 +1,200 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Regression and Correlation
+
+### Concordance versus correlation
+
+Simulate some highly correlated bivariate data, and plot the data.
+
+```{r}
+set.seed(1)
+m <- rpois(1000,50)
+eps1 <- rnorm(1000)
+eps2 <- rnorm(1000)
+x1 <- m + eps1
+x2 <- m + eps2
+par(pty="s")
+plot(x1, x2, xlim=c(10,90), ylim=c(10,90))
+abline(c(0,1), col="blue")
+```
+
+The Pearson correlation and the concordance. 
+
+```{r}
+cor.con <- function(x,y) 2*cov(x,y)/(var(x)+var(y)+(mean(x)-mean(y))^2)
+cor(x1,x2)
+cor.con(x1,x2)
+```
+
+A linear transformation of x2.
+
+```{r}
+x3 <- -10 + 1.25*x2
+par(pty="s")
+plot(x1, x3, xlim=c(10,90), ylim=c(10,90))
+abline(c(0,1), col="blue")
+cor(x1,x3)
+cor.con(x1,x3)
+```
+
+Another linear transformation of x2.
+
+```{r}
+x4 <- -40 + 1.75*x2
+par(pty="s")
+plot(x1, x4, xlim=c(10,90), ylim=c(10,90))
+abline(c(0,1), col="blue")
+cor(x1,x4)
+cor.con(x1,x4)
+```
+
+### Induced correlation
+
+Generate some hypothetical, independent log2 measurements, and plot the data. Note the difference of logs is the same as the log ratio.
+
+```{r}
+set.seed(1)
+x <- rnorm(1000)
+y <- rnorm(1000)
+r1 <- max(abs(c(x,y)))
+r1 <- c(-r1,r1)
+par(las=1, pty="s")
+plot(x, y , xlab="log2(X)", ylab="log2(Y)", xlim=r1, ylim=r1, pch=1, cex=0.7)
+```
+
+Simulate and independent "reference standard", and plot the log2 measurements relative to the standard.
+
+```{r}
+z <- rnorm(1000,sd=2)
+r2 <- max(abs(c(x-z,y-z)))
+r2 <- c(-r2,r2)
+par(las=1, pty="s")
+plot(x-z, y-z , xlab="log2(X/Z)", ylab="log2(Y/Z)", xlim=r2, ylim=r2, pch=1, cex=0.7)
+```
+
+The respective correlations.
+
+```{r}
+cor(x,y)
+cor(x-z,y-z)
+```
+
+Another example.
+
+```{r}
+z <- rnorm(1000,sd=1)
+r3 <- max(abs(c(x-z,y-z)))
+r3 <- c(-r3,r3)
+par(las=1, pty="s")
+plot(x-z, y-z , xlab="log2(X/Z)", ylab="log2(Y/Z)", xlim=r3, ylim=r3, pch=1, cex=0.7)
+cor(x-z,y-z)
+```
+
+Assume that some measurements in the reference standard failed, so the intensities are near zero (background), and therefore the log2 intensities are super small.
+
+```{r}
+z[1:20] <- log2(runif(20,0,1e-3))
+z[1:20]
+r4 <- max(abs(c(x-z,y-z)))
+r4 <- c(-r4,r4)
+par(las=1, pty="s")
+plot(x-z, y-z, xlab="log2(X/Z)", ylab="log2(Y/Z)", xlim=r4, ylim=r4, pch=1, cex=0.7)
+points((x-z)[1:20], (y-z)[1:20], pch=21, bg="red", cex=0.7)
+cor(x-z,y-z)
+```
+
+### MA plots
+
+To show how useful MA plots are, we simulate some (log2) gene expression data from two technical replicates, with and without artifacts. 
+
+```{r}
+n <- 1000
+set.seed(1)
+x <- runif(n,6,14)
+```
+
+No artifacts.
+
+```{r}
+x1 <- x + rnorm(n,sd=1/x^2)
+x2 <- x + rnorm(n,sd=1/x^2)
+r <- max(abs(x1-x2))
+r <- c(-r,r)
+par(mfrow=c(1,2), las=1)
+par(pty="s")
+plot(x1, x2, xlab="log2(R1)", ylab="log2(R2)")
+abline(c(0,1), col="red", lwd=2)
+par(pty="m")
+plot((x1+x2)/2, x1-x2, xlab="( log2(R1) + log2(R2) ) / 2", ylab="log2( R1 / R2 )", ylim=r)
+abline(h=0, col="red", lwd=2)
+```
+
+Replicate 1 has on average a 5% higher abundance.
+
+```{r}
+x1b <- x1 + log2(1.05)
+x2b <- x2
+r <- max(abs(x1b-x2b))
+r <- c(-r,r)
+par(mfrow=c(1,2), las=1)
+par(pty="s")
+plot(x1b, x2b, xlab="log2(R1)", ylab="log2(R2)")
+abline(c(0,1), col="red", lwd=2)
+par(pty="m")
+plot((x1b+x2b)/2, x1b-x2b, xlab="( log2(R1) + log2(R2) ) / 2", ylab="log2( R1 / R2 )", ylim=r)
+abline(h=0, col="red", lwd=2)
+```
+
+Replicate 1 has on average a 1% higher abundance.
+
+```{r}
+x1b <- x1 + log2(1.01)
+x2b <- x2
+r <- max(abs(x1b-x2b))
+r <- c(-r,r)
+par(mfrow=c(1,2), las=1)
+par(pty="s")
+plot(x1b, x2b, xlab="log2(R1)", ylab="log2(R2)")
+abline(c(0,1), col="red", lwd=2)
+par(pty="m")
+plot((x1b+x2b)/2, x1b-x2b, xlab="( log2(R1) + log2(R2) ) / 2", ylab="log2( R1 / R2 )", ylim=r)
+abline(h=0,col="red",lwd=2)
+```
+
+Assume there is a bias depending on the gene abundance.
+
+```{r}
+m <- mean(c(x1,x2))
+x1b <- x1 - 0.01*(x1-m)
+x2b <- x2
+r <- max(abs(x1b-x2b))
+r <- c(-r,r)
+par(mfrow=c(1,2), las=1)
+par(pty="s")
+plot(x1b, x2b, xlab="log2(R1)", ylab="log2(R2)")
+abline(c(0,1), col="red", lwd=2)
+par(pty="m")
+plot((x1b+x2b)/2, x1b-x2b, xlab="( log2(R1) + log2(R2) ) / 2",ylab="log2( R1 / R2 )", ylim=r)
+abline(h=0, col="red", lwd=2)
+```
+
+Something like this we often observe in real data.
+
+```{r}
+m <- mean(c(x1,x2))
+x1b <- x1 - (x1-m)/(x1^2)
+x2b <- x2
+r <- max(abs(x1b-x2b))
+r <- c(-r,r)
+par(mfrow=c(1,2), las=1)
+par(pty="s")
+plot(x1b, x2b, xlab="log2(R1)", ylab="log2(R2)")
+abline(c(0,1), col="red", lwd=2)
+par(pty="m")
+plot((x1b+x2b)/2, x1b-x2b, xlab="( log2(R1) + log2(R2) ) / 2", ylab="log2( R1 / R2 )", ylim=r)
+abline(h=0, col="red", lwd=2)
+```

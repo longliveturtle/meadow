@@ -1,0 +1,70 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Prediction and Calibration
+
+#### Example: David Sullivan's heme data
+
+```{r}
+h2o2 <- rep(c(0,10,25,50), each=3)
+pf3d7 <- c(0.3399,0.3563,0.3538,
+           0.3168,0.3054,0.3174,
+           0.2460,0.2618,0.2848,
+           0.1535,0.1613,0.1525)
+dat <- data.frame(conc=h2o2, od=pf3d7)
+```
+
+The regression of optical density on hydrogen peroxide concentration.
+
+```{r}
+lm.fit <- lm(od ~ conc, data=dat)
+lm.out <- summary(lm.fit)
+lm.out$coef
+```
+
+Predict the optical density at H202 concentration 30.
+
+```{r}
+b0.hat <- lm.out$coef[1,1]
+b0.hat
+b1.hat <- lm.out$coef[2,1]
+b1.hat
+s.hat <- lm.out$sigma
+s.hat
+y.hat.30 <- b0.hat+b1.hat*30
+y.hat.30
+```
+
+Get the 95% confidence interval for the mean optical density at H202 concentration 30.
+
+```{r}
+n <- length(dat$conc)
+n
+m <- mean(dat$conc)
+m
+SXX <- sum((dat$conc-m)^2)
+SXX
+y.hat.30 + c(-1,1)*qt(0.975,n-2)*s.hat*sqrt(1/n+(30-m)^2/SXX)
+```
+
+Easier:
+
+```{r}
+predict(lm.fit, data.frame(conc=30), interval="confidence")
+```
+
+Get the 95% prediction interval for a new observation at H202 concentration 30.
+
+```{r}
+y.hat.30 + c(-1,1)*qt(0.975,n-2)*s.hat*sqrt(1+1/n+(30-m)^2/SXX)
+```
+
+Easier:
+
+```{r}
+predict(lm.fit, data.frame(conc=30), interval="prediction")
+```
+

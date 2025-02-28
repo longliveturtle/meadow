@@ -1,0 +1,57 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Homework 0
+
+## My Name
+
+The hash and other tags can help to structure your document, see
+
+https://rmarkdown.rstudio.com/authoring_basics.html
+
+I also recommend to look at the IDE cheat sheet to learn about navigating the R Studio environment and the rmarkdown cheat sheet to learn how to generate and structure R markdown files. These cheat sheets are available on the class webpage, click on useful links $\rightarrow$ R resources.
+
+The latest versions of these cheat sheets are also available within R studio, click on Help $\rightarrow$ Cheat Sheets.
+
+Note that certain characters are reserved LaTeX / math characters and might throw an error while knitting if you include those into your text. If you copy and paste a greek character from the HW pdf into your Rmd file, it will almost certainly throw an error.
+
+If you get an error during knitting that is not related to the TeX installation or your code, R Studio will tell you which line it occurred on. If you have a non-text character there, take it out and try again.
+
+If you like greek and mathy characters you have to use dollar signs create a math environment that LaTeX can recognize (see for example the 'inline equation' in the reference card). 
+
+A few examples:
+
+$\alpha, \beta$ and $\gamma$. $X_1, X_2, \ldots, X_n$. $\pi$ and $\Pi$.
+
+This is not expected in your homework and it is certainly fine to just write the character in plain text (e.g., 'alpha').
+
+Within a code chunk only R syntax is allowed. Note that the hash tag is R syntax to indicate a comment that will be rendered as text.
+
+## Problem 1
+
+Q: If you flip a fair coin once, what is the chance you see Heads after it lands?
+
+A: By definition of "fair", the probability of heads is 50%.
+
+## Problem 2
+
+Q: Calculate the sum of the numbers 2, 3, and 4.
+
+```{r}
+# this is my vector x
+x <- c(2,3,4)
+sum(x)
+```
+
+The sum of these three numbers is 9.
+
+
+

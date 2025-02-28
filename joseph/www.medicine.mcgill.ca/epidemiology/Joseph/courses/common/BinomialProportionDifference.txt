@@ -1,0 +1,31 @@
+model
+{
+         x        ~ dbin(theta1, n1)   #  Likelihood for group 1
+         theta1   ~ dbeta(1,1)         #  Prior for theta1
+
+         y        ~ dbin(theta2, n2)   #  Likelihood for group 2
+         theta2   ~ dbeta(1,1)         #  Prior for theta2
+
+      propdiff <- theta1-theta2        #  Calculate difference for binomial parameters
+      rr <- theta1/theta2              #  Calculate relative risk
+                                       #  Calculate odds ratio
+      or<- theta1*(1-theta2)/((1-theta1)*theta2)
+
+}
+
+# Data
+
+list(x  = 6,
+     n1 = 20,
+     y  = 20,
+     n2 = 25)
+
+# Results
+
+|     node |    mean |      sd | MC error |    2.5% |  median |   97.5% | start | sample  |
+
+|   theta1 |  0.3176 | 0.09681 | 0.001334 |   0.148 |  0.3118 |  0.5211 |  1001 |   5000  |
+|   theta2 |  0.7774 | 0.07969 | 0.001067 |  0.6057 |  0.7848 |  0.9103 |  1001 |   5000  |
+| propdiff | -0.4598 |  0.1254 | 0.001562 | -0.6886 | -0.4662 | -0.1937 |  1001 |   5000  |
+|       or |  0.1505 |   0.112 | 0.001403 | 0.03093 |   0.122 |  0.4428 |  1001 |   5000  |
+|       rr |  0.4134 |  0.1358 | 0.001762 |  0.1862 |  0.4025 |  0.7155 |  1001 |   5000  |

@@ -1,0 +1,148 @@
+#! /usr/local/bin/perl
+
+require "subroutines.lib";
+    
+&mime;
+&parseform;
+
+$nstr=4;
+
+print "<html>\n<head>\n<title>Search the beta sheet database!
+       </title>\n</head>\n<body>\n";
+print "<body bgcolor=#FFFFFF>";
+
+$err=0;
+if ($formdata{'sqdic'}==0){
+@in=($formdata{'sq1'},$formdata{'sq2'},$formdata{'sq3'},$formdata{'sq4'});
+@in2 = sort @in;
+for ($i=0;$i<$nstr;$i++){
+    if ($i+1 != $in2[$i]){
+	$err=1;}}}
+if ($formdata{'rn1'}>$formdata{'rn2'}){
+    $err=2;}
+
+if ($err==1){
+print "<br> <img src=warning.gif border=0 align=bottom> Error!";
+print "<br><br><br> You did not specify the strand sequence
+correctly. The sequence @in is not permitted since you can not choose
+the same position for two or more different strands. Please go back
+and change your selection.";
+print "<br><br><br><hr width=100% align=right>";}
+
+elsif ($err==2){
+print "<br> <img src=warning.gif border=0 align=bottom> Error!";
+print "<br><br><br> You did not specify the protein lengths
+correctly. The upper bound can not be smaller than the lower bound.
+Please go back and change your selection.";
+print "<br><br><br><hr width=100% align=right>";}
+
+else{
+
+if ($formdata{'sqdic'}==0){
+print "<br> The strand sequence is 
+$formdata{'sq1'}
+$formdata{'sq2'}
+$formdata{'sq3'}
+$formdata{'sq4'}.";}
+
+if ($formdata{'ordic'}==0){
+print "<br> The strand orientation is 
+$formdata{'or1'}
+$formdata{'or2'}
+$formdata{'or3'}
+$formdata{'or4'}.";}
+
+if ($formdata{'lndic'}==0){
+print "<br> The loop length distribution is 
+$formdata{'ln1'}
+$formdata{'ln2'}
+$formdata{'ln3'}.";}
+
+if ($formdata{'hl'}<2){
+if ($formdata{'hl'} eq "0"){
+    print "<br> The protein is all beta.";}
+else {
+    print "<br> The protein is alpha/beta.";}}
+
+print "<br> The protein length is between $formdata{'rn1'} and
+$formdata{'rn2'} residues.";
+
+if ($formdata{'sqdic'}==0 & $formdata{'ordic'}==0){
+$sq = $formdata{'sq1'}.$formdata{'sq2'}.$formdata{'sq3'}.$formdata{'sq4'};
+$or = $formdata{'or1'}.$formdata{'or2'}.$formdata{'or3'}.$formdata{'or4'};
+$fig = $sq.$or.".jpg";
+print "<br><br> This is how the sheet looks like:";
+print "<div align=left> <img src=jpgs/s4/$fig border=0>";}
+
+$dbfile = "/users/faculty/iruczins/lookup/Data4.1.s";
+open(TAB,$dbfile) || die("Could not open file!");
+@dbs=<TAB>;
+close(TAB);
+
+if ($formdata{'sqdic'}==0){
+    @sq=($formdata{'sq1'},$formdata{'sq2'},$formdata{'sq3'},$formdata{'sq4'});}
+if ($formdata{'ordic'}==0){
+    @or=($formdata{'or1'},$formdata{'or2'},$formdata{'or3'},$formdata{'or4'});
+}
+if ($formdata{'lndic'}==0){
+    @ln=($formdata{'ln1'},$formdata{'ln2'},$formdata{'ln3'});
+}
+
+$anymatches=0;
+@allmatch=1;
+
+for ($i=0;$i<872;$i++){
+    $ldb=$i*(3*$nstr+2);
+    if ($formdata{'sqdic'}==0){
+	@sqtest=1;
+        for ($k=0;$k<$nstr;$k++){
+            push(@sqtest,$dbs[$ldb+$k]);}
+	$rem=shift(@sqtest);
+	$match=1;
+        for ($k=0;$k<$nstr;$k++){
+            if ($sq[$k]!=$sqtest[$k]){
+                $match=0;}}}
+    else {
+	$match=1;}
+    if ($formdata{'ordic'}==0&$match==1){
+	@ortest=1;
+        for ($k=0;$k<$nstr;$k++){
+	    push(@ortest,$dbs[$ldb+$nstr+$k]);}
+        $rem=shift(@ortest);
+        for ($k=0;$k<$nstr;$k++){
+	    if ($or[$k]!=$ortest[$k]){
+		$match=0;}}}
+    if ($formdata{'lndic'}==0&$match==1){
+	@lntest=1;
+        for ($k=0;$k<$nstr-1;$k++){
+	    push(@lntest,$dbs[$ldb+$nstr*2+$k]);}
+        $rem=shift(@lntest);
+        for ($k=0;$k<$nstr-1;$k++){
+	    if ($ln[$k]!=$lntest[$k]){
+		$match=0;}}}
+    if ($formdata{'hl'}<2&$match==1){
+	if ($formdata{'hl'}!=$dbs[$ldb+$nstr*3-1]){
+	    $match=0;}}
+    if ($match==1){
+	if ($formdata{'rn1'}>$dbs[$ldb+$nstr*3] | 
+            $formdata{'rn2'}<$dbs[$ldb+$nstr*3]){
+	    $match=0;}}
+
+    if ($anymatches==0 & $match==1){
+	print "<br><br><br>The following matches were found:<br>";
+        $anymatches=1;}
+    if ($match==1){
+	push(@allmatch,$dbs[$ldb+3*$nstr+1]);}}
+
+if ($anymatches==0){
+    print "<br><br><br> No matches were found!";}
+else {
+    $rem=shift(@allmatch);
+    @allmatch=sort @allmatch;
+    $howmany=@allmatch;
+    for ($k=0;$k<$howmany;$k++){
+	print "<br>$allmatch[$k]";}}
+
+print "<br><br><br><hr width=100% align=right>";
+
+}

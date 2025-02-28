@@ -1,0 +1,1936 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/MultiTranspose.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:56 GMT -->
+<head>
+<title>SAS macro %MultiTranspose: Transposing multiple variables in a SAS data set within a single macro call</title>
+<meta name="description" content=" %MultiTranspose is a SAS macro fortransposing many variables in a multiple-row-per-subject table to a one-row-per-subject table.">
+<meta name="keywords" content="data, file, long, macro, many, multiple, reshape, reshaping, sas, set, transpose, transposing, variable, wide">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.0.3 (February 2011)</div>
+<div class=title0>SAS macro %MultiTranspose</div>
+<div class=title>Transposing multiple variables in a SAS data set within a single macro call</div>
+This macro is useful when data need to be
+restructured from a multiple-row-per-subject structure into a
+one-row-per-subject structure. If only one variable needs to be transposed,
+PROC TRANSPOSE can perform this task directly. If however two or more
+variables need to be transposed, you need to transpose each variable
+separately and then merge the transposed data sets, which can be time
+consuming. For these cases, <span class=sasmacroname>%MultiTranspose</span> allows simultaneous
+transposition of several variables.
+<br><br>
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%MultiTranspose</span> is a SAS macro for
+transposing many variables in a multiple-row-per-subject table to a one-row-per-subject table.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#argslist">Arguments list</a><br>
+<a href="#examples">Examples</a><br>
+<a href="#sascode">SAS code</a><br>
+<a href="#comparison">Comparison with a similar SAS macro</a><br>
+<a href="#download">Download</a>
+</div>
+
+<a name="syntax"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+%MultiTranspose(out=, data=, vars=, by=, pivot=, copy=, dropMissingPivot=1, UseNumericExt=0, library=library);
+</div>
+
+<a name="argslist"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main><span class=sasmacroname>%MultiTranspose</span> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>out</td>
+<td class=rfctargumentvalue>the name of the output data set;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>data</td>
+<td class=rfctargumentvalue>the name of the input data set;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>vars</td>
+<td class=rfctargumentvalue>lists which variables are to be transposed;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>by</td>
+<td class=rfctargumentvalue>the name of the variable(s) that identifies(y) a subject;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>pivot</td>
+<td class=rfctargumentvalue>variable name from input data set for which each row value 
+should lead to a new series of variables (one series per variable listed in <span class=argname>vars</span>, above) in output data set;
+</td>
+<td class=rfctcomment>
+There should be only one variable named in <span class=argname>pivot</span> argument. Also, the column used as a <i>pivot</i> <b>cannot have any duplicate values</b>
+for a given series of values found in <span class=argname>by</span> variables.
+<br><br>
+<span class=sasmacroname>%MultiTranspose</span> will check that these conditions are met.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>copy</td>
+<td class=rfctargumentvalue>a list of variables that occur repeatedly with each observation for a subject and will be copied to the resulting data set;</td>
+<td class=rfctcomment>
+<span class=sasmacroname>%MultiTranspose</span> will run a check that <span class=argname>copy</span> variables have the same values within each series of <span class=argname>by</span> values.
+<br><br>
+Can be left empty.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>dropMissingPivot</td>
+<td class=rfctargumentvalue>whether or not observations corresponding to a missing value in <span class=argname>pivot</span> should be dropped from the input data before transposing;</td>
+<td class=rfctcomment>
+Default: 1 (yes).
+<br>
+Call with <b>dropMissingPivot=0</b> if you'd rather not drop observations where variable defined as <span class=argname>pivot</span> has a missing value.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>UseNumericExtension</td>
+<td class=rfctargumentvalue>whether the observed character string value for variable used as <span class=argname>pivot</span> (when it is indeed a string variable) should be replaced by numbers as suffixes in transposed variable names or not;</td>
+<td class=rfctcomment>
+Default: 0 (no: character string values observed in <span class=argname>pivot</span> variable will be used as suffixes in new variable names).
+<br>
+Call with <b> UseNumericExtension=1</b> to use numbers as suffixes in transposed variable names rather than characters. 
+See <a href="#ex3" class=commentlink>example 3</a>.
+<br><br>Relevant only when <span class=argname>pivot</span> variable is literal.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>library</td>
+<td class=rfctargumentvalue>
+the name of the library where value labels are defined 
+(if any variables of interest in the input data set were categorical/attached value labels);
+</td>
+<td class=rfctcomment>
+Default: library.<br>
+Feel free to change the default library to <span class=sascode>work</span>, for example.
+<br></td>
+</tr>
+</table>
+
+
+<a name="examples"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Examples</div>
+<br>
+The SAS code necessary to recreate each example presented below is 
+<a href="SasMacros/examples/MultiTranspose.zip">available from this SAS file</a>.
+<br><br>
+
+
+<a name="ex1">
+<div class=sub>Example 1</div>
+Suppose you have obtained the data presented below from a multi-center study, where each patient is identified by the means of the two variables 
+<span class=sascode>centre</span> and <span class=sascode>subjectno</span>.
+
+<pre class=ascii>
+             Obs    centre    subjectno    gender     visit        sbp         wt
+
+               1       1          1        female           A    121.667    75.4000
+               2       1          1        female    baseline    120.000    75.0000
+               3       1          1        female    week 1      125.000    75.5000
+               4       1          1        female    week 4      120.000    75.7000
+               5       1          2        male             A    142.500    71.5000
+               6       1          2        male      baseline    140.000    70.0000
+               7       1          2        male      week 1      145.000    73.0000
+               8       2          1        female           A    153.333    90.6667
+               9       2          1        female    baseline    155.000    90.0000
+              10       2          1        female    week 1      150.000    90.8000
+              11       2          1        female    week 4      155.000    91.2000
+</pre>
+
+Patients were followed for up to three visits (ignore the visits where <span class=sascode>visit=A</span> &mdash; which is a special missing value &mdash; for the moment), at each of which <span class=sascode>SBP</span> and <span class=sascode>WT</span>
+were collected. Note that both <span class=sascode>gender</span> and <span class=sascode>visit</span> variables are formatted numeric variables, as can be seen in <i>proc contents</i> output printed below.
+
+<pre class=ascii>
+                           Alphabetic List of Variables and Attributes
+
+                    #    Variable     Type    Len    Format      Label
+
+                    1    centre       Num       8
+                    3    gender       Num       8    GENDER.     Patient sex
+                    5    sbp          Num       8
+                    2    subjectno    Num       8
+                    4    visit        Num       8    VISITNO.
+                    6    wt           Num       8
+</pre>
+
+
+Now suppose you'd rather deal with a file with only one line per patient, where the miscellaneous measurements for
+<span class=sascode>SBP</span> and <span class=sascode>WT</span> are stored in variables <span class=sascode>SBP1, SBP2, SBP3, WT1, WT2</span> and <span class=sascode>WT3</span>.
+That can be easily done through a call to <span class=sasmacroname>%MultiTranspose</span> as follows:
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex1, out=out1, vars=sbp wt, by=centre subjectno, pivot=visit, library=work);
+</div>
+<br><br>
+
+which transposes the data and saves it to a file called <span class=sascode>out1</span>, which consists of the following observations:
+
+<pre class=ascii>
+          Obs    centre    subjectno    sbp1    wt1    sbp2     wt2    sbp3     wt3
+
+            1        1          1         120     75     125    75.5     120    75.7
+            2        1          2         140     70     145    73.0       .      .
+            3        2          1         155     90     150    90.8     155    91.2
+</pre>
+ 
+The variables found in the output data set presented above are labeled with their original labels, 
+augmented by the corresponding value for the <span class=argname>pivot</span> variable (<span class=sascode>visit</span>, in this case):
+ 
+<pre class=ascii>
+                          Alphabetic List of Variables and Attributes
+
+                        #    Variable     Type    Len    Label
+
+                        1    centre       Num       8
+                        3    sbp1         Num       8    sbp:: baseline
+                        5    sbp2         Num       8    sbp:: week 1
+                        7    sbp3         Num       8    sbp:: week 4
+                        2    subjectno    Num       8
+                        4    wt1          Num       8    wt:: baseline
+                        6    wt2          Num       8    wt:: week 1
+                        8    wt3          Num       8    wt:: week 4
+</pre>
+<br><br>
+
+
+<a name="ex1.1">
+<div class=sub>Example 1.1</div>
+
+In example above, <span class=sascode>SBP</span> and <span class=sascode>WT</span> values where the <span class=argname>pivot</span> variable <span class=sascode>visit</span>
+is missing (<span class=sascode>visit=.A</span> &mdash; where  <span class=sascode>.A</span> is a <a href="http://studysas.blogspot.com/2010/04/special-missing-values.html">special missing</a> value &mdash; were dropped;
+<span class=sasmacroname>%MultiTranspose</span> argument <span class=argname>dropMissingPivot</span> can be set to 0 (no) to avoid dropping them, as in code below.
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex1, out=out1_1, vars=sbp wt, by=centre subjectno, pivot=visit, dropMissingPivot=0, library=work);
+</div>
+<br><br>
+
+Note the presence of variable <span class=sascode>sbpA</span> and <span class=sascode>wtA</span> in resulting
+data set, presented below.
+
+<pre class=ascii>
+Obs    centre    subjectno      sbpA       wtA      sbp1    wt1    sbp2     wt2    sbp3     wt3
+
+ 1        1          1        121.667    75.4000     120     75     125    75.5     120    75.7
+ 2        1          2        142.500    71.5000     140     70     145    73.0       .      .
+ 3        2          1        153.333    90.6667     155     90     150    90.8     155    91.2
+</pre>
+ 
+These variables are also labeled properly, as can be seen from the <i>proc contents</i> output, below.
+ 
+ <pre class=ascii>
+                           Alphabetic List of Variables and Attributes
+
+                        #    Variable     Type    Len    Label
+
+                        1    centre       Num       8
+                        5    sbp1         Num       8    sbp:: baseline
+                        7    sbp2         Num       8    sbp:: week 1
+                        9    sbp3         Num       8    sbp:: week 4
+                        3    sbpA         Num       8    sbp:: visit = A
+                        2    subjectno    Num       8
+                        6    wt1          Num       8    wt:: baseline
+                        8    wt2          Num       8    wt:: week 1
+                       10    wt3          Num       8    wt:: week 4
+                        4    wtA          Num       8    wt:: visit = A
+ </pre>
+
+
+
+
+<a name="ex1.2">
+<div class=sub>Example 1.2</div>
+
+Note that in example 1 above, the variable <span class=sascode>gender</span> is not present in the output data set. 
+Since its values are the same for each data row corresponding to a given subject 
+(defined by <span class=sascode>centre</span> and <span class=sascode>subjectno</span>), its values can be linked to the resulting transposed data set through the <span class=argname>copy</span> argument.
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex1, out=out1_2, vars=sbp wt, by=centre subjectno, pivot=visit, copy=gender, library=work);
+</div>
+<br><br>
+
+The output produced by code above now includes <span class=sascode>gender</span>, as seen below. 
+
+<pre class=ascii>
+     Obs    centre    subjectno    sbp1    wt1    sbp2     wt2    sbp3     wt3    gender
+
+       1        1          1         120     75     125    75.5     120    75.7    female
+       2        1          2         140     70     145    73.0       .      .     male
+       3        2          1         155     90     150    90.8     155    91.2    female
+</pre>
+
+
+
+
+<br><br>
+
+<a name="ex2">
+<div class=sub>Example 2</div>
+
+As can be seen from example 1, it is the actual (numeric) value of the <span class=argname>pivot</span> variable that is used as a suffix in new transposed variable names, 
+not its value labels (or formatted values). For example, <span class=sascode>sbp1</span> and <span class=sascode>sbp2</span> were defined rather than 
+<span class=sascode>sbp_baseline</span> and <span class=sascode>sbp_week_1</span>.<br><br>
+The only exception to that rule, for the sake of clarity, is when the <span class=argname>pivot</span> variable is a date variable, in which case the formatted value (e.g. 31Dec2007) will be used rather than the actual numeric value <i>internally</i> used
+by SAS (the number of days elapsed since Jan 1, 1960). Blocks below present the original data set, the call to <span class=sasmacroname>%MultiTranspose</span> to
+transpose it, its transposed output data set and an excerpt of <i>proc contents</i> output.
+
+<pre class=ascii>
+                      Obs      ACCT         OBS_DT    HBAL_AMT    MBAL_AMT
+
+                        1    13607354    30SEP2007       5.57        5.57
+                        2    13607354    31OCT2007       5.57        5.57
+                        3    13607354    30NOV2007       5.57        5.57
+                        4    13607354    31DEC2007       5.57        5.57
+                        5    13607354    31JAN2008     402.72      402.72
+                        6    13873620    30SEP2007      15.00       15.00
+                        7    13873620    31OCT2007      15.00       15.00
+                        8    13873620    30NOV2007       0.00        0.00
+                        9    13873620    31DEC2007       0.00        0.00
+                       10    13873620    31JAN2008       0.00        0.00
+</pre>
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex2, out=out2, by=acct, pivot=OBS_DT, vars=HBAL_AMT MBAL_AMT, library=work);
+</div>
+<br><br>
+
+<pre class=ascii>
+                    H       M       H       M       H      M      H      M         H        M
+                    B       B       B       B       B      B      B      B         B        B
+                    A       A       A       A       A      A      A      A         A        A
+                    L       L       L       L       L      L      L      L         L        L
+                    _       _       _       _       _      _      _      _         _        _
+                    A       A       A       A       A      A      A      A         A        A
+                    M       M       M       M       M      M      M      M         M        M
+                    T       T       T       T       T      T      T      T         T        T
+                    3       3       3       3       3      3      3      3         3        3
+                    0       0       1       1       0      0      1      1         1        1
+                    S       S       O       O       N      N      D      D         J        J
+                    E       E       C       C       O      O      E      E         A        A
+                    P       P       T       T       V      V      C      C         N        N
+           a        2       2       2       2       2      2      2      2         2        2
+   O       c        0       0       0       0       0      0      0      0         0        0
+   b       c        0       0       0       0       0      0      0      0         0        0
+   s       t        7       7       7       7       7      7      7      7         8        8
+
+   1   13607354    5.57    5.57    5.57    5.57   5.57   5.57   5.57   5.57   402.72   402.72
+   2   13873620   15.00   15.00   15.00   15.00   0.00   0.00   0.00   0.00     0.00     0.00
+
+
+                           Alphabetic List of Variables and Attributes
+
+                  #    Variable             Type    Len    Label
+
+                  6    HBAL_AMT30NOV2007    Num       8    HBAL_AMT:: 30NOV2007
+                  2    HBAL_AMT30SEP2007    Num       8    HBAL_AMT:: 30SEP2007
+                  8    HBAL_AMT31DEC2007    Num       8    HBAL_AMT:: 31DEC2007
+                 10    HBAL_AMT31JAN2008    Num       8    HBAL_AMT:: 31JAN2008
+                  4    HBAL_AMT31OCT2007    Num       8    HBAL_AMT:: 31OCT2007
+                  7    MBAL_AMT30NOV2007    Num       8    MBAL_AMT:: 30NOV2007
+                  3    MBAL_AMT30SEP2007    Num       8    MBAL_AMT:: 30SEP2007
+                  9    MBAL_AMT31DEC2007    Num       8    MBAL_AMT:: 31DEC2007
+                 11    MBAL_AMT31JAN2008    Num       8    MBAL_AMT:: 31JAN2008
+                  5    MBAL_AMT31OCT2007    Num       8    MBAL_AMT:: 31OCT2007
+                  1    acct                 Num       8
+</pre>
+
+<br><br>
+
+<a name="ex3">
+<div class=sub>Example 3</div>
+As a last example, let's consider a data set where the <span class=argname>pivot</span> variable <span class=sascode>flavor</span> is a character string variable.
+
+<pre class=ascii>
+                            Obs    item    flavor    price    qty
+
+                              1       1       v         17     102
+                              2       1       c         19      95
+                              3       2       v         25      32
+                              4       2       c         28      35
+</pre>
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex3, out=out3, by=item, vars=price qty, pivot=flavor, library=work);
+</div>
+<br><br>
+
+Using the actual character values of the <span class=argname>pivot</span> variable as suffixes in the new transposed variable names
+leads to variable names that are easy to interpret (see below).  
+
+<pre class=ascii>
+                        Obs    item    pricec    qtyc    pricev    qtyv
+
+                         1       1       19       95       17       102
+                         2       2       28       35       25        32
+</pre>
+
+However, in the case where the <span class=argname>pivot</span> variable would
+take long string values, the default transposed variable names could be lengthy and less attractive in the eventuality where you would need
+to often refer to these variable names in subsequent SAS code. The option <span class=argname>UseNumericExt</span> proves useful in that case,
+and referring to the output of <i>proc contents</i> makes the transposed variable names easy to interpret. 
+
+<br><br>
+<div class=pgm>
+%MultiTranspose(data=ex3, out=out3num, by=item, vars=price qty, pivot=flavor, UseNumericExt=1 library=work);
+</div>
+<br><br>
+
+<pre class=ascii>
+                        Obs    item    price1    qty1    price2    qty2
+
+                         1       1       19       95       17       102
+                         2       2       28       35       25        32
+                         
+                         
+                           Alphabetic List of Variables and Attributes
+
+                       #    Variable    Type    Len    Label
+
+                       1    item        Num       8
+                       2    price1      Num       8    price:: flavor = c
+                       4    price2      Num       8    price:: flavor = v
+                       3    qty1        Num       8    qty:: flavor = c
+                       5    qty2        Num       8    qty:: flavor = v       
+</pre>
+
+
+<a name="sascode"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="SasMacros/MultiTranspose.zip">One-click download</a>
+</div>
+<div class=pgm>
+%macro MultiTranspose(out=, data=, vars=, by=, pivot=, copy=, dropMissingPivot=1, UseNumericExt=0, library=library);<br>
+&#160;&#160;&#160;&#160;%local dsCandidateVarnames dsContents dsCopiedVars dsLocalOut dsNewVars dsNewVarsFreq dsPivotLabels dsPivotLabelsHigh dsPivotLabelsLow dsPivotLabelsOther dsPivotObsValues dsRowvarsFreq dsTmp dsTmpOut dsTransposedVars dsXtraVars;<br>
+<br>
+&#160;&#160;&#160;&#160;%local anyfmtHigh anyfmtLow anyfmtOther anymissinglabel anymissingPivotlabel anyrepeatedvarname byfmt bylbl byvar datefmt;<br>
+&#160;&#160;&#160;&#160;%local formatl formattedPivot i llabel lmax lPivotlabel lPivotmylabel;<br>
+&#160;&#160;&#160;&#160;%local nbyvars ncandidatevars ncopy newlbl newvar newvars nNewvars npivot npivotvalues nvars;<br>
+&#160;&#160;&#160;&#160;%local pivotfmt pivotIsDate pivotIsNumeric pivotvalue s tmp tmpvar;<br>
+&#160;&#160;&#160;&#160;%local v var vars xnewvars xtravar ynewvars;<br>
+<br>
+&#160;&#160;&#160;&#160;/*<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;PIVOT names the column in the input file whose row values provide the column names in the output file.<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;There should only be one variable in the PIVOT statement. Also, the column used for the PIVOT statement cannot have<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;any duplicate values (for a given set of values taken by variables listed in BY)<br>
+&#160;&#160;&#160;&#160;*/;<br>
+<br>
+&#160;&#160;&#160;&#160;* Check that mandatory arguments were filled;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(out)) eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] output file must be specified (through out= argument);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(data)) eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] input data set must be specified (through data= argument);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(vars)) eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] list of variables to be transposed must be specified (through vars= argument);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(by)) eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] *by* variables must be specified (through by= argument);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(pivot)) eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] pivot variable must be specified (through pivot= argument);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%let nbyvars&#160;&#160;&#160;&#160;= %MultiTransposeNTokens(&amp;by);<br>
+&#160;&#160;&#160;&#160;%let npivot&#160;&#160;&#160;&#160;= %MultiTransposeNTokens(&amp;pivot);<br>
+<br>
+&#160;&#160;&#160;&#160;* ~~~ First make sure that no duplicate (in variables by * pivot) is found in source data set ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;npivot ne 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] one and only one variable name must be given in *pivot* argument;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsCandidateVarnames = %MultiTransposeNewDatasetName(candidatevarnames);<br>
+&#160;&#160;&#160;&#160;%let ncandidatevars = %sysevalf(&amp;nbyvars+2);<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsCandidateVarnames;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;retain found 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length vname $ 32;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do i = 1 to &amp;ncandidatevars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;vname = cats("_", i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if vname not in (%MultiTransposeDQList(&amp;by &amp;pivot)) then do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not found then output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;found = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select strip(vname) into :tmpvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsCandidateVarnames;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsRowvarsFreq = %MultiTransposeNewDatasetName(rowvarsfreq);<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsRowvarsFreq as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select %MultiTransposeCommasep(&amp;by &amp;pivot), sum(1) as &amp;tmpvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;dropMissingPivot eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where not missing(&amp;pivot)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group %MultiTransposeCommasep(&amp;by &amp;pivot)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(&amp;tmpvar) into :tmp<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsRowvarsFreq;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCandidateVarnames &amp;dsRowvarsFreq; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;tmp gt 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] duplicates were found in data &amp;data in variables (&amp;by) * &amp;pivot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;* ~~~ Now make sure that no duplicate (in by * copy) is found in source data set ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;<br>
+<br>
+&#160;&#160;&#160;&#160;%let ncopy = %MultiTransposeNTokens(&amp;copy);<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;ncopy %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsCopiedVars = %MultiTransposeNewDatasetName(copiedvars);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsCopiedVars as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select distinct %MultiTransposeCommasep(&amp;by &amp;copy)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;data;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsRowvarsFreq as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select %MultiTransposeCommasep(&amp;by), sum(1) as &amp;tmpvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsCopiedVars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group %MultiTransposeCommasep(&amp;by);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(&amp;tmpvar) into :tmp<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsRowvarsFreq;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsRowvarsFreq; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;tmp gt 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCopiedVars; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] some copy variables (&amp;copy) are not uniquely defined for some output data rows (defined by &amp;by);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto Farewell;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;<br>
+<br>
+&#160;&#160;&#160;&#160;* Create &amp;out, just to make sure it exists and its name is not recycled;<br>
+&#160;&#160;&#160;&#160;data &amp;out; stop; run;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsContents = %MultiTransposeNewDatasetName(contents);<br>
+&#160;&#160;&#160;&#160;proc contents data=&amp;data noprint out=&amp;dsContents (keep=name label type format formatl); run;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsTmp = %MultiTransposeNewDatasetName(tmp);<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select compress(ifc(substr(format,1,1) eq "$", substr(format,2), format)), type eq 1, formatl, <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;format in ("DATE", "DDMMYY", "DDMMYYB", "DDMMYYC", "DDMMYYD", "DDMMYYN", "DDMMYYP", "DDMMYYS", "EURDFDE", "EURDFMY", "EURDFDMY", "EURDFWKX", <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"JULIAN", "MINGUO", "MMDDYY", "MMDDYYB", "MMDDYYC", "MMDDYYD", "MMDDYYN", "MMDDYYP", "MMDDYYS", "MMYY", "MMYYC", "MMYYD", "MMYYN", "MMYYP", "MMYYS", <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"MONYY", "NENGO", "PDJULG", "PDJULI", "WEEKDATE", "WORDDATE", "WORDDATX", <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"YYMM", "YYMMC", "YYMMDD", "YYMMP", "YYMMS", "YYMMN", "YYMMDD", "YYMON", "YYQ", "YYQC", "YYQD", "YYQP", "YYQSYYQN", "YYQR", "YYQRC", "YYQRD", "YYQRP", "YYQRS")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;into :pivotfmt, :pivotIsNumeric, :formatl, :pivotIsDate<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContents<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where upcase(name) eq upcase("&amp;pivot");<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;pivotIsDate %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;formatl eq 0 %then %let datefmt=&amp;pivotfmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %let datefmt=%sysfunc(compress(&amp;pivotfmt.&amp;formatl));<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Pivot values */;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsPivotObsValues = %MultiTransposeNewDatasetName(obspivots);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotObsValues as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select distinct(&amp;pivot) as PivotValue<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;dropMissingPivot %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where not missing(&amp;pivot)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;order &amp;pivot;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;PivotIndex = _N_;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select N(PivotIndex) into :npivotvalues<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Vars to transpose */;<br>
+<br>
+&#160;&#160;&#160;&#160;%let nvars = %MultiTransposeNTokens(&amp;vars);<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsTransposedVars = %MultiTransposeNewDatasetName(transposedvars);<br>
+&#160;&#160;&#160;&#160;data &amp;dsTransposedVars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length name $32;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do v = 1 %to &amp;nvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let var = %scan(&amp;vars, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;name = "&amp;var";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsNewVars = %MultiTransposeNewDatasetName(newvars);<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;pivotIsNumeric %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsNewVars as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select v.name, upcase(v.name) as ucname, s.PivotValue, s.PivotIndex,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;when s.PivotValue eq . then&#160;&#160;&#160;&#160;cats(v.name, "00")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;pivotIsDate %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else cats(v.name, compress(put(s.PivotValue, &amp;datefmt..)))              <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else cats(v.name, s.PivotValue)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end as NewVar length=200<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTransposedVars as v, &amp;dsPivotObsValues as s;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;UseNumericExt %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsNewVars as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select v.name, upcase(v.name) as ucname, s.PivotValue, s.PivotIndex, cats(v.name, s.PivotIndex) as NewVar length=200<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTransposedVars as v, &amp;dsPivotObsValues as s;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsNewVars as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select v.name, upcase(v.name) as ucname, s.PivotValue, s.PivotIndex, tranwrd(compbl(cats(v.name, s.PivotValue)), " ", "_") as NewVar length=200<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTransposedVars as v, &amp;dsPivotObsValues as s;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsNewVars (drop=j);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsNewVars;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;j = notalnum(NewVar);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do while(j gt 0 and j le length(NewVar));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;j gt 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then NewVar = substr(NewVar, 1, j-1) || "_" || substr(NewVar, j+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;&#160;&#160;&#160;if j eq 1&#160;&#160;&#160;&#160;then NewVar = "_" || substr(NewVar, 2);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;j = notalnum(NewVar, j+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ucnewvar = upcase(NewVar);<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsXtraVars = %MultiTransposeNewDatasetName(xtravars);<br>
+&#160;&#160;&#160;&#160;data &amp;dsXtraVars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length ucnewvar $ 200;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nbyvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let xtravar = %scan(&amp;by, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ucnewvar = strip(upcase("&amp;xtravar"));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;ncopy;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let xtravar = %scan(&amp;copy, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ucnewvar = strip(upcase("&amp;xtravar"));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsNewVarsFreq = %MultiTransposeNewDatasetName(newvarsfreq);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsNewVarsFreq as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select a.ucnewvar, N(a.ucnewvar) as f<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select ucnewvar from &amp;dsNewVars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;outer union corresponding<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select ucnewvar from &amp;dsXtraVars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;) as a<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group a.ucnewvar;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsXtraVars; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select ucnewvar, N(ucnewvar) gt 0 into :multipdefnvars separated by ", ", :anyrepeatedvarname<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsNewVarsFreq<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where f gt 1;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;anyrepeatedvarname %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [MultiTranspose] given the variables to transpose and the values taken by variable &amp;pivot, <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;some variables created in transposed output data set (&amp;multipdefnvars) would have ambiguous meanings: <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;please rename some of the variables to transpose prior to calling MultiTranspose again in order to avoid these ambiguities.; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;out; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto ByeBye;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Pivot fmt values */;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsPivotLabels = %MultiTransposeNewDatasetName(pivotlabels);<br>
+&#160;&#160;&#160;&#160;%let formattedPivot = 0;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(&amp;pivotfmt) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;pivotIsDate %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let formattedPivot = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let anyfmtHigh = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let anyfmtLow = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let anyfmtOther = 0;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabels as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select PivotValue as start, PivotValue as end, compress(put(PivotValue, &amp;datefmt..)) as Label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %if %upcase("&amp;library") eq "WORK" or %sysfunc(exist(&amp;library..formats)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let formattedPivot = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc format library=&amp;library cntlout=&amp;dsTmp; run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsTmp;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if upcase(fmtname) ne upcase("&amp;pivotfmt") then delete;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;High = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Low = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Other = 0;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;upcase(HLO) eq "L"&#160;&#160;&#160;&#160;then do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;start&#160;&#160;&#160;&#160;= "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Low = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else if&#160;&#160;&#160;&#160;upcase(HLO) eq "H"&#160;&#160;&#160;&#160;then do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;&#160;&#160;= "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;High = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else if&#160;&#160;&#160;&#160;upcase(HLO) eq "O"&#160;&#160;&#160;&#160;then do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;start = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;&#160;&#160;= "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Other = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run; <br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;pivotIsNumeric %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabels as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select input(start, best32.) as start, input(end, best32.) as end, Label, High, Low, Other<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabels as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select start, end, Label, High, Low, Other<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(High), max(Low), max(Other) into :anyfmtHigh, :anyfmtLow, :anyfmtOther<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotLabels;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtHigh %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsPivotLabelsHigh = %MultiTransposeNewDatasetName(pivotlabelshigh);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabelsHigh as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select start, Label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotLabels<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where High eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;delete from &amp;dsPivotLabels where High eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtLow %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsPivotLabelsLow = %MultiTransposeNewDatasetName(pivotlabelslow);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabelsLow as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select end, Label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotLabels<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where Low eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;delete from &amp;dsPivotLabels where Low eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtOther %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsPivotLabelsOther = %MultiTransposeNewDatasetName(pivotlabelsother);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabelsOther as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select Label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotLabels<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where Other eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;delete from &amp;dsPivotLabels where Other eq 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsTmp; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsPivotLabels as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select PivotValue as start, PivotValue as end, "" as Label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Transpose data, one pivot-value at a time */;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsLocalOut&#160;&#160;&#160;&#160;= %MultiTransposeNewDatasetName(localout);<br>
+&#160;&#160;&#160;&#160;%let dsTmpOut&#160;&#160;&#160;&#160;= %MultiTransposeNewDatasetName(tmpout);<br>
+<br>
+&#160;&#160;&#160;&#160;%do s = 1 %to &amp;npivotvalues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select name, NewVar, NewVar into :vars separated by ' ', :newvars separated by ' ', :ynewvars separated by ", y."<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsNewVars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where PivotIndex eq &amp;s;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select %MultiTransposeCommasep4sql(d, &amp;by)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do v = 1 %to &amp;nvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let var = %scan(&amp;vars, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newvar = %scan(&amp;newvars, &amp;v);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;, d.&amp;var as &amp;newvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;data as d, &amp;dsPivotObsValues as s<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where d.&amp;pivot eq s.PivotValue and s.PivotIndex eq &amp;s;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;s eq 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; change &amp;dsTmp=&amp;dsLocalOut; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let xnewvars=&amp;newvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmpOut as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nbyvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let byvar = %scan(&amp;by, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coalesce(x.&amp;byvar, y.&amp;byvar) as &amp;byvar,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%MultiTransposeCommasep4sql(x, &amp;xnewvars), y.&amp;ynewvars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsLocalOut as x<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;full join &amp;dsTmp as y<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nbyvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let byvar = %scan(&amp;by, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;i gt 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;x.&amp;byvar eq y.&amp;byvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsLocalOut; change &amp;dsTmpOut=&amp;dsLocalOut; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let xnewvars=&amp;xnewvars &amp;newvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;ncopy eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;out; change &amp;dsLocalOut=&amp;out; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;out as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select t.*, %MultiTransposeCommasep4sql(c, &amp;copy)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsLocalOut as t, &amp;dsCopiedVars as c<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nbyvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let byvar = %scan(&amp;by, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;i gt 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;t.&amp;byvar eq c.&amp;byvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCopiedVars &amp;dsLocalOut; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Get variable labels */;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select t.*, c.label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTransposedVars as t, &amp;dsContents as c<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where upcase(t.name) eq upcase(c.name);<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(length(strip(label))), max(length(strip(name))), max(missing(label)) into :llabel, :lmax, :anymissinglabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;anymissinglabel and &amp;lmax gt &amp;llabel %then %let llabel = &amp;lmax;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTransposedVars as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select *, coalesce(strip(label), strip(name)) as newvarLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsTmp; quit;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;* If  pivot is a formatted variable, get the formats for each of its values, else define a label as "pivot = Value";<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;formattedPivot %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select s.PivotValue, s.PivotIndex, l.Label as PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues as s<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left join &amp;dsPivotLabels as l<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on (missing(s.PivotValue) and s.PivotValue eq l.start) <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;or (not missing(s.PivotValue) and s.PivotValue ge l.start and s.PivotValue le l.end);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtHigh %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotObsValues; change &amp;dsTmp=&amp;dsPivotObsValues; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select s.PivotValue, s.PivotIndex, coalesce(s.Label, x.Label) as PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues as s<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left join &amp;dsPivotLabelsHigh as x<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on s.PivotValue ge x.start;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotLabelsHigh; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtLow %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotObsValues; change &amp;dsTmp=&amp;dsPivotObsValues; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select s.PivotValue, s.PivotIndex, coalesce(s.Label, x.Label) as PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues as s<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left join &amp;dsPivotLabelsLow as x<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on s.PivotValue le x.end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotLabelsLow; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;anyfmtOther %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotObsValues; change &amp;dsTmp=&amp;dsPivotObsValues; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select s.PivotValue, s.PivotIndex, coalesce(s.Label, x.Label) as PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues as s, &amp;dsPivotLabelsOther as x;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotLabelsOther; quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select PivotValue, PivotIndex, "" as PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotObsValues; change &amp;dsTmp=&amp;dsPivotObsValues; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select N(PivotIndex) gt 0 into :anymissingpivotlabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where missing(PivotLabel);<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;anymissingpivotlabel %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(length(PivotLabel)) into :lpivotlabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;pivotIsNumeric %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(length(strip(put(PivotValue, best32.)))) into :lpivotmylabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select max(length(PivotValue)) into :lpivotmylabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let lpivotmylabel = %sysevalf(3+&amp;lpivotmylabel+%length(&amp;pivot));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;lpivotmylabel gt &amp;lpivotlabel %then %let lpivotlabel = &amp;lpivotmylabel;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;pivotIsNumeric %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select PivotValue, PivotIndex, coalesce(PivotLabel, catx(" = ", strip("&amp;pivot"), strip(put(PivotValue, best32.)))) as PivotLabel length=&amp;lpivotlabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select PivotValue, PivotIndex, coalesce(PivotLabel, catx(" = ", strip("&amp;pivot"), strip(PivotValue))) as PivotLabel length=&amp;lpivotlabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsPivotObsValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotObsValues; change &amp;dsTmp=&amp;dsPivotObsValues; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;* Give new labels to new (transposed) variables;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select n.newvar, t.newvarlabel, s.PivotLabel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsNewVars as n, &amp;dsTransposedVars as t, &amp;dsPivotObsValues as s<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where n.name eq t.name and n.PivotIndex eq s.PivotIndex;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsNewVars; change &amp;dsTmp=&amp;dsNewVars; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select NewVar, N(NewVar) into :newvars separated by ' ', :nNewvars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsNewVars;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nNewvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newvar = %scan(&amp;newvars, &amp;i);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select catx(":: ", tranwrd(newvarLabel, '"', '""'), tranwrd(PivotLabel, '"', '""')) into :newlbl<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsNewVars<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where NewVar eq "&amp;newvar";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;modify &amp;out;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;label &amp;newvar = "&amp;newlbl";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit; <br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;* Put back format on by variables;<br>
+<br>
+&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nbyvars;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let byvar = %scan(&amp;by, &amp;i);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let byfmt=;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let bylbl=;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ifc(anyalnum(format) or formatl gt 0, cats(format, ifc(formatl gt 0, strip(put(formatl, 4.)), ""), "."), ""), <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tranwrd(label, '"', '""')<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;into :byfmt, :bylbl<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsContents <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where lowcase(name) eq lowcase("&amp;byvar");<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;byfmt) or %length(&amp;bylbl) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;modify &amp;out;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;bylbl) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;label &amp;byvar = "&amp;bylbl";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;byfmt) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;format &amp;byvar &amp;byfmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsPivotLabels; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%ByeBye:<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsContents &amp;dsNewVars &amp;dsNewVarsFreq &amp;dsPivotObsValues &amp;dsTransposedVars; quit;<br>
+&#160;&#160;&#160;&#160;%Farewell:<br>
+%mend;<br>
+<br>
+<br>
+%macro MultiTransposeCommasep(lov);<br>
+&#160;&#160;&#160;   %sysfunc(tranwrd(%Qsysfunc(compbl(%sysfunc(strip(&amp;lov)))), %str( ), %str(, )))<br>
+%mend;<br>
+<br>
+<br>
+%macro MultiTransposeCommasep4sql(datasetindex, lov);<br>
+&#160;&#160;&#160;&#160;&amp;datasetindex..%sysfunc(tranwrd(%Qsysfunc(compbl(%sysfunc(strip(&amp;lov)))), %str( ), %str(, &amp;datasetindex..)))<br>
+%mend;<br>
+<br>
+<br>
+%macro MultiTransposeDQList(list);<br>
+&#160;&#160;&#160;&#160;"%sysfunc(tranwrd(%sysfunc(compbl(&amp;list)),%quote( ),%quote(", ")))"<br>
+%mend;<br>
+<br>
+<br>
+%macro MultiTransposeNewDatasetName(proposalname);<br>
+&#160;&#160;&#160;&#160;%*Finds the first unused dataset named *datasetname*, adding a leading underscore and a numeric suffix as large as necessary to make it unique!;<br>
+&#160;&#160;&#160;&#160;%local i newdatasetname;<br>
+&#160;&#160;&#160;&#160;%let proposalname=%sysfunc(compress(&amp;proposalname));<br>
+&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname;<br>
+<br>
+&#160;&#160;&#160;&#160;%do %while(%sysfunc(exist(&amp;newdatasetname)));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let i = %eval(&amp;i+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname&amp;i;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;newdatasetname<br>
+%mend;<br>
+<br>
+<br>
+%macro MultiTransposeNTokens(list);<br>
+&#160;&#160;&#160;&#160;%if %length(&amp;list) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%eval(1 + %length(%sysfunc(compbl(&amp;list))) - %length(%sysfunc(compress(&amp;list))))<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0<br>
+&#160;&#160;&#160;&#160;%end;<br>
+%mend;<br>
+</div>
+<br>
+
+
+<a name="comparison"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>A comparison with %MAKEWIDE</div>
+<br>
+A SAS macro called %MAKEWIDE which basically does the same as <span class=sasmacroname>%MultiTranspose</span> 
+already exists and is  <a href="http://support.sas.com/kb/32/122.html">available from SAS website</a>;
+however, we think that the macro <span class=sasmacroname>%MultiTranspose</span> presents a few advantages over the former, namely:
+<br><br>
+<ul>
+<li>variable labels are NOT lost when transposed;</li>
+<li>data need not be sorted beforehand;</li>
+<li>observations with missing values in variable <span class=argname>pivot</span> may or may not be dropped before transposing data (see use of argument <span class=argname>dropMissingPivot</span>, <a href="#ex1.1">example 1.1</a>);
+<li>%MAKEWIDE uses <span class=argname>pivot</span> value labels as suffixes in new variable names suffixes when it is formatted, which may result in unwisely long variable names in the output data set
+(e.g. if <span class=argname>pivot</span> takes value 7 for which the value label is <i>a long sentence</i>, then a new transposed variable name could be, for example, <span class=sascode>varname_a_long_sentence</span>; <span class=sasmacroname>%MultiTranspose</span> would more simply name the corresponding variable <span class=sascode>varname7</span>).
+</ul>
+
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<a href="SasMacros/MultiTranspose.zip">Download <span class=sasmacroname>%MultiTranspose</span> 1.0.3 now</a>.
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/MultiTranspose.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:58 GMT -->
+</html>

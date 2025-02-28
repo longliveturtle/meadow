@@ -1,0 +1,513 @@
+#################################################################
+# COPYRIGHT
+#
+# (c) Copyright Lawrence Joseph, 1994
+#
+# tt1, tt2, and tt3 are programs written by Lawrence Joseph,
+# at the Division of Clinical Epidemiology, Department of Medicine,
+# Montreal General Hospital.  These programs are an implementation of the
+# manuscript Bayesian Estimation of Disease Prevalence and the parameters
+# of Diagnostic Tests in the Absence of a Gold Standard, by L. Joseph, T.
+# Gyorkos, and L. Coupal, American Journal of Epidemiology,
+# 1995;141:263-72.
+#
+# You are free to use these programs, for non-commercial purposes only,
+# under two conditions:
+#
+# (1) This note is not to be removed;
+# (2) Publications using tt1, tt2, or tt3 results should reference the
+#     manuscript mentioned above.
+#
+# The manuscript mentioned above should be read carefully prior to using
+# the program.
+#
+# This file contains the program tt3.gibbs and all required subroutines
+# to calculate Bayesian posterior distributions via Gibbs sampling for
+# the prevalence of a disease, and  sensitivity, specificity, positive
+# and negative predictive values for each of three tests for that disease,
+# in the absence of a gold standard.  The program is writtem in S-PLUS
+# version 3.1.  In order to run the program, type:
+#
+#
+# tt3.out<-tt3.gibbs(a, b, c, d, e, f, g, h, y1start, y2start, y3start,
+# y4start, y5start, y6start, y7start, y8start, sens1start, spec1start,
+# sens2start, spec2start, sens3start, spec3start, prevstart, alphaprev,
+# betaprev, alphasens1, betasens1, alphaspec1, betaspec1, alphasens2,
+# betasens2, alphaspec2, betaspec2, alphasens3, betasens3, alphaspec3,
+# betaspec3, size).
+#
+# We can combine different runs (continued from the previous or not) by typing
+#
+# tt3.out3<-tt3.comb(tt3.out1, tt3.out2, overlap)
+#
+# The output is summarized (using quantiles for each variable) by typing
+#
+# tt3.sum(tt3.out3, throwaway, skip)
+#
+# The parameters are defined as follows:
+#
+# a, b, c, d, e, f, g, h = see the table of data below
+#
+# y(12345678)start = starting value for the unobserved number of true
+#                 positives in a, b, c, d, e, f, g, and h respectively.
+#
+# sens(123)start = starting value for the sensitivity of the test
+#
+# spec(123)start = starting value for the specificity of the test
+#
+# prevstart = starting value for the prevalence in the population
+#
+# alphaprev = first coefficient of the Beta prior distribution for the
+#              prevalence
+#
+# betaprev = second coefficient of the Beta prior distribution for the
+#             prevalence
+#
+# alphasens(123) = first coefficient of the Beta prior distribution for the
+#                  sensitivity
+#
+# betasens(123) = second coefficient of the Beta prior distribution for the
+#                 sensitivity
+#
+# alphaspec(123) = first coefficient of the Beta prior distribution for the
+#                  specificity
+#
+# betaspec(123) = second coefficient of the Beta prior distribution for the
+# specificity
+#
+# size = total number of Gibbs iterations
+#
+# throwaway = number of Gibbs iterations used for assessing convergence
+#
+# skip = step size for Gibbs iterates.  skip = 1 means use all
+#         iterations, skip = 2 means use every second iterate, etc.
+#
+# overlap = Use overlap = 1 if runs are not continuous to each other, or
+#            Use overlap = 2 if they are consecutive.  Can also be used for
+#            throwing away from the second of two independent runs.
+#----------------------------------------------------------------
+# The general setup is that we observe the entirety of the following
+# table:
+#
+#   Test 1  |  Test 2  |  Test 3  |  Number of Subjects
+#------------------------------------------------------
+#     +     |    +     |    +     |        a
+#     +     |    +     |    -     |        b
+#     +     |    -     |    +     |        c
+#     +     |    -     |    -     |        d
+#     -     |    +     |    +     |        e
+#     -     |    +     |    -     |        f
+#     -     |    -     |    +     |        g
+#     -     |    -     |    -     |        h
+#
+#
+# However, there are latent data y1, y2, y3, y4, y5, y6, y7, and y8
+# which represent the unobserved number of true positives in each of the
+# above cells, a, b, c, d, e, f, g, and h, respectively.
+#
+##############################################################################
+ tt3.y1 <-
+function(a, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(a == 0) {
+                return(0)
+        }
+        p1 <- prev * sens1 * sens2 * sens3
+        p2 <- (1 - prev) * (1 - spec1) * (1 - spec2) * (1 - spec3)
+        p <- p1/(p1 + p2)
+        nexty1 <- rbinom(1, a, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(a)
+        }
+        return(nexty1)
+}
+ tt3.y2 <-
+function(b, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(b == 0) {
+                return(0)
+        }
+        p1 <- prev * sens1 * sens2 * (1 - sens3)
+        p2 <- (1 - prev) * (1 - spec1) * (1 - spec2) * spec3
+        p <- p1/(p1 + p2)
+        nexty2 <- rbinom(1, b, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(b)
+        }
+        return(nexty2)
+}
+ tt3.y3 <-
+function(c, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(c == 0) {
+                return(0)
+        }
+        p1 <- prev * sens1 * (1 - sens2) * sens3
+        p2 <- (1 - prev) * (1 - spec1) * spec2 * (1 - spec3)
+        p <- p1/(p1 + p2)
+        nexty3 <- rbinom(1, c, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(c)
+        }
+        return(nexty3)
+}
+ tt3.y4 <-
+function(d, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(d == 0) {
+                return(0)
+        }
+        p1 <- prev * sens1 * (1 - sens2) * (1 - sens3)
+        p2 <- (1 - prev) * (1 - spec1) * spec2 * spec3
+        p <- p1/(p1 + p2)
+        nexty4 <- rbinom(1, d, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(d)
+        }
+        return(nexty4)
+}
+ tt3.y5 <-
+function(e, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(e == 0) {
+                return(0)
+        }
+        p1 <- prev * (1 - sens1) * sens2 * sens3
+        p2 <- (1 - prev) * spec1 * (1 - spec2) * (1 - spec3)
+        p <- p1/(p1 + p2)
+        nexty5 <- rbinom(1, e, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(e)
+        }
+        return(nexty5)
+}
+ tt3.y6 <-
+function(f, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(f == 0) {
+                return(0)
+        }
+        p1 <- prev * (1 - sens1) * sens2 * (1 - sens3)
+        p2 <- (1 - prev) * spec1 * (1 - spec2) * spec3
+        p <- p1/(p1 + p2)
+        nexty6 <- rbinom(1, f, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(f)
+        }
+        return(nexty6)
+}
+ tt3.y7 <-
+function(g, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(g == 0) {
+                return(0)
+        }
+        p1 <- prev * (1 - sens1) * (1 - sens2) * sens3
+        p2 <- (1 - prev) * spec1 * spec2 * (1 - spec3)
+        p <- p1/(p1 + p2)
+        nexty7 <- rbinom(1, g, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(g)
+        }
+        return(nexty7)
+}
+ tt3.y8 <-
+function(h, prev, sens1, spec1, sens2, spec2, sens3, spec3)
+{       if(h == 0) {
+                return(0)
+        }
+        p1 <- prev * (1 - sens1) * (1 - sens2) * (1 - sens3)
+        p2 <- (1 - prev) * spec1 * spec2 * spec3
+        p <- p1/(p1 + p2)
+        nexty8 <- rbinom(1, h, p)
+        if(p == 0) {
+                return(0)
+        }
+        if(p == 1) {
+                return(h)
+        }
+        return(nexty8)
+}
+ tt3.prev <-
+function(a, b, c, d, e, f, g, h, y1, y2, y3, y4, y5, y6, y7, y8, alphaprev,
+        betaprev)
+{
+        nextprev <- rbeta(1, y1 + y2 + y3 + y4 + y5 + y6 + y7 + y8 + alphaprev,
+                a + b + c + d + e + f + g + h - (y1 + y2 + y3 + y4 + y5 + y6 +
+                y7 + y8) + betaprev)
+        return(nextprev)
+}
+ tt3.sens1 <-
+function(y1, y2, y3, y4, y5, y6, y7, y8, alphasens1, betasens1)
+{
+        nextsens1 <- rbeta(1, y1 + y2 + y3 + y4 + alphasens1, y5 + y6 + y7 + y8 +
+                betasens1)
+        return(nextsens1)
+}
+ tt3.sens2 <-
+function(y1, y2, y3, y4, y5, y6, y7, y8, alphasens2, betasens2)
+{
+        nextsens2 <- rbeta(1, y1 + y2 + y5 + y6 + alphasens2, y3 + y4 + y7 + y8 +
+                betasens2)
+        return(nextsens2)
+}
+ tt3.sens3 <-
+function(y1, y2, y3, y4, y5, y6, y7, y8, alphasens3, betasens3)
+{
+        nextsens3 <- rbeta(1, y1 + y3 + y5 + y7 + alphasens3, y2 + y4 + y6 + y8 +
+                betasens3)
+        return(nextsens3)
+}
+ tt3.spec1 <-
+function(a, b, c, d, e, f, g, h, y1, y2, y3, y4, y5, y6, y7, y8, alphaspec1,
+        betaspec1)
+{
+        nextspec1 <- rbeta(1, e + f + g + h - (y5 + y6 + y7 + y8) + alphaspec1,
+                a + b + c + d - (y1 + y2 + y3 + y4) + betaspec1)
+        return(nextspec1)
+}
+ tt3.spec2 <-
+function(a, b, c, d, e, f, g, h, y1, y2, y3, y4, y5, y6, y7, y8, alphaspec2,
+        betaspec2)
+{
+        nextspec2 <- rbeta(1, c + d + g + h - (y3 + y4 + y7 + y8) + alphaspec2,
+                a + b + e + f - (y1 + y2 + y5 + y6) + betaspec2)
+        return(nextspec2)
+}
+ tt3.spec3 <-
+function(a, b, c, d, e, f, g, h, y1, y2, y3, y4, y5, y6, y7, y8, alphaspec3,
+        betaspec3)
+{
+        nextspec3 <- rbeta(1, b + d + f + h - (y2 + y4 + y6 + y8) + alphaspec3,
+                a + c + e + g - (y1 + y3 + y5 + y7) + betaspec3)
+        return(nextspec3)
+}
+ tt3.gibbs <-
+function(a, b, c, d, e, f, g, h, y1start, y2start, y3start, y4start, y5start,
+        y6start, y7start, y8start, sens1start, spec1start, sens2start,
+        spec2start, sens3start, spec3start, prevstart, alphaprev, betaprev,
+        alphasens1, betasens1, alphaspec1, betaspec1, alphasens2, betasens2,
+        alphaspec2, betaspec2, alphasens3, betasens3, alphaspec3, betaspec3,
+        size)
+{
+        y1.samp <- rep(-1, size)
+        y2.samp <- rep(-1, size)
+        y3.samp <- rep(-1, size)
+        y4.samp <- rep(-1, size)
+        y5.samp <- rep(-1, size)
+        y6.samp <- rep(-1, size)
+        y7.samp <- rep(-1, size)
+        y8.samp <- rep(-1, size)
+        prev.samp <- rep(-1, size)
+        sens1.samp <- rep(-1, size)
+        spec1.samp <- rep(-1, size)
+        ppv1.samp <- rep(-1, size)
+        npv1.samp <- rep(-1, size)
+        sens2.samp <- rep(-1, size)
+        spec2.samp <- rep(-1, size)
+        ppv2.samp <- rep(-1, size)
+        npv2.samp <- rep(-1, size)
+        sens3.samp <- rep(-1, size)
+        spec3.samp <- rep(-1, size)
+        ppv3.samp <- rep(-1, size)
+        npv3.samp <- rep(-1, size)
+        prev.samp[1] <- prevstart
+        y1.samp[1] <- y1start
+        y2.samp[1] <- y2start
+        y3.samp[1] <- y3start
+        y4.samp[1] <- y4start
+        y5.samp[1] <- y5start
+        y6.samp[1] <- y6start
+        y7.samp[1] <- y7start
+        y8.samp[1] <- y8start
+        sens1.samp[1] <- sens1start
+        spec1.samp[1] <- spec1start
+        sens2.samp[1] <- sens2start
+        spec2.samp[1] <- spec2start
+        sens3.samp[1] <- sens3start
+        spec3.samp[1] <- spec3start
+        for(i in 2:size) {
+                y1.samp[i] <- tt3.y1(a, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y2.samp[i] <- tt3.y2(b, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y3.samp[i] <- tt3.y3(c, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y4.samp[i] <- tt3.y4(d, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y5.samp[i] <- tt3.y5(e, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y6.samp[i] <- tt3.y6(f, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y7.samp[i] <- tt3.y7(g, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                y8.samp[i] <- tt3.y8(h, prev.samp[i - 1], sens1.samp[i - 1],
+                        spec1.samp[i - 1], sens2.samp[i - 1], spec2.samp[i - 1],
+                        sens3.samp[i - 1], spec3.samp[i - 1])
+                sens1.samp[i] <- tt3.sens1(y1.samp[i], y2.samp[i], y3.samp[i],
+                        y4.samp[i], y5.samp[i], y6.samp[i], y7.samp[i], y8.samp[
+                        i], alphasens1, betasens1)
+                sens2.samp[i] <- tt3.sens2(y1.samp[i], y2.samp[i], y3.samp[i],
+                        y4.samp[i], y5.samp[i], y6.samp[i], y7.samp[i], y8.samp[
+                        i], alphasens2, betasens2)
+                sens3.samp[i] <- tt3.sens3(y1.samp[i], y2.samp[i], y3.samp[i],
+                        y4.samp[i], y5.samp[i], y6.samp[i], y7.samp[i], y8.samp[
+                        i], alphasens3, betasens3)
+                spec1.samp[i] <- tt3.spec1(a, b, c, d, e, f, g, h, y1.samp[i],
+                        y2.samp[i], y3.samp[i], y4.samp[i], y5.samp[i], y6.samp[
+                        i], y7.samp[i], y8.samp[i], alphaspec1, betaspec1)
+                spec2.samp[i] <- tt3.spec2(a, b, c, d, e, f, g, h, y1.samp[i],
+                        y2.samp[i], y3.samp[i], y4.samp[i], y5.samp[i], y6.samp[
+                        i], y7.samp[i], y8.samp[i], alphaspec2, betaspec2)
+                spec3.samp[i] <- tt3.spec3(a, b, c, d, e, f, g, h, y1.samp[i],
+                        y2.samp[i], y3.samp[i], y4.samp[i], y5.samp[i], y6.samp[
+                        i], y7.samp[i], y8.samp[i], alphaspec3, betaspec3)
+                prev.samp[i] <- tt3.prev(a, b, c, d, e, f, g, h, y1.samp[i],
+                        y2.samp[i], y3.samp[i], y4.samp[i], y5.samp[i], y6.samp[
+                        i], y7.samp[i], y8.samp[i], alphaprev, betaprev)
+        }
+        ppv1.samp <- sens1.samp*prev.samp/(sens1.samp*prev.samp + (1-prev.samp)*(1-spec1.samp))
+        npv1.samp <- spec1.samp*(1-prev.samp)/(spec1.samp*(1-prev.samp) + prev.samp*(1-sens1.samp))
+        ppv2.samp <- sens2.samp*prev.samp/(sens2.samp*prev.samp + (1-prev.samp)*(1-spec2.samp))
+        npv2.samp <- spec2.samp*(1-prev.samp)/(spec2.samp*(1-prev.samp) + prev.samp*(1-sens2.samp))
+        ppv3.samp <- sens3.samp*prev.samp/(sens3.samp*prev.samp + (1-prev.samp)*(1-spec3.samp))
+        npv3.samp <- spec3.samp*(1-prev.samp)/(spec3.samp*(1-prev.samp) + prev.samp*(1-sens3.samp))
+        last.values <- c(y1.samp[size], y2.samp[size], y3.samp[size], y4.samp[
+                size], y5.samp[size], y6.samp[size], y7.samp[size], y8.samp[
+                size], sens1.samp[size], spec1.samp[size], sens2.samp[size],
+                spec2.samp[size], sens3.samp[size], spec3.samp[size], prev.samp[
+                size])
+        list(y1.samp=y1.samp, y2.samp=y2.samp, y3.samp=y3.samp, y4.samp=y4.samp, y5.samp=y5.samp, y6.samp=y6.samp, y7.samp=y7.samp,
+                y8.samp=y8.samp, sens1.samp=sens1.samp, spec1.samp=spec1.samp, ppv1.samp=ppv1.samp, npv1.samp=npv1.samp,
+                sens2.samp=sens2.samp, spec2.samp=spec2.samp, ppv2.samp=ppv2.samp, npv2.samp=npv2.samp, sens3.samp=sens3.samp,
+                spec3.samp=spec3.samp, ppv3.samp=ppv3.samp, npv3.samp=npv3.samp, prev.samp=prev.samp, last.values=last.values)
+}
+ tt3.comb <-
+function(a.out, b.out, overlap)
+{
+        size <- length(b.out$prev.samp)
+        y1.samp <- c(a.out$y1.samp, b.out$y1.samp[overlap:size])
+        y2.samp <- c(a.out$y2.samp, b.out$y2.samp[overlap:size])
+        y3.samp <- c(a.out$y3.samp, b.out$y3.samp[overlap:size])
+        y4.samp <- c(a.out$y4.samp, b.out$y4.samp[overlap:size])
+        y5.samp <- c(a.out$y5.samp, b.out$y5.samp[overlap:size])
+        y6.samp <- c(a.out$y6.samp, b.out$y6.samp[overlap:size])
+        y7.samp <- c(a.out$y7.samp, b.out$y7.samp[overlap:size])
+        y8.samp <- c(a.out$y8.samp, b.out$y8.samp[overlap:size])
+        sens1.samp <- c(a.out$sens1.samp, b.out$sens1.samp[overlap:size])
+        spec1.samp <- c(a.out$spec1.samp, b.out$spec1.samp[overlap:size])
+        ppv1.samp <- c(a.out$ppv1.samp, b.out$ppv1.samp[overlap:size])
+        npv1.samp <- c(a.out$npv1.samp, b.out$npv1.samp[overlap:size])
+        sens2.samp <- c(a.out$sens2.samp, b.out$sens2.samp[overlap:size])
+        spec2.samp <- c(a.out$spec2.samp, b.out$spec2.samp[overlap:size])
+        ppv2.samp <- c(a.out$ppv2.samp, b.out$ppv2.samp[overlap:size])
+        npv2.samp <- c(a.out$npv2.samp, b.out$npv2.samp[overlap:size])
+        sens3.samp <- c(a.out$sens3.samp, b.out$sens3.samp[overlap:size])
+        spec3.samp <- c(a.out$spec3.samp, b.out$spec3.samp[overlap:size])
+        ppv3.samp <- c(a.out$ppv3.samp, b.out$ppv3.samp[overlap:size])
+        npv3.samp <- c(a.out$npv3.samp, b.out$npv3.samp[overlap:size])
+        prev.samp <- c(a.out$prev.samp, b.out$prev.samp[overlap:size])
+     return(y1.samp, y2.samp, y3.samp, y4.samp, y5.samp, y6.samp, y7.samp, y8.samp,
+     sens1.samp, spec1.samp, ppv1.samp, npv1.samp, sens2.samp, spec2.samp, ppv2.samp,
+          npv2.samp, sens3.samp, spec3.samp, ppv3.samp, npv3.samp, prev.samp)
+}
+ tt3.sum <-
+function(tt3.out, throwaway, skip)
+{
+        throw <- throwaway + 1
+        size <- length(tt3.out$prev.samp)
+#
+#  Add following lines for graphical output
+#
+#        openlook()
+#        par(mfrow = c(5, 5))
+#        plot(1:throwaway, tt3.out$prev.samp[1:throwaway], type = "l")
+#        plot(throw:size, tt3.out$prev.samp[throw:size], type = "l")
+#        hist(tt3.out$y1.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y2.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y3.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y4.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y5.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y6.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y7.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$y8.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$sens1.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$spec1.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$ppv1.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$npv1.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$sens2.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$spec2.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$ppv2.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$npv2.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$sens3.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$spec3.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$ppv3.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$npv3.samp[seq(throw, size, by = skip)])
+#        hist(tt3.out$prev.samp[seq(throw, size, by = skip)])
+#
+#
+        qprev <- quantile(tt3.out$prev.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qsens1 <- quantile(tt3.out$sens1.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qspec1 <- quantile(tt3.out$spec1.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qppv1 <- quantile(tt3.out$ppv1.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qnpv1 <- quantile(tt3.out$npv1.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qsens2 <- quantile(tt3.out$sens2.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qspec2 <- quantile(tt3.out$spec2.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qppv2 <- quantile(tt3.out$ppv2.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qnpv2 <- quantile(tt3.out$npv2.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qsens3 <- quantile(tt3.out$sens3.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qspec3 <- quantile(tt3.out$spec3.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qppv3 <- quantile(tt3.out$ppv3.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        qnpv3 <- quantile(tt3.out$npv3.samp[seq(throw, size, by = skip)], c(
+                0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975))
+        list(size=size, qprev=qprev, qsens1=qsens1, qspec1=qspec1, qppv1=qppv1, qnpv1=qnpv1, qsens2=qsens2, qspec2=qspec2, qppv2=qppv2,
+                qnpv2=qnpv2, qsens3=qsens3, qspec3=qspec3, qppv3=qppv3,  qnpv3=qnpv3)
+}
+ mu.to.beta <-
+function(mu, sd)
+{
+        var <- sd^2
+        alpha <-  - (mu * (var + mu^2 - mu))/var
+        beta <- ((mu - 1) * (var + mu^2 - mu))/var
+        return(alpha, beta)
+}
+ beta.to.mu <-
+function(alpha, beta)
+{
+        mean <- alpha/(alpha + beta)
+        sd <- sqrt((alpha * beta)/((alpha + beta)^2 * (alpha + beta + 1)))
+        return(mean, sd)
+}

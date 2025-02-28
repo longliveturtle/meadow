@@ -1,0 +1,95 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Model Assumptions and Diagnostics - Advanced
+
+#### Example from class: IL10 cytokines
+
+Fancier plot. Re-order the factor levels (strain) for plotting.
+
+```{r}
+library(SPH.140.615)
+il10 <- cbind(il10, logIL10=log10(il10$IL10))
+il10$Strain <- factor(il10$Strain, levels=rev(c("A","B6",as.character(c(1,2,4:8,10:15,17:19,24:26)))))
+```
+
+Calculate the strain means.
+
+```{r}
+m <- tapply(il10$IL10, il10$Strain, mean)
+logm <- tapply(il10$logIL10, il10$Strain, mean)
+```
+
+Plot the data. Note: 'segments' adds line segments at the strain means, 'abline' adds horizontal lines to indicate the groups, and 'expression' allows you to put fancy things in the axis labels.
+
+```{r,fig.height=7}
+par(las=1, mfrow=c(1,2))
+stripchart(il10$IL10~il10$Strain, 
+           method="jitter", pch=1, ylab="Strain", xlab="IL10 response", jitter=0.2)
+segments(m, (1:21)-0.3, m, (1:21)+0.3, lwd=2, col="blue")
+abline(h=1:21, lty=2, col="gray")
+stripchart(il10$logIL10~il10$Strain, 
+           method="jitter", pch=1, ylab="Strain", xlab=expression(paste(log[10]," IL10 response")), jitter=0.2)
+segments(logm, (1:21)-0.3, logm, (1:21)+0.3, lwd=2, col="blue")
+abline(h=1:21, lty=2, col="gray")
+```
+
+You can generate a bunch of diagnostic plots using the 'plot' function.
+
+```{r,fig.width=8,fig.height=8}
+aov.il10 <- aov(IL10 ~ Strain, data=il10)
+aov.logil10 <- aov(logIL10 ~ Strain, data=il10)
+par(mfrow=c(2,2))
+plot(aov.il10)
+plot(aov.logil10)
+```
+
+#### Bartlett's test for equality of variances
+
+The brute-force method for IL10.
+
+```{r}
+s <- tapply(il10$IL10/1000, il10$Strain, sd)
+s
+n <- table(il10$Strain)
+n
+spsq <- sum((n-1)*s^2)/sum(n-1)
+spsq
+xsq <- (sum(n)-length(n)) * log(spsq) - sum((n-1)*log(s^2))
+xsq
+K <- 1 + (sum(1/(n-1)) - 1/sum(n-1))/(3*(length(n)-1))
+K
+stat <- xsq/K
+stat
+pchisq(stat, length(n)-1, lower.tail=FALSE)
+```
+
+Using the built-in function.
+
+```{r}
+bartlett.test(il10$IL10 ~ il10$Strain) 
+```
+
+The brute-force method for log10(IL10).
+
+```{r}
+logs <- tapply(il10$logIL10, il10$Strain, sd)
+logs
+logspsq <- sum((n-1)*logs^2)/sum(n-1)
+logspsq
+logxsq <- (sum(n)-length(n)) * log(logspsq) - sum((n-1)*log(logs^2))
+logxsq
+logstat <- logxsq/K
+logstat
+pchisq(logstat, length(n)-1, lower.tail=FALSE)
+```
+
+Using the built-in function.
+
+```{r}
+bartlett.test(il10$logIL10 ~ il10$Strain) 
+```
+

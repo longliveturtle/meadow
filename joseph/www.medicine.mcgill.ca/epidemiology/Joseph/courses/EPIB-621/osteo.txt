@@ -1,0 +1,48 @@
+model                          #  Usual model statement in WinBUGS
+{
+ for (j in 1:10)               #  Loop over 10 provinces
+{
+                               #  Common index trick
+ for (i in index[j]:index2[j]) # Index for jth province
+     {
+     logit(p[i]) <- alpha[j] + beta*age[i] #  Logit for individual probability
+     osteo[i] ~ dbern(p[i])                #  Likelihood function for ith individual
+     }                                  #
+     alpha[j] ~ dnorm(mu, tau)          #  Hierarchical component:  provincial rates
+   }                                    #  "tied together" thruogh normal distribution
+ mu ~  dnorm(0,0.001)                   #  Prior on hierarchical mean
+ tau <- 1/(sigma*sigma)                 #  Needed for WinBUGS
+sigma ~ dunif(0,20)                     #  Prior for hierarchical Sd
+ beta  ~  dnorm(0, 0.001)               # Prior for beta
+pred.NFLD.50 <- exp(alpha[1] + beta*50)/(1+exp(alpha[1] + beta*50))
+pred.QUEBEC.50 <- exp(alpha[5] + beta*50)/(1+exp(alpha[1] + beta*50))
+pred.BC.50 <- exp(alpha[10] + beta*50)/(1+exp(alpha[10] + beta*50))
+p.quebec.bc <-  pred.QUEBEC.50 - pred.BC.50  # Prob Quebec > BC
+}
+
+# Inits
+
+list(alpha=c(0,0,0,0,0,0,0,0,0,0), beta=0.5, mu=0, sigma = 1)
+
+#  Data
+
+list(index = c(1, 1001, 2001, 3001, 4001, 5001, 6001, 7001,
+8001, 9001),
+index2 =c(1000, 2000, 3000, 4000, 5000, 6000, 7000,
+8000, 9000, 10000),
+age=c(39, 25, 36, 68, 67, 50, 39, 68, 31, 30, 54, 30, 30,
+71, 30, 28, 49, 54, 29, 61, 35, 52, 29, 74, 70, 50, 41, 74, 74,
+38, 29, 41, 27, 28, 57, 32, 32, 64, 45, 60, 56, 66, 65, 40, 64,
+58, 51, 30, 48, 63, 50, 52, 67, 47, 44, 37, 41, 32, 35, 27, 58,
+......................etc.................
+55, 40, 27, 33, 37, 39, 28, 75, 37, 52, 57, 67, 25, 33, 34, 55,
+39, 46, 28), osteo=c(0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0,
+0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0,
+0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0,
+0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1,
+......................etc.................
+0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0,
+1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1,
+0, 0, 1, 1, 1, 1, 1, 1))
+

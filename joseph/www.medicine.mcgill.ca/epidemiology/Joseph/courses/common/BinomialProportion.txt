@@ -1,0 +1,14 @@
+model
+{
+         x     ~ dbin(theta,n)   #  Likelihood function
+         theta ~ dbeta(1,1)      #  Prior density for theta
+}
+
+# Data
+
+list(x=6, n=20)
+
+# Results
+
+|  node |   mean |     sd | MC error |   2.5% | median |  97.5% | start | sample  |
+| theta | 0.3177 | 0.0969 | 0.001411 | 0.1474 | 0.3116 | 0.5208 |  1001 |   5000  |

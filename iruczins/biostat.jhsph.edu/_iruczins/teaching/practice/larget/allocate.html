@@ -1,0 +1,21 @@
+# R function to allocate subjects into treatment groups.
+# There are 50 subjects.
+# Wish to allocate 10 subjects each into three treatment groups (A,B,C)
+# and 20 into a control group (Control).
+
+allocate <- function() {
+  groups <- c(rep("A",10),rep("B",10),rep("C",10),rep("Control",20))
+  group <- sample(groups)
+  subject <- 1:50
+  alloc <- data.frame(subject,group)
+  print("Group A:")
+  print(alloc$subject[alloc$group=="A"])
+  print("Group B:")
+  print(alloc$subject[alloc$group=="B"])
+  print("Group C:")
+  print(alloc$subject[alloc$group=="C"])
+  print("Control Group:")
+  print(alloc$subject[alloc$group=="Control"])
+  return(invisible(alloc))
+}
+  

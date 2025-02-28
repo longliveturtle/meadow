@@ -1,0 +1,13 @@
+Smoke.Index <- c( 77 , 137 , 117 , 94 , 116 , 102 , 111 , 93 , 88 , 102,
+91 , 104 , 107 , 112 , 113 , 110 , 125 , 133 , 115 , 105 , 87 , 91 ,
+100 , 76 , 66 )
+
+Cancer.Index <- c( 84 , 116 , 123 , 128 , 155 , 101 , 118 , 113 , 104 ,
+88 , 104 , 129 , 86 , 96 , 144 , 139 , 113 , 125 , 146 , 115 , 79 , 85 ,
+120 , 60 , 51 )
+
+Occupation <- c("Outdoor" , "Outdoor" , "Factory" , "Factory" ,
+"Factory" , "Factory" , "Office" , "Outdoor" , "Factory" , "Factory" ,
+"Factory" , "Factory" , "Factory" , "Factory" , "Factory" , "Office" ,
+"Outdoor" , "Outdoor" , "Outdoor" , "Office" , "Office" , "Office" ,
+"Outdoor" , "Office" , "Office" )

@@ -1,0 +1,73 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Multiple Comparisons
+
+#### Simulate 50 independent p-values from the null
+
+Some p-values are less than the significance threshold of 0.05. Remember we expect 5% do be below 0.05 by random chance. But you have at most a 5% a priori chance to get a p-value below the Bonferroni threshold.
+
+```{r}
+set.seed(1)
+n <- 50
+p <- runif(n)
+p
+sort(p)
+p<0.05
+table(p<0.05)
+which(p<0.05)
+p[which(p<0.05)]
+# Bonferroni
+0.05/n
+which(p<0.05/n)
+```
+
+#### Using 47 random and 3 very small p-values
+
+```{r}
+set.seed(2)
+psmall <- runif(3,0,1e-3)
+psmall
+p <- c(psmall,runif(47))
+p
+table(p<0.05)
+which(p<0.05)
+p[which(p<0.05)]
+# Bonferroni
+which(p<0.05/n)
+p.b <- p.adjust(p,method="bonferroni")
+p.b
+which(p.b<0.05)
+```
+
+#### Using 40 random and 10 moderately small p-values
+
+```{r}
+set.seed(3)
+psmall <- runif(10,0,0.01)
+psmall
+p <- c(psmall,runif(40))
+p
+table(p<0.05)
+which(p<0.05)
+p[which(p<0.05)]
+# Bonferroni
+which(p<0.05/n)
+# Benjamini-Hochberg
+psort <- sort(p)
+psort
+(1:n)/n*0.05
+table(psort<(1:n)/n*0.05)
+mj <- max(which(psort<(1:n)/n*0.05))
+mj
+psort[1:mj]
+p.bh <- p.adjust(p,method="BH")
+which(p.bh<0.05)
+p[which(p.bh<0.05)]
+sort(p[which(p.bh<0.05)])
+```
+
+

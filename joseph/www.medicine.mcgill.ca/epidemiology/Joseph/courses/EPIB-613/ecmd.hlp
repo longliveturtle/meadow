@@ -1,0 +1,63 @@
+{smcl}
+{* 31mar2006}
+{cmd:help ecmd}
+{hline}
+
+{title:Title}
+
+{p 4 8 2}
+{bf:ecmd -- Opens the command log in a Do-file Editor window}
+
+
+{title:Syntax}
+
+{p 8 17 2}
+{cmd:ecmd}
+
+
+{title:Description}
+
+{p 4 4 2}
+{cmd:ecmd} opens the current command log in a Do-file Editor window.
+
+
+{title:Remarks}
+
+{p 4 4 2}
+Opening the command log in a Do-file Editor window is a handy
+alternative to copying and pasting recent commands from the Review
+window to the Do-file Editor. If you let {hi:profile.do} create
+a cumulative command log ({cmd:cmdlog} ...{cmd:, append}), you will
+even have access to past commands.
+
+{p 4 4 2}
+However, the capacity of the Do-file Editor is limited, and if
+you use a cumulative command log, you must delete it now and then.
+
+{p 4 4 2}
+The comand's intended use is described in more detail in Juul (2006, sec.
+1.7).
+
+
+{title:Author}
+
+{p 4 4 2}
+{browse "sj@soci.au.dk":Svend Juul}, Department of Epidemiology, 
+Institute of Public Health, University of Aarhus, Aarhus, Denmark.
+
+
+{title:Reference}
+
+{p 4 8 2} 
+Juul, S. 2006. {it:Introduction to Stata for Health Researchers}.
+College Station, TX: Stata Press.
+
+
+{title:Also see}
+
+{p 4 13 2}
+Manual:  {hi:[R] log}
+
+{p 4 13 2}
+Online:  {help log}
+{p_end}

@@ -1,0 +1,104 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+## Maximum Likelihood Estimation - Advanced
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+### Example from class: Gaussian data
+
+Simulate some Gaussian data.
+
+```{r}
+set.seed(1)
+n <- 100
+x <- rnorm(n,mean=10,sd=4)
+```
+
+The maximum likelihood estimates.
+
+```{r}
+mean(x)
+sd(x)*(n-1)/n
+```
+
+The log likelihood.
+
+```{r}
+mu <- seq(8,12,length=101)
+sig <- seq(3,5,length=101)
+ll <- matrix(NA,length(mu),length(sig))
+for(i in 1:length(mu)){
+  for(j in 1:length(sig)){
+    ll[i,j] <- sum(dnorm(x,mu[i],sig[j],log=TRUE))
+  }
+}
+```
+
+Plot the log likelihood.
+
+```{r}
+par(las=1)
+image(mu,sig,ll,col=rev(rainbow(start=0,end=2/3,250)),
+      xlab="", ylab="", main="n=100")
+mtext(side=1,expression(mu),line=3,cex=1.5)
+mtext(side=2, expression(sigma),line=2.5,cex=1.5)
+contour(mu,sig,ll,nlev=16,add=TRUE)
+points(mean(x),sd(x)*sqrt(99/100),lwd=2,pch=4,cex=1.3,col="blue")
+arrows(mean(x)+0.8, sd(x), mean(x)+0.2, sd(x), lwd=2,col="blue",len=0.15)
+text(mean(x)+0.9,sd(x), "MLE", adj=c(0,0.5), col="blue", cex=1.4)
+```
+
+### Example from class: 2-point linkage in an intercross
+
+The log likelihood function for the 2-point intercross data.
+
+```{r}
+llf2 <- function(dat,rf=seq(0,0.5,len=501)){
+  rfbar <- 1 - rf
+  A <- dat[1,1]+dat[3,3] # non-recombinants
+  B <- dat[1,2]+dat[2,1]+dat[2,3]+dat[3,2] # single-recombinants
+  C <- dat[1,3]+dat[3,1] # double-recombinants
+  D <- dat[2,2] # double heterozygotes
+  A * log(rfbar^2/4) + B * log(rf*rfbar/2) + C*log(rf^2/4) +
+    D*log((rf^2+rfbar^2)/2)
+}
+```
+
+The example from class.
+
+```{r}
+mydat <- rbind(c(58,9,0), c(8,95,14), c(1,12,53))
+mydat
+```
+
+The function "optimize" is for finding the maximumor minimum of a function of one variable.
+
+```{r}
+mle <- optimize(llf2,c(1e-5,0.4),dat=mydat,maximum=TRUE)$maximum
+mle
+```
+
+The log likelihood function for these data.
+
+```{r}
+rf <- seq(0,0.5,len=501)
+ll <- llf2(mydat)
+plot(rf,ll,type="l",lwd=2,xlab="Recombination Fraction",ylab="log likelihood")
+abline(v=mle,col="blue",lwd=2)
+u <- par("usr")
+text(mle+diff(u[1:2])*0.1, mean(u[3:4]), "MLE = 9.4%", cex=1.5, col="blue")
+```
+
+A closer view of the log likelihood function.
+
+```{r}
+rf <- seq(0.05,0.15,len=501)
+ll <- llf2(mydat,rf)
+plot(rf,ll,type="l",lwd=2,xlab="Recombination Fraction",ylab="log likelihood")
+abline(v=mle,col="blue",lwd=2)
+u <- par("usr")
+text(mle+diff(u[1:2])*0.1, mean(u[3:4]), "MLE = 9.4%", cex=1.5, col="blue")
+```
+

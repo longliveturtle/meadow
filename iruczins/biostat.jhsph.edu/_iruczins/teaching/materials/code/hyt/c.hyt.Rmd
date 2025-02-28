@@ -1,0 +1,217 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+options(width=110)
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Hypothesis Testing
+
+### One sample / paired t-test
+
+#### Example 1
+
+```{r}
+before <- c(13.04,11.23,15.27,7.56,10.12,10.02,8.25,13.09,12.62,10.15)
+after <- c(15.15,13.96,16.41,12.52,12.57,11.07,13.23,13.13,10.01,12.63)
+```
+
+Plot the data.
+
+```{r}
+par(las=1)
+plot(before,after)
+abline(0,1,lwd=2,lty=2,col="blue")
+```
+
+Make a square plot.
+
+```{r}
+r <- range(c(before,after))
+r
+par(pty="s",las=1)
+plot(before,after,xlim=r,ylim=r)
+abline(0,1,lwd=2,lty=2,col="blue")
+```
+
+Bind the paired measurements in one data object.
+
+```{r}
+dat <- cbind(before,after)
+dat
+par(pty="s",las=1)
+plot(dat,xlim=r,ylim=r)
+abline(0,1,lwd=2,lty=2,col="blue")
+```
+
+The differences.
+
+```{r,fig.width=3}
+d <- after-before
+d
+apply(dat,1,diff)
+```
+
+Plot the differences.
+
+```{r,fig.width=3}
+par(las=1)
+stripchart(d,method="jitter",vertical=TRUE,pch=1,ylab="difference")
+abline(h=0,lwd=2,lty=2,col="blue")
+```
+
+Hypothesis test for $\mu$ = 0.
+
+```{r}
+m <- mean(d)
+m
+s <- sd(d)
+s
+n <- length(d)
+n
+se <- s/sqrt(n)
+se
+tq <- qt(0.975,n-1)
+tq
+Tstat <- m/se
+Tstat
+```
+
+The test statistic is larger than the critical value, so we reject the null hypothesis.
+
+Plot the null distribution, and calculate the p-value.
+
+```{r}
+curve(dt(x,n-1),-3.5,3.5)
+abline(h=0)
+abline(v=c(-tq,tq),col="red",lty=2)
+abline(v=Tstat,col="blue")
+pt(Tstat,n-1,lower=FALSE)
+pt(-Tstat,n-1)
+2*pt(-Tstat,n-1)
+```
+
+The built-in function.
+
+```{r}
+t.test(d)
+t.test(after,before,paired=TRUE)
+attributes(t.test(d))
+t.test(d)$p.value
+t.test(d)$stat
+t.test(d)$conf
+t.test(d)$param
+```
+
+Imagine you knew that antibody levels cannot decrease (in truth) after vaccination. Carry out a one-sided test.
+
+```{r}
+t.test(d,alternative="greater")
+```
+
+The critical value for the one-sided test.
+
+```{r}
+qt(0.95,n-1)
+```
+
+Plot the null distribution, the critical value (red) and the test statistic (blue).
+
+```{r}
+curve(dt(x,n-1),-3.5,3.5)
+abline(h=0)
+abline(v=qt(0.95,n-1),col="red",lty=2)
+abline(v=Tstat,col="blue")
+```
+
+Note the confidence interval in the output from the t.test function. Here is how you calculate the lower bound.
+
+```{r}
+mean(d) - qt(0.95,9) * sd(d) / sqrt(length(d))
+```
+
+#### Example 2
+
+```{r}
+x <- c(9.98,9.87,10.05,10.08,9.99,9.90)
+t.test(x)
+t.test(x)$p.val
+t.test(x)$conf
+t.test(x,mu=10)
+t.test(x,mu=10)$p.val
+ci <- t.test(x)$conf
+ci
+t.test(x,mu=ci[1])$p.val
+t.test(x,mu=ci[2])$p.val
+```
+
+### Two-sample t-test
+
+#### Example 1
+
+```{r}
+x <- c(102.5,106.6,99.8,106.5,103.7,105.5,98.2,104.1,85.6,105.5,114.0,112.2)
+y <- c(93.7,90.9,100.4,92.0,100.2,104.6,95.4,96.6,99.2)
+```
+
+Plot the data, using a custom function. Uncomment the line calling the function install.packages if you have not yet installed devtools. 
+
+```{r}
+# install.packages("devtools")
+library(devtools)
+devtools::install_github("bllfrg/SPH.140.615",quiet=TRUE)
+library(SPH.140.615)
+dot.plot(x,y)
+```
+
+Test whether the population means are the same in the two groups versus the alternative that they differ, allowing for different population standard deviations.
+
+```{r}
+t.test(x,y)
+t.test(x,y)$param
+qt(0.975,t.test(x,y)$param)
+t.test(x,y)$stat
+```
+
+Plot the null distribution, the critical values (red) and the test statistic (blue).
+
+```{r}
+curve(dt(x,t.test(x,y)$param),-3.5,3.5)
+abline(h=0)
+abline(v=qt(0.025,t.test(x,y)$param),col="red",lty=2)
+abline(v=qt(0.975,t.test(x,y)$param),col="red",lty=2)
+abline(v=t.test(x,y)$stat,col="blue")
+```
+
+#### Example 2
+
+```{r}
+x <- c(59.4,52.3,42.6,45.1,65.9,40.8)
+y <- c(82.7,56.7,46.9,67.8,74.8,85.7)
+dot.plot(x,y,labels=c("L","H"))
+```
+
+Test whether the population means are the same versus the alternative that the high salt population mean is larger than the low salt population mean, allowing for different population standard deviations.
+
+```{r}
+t.test(x,y,alt="less")
+qt(0.05,t.test(x,y)$param)
+t.test(x,y)$stat
+```
+
+Plot the null distribution, the critical value (red) and the test statistic (blue).
+
+```{r}
+curve(dt(x,t.test(x,y)$param),-3.5,3.5)
+abline(h=0)
+abline(v=qt(0.05,t.test(x,y)$param),col="red",lty=2)
+abline(v=t.test(x,y)$stat,col="blue")
+```
+
+Note the confidence interval in the output from the t.test function. Here is how you calculate the upper bound.
+
+```{r}
+mean(x)-mean(y) + qt(0.95,t.test(x,y)$param) * t.test(x,y)$stderr
+```
+
+

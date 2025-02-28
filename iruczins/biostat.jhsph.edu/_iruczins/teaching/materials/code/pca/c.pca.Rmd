@@ -1,0 +1,188 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Principal Components Analysis
+
+#### Example 1: father and daughter heights
+
+Plot the data using identical axis.
+
+```{r}
+library(SPH.140.615)
+par(pty="s")
+r <- range(pear)
+r
+plot(pear ,xlim=r, ylim=r)
+abline(c(0,1), lty="dotted", col="green3", lwd=2)
+```
+
+Calculate the principal components, and add them to the scatter plot.
+
+```{r}
+pear.pca <- prcomp(pear, retx=TRUE, center=TRUE, scale.=TRUE)
+int <- pear.pca$center 
+int
+rot <- pear.pca$rotation
+rot
+b1 <- rot[2,1]/rot[1,1]
+b1
+a1 <- int[2]-b1*int[1]
+a1
+b2 <- rot[2,2]/rot[1,2]
+b2
+a2 <- int[2]-b2*int[1]
+a2
+par(pty="s")
+plot(pear ,xlim=r, ylim=r)
+abline(a1, b1, col="red", lwd=2) 
+abline(a2, b2, col="blue",lwd=2) 
+```
+
+Plot the "principal components", here, the rotated data. 
+
+```{r}
+head(pear.pca$x)
+head(predict(pear.pca))
+par(pty="m")
+plot(pear.pca$x)
+```
+
+The variance contributions.
+
+```{r}
+summary(pear.pca)
+```
+
+#### Example 2: Multivariate Normal distribution in 10 dimensions
+
+A function to simulate multivariate normal data.
+
+```{r}
+myrmvn <- function(mu,sigma,hm=1,...){
+  n=length(mu)
+  if(sum((dim(sigma)-rep(n,2))^2)!=0) 
+    stop("Check the dimensions of mu and sigma!")
+  if(det(sigma)==0) stop("The covariance matrix is singular!")
+  a=t(chol(sigma))
+  z=matrix(rnorm(n*hm),nrow=n)
+  y=t(a%*%z+mu)
+  return(y)
+}
+```
+
+Generate a mean vector of zeros, and a variance-covariance matrix with some strong correlations.
+
+```{r}
+mu <- rep(0,10)
+mu
+sigma <- diag(0.2,10)+0.8
+sigma[1:8,9:10] <- 0.2
+sigma[9:10,1:8] <- 0.2
+sigma
+```
+
+Simulate data from a multivariate normal distribution with the mean vector and the variance-covariance matrix, and plot the data in the ten dimensions.
+
+```{r, fig.width=8, fig.height=8}
+set.seed(1)
+n <- 100
+dat <- myrmvn(mu,sigma,hm=n)
+pairs(dat)
+```
+
+The principal components analysis.
+
+```{r}
+dat.pca <- prcomp(dat, retx=TRUE, center=TRUE, scale.=TRUE)
+```
+
+The variance contributions.
+
+```{r}
+summary(dat.pca)
+plot(dat.pca)
+```
+
+#### Example 3: two populations with different genetic background
+
+A function to simulate some single nucleotide polymorphisms (SNPs).
+
+```{r}
+my.snp.pc.data=function(n,maf){
+  hm=length(maf)
+  z=matrix(ncol=hm,nrow=n)
+  for(j in 1:hm){
+    p=1-maf[j]
+    mp=c(p^2,2*p*(1-p),(1-p)^2)
+    z[,j]=apply(rmultinom(n,1,mp),2,order)[3,]-1
+  }
+  return(z)
+}
+```
+
+We have two populations, and we measure the genotype at 50 loci with differing minor allele frequencies (MAFs). These type of loci are often called ancestry informative markers. 
+
+Here are the minor allele frequencies for the 50 SNPs.
+
+```{r}
+ns <- 50
+set.seed(1)
+maf1 <- runif(ns,0.1,0.5)
+maf2 <- runif(ns,0.1,0.5)
+maf1
+maf2
+```
+
+Randomly sample 100 subjects from each population.
+
+```{r}
+n1 <- n2 <- 100
+z1 <- my.snp.pc.data(n1,maf1)
+z2 <- my.snp.pc.data(n2,maf2)
+z <- data.frame(rbind(z1,z2))
+head(z,10)
+```
+
+The principal components analysis.
+
+```{r}
+snp.pca <- prcomp(z, retx=TRUE, center=TRUE, scale.=TRUE)
+```
+
+The principal components. 
+
+```{r}
+snp.p <- predict(snp.pca)
+dim(snp.p)
+head(snp.p[,1:5],10)
+```
+
+Plot the first two principal components. 
+
+```{r, fig.width=6, fig.height=6}
+par(pty="s", mgp=c(1.5,0,0), font.lab=2, cex.lab=1.5)
+plot(snp.p[,1:2], pch=21, bg=rep(c("blue","red"),each=100), xaxt="n", yaxt="n", xlab="PC1", ylab="PC2")
+```
+
+Simulate a new set of 50 samples from the first population.
+
+```{r}
+n3 <- 50
+z3 <- my.snp.pc.data(n3,maf1)
+z3 <- data.frame(z3)
+head(z3)
+```
+
+Add these 50 samples to the first two principal components plot.
+
+```{r, fig.width=6, fig.height=6}
+p3 <- predict(snp.pca,z3)
+par(pty="s", mgp=c(1.5,0,0), font.lab=2, cex.lab=1.5)
+plot(snp.p[,1:2], pch=21, bg=rep(c("blue","red"),each=100), xaxt="n", yaxt="n", xlab="PC1", ylab="PC2")
+points(p3[,1:2], pch=21, bg="green3", cex=1.5)
+```
+
+

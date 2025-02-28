@@ -1,0 +1,76 @@
+### grow CART tree on kyphosis data
+kyph.tree <- tree(Kyphosis~Age+Number+Start,data=kyphosis)
+
+# plot the tree
+plot(kyph.tree)
+text(kyph.tree)
+
+# make fancy postscript plot
+post.tree(kyph.tree)
+
+# tree info
+summary(kyph.tree)
+print(kyph.tree)
+
+
+### AT&T data
+attach(market.frame)
+z.survey <- tree(market.survey,na.action=na.omit)
+
+# two types of tree display
+par(mfrow=c(1,2))
+plot(z.survey)
+plot(z.survey,type="u")
+
+# size versus deviance
+plot(prune.tree(z.survey))
+
+# prune tree to 50 leaves
+z.survey.sm <- prune.tree(z.survey,best=50)
+
+# cross validation
+survey.cv <- cv.tree(z.survey.sm,,prune.tree)
+plot(survey.cv)
+
+# best fit: tree of size 3
+z.survey.best <- prune.tree(z.survey,best=3)
+plot(z.survey.best)
+text(z.survey.best)
+
+
+### car data
+attach(car.test.frame)
+car <- car.test.frame
+car.tree <- tree(Mileage~.,data=car,na.action=na.omit)
+
+# residuals, fitted values,...
+par(mfrow=c(1,2))
+plot(predict(car.tree),residuals(car.tree))
+qqnorm(residuals(car.tree))
+
+
+### some other car data
+z.cu <- tree(Reliability~Price+Country+Mileage+Type,
+             data=cu.summary,na.action=na.tree.replace.all)
+
+# price and mileage differences after split 1 
+tree.screens()
+plot(z.cu)
+text(z.cu)
+hist.tree(z.cu,Price,Mileage,nodes=1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Nested Models - Advanced
+
+#### Example from class: mosquitos
+
+```{r}
+library(SPH.140.615)
+summary(mosq)
+```
+
+The nested ANOVA.
+
+```{r}
+mosq.aov <- aov(length ~ cage / individual, data=mosq)
+nested.anova(mosq.aov)
+```
+
+What happens when we use the average of the two measurements for each mosquito?
+
+```{r}
+aves <- tapply(mosq$length, list(mosq$individual, mosq$cage), mean)
+aves
+aves <- as.numeric(aves) 
+aves
+cage <- factor(rep(c("A","B","C"), each=4))
+cage
+anova(aov(aves ~ cage))
+```
+
+What happens when we ignore the cages, and just do the ANOVA with individual mosquitos as the groups?
+
+```{r}
+ind <- factor(paste(as.character(mosq$cage), as.character(mosq$ind), sep=":"))
+ind
+anova(aov(mosq$length ~ ind))
+```
+
+What happens when we ignore the individual mosquitoes, and just do the ANOVA with the cages as the groups?
+
+```{r}
+anova(aov(length ~ cage, data=mosq))
+```

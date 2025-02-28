@@ -1,0 +1,975 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/RunWinBUGSScript.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:01 GMT -->
+<head>
+<title>RunWinBUGSScript: The running of WinBUGS Scripts made easier</title>
+<meta name="description" content=" RunWinBUGSScript is a Perl program that facilitates the running of WinBUGS scripts, especially when a series of WinBUGS scripts are to be submitted. Use of this program will also prevent crashes that may arise from time to time when running WinBUGS scripts through DOS-prompt batch command.">
+<meta name="keywords" content="program, run, script, submit, tool, WinBUGS">
+<link rel="icon" type="image/png" href="img/favicon-2.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs-2.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook-2.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode-2.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-2.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros-2.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl-2.html">Invitation to Perl</a></li>
+      <li><a href="bic-process-2.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary-2.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript-2.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript-2.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb-2.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary-2.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software-2.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 10 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 2.0 (September 2015)</div>
+<div class=title0>RunWinBUGSScript</div>
+<div class=title> The running of WinBUGS Scripts made easier </div>
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>RunWinBUGSScript</b> is a Perl program that facilitates the running of WinBUGS 
+scripts, especially when a series of WinBUGS scripts are to be submitted. 
+Use of this program will also prevent crashes that may arise from time to 
+time when running WinBUGS scripts through DOS-prompt batch command.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+<br><br>
+
+
+<div class=main>Why use <b>RunWinBUGSScript</b></div>
+<br>
+
+The following points are advantages to running your WinBUGS script <i>yourself</i>, that is, 
+by typing the usual WinBUGS command at the DOS-prompt
+(not accounting for the advantage of not having to type a command at the DOS-prompt!)
+
+<ol>
+
+<li> When a WinBUGS script contains a file path (either to a model file, a 
+data file or an inits file) that is more than 119 characters long, it will crash!
+(If you didn't know that and fall into that trap one day, it may take 
+some time to figure that out. Add to this that 
+coda() WinBUGS script commands will fall into the same trap if file paths involved are more than 114 characters long...)
+<br><br>
+<b>RunWinBUGSScript</b> will prevent this by writing a copy of the faulty file(s) to a shorter-named temporary location and rewriting the script accordingly; 
+output files will also be saved to temporary location, if their original names are too long. 
+All this is done transparently, and the output file(s) will be
+copied to its (their) final location(s) when <b>RunWinBUGSScript</b> closes. 
+Thus, the user of <b>RunWinBUGSScript</b> need not worry about troublesome lengthy paths anymore.
+<br><br>
+<li> Used jointly with <b>WriteWinBUGSScript</b>, it can be used to monitor problematic 
+(in terms of rare extreme values) nodes, 
+such as exponential values of other monitored nodes (see <a href="#exp">section below</a> for details).
+<br><br>
+It can also be used to <a href="#x">drop unused variables</a> from data files (which would cause WinBUGS to crash)
+through <b>WriteWinBUGSScript</b>-generated comments.
+<br><br>
+<li> When called by dragging and dropping more than one script onto its desktop icon, 
+<b>RunWinBUGSScript</b> will run each of them one after another (rather than simultaneously, which could
+inadvertantly lengthen the total runtime, as well as slow down your computer in a more noticable way).
+</ol>
+
+Finally, note that <b>RunWinBUGSScript</b> will add the run time to the bottom of the WinBUGS text output file.<br>
+
+<br><br>
+<div class=main>Getting node statistics for exp() or inv.logit() for some nodes</div>
+<br>
+
+As discussed on the  <a href="WriteWinBUGSScript-2.html#exp"><b>WriteWinBUGSScript</b> page</a>, directly monitoring nodes
+such as
+
+<br><br>
+<div class=pgm>
+odds.ratio <- exp(log.OR)
+</div>
+<br>
+
+in WinBUGS models can be problematic and lead to trap error messages. The <a href="WriteWinBUGSScript-2.html#exp"><b>-exp</b></a> command
+in <b>WriteWinBUGSScript</b> will add a comment to the script generated, as in
+
+<br><br>
+<pre class=ascii>
+display(log)
+check('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/models/SomeModel.txt')
+compile(1)
+gen.inits()
+update(1000)
+set(log.OR)
+update(1000)
+stats(*)
+density(log.OR)
+history(log.OR)
+save('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/log/tmp.odc')
+save('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/log/tmp-WinBUGSlog.txt')
+quit()
+# when done, compute stats for exp() of log.OR
+</pre>
+<br>
+
+
+Of course, running this script directly from the DOS-prompt would not give any information about the exponentiated node at all, as it is a comment and hence is ignored.
+Running the same script with <b>RunWinBUGSScript</b>, however, will produce a WinBUGS text log file that includes node statistics about
+the exponentiated node, as in:
+
+
+<pre class=out>
+Node statistics
+  node          mean     sd      MC error   2.5%    median   97.5%   start  sample   
+  log.OR        0.02654  0.9779  0.02926    -1.973  0.01147  1.981   1001   1000  
+	
+  /odds ratio/
+	
+  exp(log.OR)   ->       ->      ->         0.1390  1.0115   7.2499  1001   1000  
+</pre>
+
+
+<br><br>
+<a name=x></a>
+<div class=main>Dropping variables from data files</div>
+<br>
+<b>RunWinBUGSScript</b> will read comments about deleting variables; for example, see the bottom two lines of the WinBUGS script excerpted below &#150;
+
+<pre class=ascii>
+check('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/models/model.txt')
+data('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/list.txt')
+data('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/rectangle.txt')
+# RunWinBUGSScript will drop the following variable(s) from file(s) above:
+# datavar1 datavar2
+</pre>
+
+These two lines were generated by <b>WriteWinBUGSScript</b>
+(see <a href="WriteWinBUGSScript-2.html#x">Dropping variables from data files</a> section):
+<b>RunWinBUGSScript</b> will interpret them and make temporary copies of the modified data files, which will be used in place of the original data files in the modified WinBUGS script actually run.
+Consequently, the WinBUGS <i>.odc</i> output file may include unexpected paths to data files, as in
+
+<br><br>
+<pre class=out>
+check(c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/models/SomeModel.txt)
+model is syntactically correct
+data(c:/DOCUME~1/patrick/LOCALS~1/Temp/_rwbs.txt)
+data loaded
+data(c:/DOCUME~1/patrick/LOCALS~1/Temp/_rwbs1.txt)
+</pre>
+
+Don't worry! These files are the modified versions of data files listed in the original WinBUGS script submitted.
+The WinBUGS text log file is more informative about the <i>true</i> data files read with that regards as they list
+the original data files, followed by a comment relative to variables deletion.
+
+<br><br>
+<pre class=out>
+check(c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/models/SomeModel.txt)
+model is syntactically correct
+data(c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/list.txt)
+# from which the following variables was dropped:
+# datavar2
+data loaded
+data(c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/rectangle.txt)
+# from which the following variable was dropped:
+# datavar1
+</pre>
+
+<br><br>
+<div class=main>How to use <b>RunWinBUGSScript</b></div>
+<br>
+
+<b>RunWinBUGSScript</b> is a program written in Perl. 
+Please refer to my generic page on <a href="Submitting-Perl-programs-2.html">running Perl programs</a> for instructions.
+<br><br>
+
+<br>
+<div class=tip>Additional tip</div>
+<br>
+From the <a href="Submitting-Perl-programs-2.html">instructions section</a> linked above, you know that the natural way to submit a script to <b>RunWinBUGSScript</b> is
+to drag-and-drop the text file in which the script was filed onto <b>RunWinBUGSScript</b>'s desktop icon.<br>
+<br>
+After running such a script and viewing the WinBUGS log file produced (whose name ends by <i>-WinBUGSlog.txt</i>), 
+one may want to resubmit the script, after some modification to the model,
+the inits files, or even the data files. The natural way to resubmit the script
+is, again, to drag-and-drop it onto <b>RunWinBUGSScript</b>'s desktop icon: however, since the user just had a look at the WinBUGS log file, 
+it may be more convenient to just drag-and-drop that WinBUGS log file
+onto <b>RunWinBUGSScript</b>'s desktop icon, rather than having to browse through Windows Explorer to find the script that produced it.
+<br>
+
+<br>
+<div class=tip>Avoiding trap errors from permission settings on Windows 7 and Windows Vista platforms</div>
+<br>
+<table border=0 cellpadding=0><tr><td class=leftcell>
+If you are working on a Windows 7 or Windows Vista platform and have run WinBUGS before, y
+ou may have already run into the cryptic <b>Trap #060</b> error message illustrated to the right. 
+This is due to restricted write permissions in <i>c:\Program Files</i>, where you may have installed WinBUGS.
+<br><br>
+WinBUGS must be installed in a directory where you have write permissions (e.g. in <i>C:\Users\user name\Documents</i>) for 
+<b>RunWinBUGSScript</b> to run smoothly.</td><td><img src="img/Trap060-2.gif"></td></tr></table>
+<br>
+
+<br><br>
+<a name="download"></a>
+<div class=main>Download <b>RunWinBUGSScript</b></div>
+<br>
+
+<b>RunWinBUGSScript</b> is a free program. <a href="zip/RunWinBUGSScript-2.zip">Download version 2.0</a>, unzip
+and make sure <b>RunWinBUGSScript</b> finds WinBUGS by changing the path to <i>WinBUGS14.exe</i>: edit the file <i>RunWinBUGSScript.pl</i>
+and change the path found on the line
+<pre class=ascii>
+# our %My = (WinBUGS=> {path => "C:/Program Files (x86)/WinBUGS14/WinBUGS14.exe"});
+</pre>
+and uncomment that line (by removing the leading sharp character (#)).<br>
+Be careful! Use forward slashes (/) rather than backslashes (\) in the path expression.
+<br><br>          
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/RunWinBUGSScript.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:03 GMT -->
+</html>

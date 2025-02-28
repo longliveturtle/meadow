@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+support.sas.com	TRUE	/	FALSE	1999999999	BIGipServer~WEB~www.sas.com-443-pool	1761979797.47873.0000
+

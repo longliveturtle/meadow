@@ -1,0 +1,32 @@
+
+#  Main program
+
+gibbs.eps <- function(x1, n1, x2, n2, size1, size2)
+{
+p.samp <- c()
+eps.samp <- c()
+p.samp[1] <- x1/n1
+for(i in 1:(size2 - 1)) {
+eps.samp[i] <- nexteps(p.samp[i], x1, n1, x2, n2, size1)
+p.samp[i + 1] <- nextpi(eps.samp[i], x1, n1, x2, n2, size1)
+}
+eps<-eps.samp[1:(size2 - 1)]
+return(eps)
+}
+
+# Two needed subroutines
+
+nexteps <- function(p, x1, n1, x2, n2, size) {
+eps <- runif(size, min = - p, max = 1 - p)
+w <- p^(x1) * (1 - p)^(n1 - x1) * (p + eps)^(x2) * (1 - p - eps)^(n2 - x2)
+eps.samp <- sample(eps, 1, replace = T, prob = w)
+return(eps.samp)
+}
+
+nextpi <- function(eps, x1, n1, x2, n2, size) {
+p <- runif(size, min = max( - eps, 0), max = min(1, 1 - eps))
+w <- p^(x1) * (1 - p)^(n1 - x1) * (p + eps)^(x2) * (1 - p - eps)^(n2 - x2)
+p.samp <- sample(p, 1, replace = T, prob = w)
+return(p.samp)
+}
+

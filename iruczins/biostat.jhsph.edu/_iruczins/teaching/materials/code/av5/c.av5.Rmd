@@ -1,0 +1,73 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Multiple Comparisons
+
+#### Example from class: pea sections and sugar
+
+The data.
+
+```{r}
+x <- c(75,67,70,75,65,71,67,67,76,68,
+       57,58,60,59,62,60,60,57,59,61,
+       58,61,56,58,57,56,61,60,57,58,
+       58,59,58,61,57,56,58,57,57,59,
+       62,66,65,63,64,62,65,65,62,67)
+treat <- factor(rep(c("C","G","F","G+F","S"), rep(10,5)))
+sugar <- data.frame(rsp=x, trt=treat)
+head(sugar)
+str(sugar)
+summary(sugar)
+```
+
+Plot the data.
+
+```{r}
+set.seed(1)
+par(las=1)
+stripchart(sugar$rsp ~ sugar$trt, method="jitter", pch=1, xlab="response", ylab="group")
+```
+
+Analysis of variance.
+
+```{r}
+aov.out <- aov(rsp ~ trt, data=sugar)
+summary(aov.out)
+```
+
+Tukey's HSD
+
+```{r}
+sugar.tukey <- TukeyHSD(aov.out)
+par(las=1)
+plot(sugar.tukey)
+abline(v=0, lty=2, col="red")
+sugar.tukey
+```
+
+Bonferroni corrected confidence intervals (a customized function), based on a pooled estimate of the within-group standard deviation. 
+
+```{r}
+library(devtools)
+devtools::install_github("bllfrg/SPH.140.615",quiet=TRUE)
+library(SPH.140.615)
+sugar.bonf <- ci.bonf(sugar$rsp, sugar$trt)
+sugar.bonf
+```
+
+An alternative built-in function to get Bonferroni corrected pairwise comparisons p-values, based on a pooled estimate of the within-group standard deviation. 
+
+```{r}
+pairwise.t.test(sugar$rsp, sugar$trt, p.adjust="bonf")
+```
+
+The Newman-Keuls procedure, using a customized function.
+
+```{r}
+newman.keuls(sugar$rsp, sugar$trt)
+```
+
+
