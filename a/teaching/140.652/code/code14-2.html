@@ -1,0 +1,141 @@
+## ------------------------------------------------------------------------
+log(100)
+log(100,base=10)
+log(100,b=10)
+log(100,10)
+log10(100)
+log2(c(1,2,4,8))
+
+## ------------------------------------------------------------------------
+# log(ab) = log(a) + log(b)
+log(17*4)
+log(17)+log(4)
+# log(a^b) = b log(a)
+log(17^4)
+4*log(17)
+# log(a/b) = log(a) − log(b) 
+log(17/4)
+log(17)-log(4)
+
+## ------------------------------------------------------------------------
+log(17,base=4)
+log(17)/log(4)
+
+## ------------------------------------------------------------------------
+par(las=1,mfrow=c(2,1),mar=c(3,1,4,1)+0.1)
+x <- rnorm(300,20,5)
+y <- exp(rnorm(300,2,0.75))
+hist(x,breaks=30,xlab="",ylab="",yaxt="n",col="lightblue",main="Symmetric distribution")
+hist(y,breaks=30,xlab="",ylab="",yaxt="n",col="lightblue",main="Skewed distribution")
+
+## ------------------------------------------------------------------------
+# Simulate data from a standard Normal
+set.seed(1)
+n <- 1000
+y <- rnorm(n)
+x <- qnorm(((1:n)-0.5)/n) 
+# Note: other possibilities have been proposed as well, for example qnorm((1:n)/(n+1))
+
+# Plots
+par(mfrow=c(1,2))
+plot(x,sort(y))
+qqnorm(y)
+
+## ------------------------------------------------------------------------
+# Read the data
+il10 <- read.csv("../../140.615/data/il10.html")
+
+# Include log10(IL10) as a column
+il10 <- cbind(il10, logIL10=log10(il10$IL10))
+
+# Reorder the factor levels
+temp <- as.character(il10$Strain)
+il10$Strain <- factor(temp, levels=rev(c("A","B6",as.character(c(1,2,4:8,10:15,17:19,24:26)))))
+
+# Calculate the strain means
+me <- tapply(il10$IL10, il10$Strain, mean)
+logme <- tapply(il10$logIL10, il10$Strain, mean)
+
+# Plot the data
+par(las=1, mfrow=c(1,2))
+stripchart(il10$IL10 ~ il10$Strain, method="jitter", pch=1, 
+           ylab="Strain",xlab="IL10 response", jitter=0.2)
+segments(me, (1:21)-0.3, me, (1:21)+0.3, lwd=2, col="blue")
+abline(h=1:21, lty=2, col="gray",lwd=1)
+stripchart(il10$logIL10 ~ il10$Strain, method="jitter",pch=1,jitter=0.2, 
+           ylab="Strain",xlab=expression(paste(log[10], " IL10 response")))
+segments(logme, (1:21)-0.3, logme, (1:21)+0.3, lwd=2, col="blue")
+abline(h=1:21, lty=2, col="gray",lwd=1)
+
+## ------------------------------------------------------------------------
+aov.il10 <- aov(IL10 ~ Strain, data=il10).html
+aov.logil10 <- aov(logIL10 ~ Strain, data=il10).html
+
+## ------------------------------------------------------------------------
+par(las=1, mfrow=c(1,2), lwd=2) 
+stripchart(aov.il10$residuals ~ il10$Strain, method="jitter", pch=1,
+           ylab="Strain",xlab="residuals (IL10)", jitter=0.2)
+abline(h=1:21, lty=2, col="gray",lwd=1)
+abline(v=0,lty=2,col="green",lwd=1)
+stripchart(aov.logil10$residuals ~ il10$Strain, method="jitter",pch=1,jitter=0.2,
+           ylab="Strain",xlab=expression(paste("residuals (", log[10], " IL10)")))
+abline(h=1:21, lty=2, col="gray",lwd=1)
+abline(v=0,lty=2,col="green",lwd=1)
+
+# QQ plots of all residuals, with histograms
+par(las=1, mfcol=c(2,2), lwd=2)  
+hist(aov.il10$residuals, breaks=30, yaxt="n", ylab="", main="", xlab="Residuals")
+mtext("IL10", side=3, line=1, cex=1.5)
+qqnorm(aov.il10$residuals, main="")
+qqline(aov.il10$residuals,col="blue",lty=2,lwd=1)
+hist(aov.logil10$residuals, breaks=30, yaxt="n", ylab="", main="", xlab="Residuals")
+mtext(expression(paste(log[10], " IL10")), side=3, line=1, cex=1.5)
+qqnorm(aov.logil10$residuals, main="")
+qqline(aov.logil10$residuals,col="blue",lty=2,lwd=1)
+
+# Plot residuals vs fitted
+par(las=1, mfrow=c(1,2), lwd=2)
+plot(aov.il10$fitted, aov.il10$residuals, pch=1,
+     xlab="fitted values (IL10)",ylab="residuals (IL10)")
+abline(h=0, lty=2, col="green",lwd=1)
+plot(aov.logil10$fitted, aov.logil10$residuals, pch=1,
+     xlab=expression(paste("fitted values (", log[10], " IL10)")),
+     ylab=expression(paste("residuals (", log[10], " IL10)")))
+abline(h=0,lty=2,col="green",lwd=1)
+
+## ------------------------------------------------------------------------
+# Calculate the within-strain SDs
+s <- tapply(il10$IL10,il10$Strain, sd)  
+logs <- tapply(il10$logIL10,il10$Strain, sd)
+
+# Make the plot
+par(las=1, mfrow=c(1,2), lwd=2)
+plot(me, s, pch=1, xlab="Mean (IL10)", ylab="SD (IL10)")
+plot(logme, logs, pch=1, xlab=expression(paste("Mean (", log[10], " IL10)")),
+     ylab=expression(paste("SD (", log[10], " IL10)")))
+
+## ------------------------------------------------------------------------
+x1 <- seq(-4,4,length=101)
+x2 <- seq(0,10,length=101)
+par(mfrow=c(1,2))
+plot(x1,dnorm(x1),type="l")
+plot(x2,dlnorm(x2),type="l")
+
+## ------------------------------------------------------------------------
+x1 <- seq(-2,12,length=101)
+x2 <- seq(0,500,length=101)
+par(mfrow=c(1,2))
+plot(x1,dnorm(x1,5,2),type="l")
+plot(x2,dlnorm(x2,5,2),type="l")
+
+## ------------------------------------------------------------------------
+x <- seq(-4,4,length=101)
+y <- rnorm(1000)
+z <- rlnorm(1000)
+par(mfrow=c(1,3))
+hist(y,breaks=21,prob=TRUE,col="lightblue",xlim=c(-4,4))
+lines(x,dnorm(x),lwd=2,col="red")
+hist(z,breaks=21,prob=TRUE,col="lightblue")
+hist(log(z),breaks=21,prob=TRUE,col="lightblue",xlim=c(-4,4))
+lines(x,dnorm(x),lwd=2,col="red")
+

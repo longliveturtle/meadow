@@ -1,0 +1,195 @@
+<html>
+<!-- Mirrored from biostat.jhsph.edu/~iruczins/teaching/140.751/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 06:58:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head><title>Advanced Methods in Biostatistics 1</title>
+<link rel=stylesheet type="text/css" href="ingo.css"></head>
+
+<font size=+1><b>Advanced Methods in Biostatistics 1 (140.751)</b></font>
+
+<hr width=100%>
+
+<p><b>First term objectives:</b>
+Random vectors, Multivariate normal distribution, Distributions of
+quadratic forms, Least squares estimation, Gauss Markov theorem,
+Orthogonal structures, Generalized least squares, Estimable functions,
+Hypothesis testing, Simultaneous confidence intervals, Departures from
+assumptions, Diagnostics.
+
+<p><b>Text:</b>
+Franklin A. Graybill, Theory and Application of the Linear Model,
+Wadsworth, 2000.
+
+<p><b>Useful links:</b>
+[<a href="info.html">
+General Course Info</a>
+|<a href="../cr/chuck.html">
+Chuck Rohde's Notes</a>
+|<a href="../../../../cran.r-project.org/doc/manuals/R-intro.pdf">
+Introduction to R (CRAN)</a>
+|<a href="ingo.R.pdf">
+Introduction to R (Ingo)</a>
+|<a href="http://www.biostat.jhsph.edu/~kbroman/Rintro/">
+Karl Broman's R Page</a> 
+|<a href="../jf/faraway.html">
+Julian Faraway's Book</a> ]
+
+<hr>
+
+<br>
+
+<table cellspacing="10" cellpadding="3">
+
+<tbody><tr><td valign="top" colspan="2"><b>Date</b></td> <td
+    valign="top"><b>N</b></td> <td valign="top"><b>R</b></td> <td
+    valign="top"><b>H</b></td> <td valign="top"><b>C</b><img
+    src="transparent.gif" width=10></td> <td
+    valign="top"><b>Topic</b></td></tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top">September</td><td valign="top" align="right">7</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r1.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Introduction; Review of linear algebra and matrices</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">12</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r2.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Random vectors</td>
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">14</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r3.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw1.pdf"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw1.R"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">The multivariate normal distribution</td>
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">19</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r4.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Distribution of quadratic forms</td>
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">21</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r5.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Least squares estimation</td>
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">26</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r5.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw2.pdf"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw2.R"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Design matrices of less than full rank</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">28</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r6.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top">Orthogonal structure in the design matrix</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top">October</td><td valign="top" align="right">3</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r7.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top">Generalized least squares</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">5</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r7.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw3.pdf"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw3.R"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Estimable functions</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">10</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r8.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Hypothesis testing</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">12</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r8.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw4.pdf"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="hwk/hw4.R"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Hypothesis testing</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">17</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r8.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">Hypothesis testing</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">19</td>
+    <td valign="top"><a href="notes/notes.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="read/r8.html"><img src="blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>    
+    <td valign="top">Hypothesis testing</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">24</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Review</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">26</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Final</td>    
+</tr>
+
+</tbody></table>
+
+<br>
+
+<p>
+<b>N:</b> Notes  
+<img src="transparent.gif" width=10>
+<b>R:</b> Reading
+<img src="transparent.gif" width=10>
+<b>H:</b> Homework
+<img src="transparent.gif" width=10>
+<b>C:</b> Code
+
+<br>
+
+<hr> 
+
+</font></body>
+<!-- Mirrored from biostat.jhsph.edu/~iruczins/teaching/140.751/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 06:59:25 GMT -->
+</html>
