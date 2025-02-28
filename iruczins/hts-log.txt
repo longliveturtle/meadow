@@ -1,0 +1,20 @@
+HTTrack3.49-5 launched on Fri, 28 Feb 2025 13:52:29 at https://biostat.jhsph.edu/~iruczins/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/*
+(webhttrack -q -%i -w https://biostat.jhsph.edu/~iruczins/ -O "/media/tuhocr/CLOUD1/TURTLE/meadow/iruczins" -n -%P -N0 -s2 -p7 -D -a -K0 -c4 -%k -A100000 -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -%s -%u )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+13:53:57	Error: 	Exit requested by shell or user
+13:53:58	Warning: 	File not added due to mirror cancel: https://biostat.jhsph.edu/~iruczins/software/
+13:53:58	Error: 	"mirror stopped by user" (-1) at link https://biostat.jhsph.edu/~iruczins/software/ (from https://biostat.jhsph.edu/~iruczins/)
+13:53:58	Warning: 	File not added due to mirror cancel: https://biostat.jhsph.edu/~iruczins/teaching/kogo/
+13:53:58	Error: 	"mirror stopped by user" (-1) at link https://biostat.jhsph.edu/~iruczins/teaching/kogo/ (from https://biostat.jhsph.edu/~iruczins/teaching/)
+13:53:58	Warning: 	File not added due to mirror cancel: https://biostat.jhsph.edu/~iruczins/software/phi.html
+13:53:58	Error: 	"mirror stopped by user" (-1) at link https://biostat.jhsph.edu/~iruczins/software/phi.html (from https://biostat.jhsph.edu/~iruczins/software/)
+13:53:58	Warning: 	File not added due to mirror cancel: https://biostat.jhsph.edu/~iruczins/teaching/260.655/files/AT_pH5.tab
+13:53:58	Error: 	"mirror stopped by user" (-1) at link https://biostat.jhsph.edu/~iruczins/teaching/260.655/files/AT_pH5.tab (from https://biostat.jhsph.edu/~iruczins/teaching/260.655/)
+
+HTTrack Website Copier/3.49-5 mirror complete in 1 minutes 29 seconds : 65 links scanned, 64 files written (215317314 bytes overall) [215341397 bytes received at 2419566 bytes/sec], 3.1 requests per connection
+(5 errors, 4 warnings, 0 messages)

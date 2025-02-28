@@ -1,0 +1,211 @@
+<html>
+<!-- Mirrored from biostat.jhsph.edu/~iruczins/teaching/140.752/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 06:53:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head><title>Advanced Methods in Biostatistics 2</title>
+<link rel=stylesheet type="text/css" href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/ingo.css"></head>
+
+<font size=+1><b>Advanced Methods in Biostatistics 2 (140.752)</b></font>
+
+<hr width=100%>
+
+<p><b>Second term objectives:</b>
+Experimental design, Analysis of variance, Random and mixed effects.
+
+<p><b>Text:</b>
+Franklin A. Graybill, Theory and Application of the Linear Model,
+Wadsworth, 2000.
+
+<p><b>Useful links:</b>
+[<a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/info.html">
+General Course Info</a>
+|<a href="http://www.biostat.jhsph.edu/~iruczins/teaching/cr/chuck.html">
+Chuck Rohde's Notes</a>
+|<a href="http://www.biostat.jhsph.edu/~iruczins/teaching/jf/faraway.html">
+Julian Faraway's Book</a> 
+]
+
+<hr>
+
+<p>
+<font color="red">NEW</font>:
+Instead of an in-class final, please go through the following <a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/list.pdf">list of questions</a>.
+They should help you to prepare for your 2nd year oral exam.
+
+<br>
+
+<hr>
+
+<p>
+The data and the instructions for your report area <a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/report/index.html">here</a>.
+
+<br>
+
+<hr>
+
+<br>
+
+<table cellspacing="10" cellpadding="3">
+
+<tbody><tr><td valign="top" colspan="2"><b>Date</b></td>
+    <td valign="top"><b>N</b></td>
+    <td valign="top"><b>R</b></td>
+    <td valign="top"><b>H</b></td>
+    <td valign="top"><b>C</b><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/transparent.gif" width=10></td>
+    <td valign="top"><b>Topic</b></td></tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top">October</td><td valign="top" align="right">31</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r9.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>    
+    <td valign="top">Simultaneous confidence intervals</td>    
+</tr>
+
+<tr><td valign="top">November</td><td valign="top" align="right">2</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r10.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">Effects of departures from assumptions</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">7</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r10.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw5.pdf"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw5.R"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Effects of departures from assumptions</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">9</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r10.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">Effects of departures from assumptions</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">14</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r11.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">Residuals and influence</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">16</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r12.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">Introduction to design and analysis of experiments</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">21</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r13.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">One-way analysis of variance</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">23</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r13.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw6.pdf"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top">One-way analysis of variance</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">28</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r13.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">One-way analysis of variance</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">30</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r14.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Nested and higher order designs</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top">December</td><td valign="top" align="right">5</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r14.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw7.pdf"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw7.R"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Nested and higher order designs</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">7</td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/notes/notes.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/read/r15.html"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw8.pdf"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top"><a href="https://biostat.jhsph.edu/~iruczins/teaching/140.752/hwk/hw8.R"><img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/blueshim.gif" width="10" height="10" align="middle"></a></td>
+    <td valign="top">Some more miscellaneous ANOVA topics</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">12</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Linear mixed effects (Lecturer: Ciprian Crainiceanu)</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">14</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Linear mixed effects (Lecturer: Ciprian Crainiceanu)</td>    
+</tr>
+
+<tr height="10"><td valign="top"></td></tr>
+<tr><td valign="top"></td><td valign="top" align="right">19</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Linear mixed effects (Lecturer: Ciprian Crainiceanu)</td>    
+</tr>
+
+<tr><td valign="top"></td><td valign="top" align="right">21</td>
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top"></td>
+    <td valign="top"></td>    
+    <td valign="top">Linear mixed effects (Lecturer: Ciprian Crainiceanu)</td>    
+</tr>
+
+</tbody></table>
+
+<br>
+
+<p>
+<b>N:</b> Notes  
+<img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/transparent.gif" width=10>
+<b>R:</b> Reading
+<img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/transparent.gif" width=10>
+<b>H:</b> Homework
+<img src="https://biostat.jhsph.edu/~iruczins/teaching/140.752/transparent.gif" width=10>
+<b>C:</b> Code
+
+<br>
+
+<hr> 
+
+</font></body>
+<!-- Mirrored from biostat.jhsph.edu/~iruczins/teaching/140.752/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 06:53:58 GMT -->
+</html>
