@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from stats.oarc.ucla.edu/r/dae/mixed-effects-logistic-regression/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Mar 2025 04:14:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head >
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Mixed Effects Logistic Regression |  R Data Analysis Examples</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};
+
+</script>
+<link rel='dns-prefetch' href='../../../../cdn.jsdelivr.net/index.html' />
+<link rel='dns-prefetch' href='../../../../platform-api.sharethis.com/index.html' />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<link rel="alternate" type="text/calendar" title="OARC Stats &raquo; iCal Feed" href="../../../calendar/indexedf3.html?ical=1" />
+<link rel="canonical" href="index.html" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stats.oarc.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/9df84.css" media="all" />
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/a5ff7.css" media="all" />
+
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4c431.css" media="all" />
+
+<style id='contact-form-7-inline-css' type='text/css'>
+.wpcf7 .wpcf7-recaptcha iframe {margin-bottom: 0;}.wpcf7 .wpcf7-recaptcha[data-align="center"] > div {margin: 0 auto;}.wpcf7 .wpcf7-recaptcha[data-align="right"] > div {margin: 0 0 0 auto;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4033d.css" media="all" />
+
+
+
+<link rel='stylesheet' id='slicknavcss-css' href='../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<script  src="../../../wp-content/cache/minify/818c0.js"></script>
+
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1" id="slicknav-js"></script>
+<script type="text/javascript" src="../../../../platform-api.sharethis.com/js/sharethis.js#source=googleanalytics-wordpress#product=ga&amp;property=5b058eb03e4a630011ba71c0" id="googleanalytics-platform-sharethis-js"></script>
+<link rel="https://api.w.org/" href="../../../wp-json/index.html" /><link rel="alternate" title="JSON" type="application/json" href="../../../wp-json/wp/v2/pages/924.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc0db0.html?rsd" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embedf32d.json?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Fmixed-effects-logistic-regression%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed8f37?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Fmixed-effects-logistic-regression%2F&amp;format=xml" />
+<meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://stats.oarc.ucla.edu"><link rel="alternate" href="../../../wp-json/tribe/events/v1/index.html" /><link rel="icon" href="../../../wp-content/themes/genesis-child/images/favicon.ico" />
+<link rel="pingback" href="../../../xmlrpc.html" />
+<script>
+(function() {
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '../../../../google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-121222866-1', 'auto');
+			ga('send', 'pageview');
+	})();
+</script>
+
+<link rel="icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+<link rel="shortcut icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+
+</head>
+
+<body class="page-template-default page page-id-924 page-child parent-pageid-916 tribe-no-js header-image content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-hidden" itemscope itemtype="https://schema.org/WebPage"><div class="site-container"><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li><li><a href="#genesis-sidebar-primary" class="screen-reader-shortcut"> Skip to primary sidebar</a></li></ul><header class="site-header" itemscope itemtype="https://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+
+	<div class="site-title" itemprop="headline"><a href="https://stats.oarc.ucla.edu/">stats.oarc.ucla.edu</a></div>
+
+	<p class="site-description" itemprop="description">Statistical Methods and Data Analytics</p></div>
+</div><div class="widget-area header-widget-area"><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><div><div class = "top-wrap"><div id = "ucla-logo"><img alt="Image " src = "../../../wp-content/uploads/logo/idrelogo4.png" width = 380px alt = "IDRE Logo"></div></div>
+</div></div></div></section>
+<section id="search-11" class="widget widget_search"><div class="widget-wrap"><form class="search-form" method="get" action="https://stats.oarc.ucla.edu/" role="search" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction"><label class="search-form-label screen-reader-text" for="searchform-1">Search this website</label><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search this website" itemprop="query-input"><input class="search-form-submit" type="submit" value="Search"><meta content="https://stats.oarc.ucla.edu/?s={s}" itemprop="target"></form></div></section>
+</div></div></header><nav class="nav-primary" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement" id="genesis-nav-primary"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22640"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="../../index.html" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="https://stats.oarc.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="https://stats.oarc.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="https://stats.oarc.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="https://stats.oarc.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="https://stats.oarc.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="https://stats.oarc.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="https://stats.oarc.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="https://stats.oarc.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22661"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="https://stats.oarc.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="../../../other/dae/index.html" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="https://stats.oarc.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22663"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-33775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33775"><a href="https://stats.idre.ucla.edu/ucla/policies/remote" itemprop="url"><span itemprop="name">Remote Consulting</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="https://stats.oarc.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="https://stats.oarc.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="https://stats.oarc.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="https://stats.oarc.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+		<li id="menu-item-30604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30604"><a href="https://stats.idre.ucla.edu/ucla/frequently-asked-questions-about-our-statistical-consulting-services/" itemprop="url"><span itemprop="name">FAQ</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="https://stats.oarc.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="https://stats.oarc.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="https://www.cores.ucla.edu/statistical-biomathematical-consulting-clinic-sbcc/" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="https://stats.oarc.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-924 page type-page status-publish entry" aria-label="Mixed Effects Logistic Regression |  R Data Analysis Examples" itemscope itemtype="https://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Mixed Effects Logistic Regression |  R Data Analysis Examples</h1>
+</header><div class="entry-content" itemprop="text"><p><!--[mathjax]--></p>
+<p>Mixed effects logistic regression is used to model binary outcome variables,
+in which the log odds of the outcomes are modeled as a linear
+combination of the predictor variables when data are clustered or there are
+both fixed and random effects.</p>
+<p>This page uses the following packages. Make sure that you can load
+them before trying to run the examples on this page. If you do not have
+a package installed, run: <code>install.packages("packagename")</code>, or
+if you see the version is out of date, run: <code>update.packages()</code>.</p>
+<div id="unnamed-chunk-2" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">require</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">require</span><span class="hl std">(GGally)</span>
+<span class="hl kwd">require</span><span class="hl std">(reshape2)</span>
+<span class="hl kwd">require</span><span class="hl std">(lme4)</span>
+<span class="hl kwd">require</span><span class="hl std">(compiler)</span>
+<span class="hl kwd">require</span><span class="hl std">(parallel)</span>
+<span class="hl kwd">require</span><span class="hl std">(boot)</span>
+<span class="hl kwd">require</span><span class="hl std">(lattice)</span>
+</pre>
+</div>
+</div>
+</div>
+<p><code class="knitr inline"><strong>Version info: </strong>Code for this page was tested in R version 3.1.0 (2014-04-10)
+On: 2014-07-10
+With: boot 1.3-11; lme4 1.1-6; Rcpp 0.11.2; Matrix 1.1-3; GGally 0.4.4; reshape 0.8.4; plyr 1.8; xtable 1.7-3; car 2.0-20; foreign 0.8-61; Hmisc 3.14-4; Formula 1.1-1; survival 2.37-7; lattice 0.20-29; mgcv 1.7-29; nlme 3.1-117; png 0.1-7; gridExtra 0.9.1; reshape2 1.2.2; ggplot2 0.9.3.1; vcd 1.3-1; rjson 0.2.14; RSQLite 0.11.4; DBI 0.2-7; knitr 1.5
+</code></p>
+<p><strong>Please note:</strong> The purpose of this page is to show how to use various
+data analysis commands. It does not cover all aspects of the research process
+which researchers are expected to do. In particular, it does not cover data
+cleaning and checking, verification of assumptions, model diagnostics or
+potential follow-up analyses.</p>
+<h2>Examples of mixed effects logistic regression</h2>
+<p><strong>Example 1:</strong> A researcher sampled applications to 40 different colleges to study
+factor that predict admittance into college. Predictors include student&#8217;s high school GPA,
+extracurricular activities, and SAT scores. Some schools are more or less selective, so the baseline
+probability of admittance into each of the schools is different. School level predictors include
+whether the school is public or private, the current student-to-teacher ratio, and the school&#8217;s rank.</p>
+<p><strong>Example 2:</strong> A large HMO wants to know what patient and physician factors are
+most related to whether a patient&#8217;s lung cancer goes into remission after treatment as part of
+a larger study of treatment outcomes and quality of life in patients with lunger cancer.</p>
+<p><strong>Example 3:</strong> A television station wants to know how time and advertising campaigns
+affect whether people view a television show. They sample people from four cities
+for six months. Each month, they ask whether the people had watched a particular
+show or not in the past week. After three months, they introduced a new advertising
+campaign in two of the four cities and continued monitoring whether or not people had
+watched the show.</p>
+<h2>Description of the data</h2>
+<p>In this example, we are going to explore Example 2 about lung cancer using a simulated
+dataset, which we have posted online. A variety of outcomes were collected on
+patients, who are nested within doctors, who are in turn nested within hospitals.
+There are also a few doctor level variables, such as <code>Experience</code>
+that we will use in our example.</p>
+<div id="unnamed-chunk-3" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">hdp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">"https://stats.idre.ucla.edu/stat/data/hdp.csv"</span><span class="hl std">)</span>
+<span class="hl std">hdp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">within</span><span class="hl std">(hdp, {</span>
+  <span class="hl std">Married</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(Married,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"no"</span><span class="hl std">,</span> <span class="hl str">"yes"</span><span class="hl std">))</span>
+  <span class="hl std">DID</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(DID)</span>
+  <span class="hl std">HID</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(HID)
+</span>  CancerStage &lt;- factor(CancerStage)
+<span class="hl std">})</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Now we are going to graph our continuous predictor variables.
+Visualizing data can help us understand the distributions,
+catch coding errors (e.g., we know a variable only takes values
+from 0 to 7, but we see a 999 in the graph), and give us a
+sense of the relationship among our variables. For example,
+we might see that two predictors are highly correlated and
+decide we only want to include one in the model, or we might
+note a curvilinear relation between two variables. Data
+visualization is a fast, intuitive way to check all of this at
+once. If most your predictors appear independent of each
+other, that is fine. It shapes your expectations of the model.
+For example, if they are independent, the estimate for one predictor
+should not change much when you enter another predictor (although
+the standard error and significance tests may). We can get all of this
+information and intuition about what and how to model are data
+by simply viewing it.</p>
+<div id="unnamed-chunk-4" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">ggpairs</span><span class="hl std">(hdp[,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"IL6"</span><span class="hl std">,</span> <span class="hl str">"CRP"</span><span class="hl std">,</span> <span class="hl str">"LengthofStay"</span><span class="hl std">,</span> <span class="hl str">"Experience"</span><span class="hl std">)])</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-4.png" alt="Scatter plot matrix of continuous variables" width="500px" height="500px" /></div>
+</div>
+<p>There do not seem to be any strong linear relations among our continuous
+predictors. Let us look at the distributions of our variables by
+<code>CancerStage</code>.
+Because <code>LengthofStay</code> is coded discretely in days,
+we can examine how <code>CancerStage</code> is associated
+with it using bubble plots. The area of each bubble is
+proportional to the number of observations with those values.
+For the continuous predictors, we use violin plots with jittered
+data values. All of the raw data is presented separated by
+<code>CancerStage</code>. To alleviate overplotting and see the
+values better, we add a small amount of random noise (primarily
+to the x axis) as well as set the alpha transparency.
+Although the jittered dots are helpful for seeing the raw data,
+it can be difficult to get a precise sense of the distribution.
+For that, we add violin plots. Violin plots are just kernel
+density plots reflected around the plotting axis. We plot the
+violin plots on top of the jittered points with a transparency
+so that you can stil see the raw data, but the violin plots are
+dominant. Because both <code>IL6</code> and <code>CRP</code>
+tend to have skewed distributions, we use a square root scale
+on the y axis. The distributions look fairly normal and symmetric,
+although you can still see the long right tail, even using a
+square root scale (note that only the scale was shifted, the
+values themselves are not transformed, which is important
+because this lets you see and interpret the actual scores,
+rather than the square root of the scores).</p>
+<div id="unnamed-chunk-5" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(hdp,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= CancerStage,</span> <span class="hl kwc">y</span> <span class="hl std">= LengthofStay))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">stat_sum</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">size</span> <span class="hl std">= ..n..,</span> <span class="hl kwc">group</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_size_area</span><span class="hl std">(</span><span class="hl kwc">max_size</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-51.png" alt="Bubble plot of number of people with each length of stay by cancer stage" width="500px" height="500px" /></div>
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">tmp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(hdp[,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"CancerStage"</span><span class="hl std">,</span> <span class="hl str">"IL6"</span><span class="hl std">,</span> <span class="hl str">"CRP"</span><span class="hl std">)],</span> <span class="hl kwc">id.vars</span><span class="hl std">=</span><span class="hl str">"CancerStage"</span><span class="hl std">)</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(tmp,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= CancerStage,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_jitter</span><span class="hl std">(</span><span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">.1</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_violin</span><span class="hl std">(</span><span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">.75</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_grid</span><span class="hl std">(variable</span> <span class="hl opt">~</span> <span class="hl std">.)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_y_sqrt</span><span class="hl std">()</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-52.html" alt="Violin plots over jittered data points of values for IL6 and CRP by CancerStage on a square root scale" width="500px" height="500px" /></div>
+</div>
+<p>Because it is difficult to see how binary variables change
+over levels of continuous variables, we can flip the problem around
+and look at the distribution of continuous variables at each level
+of the binary outcome.</p>
+<div id="unnamed-chunk-6" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">tmp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(hdp[,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"remission"</span><span class="hl std">,</span> <span class="hl str">"IL6"</span><span class="hl std">,</span> <span class="hl str">"CRP"</span><span class="hl std">,</span> <span class="hl str">"LengthofStay"</span><span class="hl std">,</span> <span class="hl str">"Experience"</span><span class="hl std">)],</span>
+  <span class="hl kwc">id.vars</span><span class="hl std">=</span><span class="hl str">"remission"</span><span class="hl std">)</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(tmp,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(remission),</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span> <span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl kwd">factor</span><span class="hl std">(remission)))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">variable,</span> <span class="hl kwc">scales</span><span class="hl std">=</span><span class="hl str">"free_y"</span><span class="hl std">)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-6.png" alt="Boxplots of predictors grouped by remission status" width="500px" height="500px" /></div>
+</div>
+<h2>Analysis methods you might consider</h2>
+<p>Below is a list of analysis methods you may have considered.</p>
+<ul>
+<li>Mixed effects logistic regression, the focus of this page.</li>
+<li>Mixed effects probit regression is very similar to mixed
+effects logistic regression, but it uses the normal CDF instead
+of the logistic CDF. Both model binary outcomes and can include
+fixed and random effects.</li>
+<li>Fixed effects logistic regression is limited in this case
+because it may ignore necessary random effects and/or non
+independence in the data.</li>
+<li>Fixed effects probit regression is limited in this case because
+it may ignore necessary random effects and/or non independence in the data.</li>
+<li>Logistic regression with clustered standard errors. These can adjust
+for non independence but does not allow for random effects.</li>
+<li>Probit regression with clustered standard errors. These can adjust
+for non independence but does not allow for random effects.</li>
+</ul>
+<h2>Mixed effects logistic regression</h2>
+<p>Below we use the <code>glmer</code> command to estimate a mixed effects
+logistic regression model with <code>Il6</code>, <code>CRP</code>, and
+<code>LengthofStay</code> as patient level continuous predictors,
+<code>CancerStage</code> as a patient level categorical predictor (I, II, III, or IV),
+<code>Experience</code> as a doctor level continuous predictor,
+and a random intercept by <code>DID</code>, doctor ID.</p>
+<p>Estimating and interpreting generalized linear mixed models
+(GLMMs, of which mixed effects logistic regression is one) can be quite
+challenging. If you are just starting, we highly recommend reading this
+page first <a href="https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-generalized-linear-mixed-models/">Introduction to GLMMs </a>.
+It covers some of the background and theory as well as estimation options,
+inference, and pitfalls in more detail.</p>
+<div id="unnamed-chunk-7" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># estimate the model and store results in m</span>
+<span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">glmer</span><span class="hl std">(remission</span> <span class="hl opt">~</span> <span class="hl std">IL6</span> <span class="hl opt">+</span> <span class="hl std">CRP</span> <span class="hl opt">+</span> <span class="hl std">CancerStage</span> <span class="hl opt">+</span> <span class="hl std">LengthofStay</span> <span class="hl opt">+</span> <span class="hl std">Experience</span> <span class="hl opt">+</span>
+    <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">|</span> <span class="hl std">DID),</span> <span class="hl kwc">data</span> <span class="hl std">= hdp,</span> <span class="hl kwc">family</span> <span class="hl std">= binomial,</span> <span class="hl kwc">control</span> <span class="hl std">=</span> <span class="hl kwd">glmerControl</span><span class="hl std">(</span><span class="hl kwc">optimizer</span> <span class="hl std">=</span> <span class="hl str">"bobyqa"</span><span class="hl std">),</span>
+    <span class="hl kwc">nAGQ</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+
+<span class="hl com"># print the mod results without correlations among fixed effects</span>
+<span class="hl kwd">print</span><span class="hl std">(m,</span> <span class="hl kwc">corr</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## Generalized linear mixed model fit by maximum likelihood (Adaptive
+##   Gauss-Hermite Quadrature, nAGQ = 10) [glmerMod]
+##  Family: binomial ( logit )
+## Formula: 
+## remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience +  
+##     (1 | DID)
+##    Data: hdp
+##      AIC      BIC   logLik deviance df.resid 
+##     7397     7461    -3690     7379     8516 
+## Random effects:
+##  Groups Name        Std.Dev.
+##  DID    (Intercept) 2.01    
+## Number of obs: 8525, groups: DID, 407
+## Fixed Effects:
+##    (Intercept)             IL6             CRP   CancerStageII  
+##        -2.0527         -0.0568         -0.0215         -0.4139  
+## CancerStageIII   CancerStageIV    LengthofStay      Experience  
+##        -1.0035         -2.3370         -0.1212          0.1201
+</pre>
+</div>
+</div>
+</div>
+<p>The first part tells us the estimates are based on an
+adaptive Gaussian Hermite approximation of the likelihood. In particular we used 10
+integration points. As we use more
+integration points, the approximation becomes more accurate converging to the ML estimates;
+however, more points are more computationally demanding and can be extremely slow
+or even intractable with today&#8217;s technology. To avoid a warning of nonconvergence, we specify a different optimizer with the argument <code>control=glmerControl(optimizer="bobyqa")</code>. Although the model will produce nearly identical results without the new argument, we prefer to use models without such warnings.</p>
+<p>The next section gives us basic information that can be used to compare models,
+followed by the random effect estimates. This represents the estimated variability
+in the intercept on the logit scale. Had there been other random effects, such as
+random slopes, they would also appear here. The top section concludes with the
+total number of observations, and the number of level 2 observations. In our case,
+this includes the total number of patients (8,525) and doctors (407).</p>
+<p>The last section is a table of the fixed effects estimates. For many applications,
+these are what people are primarily interested in. The estimates represent the
+regression coefficients. These are unstandardized and are on the logit scale. The
+estimates are followed by their standard errors (SEs). As is common in GLMs, the SEs
+are obtained by inverting the observed information matrix (negative second derivative matrix).
+However, for GLMMs, this is again an approximation. The approximations of the coefficient
+estimates likely stabilize faster than do those for the SEs. Thus if you are using fewer
+integration points, the estimates may be reasonable, but the approximation of the SEs may be
+less accurate. The Wald tests, (frac{Estimate}{SE}), rely on asymptotic theory, here referring
+to as the highest level unit size converges to infinity, these tests will be normally distributed,
+and from that, p values (the probability of obtaining the observed estimate or more extreme,
+given the true estimate is 0).</p>
+<p>It can be nice to get confidence intervals (CIs). We can get rough estimates using the SEs.</p>
+<div id="unnamed-chunk-8" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">se</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sqrt</span><span class="hl std">(</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl kwd">vcov</span><span class="hl std">(m)))</span>
+<span class="hl com"># table of estimates with 95% CI</span>
+<span class="hl std">(tab</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cbind</span><span class="hl std">(</span><span class="hl kwc">Est</span> <span class="hl std">=</span> <span class="hl kwd">fixef</span><span class="hl std">(m),</span> <span class="hl kwc">LL</span> <span class="hl std">=</span> <span class="hl kwd">fixef</span><span class="hl std">(m)</span> <span class="hl opt">-</span> <span class="hl num">1.96</span> <span class="hl opt">*</span> <span class="hl std">se,</span> <span class="hl kwc">UL</span> <span class="hl std">=</span> <span class="hl kwd">fixef</span><span class="hl std">(m)</span> <span class="hl opt">+</span> <span class="hl num">1.96</span> <span class="hl opt">*</span>
+    <span class="hl std">se))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                     Est       LL        UL
+## (Intercept)    -2.05269 -3.09435 -1.011025
+## IL6            -0.05677 -0.07935 -0.034196
+## CRP            -0.02148 -0.04151 -0.001455
+## CancerStageII  -0.41393 -0.56243 -0.265436
+## CancerStageIII -1.00346 -1.19610 -0.810828
+## CancerStageIV  -2.33704 -2.64683 -2.027241
+## LengthofStay   -0.12118 -0.18710 -0.055261
+## Experience      0.12009  0.06628  0.173895
+</pre>
+</div>
+</div>
+</div>
+<p>If we wanted odds ratios instead of coefficients on the logit scale,
+we could exponentiate the estimates and CIs.</p>
+<div id="unnamed-chunk-9" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">exp</span><span class="hl std">(tab)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                    Est      LL     UL
+## (Intercept)    0.12839 0.04530 0.3638
+## IL6            0.94481 0.92372 0.9664
+## CRP            0.97875 0.95934 0.9985
+## CancerStageII  0.66104 0.56982 0.7669
+## CancerStageIII 0.36661 0.30237 0.4445
+## CancerStageIV  0.09661 0.07088 0.1317
+## LengthofStay   0.88587 0.82936 0.9462
+## Experience     1.12760 1.06853 1.1899
+</pre>
+</div>
+</div>
+</div>
+<h2>Multilevel bootstrapping</h2>
+<p>Inference from GLMMs is complicated. Except for cases where there are
+many observations at each level (particularly the highest), assuming
+that (frac{Estimate}{SE}) is normally distributed may not be accurate.
+A variety of alternatives have been suggested including Monte Carlo simulation,
+Bayesian estimation, and bootstrapping. Each of these can be complex to
+implement. We are going to focus on a small bootstrapping example.</p>
+<p>Bootstrapping is a resampling method. It is by no means perfect,
+but it is conceptually straightforward and easy to implement in code.
+One downside is that it is computationally demanding. For large datasets
+or complex models where each model takes minutes to run, estimating
+on thousands of bootstrap samples can easily take hours or days. In the example
+for this page, we use a very small number of samples, but in practice you
+would use many more. Perhaps 1,000 is a reasonable starting point.</p>
+<p>For single level models, we can implement a simple random sample
+with replacement for bootstrapping. With multilevel data, we want
+to resample in the same way as the data generating mechanism. We start
+by resampling from the highest level, and then stepping down one level
+at a time. In our case, we first will sample from doctors, and then
+within each doctor sampled, we will sample from their patients. To do this,
+we first need to write a function to resample at each level.</p>
+<p>The Biostatistics Department at Vanderbilt has a nice page describing the idea: <a href="https://biostat.app.vumc.org/wiki/Main/HowToBootstrapCorrelatedData">Applied Nonparametric Bootstrap with Hierarchical and Correlated Data</a></p>
+<div id="unnamed-chunk-10" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">sampler</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">dat</span><span class="hl std">,</span> <span class="hl kwc">clustervar</span><span class="hl std">,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl kwc">reps</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">) {</span>
+    <span class="hl std">cid</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">unique</span><span class="hl std">(dat[, clustervar[</span><span class="hl num">1</span><span class="hl std">]])</span>
+    <span class="hl std">ncid</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">length</span><span class="hl std">(cid)</span>
+    <span class="hl std">recid</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(cid,</span> <span class="hl kwc">size</span> <span class="hl std">= ncid</span> <span class="hl opt">*</span> <span class="hl std">reps,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+    <span class="hl kwa">if</span> <span class="hl std">(replace) {</span>
+        <span class="hl std">rid</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lapply</span><span class="hl std">(</span><span class="hl kwd">seq_along</span><span class="hl std">(recid),</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">) {</span>
+            <span class="hl kwd">cbind</span><span class="hl std">(</span><span class="hl kwc">NewID</span> <span class="hl std">= i,</span> <span class="hl kwc">RowID</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">which</span><span class="hl std">(dat[, clustervar]</span> <span class="hl opt">==</span> <span class="hl std">recid[i]),</span>
+                <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl kwd">length</span><span class="hl std">(</span><span class="hl kwd">which</span><span class="hl std">(dat[, clustervar]</span> <span class="hl opt">==</span> <span class="hl std">recid[i])),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+        <span class="hl std">})</span>
+    <span class="hl std">}</span> <span class="hl kwa">else</span> <span class="hl std">{</span>
+        <span class="hl std">rid</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lapply</span><span class="hl std">(</span><span class="hl kwd">seq_along</span><span class="hl std">(recid),</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">) {</span>
+            <span class="hl kwd">cbind</span><span class="hl std">(</span><span class="hl kwc">NewID</span> <span class="hl std">= i,</span> <span class="hl kwc">RowID</span> <span class="hl std">=</span> <span class="hl kwd">which</span><span class="hl std">(dat[, clustervar]</span> <span class="hl opt">==</span> <span class="hl std">recid[i]))</span>
+        <span class="hl std">})</span>
+    <span class="hl std">}</span>
+    <span class="hl std">dat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">as.data.frame</span><span class="hl std">(</span><span class="hl kwd">do.call</span><span class="hl std">(rbind, rid))</span>
+    <span class="hl std">dat</span><span class="hl opt">$</span><span class="hl std">Replicate</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(</span><span class="hl kwd">cut</span><span class="hl std">(dat</span><span class="hl opt">$</span><span class="hl std">NewID,</span> <span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">, ncid</span> <span class="hl opt">*</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">reps),</span> <span class="hl kwc">include.lowest</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+        <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
+    <span class="hl std">dat</span><span class="hl opt">$</span><span class="hl std">NewID</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(dat</span><span class="hl opt">$</span><span class="hl std">NewID)</span>
+    <span class="hl kwd">return</span><span class="hl std">(dat)</span>
+<span class="hl std">}</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Now we will resample our data and take 100 replicates. Again in
+practice you would probably take thousands. We set the seed so that
+our results are reproducible. It is also likely that you will
+need to sample more replicates than you ultimately want because many
+samples may not converge so you do not get estimates from them.</p>
+<div id="unnamed-chunk-11" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">20</span><span class="hl std">)</span>
+<span class="hl std">tmp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sampler</span><span class="hl std">(hdp,</span> <span class="hl str">"DID"</span><span class="hl std">,</span> <span class="hl kwc">reps</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">)</span>
+<span class="hl std">bigdata</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cbind</span><span class="hl std">(tmp, hdp[tmp</span><span class="hl opt">$</span><span class="hl std">RowID, ])</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Next we refit the model on the resampled data. First we store the
+estimates from our original model, which we will use as start values
+for the bootstrap models. Then we make a local cluster with 4 nodes
+(the number of processors on our machine; set to the number of
+processors you have on yours). Next, we export the data and load
+the <code>lme4</code> package on the cluster. Finally,
+we write a function to fit the model and return the estimates.
+The call to <code>glmer()</code> is wrapped in <code>try</code>
+because not all models may converge on the resampled data.
+This catches the error and returns it, rather than stopping processing.</p>
+<div id="unnamed-chunk-12" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">f</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">fixef</span><span class="hl std">(m)</span>
+<span class="hl std">r</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">getME</span><span class="hl std">(m,</span> <span class="hl str">"theta"</span><span class="hl std">)</span>
+
+<span class="hl std">cl</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">makeCluster</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">)</span>
+<span class="hl kwd">clusterExport</span><span class="hl std">(cl,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"bigdata"</span><span class="hl std">,</span> <span class="hl str">"f"</span><span class="hl std">,</span> <span class="hl str">"r"</span><span class="hl std">))</span>
+<span class="hl kwd">clusterEvalQ</span><span class="hl std">(cl,</span> <span class="hl kwd">require</span><span class="hl std">(lme4))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## [[1]]
+## [1] TRUE
+## 
+## [[2]]
+## [1] TRUE
+## 
+## [[3]]
+## [1] TRUE
+## 
+## [[4]]
+## [1] TRUE
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl std">myboot</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">) {</span>
+    <span class="hl std">object</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">try</span><span class="hl std">(</span><span class="hl kwd">glmer</span><span class="hl std">(remission</span> <span class="hl opt">~</span> <span class="hl std">IL6</span> <span class="hl opt">+</span> <span class="hl std">CRP</span> <span class="hl opt">+</span> <span class="hl std">CancerStage</span> <span class="hl opt">+</span> <span class="hl std">LengthofStay</span> <span class="hl opt">+</span>
+        <span class="hl std">Experience</span> <span class="hl opt">+</span> <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">|</span> <span class="hl std">NewID),</span> <span class="hl kwc">data</span> <span class="hl std">= bigdata,</span> <span class="hl kwc">subset</span> <span class="hl std">= Replicate</span> <span class="hl opt">==</span> <span class="hl std">i,</span> <span class="hl kwc">family</span> <span class="hl std">= binomial,</span>
+        <span class="hl kwc">nAGQ</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">start</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">fixef</span> <span class="hl std">= f,</span> <span class="hl kwc">theta</span> <span class="hl std">= r)),</span> <span class="hl kwc">silent</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+    <span class="hl kwa">if</span> <span class="hl std">(</span><span class="hl kwd">class</span><span class="hl std">(object)</span> <span class="hl opt">==</span> <span class="hl str">"try-error"</span><span class="hl std">)</span>
+        <span class="hl kwd">return</span><span class="hl std">(object)</span>
+    <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwd">fixef</span><span class="hl std">(object),</span> <span class="hl kwd">getME</span><span class="hl std">(object,</span> <span class="hl str">"theta"</span><span class="hl std">))</span>
+<span class="hl std">}</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Now that we have the data, the local cluster, and the fitting
+function setup, we are ready to actually do the bootstrapping.
+To do this, we use the <code>parLapplyLB</code> function, which
+loops through every replicate, giving them out to each node of
+the cluster to estimate the models. The &#8220;LB&#8221; stands for load
+balancing, which means replicates are distributed as a node completes
+its current job. This is valuable because not all replicates will
+converge, and if there is an error and it happens early on,
+one node may be ready for a new job faster than another node.
+There is some extra communication overhead, but this is small
+compared to the time it takes to fit each model.
+The results from all nodes are aggregated back into
+a single list, stored in the object <code>res</code>. Once that
+is done, we can shut down the local cluster, which terminates
+the additional <code>R</code> instances and frees memory.</p>
+<div id="unnamed-chunk-13" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">start</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">proc.time</span><span class="hl std">()</span>
+<span class="hl std">res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">parLapplyLB</span><span class="hl std">(cl,</span> <span class="hl kwc">X</span> <span class="hl std">=</span> <span class="hl kwd">levels</span><span class="hl std">(bigdata</span><span class="hl opt">$</span><span class="hl std">Replicate),</span> <span class="hl kwc">fun</span> <span class="hl std">= myboot)</span>
+<span class="hl std">end</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">proc.time</span><span class="hl std">()</span>
+
+<span class="hl com"># shut down the cluster</span>
+<span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Now that we have the bootstrap results, we can summarize them.
+First, we calculate the number of models that successfully converged.
+We do this by checking whether a particular result is numeric or not.
+Errors are not numeric, so they will be skipped. We can calculate the
+mean of the successes to see the proportion of replicates that converged
+and that we have results for.</p>
+<div id="unnamed-chunk-14" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># calculate proportion of models that successfully converged</span>
+<span class="hl std">success</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sapply</span><span class="hl std">(res, is.numeric)</span>
+<span class="hl kwd">mean</span><span class="hl std">(success)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## [1] 1
+</pre>
+</div>
+</div>
+</div>
+<p>Next we convert the list of bootstrap results
+into a matrix, and then calculate the 2.5th and 97.5th percentiles
+for each parameter. Finally, we can make a table of the results,
+including the original estimates and standard errors, the
+mean bootstrap estimate (which is asymptotically equivalent to
+the original results, but may be biased for a small number of
+replicates, as in our case), and the bootstrapped confidence
+intervals. With these data, you could also calculate bias-corrected
+bootstrap confidence intervals if you wanted, although we only
+show the percentile CIs.</p>
+<div id="unnamed-chunk-15" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># combine successful results</span>
+<span class="hl std">bigres</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">do.call</span><span class="hl std">(cbind, res[success])</span>
+
+<span class="hl com"># calculate 2.5th and 97.5th percentiles for 95% CI</span>
+<span class="hl std">(ci</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(bigres,</span> <span class="hl num">1</span><span class="hl std">, quantile,</span> <span class="hl kwc">probs</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.025</span><span class="hl std">,</span> <span class="hl num">0.975</span><span class="hl std">))))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                       2.5%     97.5%
+## (Intercept)       -3.61982 -0.985404
+## IL6               -0.08812 -0.029664
+## CRP               -0.04897  0.006824
+## CancerStageII     -0.60754 -0.228019
+## CancerStageIII    -1.30217 -0.754609
+## CancerStageIV     -2.91414 -2.002643
+## LengthofStay      -0.21596 -0.046420
+## Experience         0.06819  0.207223
+## NewID.(Intercept)  2.03868  2.476366
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># All results</span>
+<span class="hl std">finaltable</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cbind</span><span class="hl std">(</span><span class="hl kwc">Est</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(f, r),</span> <span class="hl kwc">SE</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(se,</span> <span class="hl num">NA</span><span class="hl std">),</span> <span class="hl kwc">BootMean</span> <span class="hl std">=</span> <span class="hl kwd">rowMeans</span><span class="hl std">(bigres),</span>
+    <span class="hl std">ci)</span>
+<span class="hl com"># round and print</span>
+<span class="hl kwd">round</span><span class="hl std">(finaltable,</span> <span class="hl num">3</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                    Est    SE BootMean   2.5%  97.5%
+## (Intercept)     -2.053 0.531   -2.205 -3.620 -0.985
+## IL6             -0.057 0.012   -0.059 -0.088 -0.030
+## CRP             -0.021 0.010   -0.022 -0.049  0.007
+## CancerStageII   -0.414 0.076   -0.417 -0.608 -0.228
+## CancerStageIII  -1.003 0.098   -1.043 -1.302 -0.755
+## CancerStageIV   -2.337 0.158   -2.460 -2.914 -2.003
+## LengthofStay    -0.121 0.034   -0.142 -0.216 -0.046
+## Experience       0.120 0.027    0.128  0.068  0.207
+## DID.(Intercept)  2.015    NA    2.263  2.039  2.476
+</pre>
+</div>
+</div>
+</div>
+<h2>Predicted probabilities and graphing</h2>
+<p>These results are great to put in the table or in the text of a
+research manuscript; however, the numbers can be tricky to interpret.
+Visual presentations are helpful to ease interpretation and for
+posters and presentations. As models become more complex, there are
+many options. We will discuss some of them briefly and give an example
+how you could do one.</p>
+<p>In a logistic model, the outcome is commonly on one of three scales:</p>
+<ul>
+<li>Log odds (also called logits), which is the linearized scale</li>
+<li>Odds ratios (exponentiated log odds), which are not on a linear scale</li>
+<li>Probabilities, which are also not on a linear scale</li>
+</ul>
+<p>For tables, people often present the odds ratios. For visualization,
+the logit or probability scale is most common. There are some advantages
+and disadvantages to each. The logit scale is convenient because it is
+linearized, meaning that a 1 unit increase in a predictor results in a
+coefficient unit increase in the outcome and this holds regardless of the
+levels of the other predictors (setting aside interactions for the moment).
+A downside is the scale is not very interpretable. It is hard for readers
+to have an intuitive understanding of logits. Conversely, probabilities are
+a nice scale to intuitively understand the results; however, they are not
+linear. This means that a one unit increase in the predictor, does not
+equal a constant increase in the probability&#8212;the change in probability
+depends on the values chosen for the other predictors. In ordinary
+logistic regression, you could just hold all predictors constant, only
+varying your predictor of interest. However, in mixed effects logistic
+models, the random effects also bear on the results. Thus, if you hold
+everything constant, the change in probability of the outcome over
+different values of your predictor of interest are only true when
+all covariates are held constant and you are in the same group, or a group
+with the same random effect. The effects are conditional on other predictors
+and group membership, which is quite narrowing. An attractive alternative is
+to get the average marginal probability. That is, across all the groups in
+our sample (which is hopefully representative of your population of interest),
+graph the <em>average</em> change in probability of the outcome across the
+range of some predictor of interest.</p>
+<p>We are going to explore an example with average marginal probabilities.
+These take more work than conditional probabilities, because you have to
+calculate separate conditional probabilities for every group and then
+average them. It is also not easy to get confidence intervals around
+these average marginal effects in a frequentist framework (although
+they are trivial to obtain from Bayesian estimation).</p>
+<p>First, let&#8217;s define the general procedure using the notation
+from <a href="https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-generalized-linear-mixed-models/">here </a>.
+We create \(\mathbf{X}_{i}\) by taking \(\mathbf{X}\) and setting
+a particular predictor of interest, say in column \(j\), to a constant.
+If we only cared about one value of the predictor, \(i \in {1}\).
+However, more commonly, we want a range of values for the predictor
+in order to plot how the predicted probability varies across its range.
+We can do this by taking the observed range of the predictor and
+taking \(k\) samples evenly spaced within the range. For example,
+suppose our predictor ranged from 5 to 10, and we wanted 6 samples,
+\(\frac{10 &#8211; 5}{6 &#8211; 1} = 1\), so each sample would be 1 apart from the
+previous and they would be: \({5, 6, 7, 8, 9, 10}\). Then we create
+\(k\) different \(\mathbf{X}_{i}\)s where \(i \in {1, \ldots, k}\)
+where in each case, the \(j\)th column is set to some constant. Then
+we calculate:
+$$
+\boldsymbol{\eta}_{i} = \mathbf{X}_{i}\boldsymbol{\beta} + \mathbf{Z}\boldsymbol{\gamma}
+$$
+These are all the different linear predictors. Finally, we take \(h(\boldsymbol{\eta})\),
+which gives us \(\boldsymbol{\mu}_{i}\), which are the conditional expectations
+on the original scale, in our case, probabilities.
+We can then take the expectation of each \(\boldsymbol{\mu}_{i}\) and plot
+that against the value our predictor of interest was held at. We could also
+make boxplots to show not only the average marginal predicted probability,
+but also the distribution of predicted probabilities.</p>
+<p>You may have noticed that a lot of variability goes into those
+estimates. We are using \(\mathbf{X}\) only holding our predictor of
+interest at a constant, which allows all the other predictors to
+take on values in the original data. Also, we have left
+\(\mathbf{Z}\boldsymbol{\gamma}\) as in our sample, which means
+some groups are more or less represented than others. If we had wanted,
+we could have re-weighted all the groups to have equal weight. We chose
+to leave all these things as-is in this example based on the assumption
+that our sample is truly a good representative of our population of
+interest. Rather than attempt to pick meaningful values to hold
+covariates at (even the mean is not necessarily meaningful, particularly
+if a covariate as a bimodal distribution, it may be that <em>no</em>
+participant had a value at or near the mean), we used the values from
+our sample. This also suggests that if our sample was a good
+representation of the population, then the average marginal
+predicted probabilities are a good representation of the probability
+for a new random sample from our population.</p>
+<p>Now that we have some background and theory, let&#8217;s
+see how we actually go about calculating these things.
+We get a summary of <code>LengthofStay</code>,
+our predictor of interest, and then get 100 values across its range
+to use in prediction. We make a
+copy of our data so we can fix the values of one of the predictors
+and then use the <code>predict</code> function to calculate the
+predicted values. All random effects are included by default,
+see <code>?predict.merMod</code> for more details.
+<strong>Note that the predict method for mixed effects models is new
+and currently is only in the development version of <code>lme4</code>,
+so make sure that you have that installed.</strong></p>
+<div id="unnamed-chunk-16" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># temporary data</span>
+<span class="hl std">tmpdat</span> <span class="hl kwb">&lt;-</span> <span class="hl std">hdp[,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"IL6"</span><span class="hl std">,</span> <span class="hl str">"CRP"</span><span class="hl std">,</span> <span class="hl str">"CancerStage"</span><span class="hl std">,</span> <span class="hl str">"LengthofStay"</span><span class="hl std">,</span> <span class="hl str">"Experience"</span><span class="hl std">,</span>
+    <span class="hl str">"DID"</span><span class="hl std">)]</span>
+
+<span class="hl kwd">summary</span><span class="hl std">(hdp</span><span class="hl opt">$</span><span class="hl std">LengthofStay)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    5.00    5.00    5.49    6.00   10.00
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl std">jvalues</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">with</span><span class="hl std">(hdp,</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwc">from</span> <span class="hl std">=</span> <span class="hl kwd">min</span><span class="hl std">(LengthofStay),</span> <span class="hl kwc">to</span> <span class="hl std">=</span> <span class="hl kwd">max</span><span class="hl std">(LengthofStay),</span> <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">))</span>
+
+<span class="hl com"># calculate predicted probabilities and store in a list</span>
+<span class="hl std">pp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lapply</span><span class="hl std">(jvalues,</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">j</span><span class="hl std">) {</span>
+    <span class="hl std">tmpdat</span><span class="hl opt">$</span><span class="hl std">LengthofStay</span> <span class="hl kwb">&lt;-</span> <span class="hl std">j</span>
+    <span class="hl kwd">predict</span><span class="hl std">(m,</span> <span class="hl kwc">newdata</span> <span class="hl std">= tmpdat,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">"response"</span><span class="hl std">)</span>
+<span class="hl std">})</span>
+</pre>
+</div>
+</div>
+</div>
+<p>Now that we have all the predicted probabilities,
+we can work on displaying them. For example, we could
+look at the average marginal predicted probability at
+a handful of different lengths of stay. We can also
+plot all of them.</p>
+<div id="unnamed-chunk-17" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># average marginal predicted probability across a few different Lengths of</span>
+<span class="hl com"># Stay</span>
+<span class="hl kwd">sapply</span><span class="hl std">(pp[</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">20</span><span class="hl std">,</span> <span class="hl num">40</span><span class="hl std">,</span> <span class="hl num">60</span><span class="hl std">,</span> <span class="hl num">80</span><span class="hl std">,</span> <span class="hl num">100</span><span class="hl std">)], mean)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## [1] 0.3652 0.3366 0.3075 0.2796 0.2530 0.2278
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># get the means with lower and upper quartiles</span>
+<span class="hl std">plotdat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(</span><span class="hl kwd">sapply</span><span class="hl std">(pp,</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
+    <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwc">M</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(x),</span> <span class="hl kwd">quantile</span><span class="hl std">(x,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.25</span><span class="hl std">,</span> <span class="hl num">0.75</span><span class="hl std">)))</span>
+<span class="hl std">}))</span>
+
+<span class="hl com"># add in LengthofStay values and convert to data frame</span>
+<span class="hl std">plotdat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">as.data.frame</span><span class="hl std">(</span><span class="hl kwd">cbind</span><span class="hl std">(plotdat, jvalues))</span>
+
+<span class="hl com"># better names and show the first few rows</span>
+<span class="hl kwd">colnames</span><span class="hl std">(plotdat)</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"PredictedProbability"</span><span class="hl std">,</span> <span class="hl str">"Lower"</span><span class="hl std">,</span> <span class="hl str">"Upper"</span><span class="hl std">,</span> <span class="hl str">"LengthofStay"</span><span class="hl std">)</span>
+<span class="hl kwd">head</span><span class="hl std">(plotdat)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##   PredictedProbability   Lower  Upper LengthofStay
+## 1               0.3652 0.08490 0.6156        1.000
+## 2               0.3637 0.08405 0.6130        1.091
+## 3               0.3622 0.08320 0.6103        1.182
+## 4               0.3607 0.08237 0.6077        1.273
+## 5               0.3591 0.08154 0.6051        1.364
+## 6               0.3576 0.08072 0.6024        1.455
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># plot average marginal predicted probabilities</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(plotdat,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= LengthofStay,</span> <span class="hl kwc">y</span> <span class="hl std">= PredictedProbability))</span> <span class="hl opt">+</span> <span class="hl kwd">geom_line</span><span class="hl std">()</span> <span class="hl opt">+</span>
+    <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-17.png" alt="Average Marginal predicted probabilities plot" width="500px" height="500px" /></div>
+</div>
+<p>We could also add the lower and upper quartiles. This information shows
+us the range in which 50 percent of the predicted probabilities fell.</p>
+<div id="unnamed-chunk-18" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(plotdat,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= LengthofStay,</span> <span class="hl kwc">y</span> <span class="hl std">= PredictedProbability))</span> <span class="hl opt">+</span> <span class="hl kwd">geom_linerange</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">ymin</span> <span class="hl std">= Lower,</span>
+    <span class="hl kwc">ymax</span> <span class="hl std">= Upper))</span> <span class="hl opt">+</span> <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">+</span> <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-18.png" alt="Average Marginal predicted probabilities plot with lower and upper quartile bars" width="500px" height="500px" /></div>
+</div>
+<p>This is just the beginning of what can be done. For plots, it is
+useful to add more information. We could make the same average marginal
+predicted probabilities, but in addition to varying <code>LengthofStay</code>
+we could do it for each level of <code>CancerStage</code>.</p>
+<div id="unnamed-chunk-19" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># calculate predicted probabilities and store in a list</span>
+<span class="hl std">biprobs</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lapply</span><span class="hl std">(</span><span class="hl kwd">levels</span><span class="hl std">(hdp</span><span class="hl opt">$</span><span class="hl std">CancerStage),</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">stage</span><span class="hl std">) {</span>
+  <span class="hl std">tmpdat</span><span class="hl opt">$</span><span class="hl std">CancerStage[]</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stage</span>
+  <span class="hl kwd">lapply</span><span class="hl std">(jvalues,</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">j</span><span class="hl std">) {</span>
+    <span class="hl std">tmpdat</span><span class="hl opt">$</span><span class="hl std">LengthofStay</span> <span class="hl kwb">&lt;-</span> <span class="hl std">j</span>
+    <span class="hl kwd">predict</span><span class="hl std">(m,</span> <span class="hl kwc">newdata</span> <span class="hl std">= tmpdat,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">"response"</span><span class="hl std">)</span>
+  <span class="hl std">})</span>
+<span class="hl std">})</span>
+
+<span class="hl com"># get means and quartiles for all jvalues for each level of CancerStage</span>
+<span class="hl std">plotdat2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lapply</span><span class="hl std">(biprobs,</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">X</span><span class="hl std">) {</span>
+  <span class="hl std">temp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(</span><span class="hl kwd">sapply</span><span class="hl std">(X,</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
+    <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwc">M</span><span class="hl std">=</span><span class="hl kwd">mean</span><span class="hl std">(x),</span> <span class="hl kwd">quantile</span><span class="hl std">(x,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">.25</span><span class="hl std">,</span> <span class="hl num">.75</span><span class="hl std">)))</span>
+  <span class="hl std">}))</span>
+  <span class="hl std">temp</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">as.data.frame</span><span class="hl std">(</span><span class="hl kwd">cbind</span><span class="hl std">(temp, jvalues))</span>
+  <span class="hl kwd">colnames</span><span class="hl std">(temp)</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">"PredictedProbability"</span><span class="hl std">,</span> <span class="hl str">"Lower"</span><span class="hl std">,</span> <span class="hl str">"Upper"</span><span class="hl std">,</span> <span class="hl str">"LengthofStay"</span><span class="hl std">)</span>
+  <span class="hl kwd">return</span><span class="hl std">(temp)</span>
+<span class="hl std">})</span>
+
+<span class="hl com"># collapse to one data frame</span>
+<span class="hl std">plotdat2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">do.call</span><span class="hl std">(rbind, plotdat2)</span>
+
+<span class="hl com"># add cancer stage</span>
+<span class="hl std">plotdat2</span><span class="hl opt">$</span><span class="hl std">CancerStage</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">levels</span><span class="hl std">(hdp</span><span class="hl opt">$</span><span class="hl std">CancerStage),</span> <span class="hl kwc">each</span> <span class="hl std">=</span> <span class="hl kwd">length</span><span class="hl std">(jvalues)))</span>
+
+<span class="hl com"># show first few rows</span>
+<span class="hl kwd">head</span><span class="hl std">(plotdat2)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##   PredictedProbability  Lower  Upper LengthofStay CancerStage
+## 1               0.4475 0.1547 0.7328        1.000           I
+## 2               0.4458 0.1533 0.7307        1.091           I
+## 3               0.4441 0.1519 0.7285        1.182           I
+## 4               0.4425 0.1505 0.7263        1.273           I
+## 5               0.4408 0.1491 0.7241        1.364           I
+## 6               0.4391 0.1477 0.7219        1.455           I
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># graph it</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(plotdat2,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= LengthofStay,</span> <span class="hl kwc">y</span> <span class="hl std">= PredictedProbability))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_ribbon</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">ymin</span> <span class="hl std">= Lower,</span> <span class="hl kwc">ymax</span> <span class="hl std">= Upper,</span> <span class="hl kwc">fill</span> <span class="hl std">= CancerStage),</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">.15</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">colour</span> <span class="hl std">= CancerStage),</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span> <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span>  <span class="hl std">CancerStage)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-19.png" alt="Average Marginal predicted probabilities plot with lower and upper quartile bars by cancer stage" width="500px" height="500px" /></div>
+</div>
+<p>Things look fairly bleak for the chances of a Stage IV lung cancer
+patient who was in the hospital 10 days having cancer in remission
+(please remember that these are simulated data).
+It also looks like the distribution is skewed. We can examine the
+distribution of predicted probabilities just for that group.</p>
+<div id="unnamed-chunk-20" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">Probs</span> <span class="hl std">= biprobs[[</span><span class="hl num">4</span><span class="hl std">]][[</span><span class="hl num">100</span><span class="hl std">]]),</span> <span class="hl kwd">aes</span><span class="hl std">(Probs))</span> <span class="hl opt">+</span> <span class="hl kwd">geom_histogram</span><span class="hl std">()</span> <span class="hl opt">+</span>
+    <span class="hl kwd">scale_x_sqrt</span><span class="hl std">(</span><span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.01</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">,</span> <span class="hl num">0.5</span><span class="hl std">,</span> <span class="hl num">0.75</span><span class="hl std">))</span>
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-20.png" alt="Histogram of predicted probabilities for a 10 day stay with stage 4 cancer" width="500px" height="500px" /></div>
+</div>
+<p>Even using a square root scale that stretches out the lower
+values, it is still extremely skewed. The vast majority
+are estimated to have less than a .1 probability of being in
+remission.</p>
+<h2>Three level mixed effects logistic regression</h2>
+<p>We have looked at a two level logistic model with a random
+intercept in depth. This is the simplest mixed effects logistic model
+possible. Now we are going to briefly look at how you can add a third
+level and random slope effects as well as random intercepts.</p>
+<p>Below we estimate a three level logistic model with a random
+intercept for doctors and a random intercept for hospitals.
+In this examples, doctors are <em>nested</em> within hospitals,
+meaning that each doctor belongs to one and only one hospital.
+The alternative case is sometimes called &#8220;cross classified&#8221;
+meaning that a doctor may belong to multiple hospitals, such as
+if some of the doctor&#8217;s patients are from hospital A and others
+from hospital B. In <code>glmer</code> you do not need to specify
+whether the groups are nested or cross classified, <code>R</code>
+can figure it out based on the data. We use the same
+<code>(1 | ID)</code> general syntax to indicate the intercept (1)
+varying by some ID. For models with more than a single
+scalar random effect, <code>glmer</code> only supports a single
+integration point, so we use <code>nAGQ=1</code>.</p>
+<div id="unnamed-chunk-21" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># estimate the model and store results in m</span>
+<span class="hl std">m3a</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">glmer</span><span class="hl std">(remission</span> <span class="hl opt">~</span> <span class="hl std">Age</span> <span class="hl opt">+</span> <span class="hl std">LengthofStay</span> <span class="hl opt">+</span> <span class="hl std">FamilyHx</span> <span class="hl opt">+</span> <span class="hl std">IL6</span> <span class="hl opt">+</span> <span class="hl std">CRP</span> <span class="hl opt">+</span>
+  <span class="hl std">CancerStage</span> <span class="hl opt">+</span> <span class="hl std">Experience</span> <span class="hl opt">+</span> <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">|</span> <span class="hl std">DID)</span> <span class="hl opt">+</span> <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">|</span> <span class="hl std">HID),</span>
+  <span class="hl kwc">data</span> <span class="hl std">= hdp,</span> <span class="hl kwc">family</span> <span class="hl std">= binomial,</span> <span class="hl kwc">nAGQ</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="warning">
+<pre class="knitr r">## Warning: Model failed to converge with max|grad| = 74.1215 (tol = 0.001)
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># print the mod results without correlations among fixed effects</span>
+<span class="hl kwd">print</span><span class="hl std">(m3a,</span> <span class="hl kwc">corr</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial ( logit )
+## Formula: 
+## remission ~ Age + LengthofStay + FamilyHx + IL6 + CRP + CancerStage +  
+##     Experience + (1 | DID) + (1 | HID)
+##    Data: hdp
+##      AIC      BIC   logLik deviance df.resid 
+##     7199     7284    -3588     7175     8513 
+## Random effects:
+##  Groups Name        Std.Dev.
+##  DID    (Intercept) 1.952   
+##  HID    (Intercept) 0.549   
+## Number of obs: 8525, groups: DID, 407; HID, 35
+## Fixed Effects:
+##    (Intercept)             Age    LengthofStay     FamilyHxyes  
+##        -1.6881         -0.0149         -0.0447         -1.3066  
+##            IL6             CRP   CancerStageII  CancerStageIII  
+##        -0.0569         -0.0222         -0.3185         -0.8570  
+##  CancerStageIV      Experience  
+##        -2.1375          0.1269
+</pre>
+</div>
+</div>
+</div>
+<p>The output tells us the family (binomial for binary outcomes)
+and the link (logit). Followed by usual fit indices and the variance of the
+random effects. In this case the variability in the intercept (on the
+log odds scale) between doctors and between hospitals. The standard deviation
+is also displayed (simply the square root of the variance, not the
+standard error of the estimate of the variance). We also get the
+number of unique units at each level. Last are the fixed effects,
+as before.</p>
+<p>It can also be useful to look at the distribution of the
+conditional modes, which we do with caterpillar polots below.
+The blue dots are the conditional models with error bars.
+We do this for both doctors and hospitals. For example for
+doctors, we can see a bit of a long right tail in that there
+are more extreme positive than negative values. For the
+doctors, we suppress their IDs (using the
+<code>scales=list(y = list(alternating=0))</code> argument)
+because there are so many, but we leave them in for the hospitals.</p>
+<div id="unnamed-chunk-22" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">lattice::dotplot</span><span class="hl std">(</span><span class="hl kwd">ranef</span><span class="hl std">(m3a,</span> <span class="hl kwc">which</span> <span class="hl std">=</span> <span class="hl str">"DID"</span><span class="hl std">,</span> <span class="hl kwc">condVar</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span> <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">alternating</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">)))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## $DID
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-221.png" alt="Caterpillar plot of conditional modes for intercept by doctor" width="500px" height="500px" /></div>
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">lattice::dotplot</span><span class="hl std">(</span><span class="hl kwd">ranef</span><span class="hl std">(m3a,</span> <span class="hl kwc">which</span> <span class="hl std">=</span> <span class="hl str">"HID"</span><span class="hl std">,</span> <span class="hl kwc">condVar</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## $HID
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-222.png" alt="Caterpillar plot of conditional modes for intercept by hospital" width="500px" height="500px" /></div>
+</div>
+<p>We can easily add random slopes to the model as well,
+and allow them to vary at any level. We are just going to
+add a random slope for <code>LengthofStay</code> that
+varies between doctors. As in regular <code>R</code>
+formulae, we use the <code>+</code> operator to &#8220;add&#8221;
+an effect, and we do it in the section for doctor random
+effects. All terms in one group of parentheses use an
+unstructured covariance matrix, you can get a diagonal
+covariance structure by splitting the grouping into
+separate pieces. Between groupings is assumed indepedent.</p>
+<div id="unnamed-chunk-23" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># estimate the model and store results in m</span>
+<span class="hl std">m3b</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">glmer</span><span class="hl std">(remission</span> <span class="hl opt">~</span> <span class="hl std">Age</span> <span class="hl opt">+</span> <span class="hl std">LengthofStay</span> <span class="hl opt">+</span> <span class="hl std">FamilyHx</span> <span class="hl opt">+</span> <span class="hl std">IL6</span> <span class="hl opt">+</span> <span class="hl std">CRP</span> <span class="hl opt">+</span> <span class="hl std">CancerStage</span> <span class="hl opt">+</span>
+    <span class="hl std">Experience</span> <span class="hl opt">+</span> <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">+</span> <span class="hl std">LengthofStay</span> <span class="hl opt">|</span> <span class="hl std">DID)</span> <span class="hl opt">+</span> <span class="hl std">(</span><span class="hl num">1</span> <span class="hl opt">|</span> <span class="hl std">HID),</span> <span class="hl kwc">data</span> <span class="hl std">= hdp,</span> <span class="hl kwc">family</span> <span class="hl std">= binomial,</span>
+    <span class="hl kwc">nAGQ</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="warning">
+<pre class="knitr r">## Warning: Model failed to converge with max|grad| = 34.9006 (tol = 0.001)
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># print the mod results without correlations among fixed effects</span>
+<span class="hl kwd">print</span><span class="hl std">(m3b,</span> <span class="hl kwc">corr</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial ( logit )
+## Formula: 
+## remission ~ Age + LengthofStay + FamilyHx + IL6 + CRP + CancerStage +  
+##     Experience + (1 + LengthofStay | DID) + (1 | HID)
+##    Data: hdp
+##      AIC      BIC   logLik deviance df.resid 
+##     7148     7246    -3560     7120     8511 
+## Random effects:
+##  Groups Name         Std.Dev. Corr 
+##  DID    (Intercept)  0.504         
+##         LengthofStay 0.372    -0.11
+##  HID    (Intercept)  0.731         
+## Number of obs: 8525, groups: DID, 407; HID, 35
+## Fixed Effects:
+##    (Intercept)             Age    LengthofStay     FamilyHxyes  
+##        -0.5447         -0.0152         -0.1901         -1.3395  
+##            IL6             CRP   CancerStageII  CancerStageIII  
+##        -0.0586         -0.0210         -0.2941         -0.8651  
+##  CancerStageIV      Experience  
+##        -2.2964          0.1044
+</pre>
+</div>
+</div>
+</div>
+<div id="unnamed-chunk-24" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">lattice::dotplot</span><span class="hl std">(</span><span class="hl kwd">ranef</span><span class="hl std">(m3b,</span> <span class="hl kwc">which</span> <span class="hl std">=</span> <span class="hl str">"DID"</span><span class="hl std">,</span> <span class="hl kwc">condVar</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span> <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">alternating</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">)))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## $DID
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-241.png" alt="Caterpillar plot of conditional modes of random intercepts and random LengthofStay slopes by doctor" width="500px" height="500px" /></div>
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">lattice::dotplot</span><span class="hl std">(</span><span class="hl kwd">ranef</span><span class="hl std">(m3b,</span> <span class="hl kwc">which</span> <span class="hl std">=</span> <span class="hl str">"HID"</span><span class="hl std">,</span> <span class="hl kwc">condVar</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span> <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">alternating</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">)))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## $HID
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/melogit-unnamed-chunk-242.png" alt="Caterpillar plot of conditional modes of random intercpets by hospital" width="500px" height="500px" /></div>
+</div>
+<h2>Things to consider</h2>
+<p>See
+the <a href="https://stats.oarc.ucla.edu/mult_pkg/glmm.htm#issues">Other
+Issues</a> section of the introduction to GLMMs page for some
+considerations and issues.</p>
+<h2>See also</h2>
+<ul>
+<li><a href="https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-generalized-linear-mixed-models/">Introduction to GLMMs</a></li>
+<li><a href="../logit-regression/index.html">Regular Logistic Regression in R</a></li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Agresti, A. (2013). <i>Categorical Data Analysis</i> (3rd Ed.),
+Hoboken, New Jersey: John Wiley &amp; Sons.</li>
+</ul>
+</div></article></main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar" id="genesis-sidebar-primary"><h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2></aside><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id67c285135c608"  tabindex="0" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id67c285135c608'  class='colomat-swap' style='display:none;'> </span><div id="target-id67c285135c608" class="collapseomatic_content ">
+<div class="wpcf7 no-js" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="https://stats.oarc.ucla.edu/r/dae/mixed-effects-logistic-regression/#wpcf7-f22910-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="5.9.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+<input type="hidden" name="_wpcf7_recaptcha_response" value="" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" value="" type="text" name="your-name" /></span><br />
+</label>
+</p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" value="" type="email" name="your-email" /></span><br />
+</label>
+</p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea cols="40" rows="10" maxlength="400" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false" name="your-message"></textarea></span><br />
+</label>
+</p>
+<span class="wpcf7-form-control-wrap recaptcha"><span data-sitekey="6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" class="wpcf7-form-control wpcf7-recaptcha g-recaptcha"></span>
+<noscript>
+	<div class="grecaptcha-noscript">
+		<iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" frameborder="0" scrolling="no" width="310" height="430">
+		</iframe>
+		<textarea name="g-recaptcha-response" rows="3" cols="40" placeholder="reCaptcha Response Here">
+		</textarea>
+	</div>
+</noscript>
+</span>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Send" />
+</p><p style="display: none !important;" class="akismet-fields-container" data-prefix="_wpcf7_ak_"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="194"/><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+</div></p><p style="float:right;">
+          <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+
+    <div class="wrapped">
+        <a href="https://oarc.ucla.edu/" title="UCLA Office of Advanced Research Technology" id="footer-image">UCLA OARC</a>
+    </div>
+
+    <div class="ftr-btm">
+        <div class="footer-links">
+        <ol>
+            <li><a href="http://www.ucla.edu/terms-of-use/">© 2024 UC REGENTS</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/">HOME</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/contact">CONTACT</a></li>
+        </ol>
+        </div>
+    </div>
+<script>
+			jQuery(function($) {
+			$('.genesis-nav-menu').slicknav();
+			});
+			</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><script  src="../../../wp-content/cache/minify/1f540.js"></script>
+
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/stats.oarc.ucla.edu\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script  src="../../../wp-content/cache/minify/b68ea.js"></script>
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/npm/mathjax%403/es5/tex-chtml.js?ver=6.7.1" id="mathjax-js"></script>
+
+
+
+<script  src="../../../wp-content/cache/minify/f3065.js"></script>
+
+<script type="text/javascript" id="collapseomatic-js-js-before">
+/* <![CDATA[ */
+const com_options = {"colomatduration":"fast","colomatslideEffect":"slideFade","colomatpauseInit":"","colomattouchstart":""}
+/* ]]> */
+</script>
+
+<script  src="../../../wp-content/cache/minify/d7287.js"></script>
+
+<script type="text/javascript" id="google-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7iqfix = {"recaptcha_empty":"Please verify that you are not a robot.","response_err":"wpcf7-recaptcha: Could not verify reCaptcha response."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../www.google.com/recaptcha/apidba9.js?hl=en_US&amp;onload=recaptchaCallback&amp;render=explicit&amp;ver=2.0" id="google-recaptcha-js"></script>
+<script  defer src="../../../wp-content/cache/minify/45ffb.js"></script>
+
+
+
+
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Page Caching using Disk: Enhanced 
+Minified using Disk
+
+Served from: stats.oarc.ucla.edu @ 2025-02-28 19:54:59 by W3 Total Cache
+-->

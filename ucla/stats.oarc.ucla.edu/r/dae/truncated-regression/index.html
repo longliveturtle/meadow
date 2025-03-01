@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from stats.oarc.ucla.edu/r/dae/truncated-regression/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Mar 2025 04:14:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head >
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Truncated Regression |  R Data Analysis Examples</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};
+
+</script>
+<link rel='dns-prefetch' href='../../../../cdn.jsdelivr.net/index.html' />
+<link rel='dns-prefetch' href='../../../../platform-api.sharethis.com/index.html' />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<link rel="alternate" type="text/calendar" title="OARC Stats &raquo; iCal Feed" href="../../../calendar/indexedf3.html?ical=1" />
+<link rel="canonical" href="index.html" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stats.oarc.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/9df84.css" media="all" />
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/a5ff7.css" media="all" />
+
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4c431.css" media="all" />
+
+<style id='contact-form-7-inline-css' type='text/css'>
+.wpcf7 .wpcf7-recaptcha iframe {margin-bottom: 0;}.wpcf7 .wpcf7-recaptcha[data-align="center"] > div {margin: 0 auto;}.wpcf7 .wpcf7-recaptcha[data-align="right"] > div {margin: 0 0 0 auto;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4033d.css" media="all" />
+
+
+
+<link rel='stylesheet' id='slicknavcss-css' href='../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<script  src="../../../wp-content/cache/minify/818c0.js"></script>
+
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1" id="slicknav-js"></script>
+<script type="text/javascript" src="../../../../platform-api.sharethis.com/js/sharethis.js#source=googleanalytics-wordpress#product=ga&amp;property=5b058eb03e4a630011ba71c0" id="googleanalytics-platform-sharethis-js"></script>
+<link rel="https://api.w.org/" href="../../../wp-json/index.html" /><link rel="alternate" title="JSON" type="application/json" href="../../../wp-json/wp/v2/pages/935.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc0db0.html?rsd" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed0be4.json?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Ftruncated-regression%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed1d52?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Ftruncated-regression%2F&amp;format=xml" />
+<meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://stats.oarc.ucla.edu"><link rel="alternate" href="../../../wp-json/tribe/events/v1/index.html" /><link rel="icon" href="../../../wp-content/themes/genesis-child/images/favicon.ico" />
+<link rel="pingback" href="../../../xmlrpc.html" />
+<script>
+(function() {
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '../../../../google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-121222866-1', 'auto');
+			ga('send', 'pageview');
+	})();
+</script>
+
+<link rel="icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+<link rel="shortcut icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+
+</head>
+
+<body class="page-template-default page page-id-935 page-child parent-pageid-916 tribe-no-js header-image content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-hidden" itemscope itemtype="https://schema.org/WebPage"><div class="site-container"><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li><li><a href="#genesis-sidebar-primary" class="screen-reader-shortcut"> Skip to primary sidebar</a></li></ul><header class="site-header" itemscope itemtype="https://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+
+	<div class="site-title" itemprop="headline"><a href="https://stats.oarc.ucla.edu/">stats.oarc.ucla.edu</a></div>
+
+	<p class="site-description" itemprop="description">Statistical Methods and Data Analytics</p></div>
+</div><div class="widget-area header-widget-area"><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><div><div class = "top-wrap"><div id = "ucla-logo"><img alt="Image " src = "../../../wp-content/uploads/logo/idrelogo4.png" width = 380px alt = "IDRE Logo"></div></div>
+</div></div></div></section>
+<section id="search-11" class="widget widget_search"><div class="widget-wrap"><form class="search-form" method="get" action="https://stats.oarc.ucla.edu/" role="search" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction"><label class="search-form-label screen-reader-text" for="searchform-1">Search this website</label><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search this website" itemprop="query-input"><input class="search-form-submit" type="submit" value="Search"><meta content="https://stats.oarc.ucla.edu/?s={s}" itemprop="target"></form></div></section>
+</div></div></header><nav class="nav-primary" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement" id="genesis-nav-primary"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22640"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="../../index.html" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="https://stats.oarc.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="https://stats.oarc.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="https://stats.oarc.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="https://stats.oarc.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="https://stats.oarc.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="https://stats.oarc.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="https://stats.oarc.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="https://stats.oarc.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22661"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="https://stats.oarc.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="../../../other/dae/index.html" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="https://stats.oarc.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22663"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-33775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33775"><a href="https://stats.idre.ucla.edu/ucla/policies/remote" itemprop="url"><span itemprop="name">Remote Consulting</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="https://stats.oarc.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="https://stats.oarc.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="https://stats.oarc.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="https://stats.oarc.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+		<li id="menu-item-30604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30604"><a href="https://stats.idre.ucla.edu/ucla/frequently-asked-questions-about-our-statistical-consulting-services/" itemprop="url"><span itemprop="name">FAQ</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="https://stats.oarc.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="https://stats.oarc.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="https://www.cores.ucla.edu/statistical-biomathematical-consulting-clinic-sbcc/" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="https://stats.oarc.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-935 page type-page status-publish entry" aria-label="Truncated Regression |  R Data Analysis Examples" itemscope itemtype="https://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Truncated Regression |  R Data Analysis Examples</h1>
+</header><div class="entry-content" itemprop="text"><p><!DOCTYPE html></p>
+<p><html></p>
+<p><head></p>
+<style type="text/css">
+.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<p><title></title>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/5b0d4.css" media="all" />
+
+<!-- modified 9/02/12 jfw -->
+<!-- modified 8/20/14 jlr -->
+</head></p>
+<p><body>
+<?php include "stat/header.htm"; ?></p>
+<p>Truncated regression is used to model dependent variables for which some of the
+observations are not included in the analysis because of the value of the
+dependent variable.</p>
+<p>This page uses the following packages. Make sure that you can load 
+them before trying to run the examples on this page. If you do not have 
+a package installed, run: <code>install.packages("packagename")</code>, or 
+if you see the version is out of date, run: <code>update.packages()</code>.</p>
+<div class="chunk" id="unnamed-chunk-2">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">require</span><span class="hl std">(foreign)</span>
+<span class="hl kwd">require</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">require</span><span class="hl std">(truncreg)</span>
+<span class="hl kwd">require</span><span class="hl std">(boot)</span>
+</pre>
+</div>
+</div>
+</div>
+<p><code class="knitr inline"><strong>Version info: </strong>Code for this page was tested in R version 3.1.1 (2014-07-10)<br />
+ On: 2014-08-21<br />
+With: boot 1.3-11; truncreg 0.2-1; maxLik 1.2-0; miscTools 0.6-16; ggplot2 1.0.0; foreign 0.8-61; knitr 1.6
+</code></p>
+<p><strong>Please note:</strong> The purpose of this page is to show how to use various data
+analysis commands. It does not cover all aspects of the research process which
+researchers are expected to do. In particular, it does not cover data
+cleaning and checking, verification of assumptions, model diagnostics or
+potential follow-up analyses. </p>
+<h2>Examples of truncated regression</h2>
+<p>Example 1. A study of students in a special GATE (gifted and talented education) program
+wishes to model achievement as a function of language skills and the type of
+program in which the student is currently enrolled. A major concern is
+that students are required to have a minimum achievement score of 40 to enter
+the special program. Thus, the sample is truncated at an achievement score
+of 40.</p>
+<p>Example 2. A researcher has data for a sample of Americans whose income is
+above the poverty line. Hence, the lower part of the distribution of
+income is truncated. If the researcher had a sample of Americans whose
+income was at or below the poverty line, then the upper part of the income
+distribution would be truncated. In other words, truncation is a result of
+sampling only part of the distribution of the outcome variable.</p>
+<h2>Description of the data</h2>
+<p>Let&#8217;s pursue Example 1 from above. We have a hypothetical data file,
+<code>truncreg.dta</code>, with 178 observations. The
+outcome variable is called <code>achiv</code>, and the language test score
+variable is called <code>langscore</code>. The variable <code>prog</code> is a
+categorical predictor variable with three levels indicating the type
+of program in which the students were enrolled.</p>
+<p>Let&#8217;s look at the data. It is always a good idea to start with descriptive
+statistics.</p>
+<div class="chunk" id="unnamed-chunk-3">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">dat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.dta</span><span class="hl std">(</span><span class="hl str">&quot;https://stats.idre.ucla.edu/stat/data/truncreg.dta&quot;</span><span class="hl std">)</span>
+
+<span class="hl kwd">summary</span><span class="hl std">(dat)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##        id            achiv        langscore          prog    
+##  Min.   :  3.0   Min.   :41.0   Min.   :31.0   general : 40  
+##  1st Qu.: 55.2   1st Qu.:47.0   1st Qu.:47.5   academic:101  
+##  Median :102.5   Median :52.0   Median :56.0   vocation: 37  
+##  Mean   :103.6   Mean   :54.2   Mean   :54.0                 
+##  3rd Qu.:151.8   3rd Qu.:63.0   3rd Qu.:61.8                 
+##  Max.   :200.0   Max.   :76.0   Max.   :67.0
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># histogram of achiv coloured by program type</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(dat,</span> <span class="hl kwd">aes</span><span class="hl std">(achiv,</span> <span class="hl kwc">fill</span> <span class="hl std">= prog))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_histogram</span><span class="hl std">(</span><span class="hl kwc">binwidth</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" src="../../../wp-content/uploads/2016/02/truncreg-unnamed-chunk-3.png" alt="plot of chunk unnamed-chunk-3" width="500px" height="500px" alt="histogram of achiv by prog" class="plot" /></div>
+</div>
+<div class="chunk" id="unnamed-chunk-4">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># boxplot of achiv by program type</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(dat,</span> <span class="hl kwd">aes</span><span class="hl std">(prog, achiv))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_jitter</span><span class="hl std">()</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" src="../../../wp-content/uploads/2016/02/truncreg-unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4" width="500px" height="500px" alt="boxplot with jittered data values of achiv by prog" class="plot" /></div>
+</div>
+<div class="chunk" id="unnamed-chunk-5">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(dat,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= langscore,</span> <span class="hl kwc">y</span> <span class="hl std">= achiv))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_point</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">stat_smooth</span><span class="hl std">(</span><span class="hl kwc">method</span> <span class="hl std">=</span> <span class="hl str">&quot;loess&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_grid</span><span class="hl std">(.</span> <span class="hl opt">~</span> <span class="hl std">prog,</span> <span class="hl kwc">margins</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" src="../../../wp-content/uploads/2016/02/truncreg-unnamed-chunk-5.png" alt="plot of chunk unnamed-chunk-5" width="500px" height="500px" alt="scatterplot of langscore and achiv by prog with loess lines" class="plot" /></div>
+</div>
+<h2>Analysis methods you might consider</h2>
+<p>Below is a list of some analysis methods you may have
+encountered. Some of the methods listed are quite reasonable, while others have
+either fallen out of favor or have limitations.</p>
+<ul>
+<li>OLS regression &#8211; You could analyze these data using OLS regression.&nbsp;
+  OLS regression will not adjust the estimates of the coefficients to take
+  into account the effect of truncating the sample at 40, and the coefficients
+  may be severely biased.&nbsp; This can be conceptualized as a model
+  specification error (Heckman, 1979).</li>
+<li>Truncated regression &#8211; Truncated regression addresses the bias
+  introduced when using OLS regression with truncated data.&nbsp; Note that with truncated regression, the
+  variance of the outcome variable is reduced compared to the distribution
+  that is not truncated. Also, if the lower part of the distribution is
+  truncated, then the mean of the truncated variable will be greater than the
+  mean from the untruncated variable; if the truncation is from above, the
+  mean of the truncated variable will be less than the untruncated variable.</li>
+<li>These types of models can also be conceptualized as Heckman
+  selection models, which are used to correct for sampling selection bias.</li>
+<li>Censored regression &#8211; Sometimes the concepts of truncation and censoring
+  are confused. With censored data we have all of the observations, but we don&#8217;t know the &#8220;true&#8221; values of
+  some of them. With truncation, some of the observations are not included in the analysis
+  because of the value of the outcome variable. It would be inappropriate to analyze
+  the data in our example using a censored regression model.</li>
+</ul>
+<h2>Truncated regression</h2>
+<p>Below we use the <code>truncreg</code> function in the <code>truncreg</code> package
+to estimate a truncated regression model. The <code>point</code> argument indicates
+where the data are truncated, and the direction indicates whether it is
+left or right truncated.</p>
+<div class="chunk" id="unnamed-chunk-6">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">truncreg</span><span class="hl std">(achiv</span> <span class="hl opt">~</span> <span class="hl std">langscore</span> <span class="hl opt">+</span> <span class="hl std">prog,</span> <span class="hl kwc">data</span> <span class="hl std">= dat,</span> <span class="hl kwc">point</span> <span class="hl std">=</span> <span class="hl num">40</span><span class="hl std">,</span> <span class="hl kwc">direction</span> <span class="hl std">=</span> <span class="hl str">&quot;left&quot;</span><span class="hl std">)</span>
+
+<span class="hl kwd">summary</span><span class="hl std">(m)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call:
+## truncreg(formula = achiv ~ langscore + prog, data = dat, point = 40, 
+##     direction = "left")
+## 
+## 
+## Coefficients :
+##              Estimate Std. Error t-value Pr(>|t|)    
+## (Intercept)    11.299      6.772    1.67    0.095 .  
+## langscore       0.713      0.114    6.23  4.8e-10 ***
+## progacademic    4.063      2.054    1.98    0.048 *  
+## progvocation   -1.144      2.670   -0.43    0.668    
+## sigma           8.754      0.666   13.13  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Log-Likelihood: -591 on 5 Df
+</pre>
+</div>
+</div>
+</div>
+<ul>
+<li>In the table of coefficients, we have the truncated regression coefficients,
+  the standard error of the coefficients, the Wald z-tests (coefficient/se),
+  and the p-value associated with each z-test (shown as t-values).</li>
+<li>The ancillary statistic /sigma is equivalent to the standard error of
+  estimate in OLS regression. The value of 8.76 can be compared to the
+  standard deviation of achievement which was 8.96. This shows a modest reduction.
+  The output also contains an estimate of the standard error of sigma.</li>
+<li>The variable <code>langscore</code> is statistically significant. A unit
+  increase in language score leads to a .71 increase in predicted achievement.
+  One of the indicator variables for <code>prog</code> is also statistically
+  significant. Compared to general programs, academic programs are about 4.07 higher.
+  To determine if <code>prog</code> itself is statistically significant,
+  we can test models with it in and out for the two degree-of-freedom test of this variable.</li>
+</ul>
+<div class="chunk" id="unnamed-chunk-7">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># update old model dropping prog</span>
+<span class="hl std">m2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">update</span><span class="hl std">(m, .</span> <span class="hl opt">~</span> <span class="hl std">.</span> <span class="hl opt">-</span> <span class="hl std">prog)</span>
+
+<span class="hl kwd">pchisq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">2</span> <span class="hl opt">*</span> <span class="hl std">(</span><span class="hl kwd">logLik</span><span class="hl std">(m2)</span> <span class="hl opt">-</span> <span class="hl kwd">logLik</span><span class="hl std">(m)),</span> <span class="hl kwc">df</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">lower.tail</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 'log Lik.' 0.0252 (df=3)
+</pre>
+</div>
+</div>
+</div>
+<p>The two degree-of-freedom chi-square test indicates that <code>prog</code> is a
+statistically significant predictor of <code>achiv</code>.  We can get the
+expected means for each program at the mean of <code>langscore</code> by
+reparameterizing the model.</p>
+<div class="chunk" id="unnamed-chunk-8">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># create mean centered langscore to use later</span>
+<span class="hl std">dat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">within</span><span class="hl std">(dat, {mlangscore</span> <span class="hl kwb">&lt;-</span> <span class="hl std">langscore</span> <span class="hl opt">-</span> <span class="hl kwd">mean</span><span class="hl std">(langscore)})</span>
+
+<span class="hl std">malt</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">truncreg</span><span class="hl std">(achiv</span> <span class="hl opt">~</span> <span class="hl num">0</span> <span class="hl opt">+</span> <span class="hl std">mlangscore</span> <span class="hl opt">+</span> <span class="hl std">prog,</span> <span class="hl kwc">data</span> <span class="hl std">= dat,</span> <span class="hl kwc">point</span> <span class="hl std">=</span> <span class="hl num">40</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(malt)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call:
+## truncreg(formula = achiv ~ 0 + mlangscore + prog, data = dat, 
+##     point = 40)
+## 
+## 
+## Coefficients :
+##              Estimate Std. Error t-value Pr(>|t|)    
+## mlangscore      0.713      0.114    6.22  4.8e-10 ***
+## proggeneral    49.789      1.897   26.24  < 2e-16 ***
+## progacademic   53.853      1.150   46.82  < 2e-16 ***
+## progvocation   48.653      2.140   22.73  < 2e-16 ***
+## sigma           8.755      0.667   13.13  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Log-Likelihood: -591 on 5 Df
+</pre>
+</div>
+</div>
+</div>
+<p>Notice all that has changed is the intercept is gone and the program scores
+are now the expected values when <code>langscore</code> is at its mean for each
+type of program.</p>
+<p>We could also calculate the bootstrapped confidence intervals if
+we wanted to. First, we define a function that returns the parameters
+of interest, and then use the <code>boot</code> function to run the bootstrap.</p>
+<div class="chunk" id="unnamed-chunk-9">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">f</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">data</span><span class="hl std">,</span> <span class="hl kwc">i</span><span class="hl std">) {</span>
+  <span class="hl kwd">require</span><span class="hl std">(truncreg)</span>
+  <span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">truncreg</span><span class="hl std">(</span><span class="hl kwc">formula</span> <span class="hl std">= achiv</span> <span class="hl opt">~</span> <span class="hl std">langscore</span> <span class="hl opt">+</span> <span class="hl std">prog,</span> <span class="hl kwc">data</span> <span class="hl std">= data[i, ],</span> <span class="hl kwc">point</span> <span class="hl std">=</span> <span class="hl num">40</span><span class="hl std">)</span>
+  <span class="hl kwd">as.vector</span><span class="hl std">(</span><span class="hl kwd">t</span><span class="hl std">(</span><span class="hl kwd">summary</span><span class="hl std">(m)</span><span class="hl opt">$</span><span class="hl std">coefficients[,</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">2</span><span class="hl std">]))</span>
+<span class="hl std">}</span>
+
+<span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">)</span>
+
+<span class="hl std">(res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">boot</span><span class="hl std">(dat, f,</span> <span class="hl kwc">R</span> <span class="hl std">=</span> <span class="hl num">1200</span><span class="hl std">,</span> <span class="hl kwc">parallel</span> <span class="hl std">=</span> <span class="hl str">&quot;snow&quot;</span><span class="hl std">,</span> <span class="hl kwc">ncpus</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = dat, statistic = f, R = 1200, parallel = "snow", 
+##     ncpus = 4)
+## 
+## 
+## Bootstrap Statistics :
+##      original    bias    std. error
+## t1*    11.299  0.303557      5.9327
+## t2*     6.772 -0.055936      0.8620
+## t3*     0.713 -0.004048      0.0965
+## t4*     0.114 -0.000685      0.0137
+## t5*     4.063 -0.053784      2.0333
+## t6*     2.054 -0.001430      0.2411
+## t7*    -1.144  0.021373      2.8721
+## t8*     2.670  0.012132      0.2944
+## t9*     8.754 -0.109523      0.5500
+## t10*    0.666 -0.010924      0.0754
+</pre>
+</div>
+</div>
+</div>
+<p>We could use the bootstrapped standard error to get a normal approximation
+for a significance test and confidence intervals for every parameter. However,
+instead we will get the percentile and bias adjusted 95 percent confidence
+intervals, using the <code>boot.ci</code> function.</p>
+<div class="chunk" id="unnamed-chunk-10">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl com"># basic parameter estimates with percentile and bias adjusted CIs</span>
+<span class="hl std">parms</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(</span><span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">7</span><span class="hl std">,</span> <span class="hl num">9</span><span class="hl std">),</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">) {</span>
+    <span class="hl std">out</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">boot.ci</span><span class="hl std">(res,</span> <span class="hl kwc">index</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(i, i</span> <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl std">),</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;perc&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;bca&quot;</span><span class="hl std">))</span>
+    <span class="hl kwd">with</span><span class="hl std">(out,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwc">Est</span> <span class="hl std">= t0,</span> <span class="hl kwc">pLL</span> <span class="hl std">= percent[</span><span class="hl num">4</span><span class="hl std">],</span> <span class="hl kwc">pUL</span> <span class="hl std">= percent[</span><span class="hl num">5</span><span class="hl std">],</span> <span class="hl kwc">bcaLL</span> <span class="hl std">= bca[</span><span class="hl num">4</span><span class="hl std">],</span>
+        <span class="hl kwc">bcaLL</span> <span class="hl std">= bca[</span><span class="hl num">5</span><span class="hl std">]))</span>
+<span class="hl std">}))</span>
+
+<span class="hl com"># add row names</span>
+<span class="hl kwd">row.names</span><span class="hl std">(parms)</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">names</span><span class="hl std">(</span><span class="hl kwd">coef</span><span class="hl std">(m))</span>
+<span class="hl com"># print results</span>
+<span class="hl std">parms</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                 Est    pLL    pUL   bcaLL  bcaLL
+## (Intercept)  11.299 -1.258 22.297 -3.7231 21.320
+## langscore     0.713  0.539  0.916  0.5508  0.944
+## progacademic  4.063  0.058  8.011  0.0842  8.043
+## progvocation -1.144 -6.805  4.277 -6.8436  4.250
+## sigma         8.754  7.674  9.792  7.8896 10.110
+</pre>
+</div>
+</div>
+</div>
+<p>The conclusions are the same as from the default model tests. You can compute
+a rough estimate of the degree of association for the overall model,
+by correlating <code>achiv</code> with the predicted value and squaring the result.</p>
+<div class="chunk" id="unnamed-chunk-11">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">dat</span><span class="hl opt">$</span><span class="hl std">yhat</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">fitted</span><span class="hl std">(m)</span>
+
+<span class="hl com"># correlation</span>
+<span class="hl std">(r</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">with</span><span class="hl std">(dat,</span> <span class="hl kwd">cor</span><span class="hl std">(achiv, yhat)))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## [1] 0.552
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl com"># rough variance accounted for</span>
+<span class="hl std">r</span><span class="hl opt">^</span><span class="hl num">2</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## [1] 0.305
+</pre>
+</div>
+</div>
+</div>
+<p>The calculated value of .31 is rough estimate of the R<sup>2</sup> you would find in an OLS
+regression. The squared correlation between the observed and predicted
+academic aptitude values is about 0.31, indicating that these predictors
+accounted for over 30% of the variability in the outcome variable.</p>
+<h2>Things to consider</h2>
+<ul>
+<li>The <code>truncreg</code> function is designed to work when the
+  truncation is on the outcome variable in the model. It is possible to
+  have samples that are truncated based on one or more predictors. For
+  example, modeling college GPA as a function of high school GPA (HSGPA)
+  and SAT scores involves a sample that is truncated based on the predictors,
+  i.e., only students with higher HSGPA and SAT scores are admitted into the college.</li>
+<li>You need to be careful about what value is used  as the truncation value,
+  because it affects the estimation of the coefficients and standard errors.
+  In the example above, if we had used <code>point = 39</code> instead of
+  <code>point = 40</code>, the results would have been slightly different.
+  It does not matter that there were no values of 40 in our sample.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Greene, W. H. (2003). <i>Econometric Analysis, Fifth Edition</i>.
+  Upper Saddle River, NJ: Prentice Hall.</li>
+<li>Heckman, J. J. (1979). Sample selection bias as a
+  specification error. <i>Econometrica</i>, Volume 47, Number 1, pages 153 - 161.</li>
+<li>Long, J. S. (1997). <i>Regression Models for Categorical and Limited
+  Dependent Variables.</i> Thousand Oaks, CA: Sage Publications.</li>
+</ul>
+<p><?php include "stat/footer.htm"; ?>
+</body>
+
+<!-- Mirrored from stats.oarc.ucla.edu/r/dae/truncated-regression/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Mar 2025 04:14:51 GMT -->
+</html></p>
+</div></article></main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar" id="genesis-sidebar-primary"><h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2></aside><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id67c2857a3cf62"  tabindex="0" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id67c2857a3cf62'  class='colomat-swap' style='display:none;'> </span><div id="target-id67c2857a3cf62" class="collapseomatic_content ">
+<div class="wpcf7 no-js" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="https://stats.oarc.ucla.edu/r/dae/truncated-regression/#wpcf7-f22910-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="5.9.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+<input type="hidden" name="_wpcf7_recaptcha_response" value="" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" value="" type="text" name="your-name" /></span><br />
+</label>
+</p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" value="" type="email" name="your-email" /></span><br />
+</label>
+</p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea cols="40" rows="10" maxlength="400" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false" name="your-message"></textarea></span><br />
+</label>
+</p>
+<span class="wpcf7-form-control-wrap recaptcha"><span data-sitekey="6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" class="wpcf7-form-control wpcf7-recaptcha g-recaptcha"></span>
+<noscript>
+	<div class="grecaptcha-noscript">
+		<iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" frameborder="0" scrolling="no" width="310" height="430">
+		</iframe>
+		<textarea name="g-recaptcha-response" rows="3" cols="40" placeholder="reCaptcha Response Here">
+		</textarea>
+	</div>
+</noscript>
+</span>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Send" />
+</p><p style="display: none !important;" class="akismet-fields-container" data-prefix="_wpcf7_ak_"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="184"/><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+</div></p><p style="float:right;">
+          <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+
+    <div class="wrapped">
+        <a href="https://oarc.ucla.edu/" title="UCLA Office of Advanced Research Technology" id="footer-image">UCLA OARC</a>
+    </div>
+
+    <div class="ftr-btm">
+        <div class="footer-links">
+        <ol>
+            <li><a href="http://www.ucla.edu/terms-of-use/">© 2024 UC REGENTS</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/">HOME</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/contact">CONTACT</a></li>
+        </ol>
+        </div>
+    </div>
+<script>
+			jQuery(function($) {
+			$('.genesis-nav-menu').slicknav();
+			});
+			</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><script  src="../../../wp-content/cache/minify/1f540.js"></script>
+
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/stats.oarc.ucla.edu\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script  src="../../../wp-content/cache/minify/b68ea.js"></script>
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/npm/mathjax%403/es5/tex-chtml.js?ver=6.7.1" id="mathjax-js"></script>
+
+
+
+<script  src="../../../wp-content/cache/minify/f3065.js"></script>
+
+<script type="text/javascript" id="collapseomatic-js-js-before">
+/* <![CDATA[ */
+const com_options = {"colomatduration":"fast","colomatslideEffect":"slideFade","colomatpauseInit":"","colomattouchstart":""}
+/* ]]> */
+</script>
+
+<script  src="../../../wp-content/cache/minify/d7287.js"></script>
+
+<script type="text/javascript" id="google-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7iqfix = {"recaptcha_empty":"Please verify that you are not a robot.","response_err":"wpcf7-recaptcha: Could not verify reCaptcha response."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../www.google.com/recaptcha/apidba9.js?hl=en_US&amp;onload=recaptchaCallback&amp;render=explicit&amp;ver=2.0" id="google-recaptcha-js"></script>
+<script  defer src="../../../wp-content/cache/minify/45ffb.js"></script>
+
+
+
+
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Page Caching using Disk: Enhanced 
+Minified using Disk
+
+Served from: stats.oarc.ucla.edu @ 2025-02-28 19:56:42 by W3 Total Cache
+-->

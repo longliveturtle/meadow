@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from stats.oarc.ucla.edu/r/dae/robust-regression/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Mar 2025 04:16:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head >
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Robust Regression |  R Data Analysis Examples</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};
+
+</script>
+<link rel='dns-prefetch' href='../../../../cdn.jsdelivr.net/index.html' />
+<link rel='dns-prefetch' href='../../../../platform-api.sharethis.com/index.html' />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<link rel="alternate" type="text/calendar" title="OARC Stats &raquo; iCal Feed" href="../../../calendar/indexedf3.html?ical=1" />
+<link rel="canonical" href="index.html" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stats.oarc.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/9df84.css" media="all" />
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/a5ff7.css" media="all" />
+
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4c431.css" media="all" />
+
+<style id='contact-form-7-inline-css' type='text/css'>
+.wpcf7 .wpcf7-recaptcha iframe {margin-bottom: 0;}.wpcf7 .wpcf7-recaptcha[data-align="center"] > div {margin: 0 auto;}.wpcf7 .wpcf7-recaptcha[data-align="right"] > div {margin: 0 0 0 auto;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4033d.css" media="all" />
+
+
+
+<link rel='stylesheet' id='slicknavcss-css' href='../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<script  src="../../../wp-content/cache/minify/818c0.js"></script>
+
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1" id="slicknav-js"></script>
+<script type="text/javascript" src="../../../../platform-api.sharethis.com/js/sharethis.js#source=googleanalytics-wordpress#product=ga&amp;property=5b058eb03e4a630011ba71c0" id="googleanalytics-platform-sharethis-js"></script>
+<link rel="https://api.w.org/" href="../../../wp-json/index.html" /><link rel="alternate" title="JSON" type="application/json" href="../../../wp-json/wp/v2/pages/930.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc0db0.html?rsd" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed18ea.json?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Frobust-regression%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embede44b?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Frobust-regression%2F&amp;format=xml" />
+<meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://stats.oarc.ucla.edu"><link rel="alternate" href="../../../wp-json/tribe/events/v1/index.html" /><link rel="icon" href="../../../wp-content/themes/genesis-child/images/favicon.ico" />
+<link rel="pingback" href="../../../xmlrpc.html" />
+<script>
+(function() {
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '../../../../google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-121222866-1', 'auto');
+			ga('send', 'pageview');
+	})();
+</script>
+
+<link rel="icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+<link rel="shortcut icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+
+</head>
+
+<body class="page-template-default page page-id-930 page-child parent-pageid-916 tribe-no-js header-image content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-hidden" itemscope itemtype="https://schema.org/WebPage"><div class="site-container"><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li><li><a href="#genesis-sidebar-primary" class="screen-reader-shortcut"> Skip to primary sidebar</a></li></ul><header class="site-header" itemscope itemtype="https://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+
+	<div class="site-title" itemprop="headline"><a href="https://stats.oarc.ucla.edu/">stats.oarc.ucla.edu</a></div>
+
+	<p class="site-description" itemprop="description">Statistical Methods and Data Analytics</p></div>
+</div><div class="widget-area header-widget-area"><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><div><div class = "top-wrap"><div id = "ucla-logo"><img alt="Image " src = "../../../wp-content/uploads/logo/idrelogo4.png" width = 380px alt = "IDRE Logo"></div></div>
+</div></div></div></section>
+<section id="search-11" class="widget widget_search"><div class="widget-wrap"><form class="search-form" method="get" action="https://stats.oarc.ucla.edu/" role="search" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction"><label class="search-form-label screen-reader-text" for="searchform-1">Search this website</label><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search this website" itemprop="query-input"><input class="search-form-submit" type="submit" value="Search"><meta content="https://stats.oarc.ucla.edu/?s={s}" itemprop="target"></form></div></section>
+</div></div></header><nav class="nav-primary" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement" id="genesis-nav-primary"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22640"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="../../index.html" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="https://stats.oarc.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="https://stats.oarc.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="https://stats.oarc.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="https://stats.oarc.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="https://stats.oarc.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="https://stats.oarc.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="https://stats.oarc.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="https://stats.oarc.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22661"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="https://stats.oarc.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="../../../other/dae/index.html" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="https://stats.oarc.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22663"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-33775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33775"><a href="https://stats.idre.ucla.edu/ucla/policies/remote" itemprop="url"><span itemprop="name">Remote Consulting</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="https://stats.oarc.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="https://stats.oarc.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="https://stats.oarc.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="https://stats.oarc.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+		<li id="menu-item-30604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30604"><a href="https://stats.idre.ucla.edu/ucla/frequently-asked-questions-about-our-statistical-consulting-services/" itemprop="url"><span itemprop="name">FAQ</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="https://stats.oarc.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="https://stats.oarc.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="https://www.cores.ucla.edu/statistical-biomathematical-consulting-clinic-sbcc/" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="https://stats.oarc.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-930 page type-page status-publish entry" aria-label="Robust Regression |  R Data Analysis Examples" itemscope itemtype="https://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Robust Regression |  R Data Analysis Examples</h1>
+</header><div class="entry-content" itemprop="text"><p><!--[mathjax]--></p>
+<p>Robust regression is an alternative to least squares regression
+when data are contaminated with outliers or influential observations, and it can also be used
+for the purpose of detecting influential observations.</p>
+<p>This page uses the following packages. Make sure that you can load
+them before trying to run the examples on this page. If you do not have
+a package installed, run: <code>install.packages("packagename")</code>, or
+if you see the version is out of date, run: <code>update.packages()</code>.</p>
+<div id="unnamed-chunk-2" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">require</span><span class="hl std">(foreign)</span>
+<span class="hl kwd">require</span><span class="hl std">(MASS)</span>
+</pre>
+</div>
+</div>
+</div>
+<p><code class="knitr inline"><strong>Version info: </strong>Code for this page was tested in R version 3.1.1 (2014-07-10)
+On: 2014-09-29
+With: MASS 7.3-33; foreign 0.8-61; knitr 1.6; boot 1.3-11; ggplot2 1.0.0; dplyr 0.2; nlme 3.1-117
+</code></p>
+<p><strong>Please note:</strong> The purpose of this page is to show how to use various
+data analysis commands. It does not cover all aspects of the research process
+which researchers are expected to do. In particular, it does not cover data
+cleaning and checking, verification of assumptions, model diagnostics or
+potential follow-up analyses.</p>
+<h2>Introduction</h2>
+<p>Let&#8217;s begin our discussion on robust regression with some terms in linear
+regression.</p>
+<p><strong>Residual</strong>: The difference between the predicted value (based on the
+regression equation) and the actual, observed value.</p>
+<p><strong>Outlier</strong>: In linear regression, an outlier is an observation with
+large residual. In other words, it is an observation whose dependent-variable
+value is unusual given its value on the predictor variables. An outlier may
+indicate a sample peculiarity or may indicate a data entry error or other
+problem.</p>
+<p><strong>Leverage</strong>: An observation with an extreme value on a predictor
+variable is a point with high leverage. Leverage is a measure of how far an
+independent variable deviates from its mean. High leverage points can have a
+great amount of effect on the estimate of regression coefficients.</p>
+<p><strong>Influence</strong>: An observation is said to be influential if removing the
+observation substantially changes the estimate of the regression coefficients.
+Influence can be thought of as the product of leverage and outlierness.</p>
+<p><strong>Cook&#8217;s distance</strong> (or Cook&#8217;s D): A measure that combines the information
+of leverage and residual of the observation.</p>
+<p>Robust regression can be used in any situation in which you would use least
+squares regression. When fitting a least squares regression, we might find some
+outliers or high leverage data points. We have decided that these data points
+are not data entry errors, neither they are from a different population than
+most of our data. So we have no compelling reason to exclude them from the
+analysis. Robust regression might be a good strategy since it is a compromise
+between excluding these points entirely from the analysis and including all the
+data points and treating all them equally in OLS regression. The idea of robust
+regression is to weigh the observations differently based on how well behaved
+these observations are. Roughly speaking, it is a form of weighted and
+reweighted least squares regression.</p>
+<p>The <code>rlm</code> command in the <code>MASS</code> package command implements several versions of robust
+regression. In this page, we will show M-estimation with Huber and bisquare
+weighting. These two are very standard. M-estimation defines a weight function
+such that the estimating equation becomes \(\sum_{i=1}^{n}w_{i}(y_{i} &#8211; x&#8217;b)x&#8217;_{i} = 0\).
+But the weights depend on the residuals and the residuals on the weights. The equation is solved using <strong>I</strong>teratively
+<strong>R</strong>eweighted <strong>L</strong>east <strong>S</strong>quares (IRLS).
+For example, the coefficient matrix at iteration <i>j</i> is
+\(B_{j} = [X&#8217;W_{j-1}X]^{-1}X&#8217;W_{j-1}Y\)
+where the subscripts indicate the matrix at a particular iteration (<i>not</i> rows or columns).
+The process continues until it converges. In Huber weighting,
+observations with small residuals get a weight of 1 and the larger the residual,
+the smaller the weight. This is defined by the weight function</p>
+<p>\begin{equation}
+w(e) =
+\left\{
+\begin{array}{rl}
+1 \quad \mbox{for} \quad |e| \leq k \\ \dfrac{k}{|e|} \quad \mbox{for} \quad |e| &gt; k \\
+\end{array}
+\right.
+\end{equation}</p>
+<p>With bisquare weighting, all cases with a non-zero
+residual get down-weighted at least a little.</p>
+<h2>Description of the example data</h2>
+<p>For our data analysis below, we will use the crime dataset that appears in
+<i>Statistical Methods for Social Sciences, Third Edition</i>
+by Alan Agresti and Barbara Finlay (Prentice Hall, 1997). The variables are
+state id (<code>sid</code>), state name (<code>state</code>), violent crimes per 100,000
+people (<code>crime</code>), murders per 1,000,000 (<code>murder</code>), the percent of
+the population living in metropolitan areas (<code>pctmetro</code>), the percent of
+the population that is white (<code>pctwhite</code>), percent of population with a
+high school education or above (<code>pcths</code>), percent of population living
+under poverty line (<code>poverty</code>), and percent of population that are single
+parents (<code>single</code>). It has 51 observations. We are going to use <code>poverty</code>
+and <code>single</code> to predict <code>crime</code>.</p>
+<div id="unnamed-chunk-3" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">cdata</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.dta</span><span class="hl std">(</span><span class="hl str">"https://stats.idre.ucla.edu/stat/data/crime.dta"</span><span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(cdata)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##       sid          state               crime          murder     
+##  Min.   : 1.0   Length:51          Min.   :  82   Min.   : 1.60  
+##  1st Qu.:13.5   Class :character   1st Qu.: 326   1st Qu.: 3.90  
+##  Median :26.0   Mode  :character   Median : 515   Median : 6.80  
+##  Mean   :26.0                      Mean   : 613   Mean   : 8.73  
+##  3rd Qu.:38.5                      3rd Qu.: 773   3rd Qu.:10.35  
+##  Max.   :51.0                      Max.   :2922   Max.   :78.50  
+##     pctmetro        pctwhite        pcths         poverty    
+##  Min.   : 24.0   Min.   :31.8   Min.   :64.3   Min.   : 8.0  
+##  1st Qu.: 49.5   1st Qu.:79.3   1st Qu.:73.5   1st Qu.:10.7  
+##  Median : 69.8   Median :87.6   Median :76.7   Median :13.1  
+##  Mean   : 67.4   Mean   :84.1   Mean   :76.2   Mean   :14.3  
+##  3rd Qu.: 84.0   3rd Qu.:92.6   3rd Qu.:80.1   3rd Qu.:17.4  
+##  Max.   :100.0   Max.   :98.5   Max.   :86.6   Max.   :26.4  
+##      single    
+##  Min.   : 8.4  
+##  1st Qu.:10.1  
+##  Median :10.9  
+##  Mean   :11.3  
+##  3rd Qu.:12.1  
+##  Max.   :22.1
+</pre>
+</div>
+</div>
+</div>
+<h3>Using robust regression analysis</h3>
+<p>In most cases, we begin by running an OLS regression and doing some
+diagnostics. We will begin by running an OLS regression and looking at
+diagnostic plots examining residuals, fitted values, Cook&#8217;s distance, and leverage.</p>
+<div id="unnamed-chunk-4" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(ols</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(crime</span> <span class="hl opt">~</span> <span class="hl std">poverty</span> <span class="hl opt">+</span> <span class="hl std">single,</span> <span class="hl kwc">data</span> <span class="hl std">= cdata))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call:
+## lm(formula = crime ~ poverty + single, data = cdata)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -811.1 -114.3  -22.4  121.9  689.8 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -1368.19     187.21   -7.31  2.5e-09 ***
+## poverty         6.79       8.99    0.76     0.45    
+## single        166.37      19.42    8.57  3.1e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 244 on 48 degrees of freedom
+## Multiple R-squared:  0.707,	Adjusted R-squared:  0.695 
+## F-statistic:   58 on 2 and 48 DF,  p-value: 1.58e-13
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl std">opar</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">),</span> <span class="hl kwc">oma</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">1.1</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">))</span>
+<span class="hl kwd">plot</span><span class="hl std">(ols,</span> <span class="hl kwc">las</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/rreg-unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4" width="500px" height="500px" /></div>
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(opar)</span>
+</pre>
+</div>
+</div>
+</div>
+<p>From these plots, we can identify observations 9, 25, and 51 as possibly
+problematic to our model. We can look at these observations to see which states
+they represent.</p>
+<div id="unnamed-chunk-5" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">cdata[</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">9</span><span class="hl std">,</span> <span class="hl num">25</span><span class="hl std">,</span> <span class="hl num">51</span><span class="hl std">),</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">2</span><span class="hl std">]</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    sid state
+## 9    9    fl
+## 25  25    ms
+## 51  51    dc
+</pre>
+</div>
+</div>
+</div>
+<p>DC, Florida and Mississippi have either high leverage or
+large residuals. We can display the observations that have relatively
+large values of Cook&#8217;s D. A conventional cut-off point is \({4}/{n}\),
+where \(n\) is the number of observations in the data set. We
+will use this criterion to select the values to display.</p>
+<div id="unnamed-chunk-6" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">d1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cooks.distance</span><span class="hl std">(ols)</span>
+<span class="hl std">r</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">stdres</span><span class="hl std">(ols)</span>
+<span class="hl std">a</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cbind</span><span class="hl std">(cdata, d1, r)</span>
+<span class="hl std">a[d1</span> <span class="hl opt">&gt;</span> <span class="hl num">4</span><span class="hl opt">/</span><span class="hl num">51</span><span class="hl std">, ]</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    sid state crime murder pctmetro pctwhite pcths poverty single     d1
+## 1    1    ak   761    9.0     41.8     75.2  86.6     9.1   14.3 0.1255
+## 9    9    fl  1206    8.9     93.0     83.5  74.4    17.8   10.6 0.1426
+## 25  25    ms   434   13.5     30.7     63.3  64.3    24.7   14.7 0.6139
+## 51  51    dc  2922   78.5    100.0     31.8  73.1    26.4   22.1 2.6363
+##         r
+## 1  -1.397
+## 9   2.903
+## 25 -3.563
+## 51  2.616
+</pre>
+</div>
+</div>
+</div>
+<p>We probably should drop DC to begin with since it is not even a state. We
+include it in the analysis just to show that it has large Cook&#8217;s D and
+demonstrate how it will be handled by <code>rlm</code>. Now we will look at
+the residuals. We will
+generate a new variable called <code>absr1</code>, which is the absolute value of the
+residuals (because the sign of the residual doesn&#8217;t matter). We then print the
+ten observations with the highest absolute residual values.</p>
+<div id="unnamed-chunk-7" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">rabs</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">abs</span><span class="hl std">(r)</span>
+<span class="hl std">a</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">cbind</span><span class="hl std">(cdata, d1, r, rabs)</span>
+<span class="hl std">asorted</span> <span class="hl kwb">&lt;-</span> <span class="hl std">a[</span><span class="hl kwd">order</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">rabs), ]</span>
+<span class="hl std">asorted[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">, ]</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    sid state crime murder pctmetro pctwhite pcths poverty single      d1
+## 25  25    ms   434   13.5     30.7     63.3  64.3    24.7   14.7 0.61387
+## 9    9    fl  1206    8.9     93.0     83.5  74.4    17.8   10.6 0.14259
+## 51  51    dc  2922   78.5    100.0     31.8  73.1    26.4   22.1 2.63625
+## 46  46    vt   114    3.6     27.0     98.4  80.8    10.0   11.0 0.04272
+## 26  26    mt   178    3.0     24.0     92.6  81.0    14.9   10.8 0.01676
+## 21  21    me   126    1.6     35.7     98.5  78.8    10.7   10.6 0.02233
+## 1    1    ak   761    9.0     41.8     75.2  86.6     9.1   14.3 0.12548
+## 31  31    nj   627    5.3    100.0     80.8  76.7    10.9    9.6 0.02229
+## 14  14    il   960   11.4     84.0     81.0  76.2    13.6   11.5 0.01266
+## 20  20    md   998   12.7     92.8     68.9  78.4     9.7   12.0 0.03570
+##         r  rabs
+## 25 -3.563 3.563
+## 9   2.903 2.903
+## 51  2.616 2.616
+## 46 -1.742 1.742
+## 26 -1.461 1.461
+## 21 -1.427 1.427
+## 1  -1.397 1.397
+## 31  1.354 1.354
+## 14  1.338 1.338
+## 20  1.287 1.287
+</pre>
+</div>
+</div>
+</div>
+<p>Now let&#8217;s run our first robust regression. Robust regression is done by
+iterated re-weighted least squares (IRLS). The command for running robust regression
+is <code>rlm</code> in the <code>MASS</code> package. There are several weighting functions
+that can be used for IRLS. We are
+going to first use the Huber weights in this example. We will then look at
+the final weights created by the IRLS process. This can be very
+useful.</p>
+<div id="unnamed-chunk-8" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(rr.huber</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rlm</span><span class="hl std">(crime</span> <span class="hl opt">~</span> <span class="hl std">poverty</span> <span class="hl opt">+</span> <span class="hl std">single,</span> <span class="hl kwc">data</span> <span class="hl std">= cdata))</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call: rlm(formula = crime ~ poverty + single, data = cdata)
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -846.1 -125.8  -16.5  119.2  679.9 
+## 
+## Coefficients:
+##             Value     Std. Error t value  
+## (Intercept) -1423.037   167.590     -8.491
+## poverty         8.868     8.047      1.102
+## single        168.986    17.388      9.719
+## 
+## Residual standard error: 182 on 48 degrees of freedom
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl std">hweights</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">state</span> <span class="hl std">= cdata</span><span class="hl opt">$</span><span class="hl std">state,</span> <span class="hl kwc">resid</span> <span class="hl std">= rr.huber</span><span class="hl opt">$</span><span class="hl std">resid,</span> <span class="hl kwc">weight</span> <span class="hl std">= rr.huber</span><span class="hl opt">$</span><span class="hl std">w)</span>
+<span class="hl std">hweights2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">hweights[</span><span class="hl kwd">order</span><span class="hl std">(rr.huber</span><span class="hl opt">$</span><span class="hl std">w), ]</span>
+<span class="hl std">hweights2[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">15</span><span class="hl std">, ]</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    state   resid weight
+## 25    ms -846.09 0.2890
+## 9     fl  679.94 0.3595
+## 46    vt -410.48 0.5956
+## 51    dc  376.34 0.6494
+## 26    mt -356.14 0.6865
+## 21    me -337.10 0.7252
+## 31    nj  331.12 0.7384
+## 14    il  319.10 0.7661
+## 1     ak -313.16 0.7807
+## 20    md  307.19 0.7958
+## 19    ma  291.21 0.8395
+## 18    la -266.96 0.9159
+## 2     al  105.40 1.0000
+## 3     ar   30.54 1.0000
+## 4     az  -43.25 1.0000
+</pre>
+</div>
+</div>
+</div>
+<p>We can see that roughly, as the absolute residual goes down, the weight goes up. In other words,
+cases with a large residuals tend to be down-weighted. This output shows us that the
+observation for Mississippi will be down-weighted the most. Florida will
+also be substantially down-weighted. All observations not shown above have
+a weight of 1. In OLS regression, all
+cases have a weight of 1. Hence, the more cases in the robust regression
+that have a weight close to one, the closer the results of the OLS and robust
+regressions.</p>
+<p>Next, let&#8217;s run the same model, but using the bisquare weighting function.
+Again, we can look at the weights.</p>
+<div id="unnamed-chunk-9" class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="hl std">rr.bisquare</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rlm</span><span class="hl std">(crime</span> <span class="hl opt">~</span> <span class="hl std">poverty</span> <span class="hl opt">+</span> <span class="hl std">single,</span> <span class="hl kwc">data</span><span class="hl std">=cdata,</span> <span class="hl kwc">psi</span> <span class="hl std">= psi.bisquare)</span>
+<span class="hl kwd">summary</span><span class="hl std">(rr.bisquare)</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call: rlm(formula = crime ~ poverty + single, data = cdata, psi = psi.bisquare)
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -906   -141    -15    115    668 
+## 
+## Coefficients:
+##             Value     Std. Error t value  
+## (Intercept) -1535.334   164.506     -9.333
+## poverty        11.690     7.899      1.480
+## single        175.930    17.068     10.308
+## 
+## Residual standard error: 202 on 48 degrees of freedom
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r"><span class="hl std">biweights</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">state</span> <span class="hl std">= cdata</span><span class="hl opt">$</span><span class="hl std">state,</span> <span class="hl kwc">resid</span> <span class="hl std">= rr.bisquare</span><span class="hl opt">$</span><span class="hl std">resid,</span> <span class="hl kwc">weight</span> <span class="hl std">= rr.bisquare</span><span class="hl opt">$</span><span class="hl std">w)</span>
+<span class="hl std">biweights2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">biweights[</span><span class="hl kwd">order</span><span class="hl std">(rr.bisquare</span><span class="hl opt">$</span><span class="hl std">w), ]</span>
+<span class="hl std">biweights2[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">15</span><span class="hl std">, ]</span>
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##    state  resid   weight
+## 25    ms -905.6 0.007653
+## 9     fl  668.4 0.252871
+## 46    vt -402.8 0.671495
+## 26    mt -360.9 0.731137
+## 31    nj  346.0 0.751348
+## 18    la -332.7 0.768938
+## 21    me -328.6 0.774103
+## 1     ak -325.9 0.777662
+## 14    il  313.1 0.793659
+## 20    md  308.8 0.799066
+## 19    ma  297.6 0.812597
+## 51    dc  260.6 0.854442
+## 50    wy -234.2 0.881661
+## 5     ca  201.4 0.911714
+## 10    ga -186.6 0.924033
+</pre>
+</div>
+</div>
+</div>
+<p>We can see that the weight given to Mississippi is dramatically lower using
+the bisquare weighting function than the Huber weighting function and the
+parameter estimates from these two different weighting methods differ. When comparing the results of a regular OLS
+regression and a robust regression, if the results are very different, you will
+most likely want to use the results from the robust regression. Large
+differences suggest that the model parameters are being highly influenced by
+outliers. Different
+functions have advantages and drawbacks. Huber weights can have difficulties
+with severe outliers, and bisquare weights can have difficulties converging or
+may yield multiple solutions.</p>
+<p>As you can see, the results from the two analyses are fairly different,
+especially with respect to the coefficients of <code>single</code> and the constant
+(<code>intercept</code>).
+While normally we are not interested in the constant, if you had centered one or
+both of the predictor variables, the constant would be useful. On the
+other hand, you will notice that <code>poverty</code> is not statistically significant
+in either analysis, whereas <code>single</code> is significant in both analyses.</p>
+<h2>Things to consider</h2>
+<ul>
+<li>Robust regression does not address issues of heterogeneity of variance.
+This problem can be addressed by using functions in the <code>sandwich</code> package
+after the <code>lm</code> function.</li>
+<li>The examples shown here have presented <code>R</code> code for M estimation. There are
+other estimation options available in <code>rlm</code> and other R commands and
+packages: Least trimmed squares using
+<code>ltsReg</code> in the <code>robustbase</code> package and MM using <code>rlm</code>.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Li, G. 1985. <i>Robust regression</i>. In <i>Exploring Data Tables, Trends, and Shapes</i>,
+ed. D. C. Hoaglin, F. Mosteller, and J. W. Tukey, Wiley.</li>
+<li>John Fox, <i>Applied regression analysis, linear models, and related models</i>,
+Sage publications, Inc, 1997</li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li><a href="http://stat.ethz.ch/R-manual/R-patched/library/MASS/html/rlm.html">
+R documentation for <code>rlm</code></a></li>
+</ul>
+</div></article></main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar" id="genesis-sidebar-primary"><h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2></aside><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id67c28482e9d4d"  tabindex="0" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id67c28482e9d4d'  class='colomat-swap' style='display:none;'> </span><div id="target-id67c28482e9d4d" class="collapseomatic_content ">
+<div class="wpcf7 no-js" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="https://stats.oarc.ucla.edu/r/dae/robust-regression/#wpcf7-f22910-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="5.9.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+<input type="hidden" name="_wpcf7_recaptcha_response" value="" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" value="" type="text" name="your-name" /></span><br />
+</label>
+</p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" value="" type="email" name="your-email" /></span><br />
+</label>
+</p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea cols="40" rows="10" maxlength="400" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false" name="your-message"></textarea></span><br />
+</label>
+</p>
+<span class="wpcf7-form-control-wrap recaptcha"><span data-sitekey="6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" class="wpcf7-form-control wpcf7-recaptcha g-recaptcha"></span>
+<noscript>
+	<div class="grecaptcha-noscript">
+		<iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" frameborder="0" scrolling="no" width="310" height="430">
+		</iframe>
+		<textarea name="g-recaptcha-response" rows="3" cols="40" placeholder="reCaptcha Response Here">
+		</textarea>
+	</div>
+</noscript>
+</span>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Send" />
+</p><p style="display: none !important;" class="akismet-fields-container" data-prefix="_wpcf7_ak_"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="161"/><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+</div></p><p style="float:right;">
+          <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+
+    <div class="wrapped">
+        <a href="https://oarc.ucla.edu/" title="UCLA Office of Advanced Research Technology" id="footer-image">UCLA OARC</a>
+    </div>
+
+    <div class="ftr-btm">
+        <div class="footer-links">
+        <ol>
+            <li><a href="http://www.ucla.edu/terms-of-use/">© 2024 UC REGENTS</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/">HOME</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/contact">CONTACT</a></li>
+        </ol>
+        </div>
+    </div>
+<script>
+			jQuery(function($) {
+			$('.genesis-nav-menu').slicknav();
+			});
+			</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><script  src="../../../wp-content/cache/minify/1f540.js"></script>
+
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/stats.oarc.ucla.edu\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script  src="../../../wp-content/cache/minify/b68ea.js"></script>
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/npm/mathjax%403/es5/tex-chtml.js?ver=6.7.1" id="mathjax-js"></script>
+
+
+
+<script  src="../../../wp-content/cache/minify/f3065.js"></script>
+
+<script type="text/javascript" id="collapseomatic-js-js-before">
+/* <![CDATA[ */
+const com_options = {"colomatduration":"fast","colomatslideEffect":"slideFade","colomatpauseInit":"","colomattouchstart":""}
+/* ]]> */
+</script>
+
+<script  src="../../../wp-content/cache/minify/d7287.js"></script>
+
+<script type="text/javascript" id="google-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7iqfix = {"recaptcha_empty":"Please verify that you are not a robot.","response_err":"wpcf7-recaptcha: Could not verify reCaptcha response."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../www.google.com/recaptcha/apidba9.js?hl=en_US&amp;onload=recaptchaCallback&amp;render=explicit&amp;ver=2.0" id="google-recaptcha-js"></script>
+<script  defer src="../../../wp-content/cache/minify/45ffb.js"></script>
+
+
+
+
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Page Caching using Disk: Enhanced 
+Minified using Disk
+
+Served from: stats.oarc.ucla.edu @ 2025-02-28 19:52:34 by W3 Total Cache
+-->

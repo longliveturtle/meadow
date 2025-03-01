@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from stats.oarc.ucla.edu/r/dae/zero-truncated-poisson/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Mar 2025 04:14:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head >
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Zero-Truncated Poisson |  R Data Analysis Examples</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore|editor-rich-text'
+  }
+};
+
+</script>
+<link rel='dns-prefetch' href='../../../../cdn.jsdelivr.net/index.html' />
+<link rel='dns-prefetch' href='../../../../platform-api.sharethis.com/index.html' />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="OARC Stats &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<link rel="alternate" type="text/calendar" title="OARC Stats &raquo; iCal Feed" href="../../../calendar/indexedf3.html?ical=1" />
+<link rel="canonical" href="index.html" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stats.oarc.ucla.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/9df84.css" media="all" />
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/a5ff7.css" media="all" />
+
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4c431.css" media="all" />
+
+<style id='contact-form-7-inline-css' type='text/css'>
+.wpcf7 .wpcf7-recaptcha iframe {margin-bottom: 0;}.wpcf7 .wpcf7-recaptcha[data-align="center"] > div {margin: 0 auto;}.wpcf7 .wpcf7-recaptcha[data-align="right"] > div {margin: 0 0 0 auto;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/4033d.css" media="all" />
+
+
+
+<link rel='stylesheet' id='slicknavcss-css' href='../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/slicknav.css?ver=1' type='text/css' media='all' />
+<script  src="../../../wp-content/cache/minify/818c0.js"></script>
+
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/jquery.slicknav/0.1/jquery.slicknav.min.js?ver=1" id="slicknav-js"></script>
+<script type="text/javascript" src="../../../../platform-api.sharethis.com/js/sharethis.js#source=googleanalytics-wordpress#product=ga&amp;property=5b058eb03e4a630011ba71c0" id="googleanalytics-platform-sharethis-js"></script>
+<link rel="https://api.w.org/" href="../../../wp-json/index.html" /><link rel="alternate" title="JSON" type="application/json" href="../../../wp-json/wp/v2/pages/939.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc0db0.html?rsd" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embeda7c7.json?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Fzero-truncated-poisson%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed56db?url=https%3A%2F%2Fstats.oarc.ucla.edu%2Fr%2Fdae%2Fzero-truncated-poisson%2F&amp;format=xml" />
+<meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://stats.oarc.ucla.edu"><link rel="alternate" href="../../../wp-json/tribe/events/v1/index.html" /><link rel="icon" href="../../../wp-content/themes/genesis-child/images/favicon.ico" />
+<link rel="pingback" href="../../../xmlrpc.html" />
+<script>
+(function() {
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '../../../../google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-121222866-1', 'auto');
+			ga('send', 'pageview');
+	})();
+</script>
+
+<link rel="icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+<link rel="shortcut icon" href="../../../wp-includes/images/w-logo-blue-white-bg.png" type="image/x-icon" />
+
+</head>
+
+<body class="page-template-default page page-id-939 page-child parent-pageid-916 tribe-no-js header-image content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-hidden" itemscope itemtype="https://schema.org/WebPage"><div class="site-container"><ul class="genesis-skip-link"><li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li><li><a href="#genesis-sidebar-primary" class="screen-reader-shortcut"> Skip to primary sidebar</a></li></ul><header class="site-header" itemscope itemtype="https://schema.org/WPHeader"><div class="wrap"><div class="title-area">	<div class="title-area">
+
+	<div class="site-title" itemprop="headline"><a href="https://stats.oarc.ucla.edu/">stats.oarc.ucla.edu</a></div>
+
+	<p class="site-description" itemprop="description">Statistical Methods and Data Analytics</p></div>
+</div><div class="widget-area header-widget-area"><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><div><div class = "top-wrap"><div id = "ucla-logo"><img alt="Image " src = "../../../wp-content/uploads/logo/idrelogo4.png" width = 380px alt = "IDRE Logo"></div></div>
+</div></div></div></section>
+<section id="search-11" class="widget widget_search"><div class="widget-wrap"><form class="search-form" method="get" action="https://stats.oarc.ucla.edu/" role="search" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction"><label class="search-form-label screen-reader-text" for="searchform-1">Search this website</label><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search this website" itemprop="query-input"><input class="search-form-submit" type="submit" value="Search"><meta content="https://stats.oarc.ucla.edu/?s={s}" itemprop="target"></form></div></section>
+</div></div></header><nav class="nav-primary" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement" id="genesis-nav-primary"><div class="wrap"><ul id="menu-idre-stats-navigation-menu" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-22640" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22640"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">HOME</span></a></li>
+<li id="menu-item-22662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22662"><a href="#" itemprop="url"><span itemprop="name">SOFTWARE</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22646" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22646"><a href="../../index.html" itemprop="url"><span itemprop="name">R</span></a></li>
+	<li id="menu-item-22649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22649"><a href="https://stats.oarc.ucla.edu/stata/" itemprop="url"><span itemprop="name">Stata</span></a></li>
+	<li id="menu-item-22647" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22647"><a href="https://stats.oarc.ucla.edu/sas/" itemprop="url"><span itemprop="name">SAS</span></a></li>
+	<li id="menu-item-22648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22648"><a href="https://stats.oarc.ucla.edu/spss/" itemprop="url"><span itemprop="name">SPSS</span></a></li>
+	<li id="menu-item-22659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22659"><a href="https://stats.oarc.ucla.edu/mplus/" itemprop="url"><span itemprop="name">Mplus</span></a></li>
+	<li id="menu-item-22657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22657"><a href="https://stats.oarc.ucla.edu/other/" itemprop="url"><span itemprop="name">Other Packages</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22658"><a href="https://stats.oarc.ucla.edu/other/gpower/" itemprop="url"><span itemprop="name">G*Power</span></a></li>
+		<li id="menu-item-22684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22684"><a href="https://stats.oarc.ucla.edu/other/sudaan/" itemprop="url"><span itemprop="name">SUDAAN</span></a></li>
+		<li id="menu-item-22696" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22696"><a href="https://stats.oarc.ucla.edu/spss/spss-user/sample-power/" itemprop="url"><span itemprop="name">Sample Power</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22661"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">RESOURCES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-22656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22656"><a href="https://stats.oarc.ucla.edu/annotatedoutput" itemprop="url"><span itemprop="name">Annotated Output</span></a></li>
+	<li id="menu-item-22651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22651"><a href="../../../other/dae/index.html" itemprop="url"><span itemprop="name">Data Analysis Examples</span></a></li>
+	<li id="menu-item-22654" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22654"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/" itemprop="url"><span itemprop="name">Frequently Asked Questions</span></a></li>
+	<li id="menu-item-22652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22652"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/seminars/" itemprop="url"><span itemprop="name">Seminars</span></a></li>
+	<li id="menu-item-22653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22653"><a href="https://stats.oarc.ucla.edu/other/examples/" itemprop="url"><span itemprop="name">Textbook Examples</span></a></li>
+	<li id="menu-item-22692" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22692"><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/" itemprop="url"><span itemprop="name">Which Statistical Test?</span></a></li>
+</ul>
+</li>
+<li id="menu-item-22663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22663"><a href="https://stats.oarc.ucla.edu/" itemprop="url"><span itemprop="name">SERVICES</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-33775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33775"><a href="https://stats.idre.ucla.edu/ucla/policies/remote" itemprop="url"><span itemprop="name">Remote Consulting</span></a></li>
+	<li id="menu-item-22655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-22655"><a href="https://stats.oarc.ucla.edu/ucla/policies" itemprop="url"><span itemprop="name">Services and Policies</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-22885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22885"><a href="https://stats.oarc.ucla.edu/ucla/policies/#WalkIn" itemprop="url"><span itemprop="name">Walk-In Consulting</span></a></li>
+		<li id="menu-item-22882" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22882"><a href="https://stats.oarc.ucla.edu/ucla/policies/#EmailConsult" itemprop="url"><span itemprop="name">Email Consulting</span></a></li>
+		<li id="menu-item-22880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22880"><a href="https://stats.oarc.ucla.edu/ucla/policies/#Fee" itemprop="url"><span itemprop="name">Fee for Service</span></a></li>
+		<li id="menu-item-30604" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30604"><a href="https://stats.idre.ucla.edu/ucla/frequently-asked-questions-about-our-statistical-consulting-services/" itemprop="url"><span itemprop="name">FAQ</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-22687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22687"><a href="https://stats.oarc.ucla.edu/purchasing-and-updatingstatistical-software-packages/" itemprop="url"><span itemprop="name">Software Purchasing and Updating</span></a></li>
+	<li id="menu-item-22688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22688"><a href="https://stats.oarc.ucla.edu/statistical-consultants-for-hire/" itemprop="url"><span itemprop="name">Consultants for Hire</span></a></li>
+	<li id="menu-item-23684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-23684"><a itemprop="url"><span itemprop="name">Other Consulting Centers</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-23685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23685"><a href="http://scc.stat.ucla.edu/" itemprop="url"><span itemprop="name">Department of Statistics Consulting Center</span></a></li>
+		<li id="menu-item-23686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23686"><a href="https://www.cores.ucla.edu/statistical-biomathematical-consulting-clinic-sbcc/" itemprop="url"><span itemprop="name">Department of Biomathematics Consulting Clinic</span></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-22664" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22664"><a href="https://stats.oarc.ucla.edu/ucla/about" itemprop="url"><span itemprop="name">ABOUT US</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-939 page type-page status-publish entry" aria-label="Zero-Truncated Poisson |  R Data Analysis Examples" itemscope itemtype="https://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Zero-Truncated Poisson |  R Data Analysis Examples</h1>
+</header><div class="entry-content" itemprop="text"><p>Zero-truncated poisson regression is used to model count data for which the value zero cannot occur.</p>
+<p>This page uses the following packages. Make sure that you can load
+them before trying to run the examples on this page. If you do not have
+a package installed, run: <code>install.packages("packagename")</code>, or
+if you see the version is out of date, run: <code>update.packages()</code>.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">require</span>(foreign)
+<span class="functioncall">require</span>(ggplot2)
+<span class="functioncall">require</span>(VGAM)
+<span class="functioncall">require</span>(boot)
+</pre>
+</div>
+</div>
+</div>
+<p><code class="knitr inline"><b>Version info: </b>Code for this page was tested in R Under development (unstable) (2012-11-16 r61126)
+On: 2012-12-15
+With: boot 1.3-7; VGAM 0.9-0; ggplot2 0.9.3; foreign 0.8-51; knitr 0.9
+</code></p>
+<p><strong>Please Note:</strong> The purpose of this page is to show how to use various data analysis commands.
+It does not cover all aspects of the research process which researchers are expected to do. In
+particular, it does not cover data cleaning and verification, verification of assumptions, model
+diagnostics and potential follow-up analyses.</p>
+<h2>Examples of zero-truncated Poisson regression</h2>
+<p>Example 1. A study of length of hospital stay, in days, as a function
+of age, kind of health insurance and whether or not the patient died while in the hospital.
+Length of hospital stay is recorded as a minimum of at least one day.</p>
+<p>Example 2. A study of the number of journal articles published by
+tenured faculty as a function of discipline (fine arts, science, social science,
+humanities, medical, etc). To get tenure faculty must publish, therefore,
+there are no tenured faculty with zero publications.</p>
+<p>Example 3. A study by the county traffic court on the number of tickets received by teenagers
+as predicted by school performance, amount of driver training and gender. Only individuals
+who have received at least one citation are in the traffic court files.</p>
+<h2>Description of the data</h2>
+<p>Let&#8217;s pursue Example 1 from above.</p>
+<p>We have a <strong>hypothetical</strong> data file, <code>ztp.dta</code> with 1,493 observations.
+The length of hospital stay variable is <code>stay</code>.
+The variable <code>age</code> gives the age group from 1 to 9 which will be treated as
+interval in this example. The variables <code>hmo</code> and <code>died</code> are binary indicator variables
+for HMO insured patients and patients who died while in the hospital, respectively.</p>
+<p>Let&#8217;s look at the data. We import the Stata dataset using
+the <code>foreign</code> package.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r">dat &lt;- <span class="functioncall">read.dta</span>(<span class="string">"https://stats.idre.ucla.edu/stat/data/ztp.dta"</span>)
+
+dat &lt;- <span class="functioncall">within</span>(dat, {
+    hmo &lt;- <span class="functioncall">factor</span>(hmo)
+    died &lt;- <span class="functioncall">factor</span>(died)
+})
+
+<span class="functioncall">summary</span>(dat)
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##       stay            age       hmo      died   
+##  Min.   : 1.00   Min.   :1.00   0:1254   0:981  
+##  1st Qu.: 4.00   1st Qu.:4.00   1: 239   1:512  
+##  Median : 8.00   Median :5.00                   
+##  Mean   : 9.73   Mean   :5.23                   
+##  3rd Qu.:13.00   3rd Qu.:6.00                   
+##  Max.   :74.00   Max.   :9.00
+</pre>
+</div>
+</div>
+</div>
+<p>Now let&#8217;s look at some graphs of the data conditional on various
+combinations of the variables to get a sense of how the variables work together.
+We will use the <code>ggplot2</code> package. First we can look at histograms of
+<code>stay</code> broken down by <code>hmo</code> on the rows and <code>died</code> on the columns.
+We also include the marginal distributions, thus the lower right corner represents
+the overall histogram. We use a log base 10 scale to approximate the canonical link function of
+the poisson distribution (natural logarithm).</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">ggplot</span>(dat, <span class="functioncall">aes</span>(stay)) +
+  <span class="functioncall">geom_histogram</span>() +
+  <span class="functioncall">scale_x_log10</span>() +
+  <span class="functioncall">facet_grid</span>(hmo ~ died, margins=<span class="keyword">TRUE</span>, scales=<span class="string">"free_y"</span>)
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust
+## this.
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4" width="500px" height="500px" /></div>
+</div>
+<p>From the histograms, it looks like the density of the distribution,
+does vary across levels of <code>hmo</code> and <code>died</code>, with
+shorter stays for those in HMOs (1) and shorter for those who did die,
+including what seems to be an inflated number of 1 day stays.
+To examine how <code>stay</code> varies across age groups, we can use conditional
+violin plots which show a kernel density estimate of the distribution of stay
+mirrored (hence the violin) and conditional on each age group. To further understand
+the raw data going into each density estimate, we add raw data on top of the violin plots
+with a small amount of random noise (jitter) to alleviate over plotting. Finally, to get a
+sense of the overall trend, we add a locally weighted regression line.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">ggplot</span>(dat, <span class="functioncall">aes</span>(<span class="functioncall">factor</span>(age), stay)) +
+  <span class="functioncall">geom_violin</span>() +
+  <span class="functioncall">geom_jitter</span>(size=1.5) +
+  <span class="functioncall">scale_y_log10</span>() +
+  <span class="functioncall">stat_smooth</span>(<span class="functioncall">aes</span>(x = age, y = stay, group=1), method=<span class="string">"loess"</span>)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-5.png" alt="plot of chunk unnamed-chunk-5" width="500px" height="500px" /></div>
+</div>
+<p>The distribution of length of stay does not seem to vary much across age groups.
+This observation from the raw data is corroborated by the relatively flat loess line.
+Finally let&#8217;s look at the proportion of people who lived or died across age groups
+by whether or not they are in HMOs.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">ggplot</span>(dat, <span class="functioncall">aes</span>(age, fill=died)) +
+  <span class="functioncall">geom_histogram</span>(binwidth=.5, position=<span class="string">"fill"</span>) +
+  <span class="functioncall">facet_grid</span>(hmo ~ ., margins=<span class="keyword">TRUE</span>)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-6.png" alt="plot of chunk unnamed-chunk-6" width="500px" height="500px" /></div>
+</div>
+<p>For the lowest ages, a smaller proportion of people in HMOs died, but
+for higher ages, there does not seem to be a huge difference, with a
+slightly higher proportion in HMOs dying if anything. Overall, as
+age group increases, the proportion of those dying increases, as expected.</p>
+<h2>Analysis methods you might consider</h2>
+<p>Below is a list of some analysis methods you may have encountered.
+Some of the methods listed are quite reasonable while others have either fallen out of favor or
+have limitations.</p>
+<ul>
+<li>Zero-truncated Poisson Regression &#8211; The focus of this web page.</li>
+<li>Zero-truncated Negative Binomial Regression &#8211; If you have overdispersion in addition to
+zero truncation. See the Data Analysis Example for <a href="../zero-truncated-negative-binomial/index.html">ztnb</a>.</li>
+<li>Poisson Regression &#8211; Ordinary Poisson regression will have difficulty with
+zero-truncated data. It will try to predict zero counts even though there are
+no zero values.</li>
+<li>Negative Binomial Regression &#8211; Ordinary Negative Binomial regression will have difficulty with
+zero-truncated data. It will try to predict zero counts even though there are
+no zero values.</li>
+<li>OLS Regression &#8211; You could try to analyze these data using OLS regression. However, count
+data are highly non-normal and are not well estimated by OLS regression.</li>
+</ul>
+<h2>Zero-truncated Poisson regression</h2>
+<p>To fit the zero-truncated poisson model, we use the <code>vglm</code> function
+in the <code>VGAM</code> package. This function fits a very flexible class of models
+called vector generalized linear models to a wide range of assumed distributions.
+In our case, we believe the data are poisson, but without zeros. Thus the values are
+strictly positive poisson, for which we use the positive poisson family via the
+<code>pospoisson</code> function passed to <code>vglm</code>.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r">m1 &lt;- <span class="functioncall">vglm</span>(stay ~ age + hmo + died, family = <span class="functioncall">pospoisson</span>(), data = dat)
+<span class="functioncall">summary</span>(m1)
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## Call:
+## vglm(formula = stay ~ age + hmo + died, family = pospoisson(), 
+##     data = dat)
+## 
+## Pearson Residuals:
+##             Min   1Q Median   3Q Max
+## log(lambda)  -3 -1.7  -0.59 0.98  21
+## 
+## Coefficients:
+##             Estimate Std. Error z value
+## (Intercept)    2.436      0.027    89.1
+## age           -0.014      0.005    -2.9
+## hmo1          -0.136      0.024    -5.7
+## died1         -0.204      0.018   -11.1
+## 
+## Number of linear predictors:  1 
+## 
+## Name of linear predictor: log(lambda) 
+## 
+## Dispersion Parameter for pospoisson family:   1
+## 
+## Log-likelihood: -6909 on 1489 degrees of freedom
+## 
+## Number of iterations: 4
+</pre>
+</div>
+</div>
+</div>
+<p>The output looks very much like the output from an OLS regression:</p>
+<ul>
+<li>It begins by echoing the function call showing us what we modeled.</li>
+<li>Next comes the spread of the residuals, there is at least one high
+residual because the max is much higher than the min.</li>
+<li>Following the residuals are the parameter estimates and standard errors. The
+z values (frac{Estimate}{SE}) are also printed. No p values are given, although
+if one wished to assume that the estimates followed the normal distribution, one
+could easily compute the probability of obtaining that z value.</li>
+<li>The number of linear predictors is printed because <b>vglm</b> can fit far more
+complex models, for this page, this will always be one, the expected mean, (lambda).</li>
+<li>Next the dispersion parameter is printed, for the Poisson, this is
+assumed to be 1 and is not estimated.</li>
+<li>Finally the log likelihood <code class="knitr inline">-6908.7991</code> is printed along with the number of iterations
+needed to reach convergence.</li>
+</ul>
+<p>Now let&#8217;s look at a plot of the residuals versus fitted values. We add random horizontal
+noise as well as 50 percent transparency to alleviate over plotting and better see where
+<i>most</i> residuals fall.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r">output &lt;- <span class="functioncall">data.frame</span>(resid = <span class="functioncall">resid</span>(m1), fitted = <span class="functioncall">fitted</span>(m1))
+<span class="functioncall">ggplot</span>(output, <span class="functioncall">aes</span>(fitted, resid)) +
+  <span class="functioncall">geom_jitter</span>(position=<span class="functioncall">position_jitter</span>(width=.25), alpha=.5) +
+  <span class="functioncall">stat_smooth</span>(method=<span class="string">"loess"</span>)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-8.png" alt="plot of chunk unnamed-chunk-8" width="500px" height="500px" /></div>
+</div>
+<p>The mean is around zero across all the fitted levels it looks like. However,
+there are some values that look rather extreme. To see if these have much influence,
+we can fit lines using quantile regression, these lines represent the 75th, 50th, and 25th
+percentiles.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">ggplot</span>(output, <span class="functioncall">aes</span>(fitted, resid)) +
+  <span class="functioncall">geom_jitter</span>(position=<span class="functioncall">position_jitter</span>(width=.25), alpha=.5) +
+  <span class="functioncall">stat_quantile</span>(method=<span class="string">"rq"</span>)
+</pre>
+</div>
+<div class="message">
+<pre class="knitr r">## Smoothing formula not specified. Using: y ~ x
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-9.png" alt="plot of chunk unnamed-chunk-9" width="500px" height="500px" /></div>
+</div>
+<p>Here we see the spread narrowing at higher levels. Let&#8217;s cut the data
+into intervals and check box plots for each. We will get the breaks
+from the algorithm for a histogram.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r">output &lt;- <span class="functioncall">within</span>(output, {
+  broken &lt;- <span class="functioncall">cut</span>(fitted, <span class="functioncall">hist</span>(fitted, plot=<span class="keyword">FALSE</span>)$breaks)
+})
+
+<span class="functioncall">ggplot</span>(output, <span class="functioncall">aes</span>(broken, resid)) +
+ <span class="functioncall">geom_boxplot</span>() +
+ <span class="functioncall">geom_jitter</span>(alpha=.25)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-10.png" alt="plot of chunk unnamed-chunk-10" width="500px" height="500px" /></div>
+</div>
+<p>Now that feel a little more confident the model fits okay, let&#8217;s look
+at the coefficients.</p>
+<ul>
+<li>The value of the coefficient for <code>age</code>,
+<code class="knitr inline">-0.0144</code> suggests that the log count of
+stay decreases by <code class="knitr inline">0.0144</code> for each year increase in age.</li>
+<li>The coefficient for <code>hmo</code>,
+<code class="knitr inline">-0.1359</code> indicates that the log count of stay
+for HMO patient is <code class="knitr inline">0.1359</code> less than for non-HMO patients.</li>
+<li>The log count of stay for patients who died while in the hospital was
+<code class="knitr inline">0.2038</code> less than those patients who did not die.</li>
+<li>Finally, the value of the constant <code class="knitr inline">2.4358</code> is
+the log count of the stay when all of the predictors equal zero.</li>
+</ul>
+<p>We can get confidence intervals for the parameters and the
+exponentiated parameters using bootstrapping. For the Poisson model, these would
+be incident risk ratios. We use the <code>boot</code> package.
+First, we get the coefficients from our original model to
+use as start values for the model to speed up the time it takes to estimate. Then
+we write a short function that takes data and indices as input and returns the
+parameters we are interested in. Finally, we pass that
+to the <code>boot</code> function and do 1200 replicates, using snow to distribute across
+four cores. Note that you should adjust the number of cores to whatever your machine
+has. Also, for final results, one may wish to increase the number of replications to
+help ensure stable results.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="functioncall">dput</span>(<span class="functioncall">round</span>(<span class="functioncall">coef</span>(m1),3))
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## structure(c(2.436, -0.014, -0.136, -0.204), .Names = c("(Intercept)", 
+## "age", "hmo1", "died1"))
+</pre>
+</div>
+<div class="source">
+<pre class="knitr r">f &lt;- <span class="functioncall"><span class="keyword">function</span></span>(data, i) {
+  <span class="functioncall">require</span>(VGAM)
+  m &lt;- <span class="functioncall">vglm</span>(formula = stay ~ age + hmo + died, family = <span class="functioncall">pospoisson</span>(),
+    data = data[i, ], coefstart = <span class="functioncall">c</span>(2.436, -0.014, -0.136, -0.204))
+  <span class="functioncall">as.vector</span>(<span class="functioncall">t</span>(<span class="functioncall">coef</span>(<span class="functioncall">summary</span>(m))[, 1:2]))
+}
+
+<span class="functioncall">set.seed</span>(10)
+res &lt;- <span class="functioncall">boot</span>(dat, f, R = 1200, parallel = <span class="string">"snow"</span>, ncpus = 4)
+
+<span class="comment">## print results</span>
+res
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = dat, statistic = f, R = 1200, parallel = "snow", 
+##     ncpus = 4)
+## 
+## 
+## Bootstrap Statistics :
+##      original     bias    std. error
+## t1*  2.435808  2.124e-04   6.962e-02
+## t2*  0.027332  8.324e-06   5.621e-04
+## t3* -0.014442 -5.729e-05   1.212e-02
+## t4*  0.005035  2.490e-06   9.896e-05
+## t5* -0.135903  1.162e-03   5.105e-02
+## t6*  0.023742  1.313e-05   7.497e-04
+## t7* -0.203771 -1.487e-03   4.984e-02
+## t8*  0.018373  3.854e-05   3.556e-04
+</pre>
+</div>
+</div>
+</div>
+<p>The results are alternating parameter estimates and standard
+errors. That is, the first row has the first parameter estimate
+from our model. The second has the standard error for the
+first parameter. The third column contains the bootstrapped
+standard errors.</p>
+<p>Now we can get the confidence intervals for all the parameters.
+We start on the original scale with percentile and basic bootstrap CIs.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="comment">## basic parameter estimates with percentile and bias adjusted CIs</span>
+parms &lt;- <span class="functioncall">t</span>(<span class="functioncall">sapply</span>(<span class="functioncall">c</span>(1, 3, 5, 7), <span class="functioncall"><span class="keyword">function</span></span>(i) {
+  out &lt;- <span class="functioncall">boot.ci</span>(res, index = <span class="functioncall">c</span>(i, i + 1), type = <span class="functioncall">c</span>(<span class="string">"perc"</span>, <span class="string">"basic"</span>))
+  <span class="functioncall">with</span>(out, <span class="functioncall">c</span>(Est = t0, pLL = percent[4], pUL = percent[5],
+    basicLL = basic[4], basicLL = basic[5]))
+}))
+
+<span class="comment">## add row names</span>
+<span class="functioncall">row.names</span>(parms) &lt;- <span class="functioncall">names</span>(<span class="functioncall">coef</span>(m1))
+<span class="comment">## print results</span>
+parms
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                  Est      pLL       pUL  basicLL  basicLL
+## (Intercept)  2.43581  2.29933  2.577805  2.29381  2.57228
+## age         -0.01444 -0.04003  0.009798 -0.03868  0.01114
+## hmo1        -0.13590 -0.23875 -0.038074 -0.23373 -0.03306
+## died1       -0.20377 -0.30530 -0.106277 -0.30126 -0.10224
+</pre>
+</div>
+</div>
+</div>
+<p>The bootstrapped confidence intervals are wider than would be expected using a
+normal based approximation. The bootstrapped CIs are more consistent with
+the CIs from Stata when using robust standard errors.</p>
+<p>Now we can estimate the incident risk ratio (IRR) for the Poisson model.
+This is done using almost identical code as before,
+but passing a transformation function to the <code>h</code> argument of
+<code>boot.ci</code>, in this case, <code>exp</code> to exponentiate.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="comment">## exponentiated parameter estimates with percentile and bias adjusted CIs</span>
+expparms &lt;- <span class="functioncall">t</span>(<span class="functioncall">sapply</span>(<span class="functioncall">c</span>(1, 3, 5, 7), <span class="functioncall"><span class="keyword">function</span></span>(i) {
+  out &lt;- <span class="functioncall">boot.ci</span>(res, index = <span class="functioncall">c</span>(i, i + 1), type = <span class="functioncall">c</span>(<span class="string">"perc"</span>, <span class="string">"basic"</span>), h = exp)
+  <span class="functioncall">with</span>(out, <span class="functioncall">c</span>(Est = t0, pLL = percent[4], pUL = percent[5],
+    basicLL = basic[4], basicLL = basic[5]))
+}))
+
+<span class="comment">## add row names</span>
+<span class="functioncall">row.names</span>(expparms) &lt;- <span class="functioncall">names</span>(<span class="functioncall">coef</span>(m1))
+<span class="comment">## print results</span>
+expparms
+</pre>
+</div>
+<div class="output">
+<pre class="knitr r">##                 Est    pLL     pUL basicLL basicLL
+## (Intercept) 11.4250 9.9675 13.1682  9.6819 12.8826
+## age          0.9857 0.9608  1.0098  0.9615  1.0106
+## hmo1         0.8729 0.7876  0.9626  0.7832  0.9582
+## died1        0.8156 0.7369  0.8992  0.7321  0.8944
+</pre>
+</div>
+</div>
+</div>
+<p>The results are consistent with what we initially viewed graphically,
+<code>age</code> does not have a significant effect, but <code>hmo</code> and <code>died</code> both do.
+In order to better understand our results and model, let&#8217;s plot some predicted values.
+Because all of our predictors were categorical (<code>hmo</code> and <code>died</code>)
+or had a small number of unique values (<code>age</code>) we will get predicted values for
+all possible combinations. First we create a new data set using the <code>expand.grid</code>
+function, then estimate the predicted values using the <code>predict</code> function, and
+finally plot them.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r">newdata &lt;- <span class="functioncall">expand.grid</span>(age = 1:9, hmo = <span class="functioncall">factor</span>(0:1), died = <span class="functioncall">factor</span>(0:1))
+newdata$yhat &lt;- <span class="functioncall">predict</span>(m1, newdata, type = <span class="string">"response"</span>)
+
+<span class="functioncall">ggplot</span>(newdata, <span class="functioncall">aes</span>(x = age, y = yhat, colour = hmo))  +
+  <span class="functioncall">geom_point</span>() +
+  <span class="functioncall">geom_line</span>() +
+  <span class="functioncall">facet_wrap</span>(~ died)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-14.png" alt="plot of chunk unnamed-chunk-14" width="500px" height="500px" /></div>
+</div>
+<p>If we really wanted to compare the predicted values, we could bootstrap
+confidence intervals around the predicted estimates. These confidence
+intervals are not for the predicted value themselves, but that that is the
+mean predicted value (i.e., for the estimate, not a new individual).
+If we wanted to be efficient, we could have done this with our prior
+bootstrap so we only fit the models once. However, it is fast enough
+we just rerun the bootstrap rather than combine them.</p>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="comment">## <span class="keyword">function</span> to return predicted values</span>
+fpred &lt;- <span class="functioncall"><span class="keyword">function</span></span>(data, i, newdata) {
+  <span class="functioncall">require</span>(VGAM)
+  m &lt;- <span class="functioncall">vglm</span>(formula = stay ~ age + hmo + died, family = <span class="functioncall">pospoisson</span>(),
+    data = data[i, ], coefstart = <span class="functioncall">c</span>(2.436, -0.014, -0.136, -0.204))
+  <span class="functioncall">predict</span>(m, newdata, type = <span class="string">"response"</span>)
+}
+
+<span class="comment">## set seed and run bootstrap with 1,200 draws</span>
+<span class="functioncall">set.seed</span>(10)
+respred &lt;- <span class="functioncall">boot</span>(dat, fpred, R = 1200, newdata = newdata,
+  parallel = <span class="string">"snow"</span>, ncpus = 4)
+
+<span class="comment">## get the bootstrapped percentile CIs</span>
+yhat &lt;- <span class="functioncall">t</span>(<span class="functioncall">sapply</span>(1:<span class="functioncall">nrow</span>(newdata), <span class="functioncall"><span class="keyword">function</span></span>(i) {
+  out &lt;- <span class="functioncall">boot.ci</span>(respred, index = i, type = <span class="functioncall">c</span>(<span class="string">"perc"</span>))
+  <span class="functioncall">with</span>(out, <span class="functioncall">c</span>(Est = t0, pLL = percent[4], pUL = percent[5]))
+}))
+
+<span class="comment">## merge CIs with predicted values</span>
+newdata &lt;- <span class="functioncall">cbind</span>(newdata, yhat)
+</pre>
+</div>
+</div>
+</div>
+<div class="chunk">
+<div class="rcode">
+<div class="source">
+<pre class="knitr r"><span class="comment">## graph with CIs</span>
+<span class="functioncall">ggplot</span>(newdata, <span class="functioncall">aes</span>(x = age, y = yhat, colour = hmo, fill = hmo))  +
+  <span class="functioncall">geom_ribbon</span>(<span class="functioncall">aes</span>(ymin = pLL, ymax = pUL), alpha = .25) +
+  <span class="functioncall">geom_point</span>() +
+  <span class="functioncall">geom_line</span>() +
+  <span class="functioncall">facet_wrap</span>(~ died)
+</pre>
+</div>
+</div>
+<div class="rimage default"><img decoding="async" class="plot" src="../../../wp-content/uploads/2016/02/ztp-unnamed-chunk-16.png" alt="plot of chunk unnamed-chunk-16" width="500px" height="500px" /></div>
+</div>
+<h2>Things to consider</h2>
+<ul>
+<li>Count data often use exposure variable to indicate the number of times the event
+could have happened. You can incorporate exposure into your model by using the <code>exposure()</code>
+option.</li>
+<li>It is not recommended that zero-truncated poisson models be applied to
+small samples. What constitutes a small sample does not seem to be clearly defined
+in the literature.</li>
+<li>Pseudo-R-squared values differ from OLS R-squareds, please see
+<a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/">FAQ: What are
+pseudo R-squareds?</a> for a discussion on this issue.</li>
+</ul>
+<h2>See Also</h2>
+<ul>
+<li><a href="../zero-truncated-negative-binomial/index.html">Zero-truncated negative binomial regression in R</a>
+useful when there is overdispersion.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Yee, T. W. (2008). The VGAM package. <i>R News 8(2)</i>, 28 39.
+URL http://CRAN.R-project.org/doc/Rnews/</li>
+<li>Yee, T. W., Hastie, T. J. (2003). Reduced-rank vector generalized linear models.
+<i>Statistical Modelling 3(1)</i>, 15 41.</li>
+<li>Yee, T. W., Wild, C. J. (1996). Vector generalized additive models.
+<i>J. Roy. Statist. Soc. Ser. B 58(3)</i>, 481 493.</li>
+<li>Long, J. Scott (1997). Regression Models for Categorical and Limited Dependent Variables.
+Thousand Oaks, CA: Sage Publications.</li>
+</ul>
+<p><!--?php include "stat/footer.htm"; ?--></p>
+</div></article></main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar" id="genesis-sidebar-primary"><h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2></aside><hr><div style="clear:both;">
+          <p style="float:left;"><span class="collapseomatic " id="id67c2857849a82"  tabindex="0" title="Click here to report an error on this page or leave a comment"    >Click here to report an error on this page or leave a comment</span><span id='swap-id67c2857849a82'  class='colomat-swap' style='display:none;'> </span><div id="target-id67c2857849a82" class="collapseomatic_content ">
+<div class="wpcf7 no-js" id="wpcf7-f22910-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="https://stats.oarc.ucla.edu/r/dae/zero-truncated-poisson/#wpcf7-f22910-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="22910" />
+<input type="hidden" name="_wpcf7_version" value="5.9.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f22910-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+<input type="hidden" name="_wpcf7_recaptcha_response" value="" />
+</div>
+<p><label for="namefield"> Your Name (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="namefield" aria-required="true" aria-invalid="false" value="" type="text" name="your-name" /></span><br />
+</label>
+</p>
+<p><label for="emailfield"> Your Email (must be a valid email for us to receive the report!)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="80" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" id="emailfield" aria-required="true" aria-invalid="false" value="" type="email" name="your-email" /></span><br />
+</label>
+</p>
+<p><label for="commentfield"> Comment/Error Report (required)<br />
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea cols="40" rows="10" maxlength="400" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" id="commentfield" aria-required="true" aria-invalid="false" name="your-message"></textarea></span><br />
+</label>
+</p>
+<span class="wpcf7-form-control-wrap recaptcha"><span data-sitekey="6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" class="wpcf7-form-control wpcf7-recaptcha g-recaptcha"></span>
+<noscript>
+	<div class="grecaptcha-noscript">
+		<iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfYdSEUAAAAALpzE4-TLY8d8B8SKVQBCnKVDCNH" frameborder="0" scrolling="no" width="310" height="430">
+		</iframe>
+		<textarea name="g-recaptcha-response" rows="3" cols="40" placeholder="reCaptcha Response Here">
+		</textarea>
+	</div>
+</noscript>
+</span>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Send" />
+</p><p style="display: none !important;" class="akismet-fields-container" data-prefix="_wpcf7_ak_"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="142"/><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+</div></p><p style="float:right;">
+          <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-cite-web-pages-and-programs-from-the-ucla-statistical-consulting-group/">How to cite this page</a>
+          </p></div></div></div>
+
+    <div class="wrapped">
+        <a href="https://oarc.ucla.edu/" title="UCLA Office of Advanced Research Technology" id="footer-image">UCLA OARC</a>
+    </div>
+
+    <div class="ftr-btm">
+        <div class="footer-links">
+        <ol>
+            <li><a href="http://www.ucla.edu/terms-of-use/">© 2024 UC REGENTS</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/">HOME</a></li>
+            <li><a href="https://stats.oarc.ucla.edu/contact">CONTACT</a></li>
+        </ol>
+        </div>
+    </div>
+<script>
+			jQuery(function($) {
+			$('.genesis-nav-menu').slicknav();
+			});
+			</script>		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><script  src="../../../wp-content/cache/minify/1f540.js"></script>
+
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/stats.oarc.ucla.edu\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script  src="../../../wp-content/cache/minify/b68ea.js"></script>
+
+<script type="text/javascript" src="../../../../cdn.jsdelivr.net/npm/mathjax%403/es5/tex-chtml.js?ver=6.7.1" id="mathjax-js"></script>
+
+
+
+<script  src="../../../wp-content/cache/minify/f3065.js"></script>
+
+<script type="text/javascript" id="collapseomatic-js-js-before">
+/* <![CDATA[ */
+const com_options = {"colomatduration":"fast","colomatslideEffect":"slideFade","colomatpauseInit":"","colomattouchstart":""}
+/* ]]> */
+</script>
+
+<script  src="../../../wp-content/cache/minify/d7287.js"></script>
+
+<script type="text/javascript" id="google-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7iqfix = {"recaptcha_empty":"Please verify that you are not a robot.","response_err":"wpcf7-recaptcha: Could not verify reCaptcha response."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../www.google.com/recaptcha/apidba9.js?hl=en_US&amp;onload=recaptchaCallback&amp;render=explicit&amp;ver=2.0" id="google-recaptcha-js"></script>
+<script  defer src="../../../wp-content/cache/minify/45ffb.js"></script>
+
+
+
+
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Page Caching using Disk: Enhanced 
+Minified using Disk
+
+Served from: stats.oarc.ucla.edu @ 2025-02-28 19:56:40 by W3 Total Cache
+-->
