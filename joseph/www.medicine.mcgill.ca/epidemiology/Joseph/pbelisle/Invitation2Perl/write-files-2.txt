@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+@CRITERIA = ("acc", "alc", "mwoc");
+@LEVELS   = (50, 90, 95, 99);
+@L        = ("01", "02", "05", "10", "15", "20", "25", "30", "40", "50"); # I quoted the values to save the leading 0's
+
+
+foreach $level (@LEVELS)
+{
+  foreach $l (@L)
+  {
+    foreach $criterion (@CRITERIA)
+    {
+      $file = "$criterion-$l-$level.txt";
+ 
+      open(TMP, "> $file") || die "Cannot read to file $file. Abort.\n";  # TMP (could have been any name!) is called a file handle, and is typically written in upper case
+     
+      print TMP "n.$criterion(0.$l, 0.$level)\n";   
+
+      close TMP; # close the file (allows to reuse the file handle TMP) 
+    }
+  }
+}

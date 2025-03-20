@@ -1,0 +1,40 @@
+* sludge.sas, sludge experiment, Table 15.41 (p539), Table 15.42 (p540);
+;
+* Table 15.41, p539;
+DATA SLUDGE;
+  INPUT A B C D E Y;
+  TC = 10000*A + 1000*B + 100*C + 10*D + E;
+  LINES;
+  0 0 0 1 0  195
+  0 0 1 1 1  496
+  0 1 0 0 1   87
+  0 1 1 0 0 1371
+  1 0 0 0 1  102
+  1 0 1 0 0 1001
+  1 1 0 1 0  354
+  1 1 1 1 1  775
+;
+PROC GLM;
+  CLASS TC;
+  MODEL Y = TC;
+  ESTIMATE 'A' TC -1 -1 -1 -1  1  1  1  1 / DIVISOR = 4;
+  ESTIMATE 'B' TC -1 -1  1  1 -1 -1  1  1 / DIVISOR = 4;
+  ESTIMATE 'C' TC -1  1 -1  1 -1  1 -1  1 / DIVISOR = 4;
+  ESTIMATE 'D' TC  1  1 -1 -1 -1 -1  1  1 / DIVISOR = 4;
+  ESTIMATE 'E' TC -1  1  1 -1  1 -1 -1  1 / DIVISOR = 4;
+  ESTIMATE 'AC' TC 1 -1  1 -1 -1  1 -1  1 / DIVISOR = 4;
+  ESTIMATE 'BC' TC 1 -1 -1  1  1 -1 -1  1 / DIVISOR = 4;
+;
+* Table 15.42, p540;
+PROC GLM;
+  CLASSES A B C D E;
+  MODEL Y= A B C D E A*C B*C;
+  ESTIMATE 'A' A -1 1;
+  ESTIMATE 'B' B -1 1;
+  ESTIMATE 'C' C -1 1;
+  ESTIMATE 'D' D -1 1;
+  ESTIMATE 'E' E -1 1;
+  ESTIMATE 'AC' A*C 1 -1 -1 1 / DIVISOR=2;
+  ESTIMATE 'BC' B*C 1 -1 -1 1 / DIVISOR=2;
+;
+run;

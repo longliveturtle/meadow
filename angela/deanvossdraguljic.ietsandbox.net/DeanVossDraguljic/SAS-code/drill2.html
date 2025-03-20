@@ -1,0 +1,55 @@
+* drill2.sas, drill advance experiment, Table 7.9, p227;
+* Voss-Wang method of analysis;
+;
+DATA DRILL;
+  INPUT A B C D ADVANCE;
+  Y = LOG10(ADVANCE); * log to base 10;
+  * Compute contrast coefficients +/-0.5;
+  A = A - 1.5; B = B - 1.5; C = C - 1.5; D = D - 1.5;
+  AB = 2*A*B; AC = 2*A*C; AD = 2*A*D; BC = 2*B*C; BD = 2*B*D;
+  CD = 2*C*D;
+  ABC = 4*A*B*C; ABD = 4*A*B*D; ACD = 4*A*C*D; BCD = 4*B*C*D;
+  ABCD = 8*A*B*C*D;
+  LINES;
+  1 1 1 1   1.68   
+  1 1 1 2   2.07    
+  1 1 2 1   4.98    
+  1 1 2 2   7.77    
+  1 2 1 1   3.28    
+  1 2 1 2   4.09    
+  1 2 2 1   9.97    
+  1 2 2 2  11.75   
+  2 1 1 1   1.98 
+  2 1 1 2   2.44
+  2 1 2 1   5.70
+  2 1 2 2   9.43
+  2 2 1 1   3.44
+  2 2 1 2   4.53
+  2 2 2 1   9.07
+  2 2 2 2  16.30
+;
+* Fit complete model to obtain the m=15 effect sums of squares;
+PROC GLM;
+  MODEL Y = A B C D AB AC AD BC BD CD ABC ABD ACD BCD ABCD / SS1;
+  ODS select ModelANOVA ParameterEstimates;
+
+* The models fit below depend on the results of the above GLM procedure;
+* CIs for C, B, D, A, CD, AD, and ACD: compute estimates and standard
+* errors by omitting the (other) d=8 effects with the 8 smallest SSs;
+PROC GLM;
+  MODEL Y = C B D A CD AD ACD / SS1;
+  ODS select OverallANOVA ParameterEstimates;
+
+* CI for ABD: compute est and stde by omitting d=8 other effects;
+PROC GLM;
+  MODEL Y = C B D A CD AD ABD / SS1;
+  ODS select OverallANOVA ParameterEstimates;
+
+* CI for BC: compute est and stde by omitting d=8 other effects;
+PROC GLM;
+  MODEL Y = C B D A CD AD BC / SS1;
+  ODS select OverallANOVA ParameterEstimates;
+
+* Continue as above for the six remaining effects;
+
+run;

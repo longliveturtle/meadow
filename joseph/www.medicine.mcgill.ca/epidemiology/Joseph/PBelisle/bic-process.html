@@ -1,0 +1,1175 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/bic-process.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:39:54 GMT -->
+<head>
+<title>bic.process: [R] Cleaning and adding to BIC outputs</title>
+<meta name="description" content=" bic.process is an R function developped to process the output from functions bic.glm , bicreg and bic.surv . It takes exp () of mle's to get odds ratios in logistic regression or hazard rates in survival models and returns confidence intervals for mle's (as well as for exponentiated mle's, when indicated) . Moreover, it discards incomplete high-order models.">
+<meta name="keywords" content="bayesian, BIC, bic.glm, bic.surv, bicreg, clean, confidence, criterion, hazard, information, interaction, interval, logistic, models, odds, output, parameters, process, rate, ratio, regression, survival">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 6 apr 2016</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.6 (April 2016)</div>
+<div class=title0>bic.process</div>
+<div class=title>[R] Cleaning and adding to BIC outputs </div>
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>bic.process</b> is an R function developped to process the output from functions <i>bic.glm</i>, <i>bicreg</i> and <i>bic.surv</i>.<br>
+It takes <i>exp()</i> of mle's to get odds ratios in logistic regression or hazard rates in survival models and 
+returns confidence intervals for mle's (as well as for exponentiated mle's, when indicated).<br>
+Moreover, it discards incomplete high-order models.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><b>bic.process</b> arguments</a><br>
+<a href="#output">Output dimensions</a><br>
+<a href="#example">Example</a><br>
+<a href="#notes">Notes</a><br>
+<a href="#download">Download</a><br>
+<a href="#more">More</a><br>
+<a href="#changelog">Change Log</a>
+</div>
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="syntax"></a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+bic.process(bic.out,<br>
+&#160;&#160;&#160;&#160;&#160; data,<br>
+&#160;&#160;&#160;&#160;&#160; n = nrow(data),<br>
+&#160;&#160;&#160;&#160;&#160; report.ci = T,<br>
+&#160;&#160;&#160;&#160;&#160; ci.level = 0.95,<br>
+&#160;&#160;&#160;&#160;&#160; report.or = bic.out.family=="binomial",<br>
+&#160;&#160;&#160;&#160;&#160; report.rate.ratio = bic.out.family=="poisson",<br>
+&#160;&#160;&#160;&#160;&#160; report.hazard.ratio = bic.fct=="surv",<br>
+&#160;&#160;&#160;&#160;&#160; report.r2 = bic.out.family=="gaussian",<br>
+&#160;&#160;&#160;&#160;&#160; notes = NULL,<br>
+&#160;&#160;&#160;&#160;&#160; formula = character(0),<br>
+&#160;&#160;&#160;&#160;&#160; discard.incomplete.models = T,<br>
+&#160;&#160;&#160;&#160;&#160; mixed.interactionterms.factor.type = bic.out.factor.type,<br>
+&#160;&#160;&#160;&#160;&#160; recode.absent.var.value.as.na=T,<br>
+&#160;&#160;&#160;&#160;&#160; n.events=integer(0))
+</div>
+
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="arguments"></a>
+<div class=main>bic.process arguments</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>bic.out</td>
+<td class=rfctargumentvalue>
+The output from a <i>bic.glm()</i>, <i>bicreg</i> or <i>bic.surv()</i> call.
+</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>data</td>
+<td class=rfctargumentvalue>
+the independent variables data matrix used in <i>bic.glm</i>, <i>bicreg</i> or <i>bic.surv</i> call;
+it may also include outcome variable.
+</td>
+<td class=rfctcomment>
+Names of variables found in <i>data</i> will be used to identify which columns in <i>bic.out$mle</i> correspond
+to first-order terms and which correspond to higher-order interaction terms; column labels used by <i>bic.surv</i>, <i>bicreg</i> or <i>bic.glm</i>
+will be changed to easier-to-read labels, e.g., a*b for the interaction term between a and b rather than a.b (returned by <i>bic.glm</i> or <i>bic.surv</i>).<br>
+Furthermore, variables levels (if any variable is a factor) read in <i>data</i> will be used to relabel regression parameters.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>n</td>
+<td class=rfctargumentvalue>
+Sample size.<br>
+Default value is ok for <i>bic.glm</i> and <i>bicreg</i> outputs.
+</td>
+<td class=rfctcomment>
+The value entered in <i>n</i> is not used in any calculation, but is often useful information to have at hand in your output; hence this argument
+to enter the sample size and have it added to the output.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.ci</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not confidence intervals for regression parameters
+should be returned in output.
+</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>ci.level</td>
+<td class=rfctargumentvalue>
+Confidence interval level.<br>Default is 0.95.
+</td>
+<td class=rfctcomment>
+When <i>report.ci=TRUE</i>, level for which confidence intervals are to be computed.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.or</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not point estimates and confidence intervals for ORs (exponential of regression parameters, in logistic regression) 
+should be returned in output.
+<br>
+Default is to report ORs when <i>bic.out</i> is <i>bic.glm</i> output with <i>family=binomial</i>.</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.rate.ratio</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not point estimates and confidence intervals for Rate Ratios (exponential of regression parameters, in Poisson regression models) 
+should be returned in output. 
+Default is to report Rate Ratios when <i>family = poisson</i>.
+</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.hazard.ratio</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not point estimates and confidence intervals for Hazard Ratios (exponential of regression parameters, in survival models) 
+should be returned in output. 
+Default is to report Hazard Ratios when <i>bic.out</i> is a <i>bic.surv</i> output.
+</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.r2</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not <i>R</i><sup>2</sup> should be computed and returned in output list.
+Default is to report <i>R</i><sup>2</sup>.
+</td>
+<td class=rfctcomment>
+Relevant only in linear regression, that is, only when <i>bic.out</i> is a <i>bic.glm</i> output with <i>family=gaussian</i>
+or a <i>bicreg</i> output.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>notes</td>
+<td class=rfctargumentvalue>Any info that you would like to be added to the output list.</td>
+<td class=rfctcomment>E.g. comments on subject selection, choice of independent variables, etc.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>formula</td>
+<td class=rfctargumentvalue>Formula that was used (if so) in the call to <i>bic.glm</i> or <i>bic.surv</i>.</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>discard.incomplete.models</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not models with interaction terms present in model but one or more of the corresponding direct effects not in model should be discarded.<br>
+</td>
+<td class=rfctcomment>When <i>TRUE</i>, many parameters will be recalculated: <i>postmean</i>, <i>postsd</i>, <i>probne0</i>,
+<i>postprob</i>, <i>condpostmean</i> and <i>condpostsd</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>mixed.interactionterms.factor.type</td>
+<td class=rfctargumentvalue>
+Logical. Whether or not models with interaction terms involving at least one continuous and one categorical variable should be treated as a factor.
+If <i>mixed.interactionterms.factor.type=TRUE</i>, models will contain either all or none of the interaction terms involving the same mixture of continuous and categorical variables.
+<br>
+</td>
+<td class=rfctcomment>Consider an example where you have a <i>size</i> (continous) &times; <i>color</i> (categorical, with values blue [reference color], red and green) interaction:<br>
+if <i>mixed.interactionterms.factor.type=TRUE</i>, then only models including both or none of interaction terms <i>size*color=red</i> and <i>size*color=green</i> will be kept;
+if <i>mixed.interactionterms.factor.type=FALSE</i>, then no model is discarded on the base of its incompleteness relative to  mixed interaction terms.
+<br><br>
+If <i>bic.out</i> was obtained with <i>factor.type=False</i> &#150; that is, if <i>bic.out$factor.type=False</i> &#150; then
+<i>mixed.interactionterms.factor.type</i> will be set to <i>False</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>recode.absent.var.value.as.na</td>
+<td class=rfctargumentvalue>Logical.</td>
+<td class=rfctcomment>If <i>TRUE</i>, parameter estimates of variables not in a given model will be displayed as NA's rather than  0.000000,
+which we find adds to output readability.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>n.events</td>
+<td class=rfctargumentvalue>Number of events (when <i>bic.out</i> is a <i>bic.surv</i> output).</td>
+<td class=rfctcomment>As is the case for <i>n</i>, this value is only used to document the output.</td>
+</tr>
+</table>
+
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="output"></a>
+<div class=main>Output</div>
+<br>
+In addition to the dimensions found in <i>bic.glm()</i>, <i>bicreg()</i>  or <i>bic.surv()</i> outputs, <b>bic.process</b> returns the elements listed in table below.
+<br>
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Output dimension</td>
+<td class=tableheader>Value</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$mle.lower<br>$mle.upper</td>
+<td class=rfctargumentvalue>
+MLE (maximum likelihood estimators) lower and upper confidence intervals limits for each regression parameter, at the level prescribed by <i>ci.level</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$odds.ratio<br>
+$odds.ratio.lower<br>
+$odds.ratio.upper
+</td>
+<td class=rfctargumentvalue>
+Point estimate and lower and upper confidence interval limits for each Odds Ratio (when <i>report.or=TRUE</i>).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$rate.ratio<br>
+$rate.ratio.lower<br>
+$rate.ratio.upper
+</td>
+<td class=rfctargumentvalue>
+Point estimate and lower and upper confidence interval limits for each Rate Ratio (when <i>report.rate.ratio=TRUE</i>).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$hazard.ratio<br>
+$hazard.ratio.lower<br>
+$hazard.ratio.upper
+</td>
+<td class=rfctargumentvalue>
+Point estimate and lower and upper confidence interval limits for each Hazard Ratio (when <i>report.hazard.ratio=TRUE</i>).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$notes
+</td>
+<td class=rfctargumentvalue>
+Same value as input.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$n.events
+</td>
+<td class=rfctargumentvalue>
+Same value as input.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$censoring.var
+</td>
+<td class=rfctargumentvalue>
+Name of censoring variable, in survival models.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$r2
+</td>
+<td class=rfctargumentvalue>
+<i>R</i><sup>2</sup>. Returned when <i>report.r2=TRUE</i> and <i>bic.out</i> is an output from either <i>bic.glm</i> &#150; with <i>family=gaussian</i> &#150; or from <i>bicreg</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$OR.corrected
+</td>
+<td class=rfctargumentvalue>
+When some models were discarded due to to model incompleteness 
+(in terms of interaction terms in a model requiring presence of direct effects in the same model),
+the original <b>OR</b> is not respected if the best model found by either <i>bic.glm</i> or <i>bic.surv</i> was dropped
+(by <b>bic.process</b>); if one really wants to list all the models not
+exceeding the maximum ratio in Occam's window (see <i>bic.glm</i> documentation), then <i>bic.glm</i> &#150; or <i>bic.surv</i> &#150;
+should be rerun with OR equals to the value given in <b>OR.corrected</b>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$excluded
+</td>
+<td class=rfctargumentvalue>
+Numbers of models present in <i>bic.out</i> but excluded from <b>bic.process</b> output.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$which.excluded
+</td>
+<td class=rfctargumentvalue>
+The rows of <i>$which</i> (see <i>bic.glm</i> documentation) corresponding to the excluded models.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$exclusion.criterion
+</td>
+<td class=rfctargumentvalue>
+Drop-out criterion, when applies, for each model excluded.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+$first.model.in<br>
+$first.model.out<br>
+</td>
+<td class=rfctargumentvalue>
+Model number for the first model with (and first model without, respectively) each independent variable.
+</td>
+</tr>
+</table>
+
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+The following is an excerpt of an R commands file that include calls to <i>bic.glm</i> and <i>bic.process</i>.
+
+<br><br>
+<div class=pgm>
+# data was already defined and includes<br>
+# outcome variable nank5y40<br>
+# and independent variables sex, pat_age, immunosuppression, nankslope1, nankslope2, acr1<br>
+<br>
+f <- 'nank5y40 ~ .'<br>
+nank5y40.1 <- bic.glm(as.formula(f), data=data%2c.html glm.family='binomial')<br>
+nank5y40.1 <- bic.process(nank5y40.1, data=data%2c.html n=nrow(data), formula=f)
+</div>
+<br>
+
+
+An excerpt from this code is shown below (click to see complete output).
+<br><br>
+<a href="SampleOutputFiles/bicprocess-output.txt"><img src="img/bic.process/bicprocess-out.gif" border=0></a>
+<br clear=all>
+<div class=click>Click on the image above to see full-size text output file.</div>
+
+<a name="notes"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Notes</div>
+<br>
+Note that <b>bic.process</b> was tested only for <i>bic.glm</i> outputs when <i>glm.family</i> is either <i>gaussian</i>, <i>binomial</i> or <i>poisson</i>, for <i>bicreg</i>
+and for <i>bic.surv</i> outputs. It was not tested for S-Plus: please let us know how it works if you try it in S-Plus!
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<b>bic.process</b> is a free R function. <a href="R/bic-process.R">Download version 1.6 now</a>.
+
+<a name="more"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>More</div>
+<br>
+Read about <a href="bic2html.html"><b>bic2html</b></a>, a Perl program that suitably converts <b>bic.process</b> outputs into easy to read html tables.
+<br><br>
+<a href="BICSurvTimeDependent.html">%BICSurvTimeDependent</a>
+is SAS macro to compute BIC in Survival Models when one or more 
+of the independent variables is (are) time-dependent.
+
+
+<a name="changelog"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Change Log</div>
+<br><b>Version 1.1, January 2009</b> Previous version would crash if one of the independent variables was called "function".
+<br><b>Version 1.2, February 2009</b> Previous versions would inadvertently drop a column in the computed hazard ratios from <i>bic.surv</i> processed outputs.
+<br><b>Version 1.3, March 2009</b> Previous versions would not compute rate ratios in Poisson models.
+<br><b>Version 1.5, December 2012</b> Previous versions did not output <span class=argname>$first.model.out</span>.
+
+
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/bic-process.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:00 GMT -->
+</html>

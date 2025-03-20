@@ -1,0 +1,83 @@
+{smcl}
+{* 27jul2005}
+{cmd:help bkup}
+{hline}
+
+{title:Title}
+
+{p 4 8 2}
+{bf:bkup -- Take backup, using WinZip's command line option}
+
+
+{title:Syntax}
+
+{p 8 17 2}
+{cmd:bkup} [{cmd:,} {cmdab:f:ull}]
+
+
+{title:Description}
+
+{p 4 4 2}
+{cmd:bkup} uses WinZip's command line option to make
+an incremental or a full backup to a compressed file whose name
+reflects the date and time of creation: YYYYMMDDHHMM.ZIP,
+e.g., 200507271921.zip for a file created at 19:21 on 27 July 2005.
+
+
+{title:Options}
+
+{p 4 8 2}
+{cmd:full} turns the archive bit on for all files in the backup path,
+leading to a full backup. The default setting is an incremental backup.
+
+
+{title:Remarks}
+
+{p 4 4 2}
+The intended use of {cmd:bkup} is described in more detail in
+{it:An Introduction to Stata for Health Researchers} (Juul 2006, 
+section 18.9).
+
+{p 4 4 2}
+{cmd:bkup} requires WinZip with the Command Line Support Add-On to be
+installed. WinZip is shareware; download both the main program
+and the command line add-on from
+{browse "http://www.winzip.com":http://www.winzip.com}.
+
+{p 4 4 2}
+Using {cmd:bkup} requires that all your "own" files be
+stored under a main personal folder (e.g., {hi:c:\docs}). {cmd:bkup}
+backs up files in your personal
+ado folder (typically {hi:c:\ado\personal}).
+
+{p 4 4 2}
+Before using {cmd:bkup} you must personalize it. Open {hi:bkup.ado}
+in the Do-file editor and modify, if needed, the location of your
+main personal folder (initially {hi:"c:\docs"}), the location of the folder 
+where you want the backup files stored (initially {hi:"c:\backup"}), and the
+location of your WinZip program (initially {hi:"c:\Program files\winzip\wzzip"}).
+ 
+{p 4 4 2}
+{hi:bkup.ado} includes several DOS {cmd:attrib} commands turning
+off the archive attribute for file types that you do not want
+to back up. You may want to modify this list.
+
+{p 4 4 2}
+{cmd:bkup} automatically gives the zip-file a name reflecting
+the date and time of creation. This system lets you easily sort the zip files
+chronologically in case you need to make a restore.
+
+
+{title:Author}
+
+{p 4 4 2}
+{browse "sj@soci.au.dk":Svend Juul}, Department of Epidemiology, 
+Institute of Public Health, University of Aarhus, Aarhus, Denmark.
+
+
+{title:Reference}
+
+{p 4 8 2} 
+Juul, S. 2006. {it:An Introduction to Stata for Health Researchers}.
+College Station, TX: Stata Press.
+

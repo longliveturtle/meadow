@@ -1,0 +1,1113 @@
+> nank5y40.1
+$label
+[1] "sex,pat_age,nankslope1"            "sex,pat_age,nankslope1,acr1"      
+[3] "sex,pat_age,nankslope1,nankslope2" "sex,nankslope1"                   
+
+$bic
+[1] -997.4555 -994.7877 -992.1100 -992.0392
+
+$n.models
+[1] 4
+
+$probne0
+              sex           pat_age immunosuppression        nankslope1 
+            100.0              95.2               0.0             100.0 
+       nankslope2              acr1 
+              4.9              18.8 
+
+$which
+      sex pat_age immunosuppression nankslope1 nankslope2  acr1
+[1,] TRUE    TRUE             FALSE       TRUE      FALSE FALSE
+[2,] TRUE    TRUE             FALSE       TRUE      FALSE  TRUE
+[3,] TRUE    TRUE             FALSE       TRUE       TRUE FALSE
+[4,] TRUE   FALSE             FALSE       TRUE      FALSE FALSE
+
+$size
+[1] 3 4 4 2
+
+$mle
+     Intercept sex=male     pat_age immunosuppression=neo/imuran
+[1,] 3.4827218 2.867810 -0.06578983                           NA
+[2,] 3.0380619 2.906481 -0.06088977                           NA
+[3,] 3.4740995 2.868464 -0.06564482                           NA
+[4,] 0.2902138 2.522286          NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.2276776         NA       NA
+[2,]                           NA  0.2448628         NA 1.567064
+[3,]                           NA  0.2279817 0.05147515       NA
+[4,]                           NA  0.2407552         NA       NA
+
+$se
+     Intercept  sex=male    pat_age immunosuppression=neo/imuran
+[1,] 1.1603414 0.5876825 0.02215362                           NA
+[2,] 1.1704105 0.5941323 0.02214049                           NA
+[3,] 1.1793753 0.5879853 0.02243743                           NA
+[4,] 0.3426876 0.5446915         NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA 0.09428066         NA       NA
+[2,]                           NA 0.09711799         NA 1.119558
+[3,]                           NA 0.09464002   1.285039       NA
+[4,]                           NA 0.09309259         NA       NA
+
+$postmean
+                    Intercept                      sex=male 
+                  3.246469511                   2.858661877 
+                      pat_age  immunosuppression=neo/imuran 
+                 -0.061725587                   0.000000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                  0.000000000                   0.000000000 
+ immunosuppression=other|none                    nankslope1 
+                  0.000000000                   0.231551438 
+                   nankslope2                      acr1=yes 
+                  0.002540764                   0.295060472 
+
+$postsd
+                    Intercept                      sex=male 
+                   1.32720104                    0.59193753 
+                      pat_age  immunosuppression=neo/imuran 
+                   0.02573198                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.09503996 
+                   nankslope2                      acr1=yes 
+                   0.28571348                    0.78187024 
+
+$postprob
+[1] 0.71470877 0.18828867 0.04935905 0.04764351
+
+$condpostmean
+                    Intercept                      sex=male 
+                   3.24646951                    2.85866188 
+                      pat_age  immunosuppression=neo/imuran 
+                  -0.06481353                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.23155144 
+                   nankslope2                      acr1=yes 
+                   0.05147515                    1.56706441 
+
+$condpostsd
+                    Intercept                      sex=male 
+                   1.32720104                    0.59193753 
+                      pat_age  immunosuppression=neo/imuran 
+                   0.02225127                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.09503996 
+                   nankslope2                      acr1=yes 
+                   1.28503915                    1.11955815 
+
+$n
+[1] 210
+
+$vars.in.model
+[1] "sex"               "pat_age"           "immunosuppression"
+[4] "nankslope1"        "nankslope2"        "acr1"             
+
+$first.model.in
+              sex           pat_age immunosuppression        nankslope1 
+                1                 1                NA                 1 
+       nankslope2              acr1 
+                3                 2 
+
+$first.model.out
+              sex           pat_age immunosuppression        nankslope1 
+               NA                 4                 1                NA 
+       nankslope2              acr1 
+                1                 1 
+
+$input.nrows
+[1] 210
+
+$reduced
+[1] FALSE
+
+$call
+bic.glm.formula(f = as.formula(f), data = data, glm.family = "binomial")
+
+$factor.type
+[1] TRUE
+
+$original.namesx
+[1] "sex"               "pat_age"           "immunosuppression"
+[4] "nankslope1"        "nankslope2"        "acr1"             
+
+$discard.incomplete.models
+[1] TRUE
+
+$mixed.interactionterms.factor.type
+[1] TRUE
+
+$reference.values
+              sex immunosuppression              acr1 
+         "female"          "fk/mmf"              "no" 
+
+$nests
+[1] 10
+
+$disp
+[1] 1
+
+$family
+[1] "binomial"
+
+$prior.model.weights
+[1] 1 1 1 1
+
+$prior.param
+              sex           pat_age immunosuppression        nankslope1 
+              0.5               0.5               0.5               0.5 
+       nankslope2              acr1 
+              0.5               0.5 
+
+$mle.lower
+      Intercept sex=male    pat_age immunosuppression=neo/imuran
+[1,]  1.2084944 1.715974 -0.1092101                           NA
+[2,]  0.7440996 1.742003 -0.1042843                           NA
+[3,]  1.1625663 1.716034 -0.1096214                           NA
+[4,] -0.3814415 1.454710         NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2   acr1=yes
+[1,]                           NA 0.04289089         NA         NA
+[2,]                           NA 0.05451504         NA -0.6272292
+[3,]                           NA 0.04249069  -2.467155         NA
+[4,]                           NA 0.05829704         NA         NA
+
+$mle.upper
+     Intercept sex=male     pat_age immunosuppression=neo/imuran
+[1,]  5.756949 4.019647 -0.02236953                           NA
+[2,]  5.332024 4.070959 -0.01749520                           NA
+[3,]  5.785633 4.020894 -0.02166827                           NA
+[4,]  0.961869 3.589862          NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.4124643         NA       NA
+[2,]                           NA  0.4352106         NA 3.761358
+[3,]                           NA  0.4134727   2.570106       NA
+[4,]                           NA  0.4232133         NA       NA
+
+$odds.ratio
+     sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 17.59844 0.9363276                           NA                        NA
+[2,] 18.29232 0.9409270                           NA                        NA
+[3,] 17.60995 0.9364634                           NA                        NA
+[4,] 12.45704        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.255680
+[2,]                            NA                           NA   1.277446
+[3,]                            NA                           NA   1.256062
+[4,]                            NA                           NA   1.272210
+     nankslope2 acr1=yes
+[1,]         NA       NA
+[2,]         NA 4.792559
+[3,]   1.052823       NA
+[4,]         NA       NA
+
+$odds.ratio.lower
+     sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 5.562089 0.8965420                           NA                        NA
+[2,] 5.708768 0.9009691                           NA                        NA
+[3,] 5.562425 0.8961734                           NA                        NA
+[4,] 4.283243        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.043824
+[2,]                            NA                           NA   1.056028
+[3,]                            NA                           NA   1.043406
+[4,]                            NA                           NA   1.060030
+     nankslope2  acr1=yes
+[1,]         NA        NA
+[2,]         NA 0.5340695
+[3,] 0.08482582        NA
+[4,]         NA        NA
+
+$odds.ratio.upper
+     sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 55.68144 0.9778788                           NA                        NA
+[2,] 58.61314 0.9826569                           NA                        NA
+[3,] 55.75095 0.9785648                           NA                        NA
+[4,] 36.22907        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.510536
+[2,]                            NA                           NA   1.545288
+[3,]                            NA                           NA   1.512060
+[4,]                            NA                           NA   1.526860
+     nankslope2 acr1=yes
+[1,]         NA       NA
+[2,]         NA 43.00679
+[3,]    13.0672       NA
+[4,]         NA       NA
+
+$deviance
+[1] 104.0487 101.3694 104.0471 114.8120
+
+> nank5y40.2
+$label
+[1] "pat_age,nankslope1,sexmatch"                  
+[2] "pat_age,sexmatch"                             
+[3] "pat_age,nankslope1,acr1,sexmatch"             
+[4] "pat_age,immunosuppression,nankslope1,sexmatch"
+[5] "pat_age,nankslope1,nankslope2,sexmatch"       
+
+$bic
+[1] -992.9294 -990.4877 -990.0075 -988.7320 -987.5837
+
+$n.models
+[1] 5
+
+$probne0
+          pat_age immunosuppression        nankslope1        nankslope2 
+            100.0               7.1              82.8               4.0 
+             acr1          sexmatch 
+             13.5             100.0 
+
+$which
+     pat_age immunosuppression nankslope1 nankslope2  acr1 sexmatch
+[1,]    TRUE             FALSE       TRUE      FALSE FALSE     TRUE
+[2,]    TRUE             FALSE      FALSE      FALSE FALSE     TRUE
+[3,]    TRUE             FALSE       TRUE      FALSE  TRUE     TRUE
+[4,]    TRUE              TRUE       TRUE      FALSE FALSE     TRUE
+[5,]    TRUE             FALSE       TRUE       TRUE FALSE     TRUE
+
+$size
+[1] 3 2 4 4 4
+
+$mle
+     Intercept     pat_age immunosuppression=neo/imuran
+[1,]  6.972293 -0.07363721                           NA
+[2,]  7.456247 -0.07551015                           NA
+[3,]  6.594619 -0.06898259                           NA
+[4,]  6.171508 -0.07943468                     17.84297
+[5,]  6.965521 -0.07350173                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                  1.114062                      2.426649
+[5,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.2017799         NA       NA
+[2,]                           NA         NA         NA       NA
+[3,]                           NA  0.2172757         NA 1.506684
+[4,]                      18.6439  0.2078068         NA       NA
+[5,]                           NA  0.2020862 0.05275339       NA
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         -2.113342        -0.2417073         -3.721948
+[2,]         -1.696197        -0.2188215         -3.587185
+[3,]         -2.171863        -0.2626761         -3.773613
+[4,]         -1.797409        -0.3555761         -4.417915
+[5,]         -2.114363        -0.2430744         -3.723091
+
+$se
+     Intercept    pat_age immunosuppression=neo/imuran
+[1,]  1.526926 0.02360986                           NA
+[2,]  1.480273 0.02282099                           NA
+[3,]  1.528662 0.02353432                           NA
+[4,]  1.629527 0.02652806                     4173.238
+[5,]  1.536318 0.02387237                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                  0.948401                     0.7760888
+[5,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA 0.09816287         NA       NA
+[2,]                           NA         NA         NA       NA
+[3,]                           NA 0.10107108         NA 1.121765
+[4,]                      2220.94 0.09782267         NA       NA
+[5,]                           NA 0.09857255   1.395179       NA
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         0.9109874         0.9492185         0.8683510
+[2,]         0.8830128         0.9444149         0.8481512
+[3,]         0.9181862         0.9511724         0.8808399
+[4,]         0.9811055         0.9867862         1.0189673
+[5,]         0.9115814         0.9500105         0.8689727
+
+$postmean
+                    Intercept                       pat_age 
+                  6.946967771                  -0.073738459 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                  1.272948610                   0.079479143 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                  0.173121305                   1.330088314 
+                   nankslope1                    nankslope2 
+                  0.169682637                   0.002119639 
+                     acr1=yes             sexmatch=D_M in F 
+                  0.203397649                  -2.027149651 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                 -0.248788687                  -3.755490454 
+
+$postsd
+                    Intercept                       pat_age 
+                 1.561077e+00                  2.382252e-02 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                 1.114676e+03                  3.826188e-01 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                 6.581061e-01                  5.932296e+02 
+                   nankslope1                    nankslope2 
+                 1.185392e-01                  2.798553e-01 
+                     acr1=yes             sexmatch=D_M in F 
+                 6.595146e-01                  9.287572e-01 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                 9.519608e-01                  8.990343e-01 
+
+$postprob
+[1] 0.58185135 0.17162986 0.13499691 0.07134173 0.04018015
+
+$condpostmean
+                    Intercept                       pat_age 
+                   6.94696777                   -0.07373846 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                  17.84297434                    1.11406250 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                   2.42664863                   18.64390399 
+                   nankslope1                    nankslope2 
+                   0.20483915                    0.05275339 
+                     acr1=yes             sexmatch=D_M in F 
+                   1.50668378                   -2.02714965 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                  -0.24878869                   -3.75549045 
+
+$condpostsd
+                    Intercept                       pat_age 
+                 1.561077e+00                  2.382252e-02 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                 4.173238e+03                  9.484010e-01 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                 7.760888e-01                  2.220940e+03 
+                   nankslope1                    nankslope2 
+                 9.880004e-02                  1.395179e+00 
+                     acr1=yes             sexmatch=D_M in F 
+                 1.121765e+00                  1.295615e+00 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                 3.098864e+00                  3.073569e+00 
+
+$n
+[1] 210
+
+$vars.in.model
+[1] "pat_age"           "immunosuppression" "nankslope1"       
+[4] "nankslope2"        "acr1"              "sexmatch"         
+
+$first.model.in
+          pat_age immunosuppression        nankslope1        nankslope2 
+                1                 4                 1                 5 
+             acr1          sexmatch 
+                3                 1 
+
+$first.model.out
+          pat_age immunosuppression        nankslope1        nankslope2 
+               NA                 1                 2                 1 
+             acr1          sexmatch 
+                1                NA 
+
+$input.nrows
+[1] 210
+
+$reduced
+[1] FALSE
+
+$call
+bic.glm.formula(f = as.formula(f), data = data, glm.family = "binomial")
+
+$factor.type
+[1] TRUE
+
+$original.namesx
+[1] "pat_age"           "immunosuppression" "nankslope1"       
+[4] "nankslope2"        "acr1"              "sexmatch"         
+
+$discard.incomplete.models
+[1] TRUE
+
+$mixed.interactionterms.factor.type
+[1] TRUE
+
+$reference.values
+immunosuppression              acr1          sexmatch 
+         "fk/mmf"              "no"        "D_M in M" 
+
+$nests
+[1] 12
+
+$disp
+[1] 1
+
+$family
+[1] "binomial"
+
+$prior.model.weights
+[1] 1 1 1 1 1
+
+$prior.param
+          pat_age immunosuppression        nankslope1        nankslope2 
+              0.5               0.5               0.5               0.5 
+             acr1          sexmatch 
+              0.5               0.5 
+
+$mle.lower
+     Intercept    pat_age immunosuppression=neo/imuran
+[1,]  3.979573 -0.1199117                           NA
+[2,]  4.554965 -0.1202385                           NA
+[3,]  3.598497 -0.1151090                           NA
+[4,]  2.977694 -0.1314287                    -8161.553
+[5,]  3.954394 -0.1202907                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                -0.7447694                     0.9055425
+[5,]                        NA                            NA
+     immunosuppression=other|none  nankslope1 nankslope2   acr1=yes
+[1,]                           NA 0.009384255         NA         NA
+[2,]                           NA          NA         NA         NA
+[3,]                           NA 0.019180073         NA -0.6919343
+[4,]                    -4334.318 0.016077926         NA         NA
+[5,]                           NA 0.008887518  -2.681748         NA
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         -3.898845         -2.102142         -5.423884
+[2,]         -3.426870         -2.069841         -5.249531
+[3,]         -3.971475         -2.126940         -5.500027
+[4,]         -3.720341         -2.289642         -6.415054
+[5,]         -3.901030         -2.105061         -5.426246
+
+$mle.upper
+     Intercept     pat_age immunosuppression=neo/imuran
+[1,]  9.965013 -0.02736272                           NA
+[2,] 10.357529 -0.03078183                           NA
+[3,]  9.590741 -0.02285618                           NA
+[4,]  9.365323 -0.02744063                     8197.239
+[5,]  9.976649 -0.02671274                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                  2.972894                      3.947755
+[5,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.3941756         NA       NA
+[2,]                           NA         NA         NA       NA
+[3,]                           NA  0.4153714         NA 3.705302
+[4,]                     4371.606  0.3995358         NA       NA
+[5,]                           NA  0.3952848   2.787254       NA
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]       -0.32783973          1.618727         -2.020011
+[2,]        0.03447624          1.632198         -1.924839
+[3,]       -0.37225146          1.601587         -2.047199
+[4,]        0.12552199          1.578489         -2.420776
+[5,]       -0.32769673          1.618912         -2.019935
+
+$odds.ratio
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.9290087                           NA                        NA
+[2,] 0.9272703                           NA                        NA
+[3,] 0.9333429                           NA                        NA
+[4,] 0.9236384                     56118402                  3.046711
+[5,] 0.9291345                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.223579
+[2,]                            NA                           NA         NA
+[3,]                            NA                           NA   1.242687
+[4,]                      11.32088                    125009962   1.230975
+[5,]                            NA                           NA   1.223953
+     nankslope2 acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA       NA         0.1208334         0.7852860        0.02418681
+[2,]         NA       NA         0.1833796         0.8034652        0.02767614
+[3,]         NA 4.511744         0.1139651         0.7689909        0.02296893
+[4,]         NA       NA         0.1657277         0.7007696        0.01205935
+[5,]    1.05417       NA         0.1207101         0.7842132        0.02415918
+
+$odds.ratio.lower
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.8869988                           NA                        NA
+[2,] 0.8867090                           NA                        NA
+[3,] 0.8912690                           NA                        NA
+[4,] 0.8768418                            0                 0.4748438
+[5,] 0.8866626                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.009428
+[2,]                            NA                           NA         NA
+[3,]                            NA                           NA   1.019365
+[4,]                      2.473273                            0   1.016208
+[5,]                            NA                           NA   1.008927
+     nankslope2  acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA        NA        0.02026531         0.1221945       0.004409983
+[2,]         NA        NA        0.03248846         0.1262059       0.005249983
+[3,]         NA 0.5006068        0.01884561         0.1192015       0.004086659
+[4,]         NA        NA        0.02422571         0.1013028       0.001636731
+[5,] 0.06844344        NA        0.02022107         0.1218383       0.004399582
+
+$odds.ratio.upper
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.9730082                           NA                        NA
+[2,] 0.9696871                           NA                        NA
+[3,] 0.9774030                           NA                        NA
+[4,] 0.9729324                          Inf                  19.54842
+[5,] 0.9736409                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.483161
+[2,]                            NA                           NA         NA
+[3,]                            NA                           NA   1.514933
+[4,]                      51.81889                          Inf   1.491132
+[5,]                            NA                           NA   1.484807
+     nankslope2 acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA       NA         0.7204785          5.046661        0.13265400
+[2,]         NA       NA         1.0350774          5.115104        0.14589926
+[3,]         NA 40.66232         0.6891809          4.960901        0.12909604
+[4,]         NA       NA         1.1337401          4.847627        0.08885267
+[5,]   16.23638       NA         0.7205815          5.047596        0.13266402
+
+$deviance
+[1]  97.88050 105.66936  95.45532  80.68954  97.87908
+
+> nank5y50.1
+$label
+[1] "sex,pat_age,nankslope1,acr1"           
+[2] "sex,pat_age,nankslope1"                
+[3] "sex,pat_age,nankslope1,nankslope2,acr1"
+[4] "sex,nankslope1,acr1"                   
+
+$bic
+[1] -893.5101 -891.1035 -888.4647 -888.2221
+
+$n.models
+[1] 4
+
+$probne0
+              sex           pat_age immunosuppression        nankslope1 
+            100.0              95.1               0.0             100.0 
+       nankslope2              acr1 
+              5.5              79.3 
+
+$which
+      sex pat_age immunosuppression nankslope1 nankslope2  acr1
+[1,] TRUE    TRUE             FALSE       TRUE      FALSE  TRUE
+[2,] TRUE    TRUE             FALSE       TRUE      FALSE FALSE
+[3,] TRUE    TRUE             FALSE       TRUE       TRUE  TRUE
+[4,] TRUE   FALSE             FALSE       TRUE      FALSE  TRUE
+
+$size
+[1] 4 3 5 3
+
+$mle
+      Intercept sex=male     pat_age immunosuppression=neo/imuran
+[1,]  1.2357647 1.712115 -0.04377487                           NA
+[2,]  1.7071991 1.651106 -0.04820319                           NA
+[3,]  1.2885793 1.721806 -0.04479730                           NA
+[4,] -0.8158221 1.508533          NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.1847318         NA 1.650611
+[2,]                           NA  0.1691439         NA       NA
+[3,]                           NA  0.1847527 -0.3882527 1.636521
+[4,]                           NA  0.1914176         NA 1.843950
+
+$se
+     Intercept  sex=male    pat_age immunosuppression=neo/imuran
+[1,] 0.7286035 0.3823035 0.01410158                           NA
+[2,] 0.7039825 0.3697965 0.01385798                           NA
+[3,] 0.7372884 0.3835621 0.01426964                           NA
+[4,] 0.3305679 0.3575121         NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2  acr1=yes
+[1,]                           NA 0.05049561         NA 0.6781527
+[2,]                           NA 0.04884507         NA        NA
+[3,]                           NA 0.05052142  0.6645808 0.6809317
+[4,]                           NA 0.05115333         NA 0.6621530
+
+$postmean
+                    Intercept                      sex=male 
+                   1.23572398                    1.69006387 
+                      pat_age  immunosuppression=neo/imuran 
+                  -0.04260371                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.18183648 
+                   nankslope2                      acr1=yes 
+                  -0.02146319                    1.31792734 
+
+$postsd
+                    Intercept                      sex=male 
+                   0.86939655                    0.38168566 
+                      pat_age  immunosuppression=neo/imuran 
+                   0.01686851                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.05062976 
+                   nankslope2                      acr1=yes 
+                   0.17969007                    0.90475002 
+
+$postprob
+[1] 0.68893575 0.20681560 0.05528150 0.04896716
+
+$condpostmean
+                    Intercept                      sex=male 
+                    1.2357240                     1.6900639 
+                      pat_age  immunosuppression=neo/imuran 
+                   -0.0447973                     0.0000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                    0.0000000                     0.0000000 
+ immunosuppression=other|none                    nankslope1 
+                    0.0000000                     0.1818365 
+                   nankslope2                      acr1=yes 
+                   -0.3882527                     1.6615649 
+
+$condpostsd
+                    Intercept                      sex=male 
+                   0.86939655                    0.38168566 
+                      pat_age  immunosuppression=neo/imuran 
+                   0.01417499                    0.00000000 
+    immunosuppression=neo/mmf immunosuppression=sand/imuran 
+                   0.00000000                    0.00000000 
+ immunosuppression=other|none                    nankslope1 
+                   0.00000000                    0.05062976 
+                   nankslope2                      acr1=yes 
+                   0.66458077                    0.67899329 
+
+$n
+[1] 210
+
+$vars.in.model
+[1] "sex"               "pat_age"           "immunosuppression"
+[4] "nankslope1"        "nankslope2"        "acr1"             
+
+$first.model.in
+              sex           pat_age immunosuppression        nankslope1 
+                1                 1                NA                 1 
+       nankslope2              acr1 
+                3                 1 
+
+$first.model.out
+              sex           pat_age immunosuppression        nankslope1 
+               NA                 4                 1                NA 
+       nankslope2              acr1 
+                1                 2 
+
+$input.nrows
+[1] 210
+
+$reduced
+[1] FALSE
+
+$call
+bic.glm.formula(f = as.formula(f), data = data, glm.family = "binomial")
+
+$factor.type
+[1] TRUE
+
+$original.namesx
+[1] "sex"               "pat_age"           "immunosuppression"
+[4] "nankslope1"        "nankslope2"        "acr1"             
+
+$discard.incomplete.models
+[1] TRUE
+
+$mixed.interactionterms.factor.type
+[1] TRUE
+
+$reference.values
+              sex immunosuppression              acr1 
+         "female"          "fk/mmf"              "no" 
+
+$nests
+[1] 10
+
+$disp
+[1] 1
+
+$family
+[1] "binomial"
+
+$prior.model.weights
+[1] 1 1 1 1
+
+$prior.param
+              sex           pat_age immunosuppression        nankslope1 
+              0.5               0.5               0.5               0.5 
+       nankslope2              acr1 
+              0.5               0.5 
+
+$mle.lower
+      Intercept  sex=male     pat_age immunosuppression=neo/imuran
+[1,] -0.1922719 0.9628134 -0.07141346                           NA
+[2,]  0.3274188 0.9263177 -0.07536432                           NA
+[3,] -0.1564794 0.9700385 -0.07276529                           NA
+[4,] -1.4637234 0.8078221          NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2  acr1=yes
+[1,]                           NA 0.08576217         NA 0.3214563
+[2,]                           NA 0.07340929         NA        NA
+[3,]                           NA 0.08573251  -1.690807 0.3019198
+[4,]                           NA 0.09115891         NA 0.5461538
+
+$mle.upper
+      Intercept sex=male     pat_age immunosuppression=neo/imuran
+[1,]  2.6638013 2.461416 -0.01613628                           NA
+[2,]  3.0869794 2.375893 -0.02104205                           NA
+[3,]  2.7336379 2.473574 -0.01682931                           NA
+[4,] -0.1679208 2.209244          NA                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+[4,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.2837013         NA 2.979766
+[2,]                           NA  0.2648784         NA       NA
+[3,]                           NA  0.2837728  0.9143017 2.971123
+[4,]                           NA  0.2916763         NA 3.141746
+
+$odds.ratio
+     sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 5.540665 0.9571694                           NA                        NA
+[2,] 5.212739 0.9529401                           NA                        NA
+[3,] 5.594625 0.9561913                           NA                        NA
+[4,] 4.520095        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.202896
+[2,]                            NA                           NA   1.184290
+[3,]                            NA                           NA   1.202921
+[4,]                            NA                           NA   1.210965
+     nankslope2 acr1=yes
+[1,]         NA 5.210163
+[2,]         NA       NA
+[3,]  0.6782409 5.137268
+[4,]         NA 6.321458
+
+$odds.ratio.lower
+     sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 2.619055 0.9310768                           NA                        NA
+[2,] 2.525194 0.9274055                           NA                        NA
+[3,] 2.638046 0.9298190                           NA                        NA
+[4,] 2.243018        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.089547
+[2,]                            NA                           NA   1.076171
+[3,]                            NA                           NA   1.089515
+[4,]                            NA                           NA   1.095443
+     nankslope2 acr1=yes
+[1,]         NA 1.379135
+[2,]         NA       NA
+[3,]  0.1843707 1.352453
+[4,]         NA 1.726599
+
+$odds.ratio.upper
+      sex=male   pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 11.721393 0.9839932                           NA                        NA
+[2,] 10.760622 0.9791778                           NA                        NA
+[3,] 11.864779 0.9833115                           NA                        NA
+[4,]  9.108825        NA                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.328036
+[2,]                            NA                           NA   1.303273
+[3,]                            NA                           NA   1.328131
+[4,]                            NA                           NA   1.338670
+     nankslope2 acr1=yes
+[1,]         NA 19.68321
+[2,]         NA       NA
+[3,]   2.495032 19.51382
+[4,]         NA 23.14424
+
+$deviance
+[1] 202.6469 210.4007 202.3452 213.2820
+
+> nank5y50.2
+$label
+[1] "pat_age,nankslope1,acr1,sexmatch"           
+[2] "pat_age,nankslope1,sexmatch"                
+[3] "pat_age,nankslope1,nankslope2,acr1,sexmatch"
+
+$bic
+[1] -896.5478 -893.8843 -891.7281
+
+$n.models
+[1] 3
+
+$probne0
+          pat_age immunosuppression        nankslope1        nankslope2 
+            100.0               0.0             100.0               6.6 
+             acr1          sexmatch 
+             80.5             100.0 
+
+$which
+     pat_age immunosuppression nankslope1 nankslope2  acr1 sexmatch
+[1,]    TRUE             FALSE       TRUE      FALSE  TRUE     TRUE
+[2,]    TRUE             FALSE       TRUE      FALSE FALSE     TRUE
+[3,]    TRUE             FALSE       TRUE       TRUE  TRUE     TRUE
+
+$size
+[1] 4 3 5
+
+$mle
+     Intercept     pat_age immunosuppression=neo/imuran
+[1,]  3.774530 -0.05053782                           NA
+[2,]  4.120058 -0.05394366                           NA
+[3,]  3.883674 -0.05215781                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.1638673         NA 1.750278
+[2,]                           NA  0.1504216         NA       NA
+[3,]                           NA  0.1640917 -0.5495037 1.752136
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         -1.230934        -0.7774915         -3.144711
+[2,]         -1.175592        -0.7561997         -3.003455
+[3,]         -1.254525        -0.7965479         -3.184335
+
+$se
+     Intercept    pat_age immunosuppression=neo/imuran
+[1,] 0.8879680 0.01505688                           NA
+[2,] 0.8622312 0.01463293                           NA
+[3,] 0.9080594 0.01530622                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2  acr1=yes
+[1,]                           NA 0.05165734         NA 0.7073399
+[2,]                           NA 0.05012863         NA        NA
+[3,]                           NA 0.05177904  0.6884858 0.7110838
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         0.5659484         0.4670781         0.6006542
+[2,]         0.5531033         0.4597232         0.5720271
+[3,]         0.5678113         0.4697575         0.6076509
+
+$postmean
+                    Intercept                       pat_age 
+                   3.84915415                   -0.05130949 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                   0.00000000                    0.00000000 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                   0.00000000                    0.00000000 
+                   nankslope1                    nankslope2 
+                   0.16126012                   -0.03645941 
+                     acr1=yes             sexmatch=D_M in F 
+                   1.40907352                   -1.22170658 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                  -0.77460370                   -3.11979329 
+
+$postsd
+                    Intercept                       pat_age 
+                   0.89476324                    0.01505317 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                   0.00000000                    0.00000000 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                   0.00000000                    0.00000000 
+                   nankslope1                    nankslope2 
+                   0.05164720                    0.22395511 
+                     acr1=yes             sexmatch=D_M in F 
+                   0.94027090                    0.56407768 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                   0.46594349                    0.59847653 
+
+$postprob
+[1] 0.7386368 0.1950135 0.0663497
+
+$condpostmean
+                    Intercept                       pat_age 
+                   3.84915415                   -0.05130949 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                   0.00000000                    0.00000000 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                   0.00000000                    0.00000000 
+                   nankslope1                    nankslope2 
+                   0.16126012                   -0.54950373 
+                     acr1=yes             sexmatch=D_M in F 
+                   1.75043127                   -1.22170658 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                  -0.77460370                   -3.11979329 
+
+$condpostsd
+                    Intercept                       pat_age 
+                   0.89476324                    0.01505317 
+ immunosuppression=neo/imuran     immunosuppression=neo/mmf 
+                   0.00000000                    0.00000000 
+immunosuppression=sand/imuran  immunosuppression=other|none 
+                   0.00000000                    0.00000000 
+                   nankslope1                    nankslope2 
+                   0.05164720                    0.68848579 
+                     acr1=yes             sexmatch=D_M in F 
+                   0.70764940                    0.76151136 
+            sexmatch=D_F in M             sexmatch=D_F in F 
+                   0.84908110                    2.01377735 
+
+$n
+[1] 210
+
+$vars.in.model
+[1] "pat_age"           "immunosuppression" "nankslope1"       
+[4] "nankslope2"        "acr1"              "sexmatch"         
+
+$first.model.in
+          pat_age immunosuppression        nankslope1        nankslope2 
+                1                NA                 1                 3 
+             acr1          sexmatch 
+                1                 1 
+
+$first.model.out
+          pat_age immunosuppression        nankslope1        nankslope2 
+               NA                 1                NA                 1 
+             acr1          sexmatch 
+                2                NA 
+
+$input.nrows
+[1] 210
+
+$reduced
+[1] FALSE
+
+$call
+bic.glm.formula(f = as.formula(f), data = data, glm.family = "binomial")
+
+$factor.type
+[1] TRUE
+
+$original.namesx
+[1] "pat_age"           "immunosuppression" "nankslope1"       
+[4] "nankslope2"        "acr1"              "sexmatch"         
+
+$discard.incomplete.models
+[1] TRUE
+
+$mixed.interactionterms.factor.type
+[1] TRUE
+
+$reference.values
+immunosuppression              acr1          sexmatch 
+         "fk/mmf"              "no"        "D_M in M" 
+
+$nests
+[1] 12
+
+$disp
+[1] 1
+
+$family
+[1] "binomial"
+
+$prior.model.weights
+[1] 1 1 1
+
+$prior.param
+          pat_age immunosuppression        nankslope1        nankslope2 
+              0.5               0.5               0.5               0.5 
+             acr1          sexmatch 
+              0.5               0.5 
+
+$mle.lower
+     Intercept     pat_age immunosuppression=neo/imuran
+[1,]  2.034145 -0.08004876                           NA
+[2,]  2.430116 -0.08262367                           NA
+[3,]  2.103910 -0.08215745                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2  acr1=yes
+[1,]                           NA 0.06262079         NA 0.3639174
+[2,]                           NA 0.05217132         NA        NA
+[3,]                           NA 0.06260669  -1.898911 0.3584374
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         -2.340172         -1.692948         -4.321972
+[2,]         -2.259655         -1.657241         -4.124608
+[3,]         -2.367415         -1.717256         -4.375309
+
+$mle.upper
+     Intercept     pat_age immunosuppression=neo/imuran
+[1,]  5.514915 -0.02102688                           NA
+[2,]  5.810000 -0.02526365                           NA
+[3,]  5.663438 -0.02215817                           NA
+     immunosuppression=neo/mmf immunosuppression=sand/imuran
+[1,]                        NA                            NA
+[2,]                        NA                            NA
+[3,]                        NA                            NA
+     immunosuppression=other|none nankslope1 nankslope2 acr1=yes
+[1,]                           NA  0.2651138         NA 3.136639
+[2,]                           NA  0.2486719         NA       NA
+[3,]                           NA  0.2655768  0.7999036 3.145835
+     sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]       -0.12169509         0.1379647         -1.967450
+[2,]       -0.09152949         0.1448413         -1.882303
+[3,]       -0.14163546         0.1241599         -1.993361
+
+$odds.ratio
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.9507180                           NA                        NA
+[2,] 0.9474855                           NA                        NA
+[3,] 0.9491791                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.178058
+[2,]                            NA                           NA   1.162324
+[3,]                            NA                           NA   1.178322
+     nankslope2 acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA 5.756203         0.2920198         0.4595574        0.04307937
+[2,]         NA       NA         0.3086362         0.4694471        0.04961534
+[3,]  0.5772362 5.766908         0.2852112         0.4508828        0.04140576
+
+$odds.ratio.lower
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.9230713                           NA                        NA
+[2,] 0.9206976                           NA                        NA
+[3,] 0.9211269                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.064623
+[2,]                            NA                           NA   1.053556
+[3,]                            NA                           NA   1.064608
+     nankslope2 acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA 1.438955        0.09631105         0.1839764        0.01327369
+[2,]         NA       NA        0.10438652         0.1906643        0.01616984
+[3,]  0.1497316 1.431091        0.09372269         0.1795583        0.01258425
+
+$odds.ratio.upper
+       pat_age immunosuppression=neo/imuran immunosuppression=neo/mmf
+[1,] 0.9791926                           NA                        NA
+[2,] 0.9750528                           NA                        NA
+[3,] 0.9780855                           NA                        NA
+     immunosuppression=sand/imuran immunosuppression=other|none nankslope1
+[1,]                            NA                           NA   1.303579
+[2,]                            NA                           NA   1.282321
+[3,]                            NA                           NA   1.304183
+     nankslope2 acr1=yes sexmatch=D_M in F sexmatch=D_F in M sexmatch=D_F in F
+[1,]         NA 23.02634         0.8854183          1.147935         0.1398129
+[2,]         NA       NA         0.9125344          1.155856         0.1522391
+[3,]   2.225326 23.23907         0.8679376          1.132197         0.1362367
+
+$deviance
+[1] 188.9150 196.9256 188.3877

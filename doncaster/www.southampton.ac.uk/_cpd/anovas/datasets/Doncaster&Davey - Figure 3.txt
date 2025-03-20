@@ -1,0 +1,40 @@
+1.1  ONE-FACTOR MODEL Y = A + e
+
+Analysis of yield response Y to irrigation treatment A, 
+declaring term: A
+
+Example data for Figure 3:
+
+A	Y
+Control	 6.0000
+Control	 9.2085
+Control	13.1147
+Control	15.2654
+Control	12.4188
+Control	14.3951
+Control	 8.5986
+Control	 3.4945
+Water	21.3220
+Water	26.0000
+Water	22.6600
+Water	24.1283
+Water	18.0000
+Water	14.0000
+Water	15.0000
+Water	17.0000
+
+
+Model 1.1(i) A is a fixed factor:
+
+  Source    DF      SS      MS      F      P
+1 A          1  357.35  357.35  19.38  0.001
+2 S(A)      14  258.15   18.44
+  Total     15  615.50
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

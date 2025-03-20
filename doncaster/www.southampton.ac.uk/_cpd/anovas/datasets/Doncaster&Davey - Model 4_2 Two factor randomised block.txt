@@ -1,0 +1,90 @@
+4.2 TWO FACTOR RANDOMISED BLOCK MODEL Y = S'|B|A
+
+Analysis of terms: S|B|A - S*B*A (Model 1) or S + B|A (Model 2)
+
+Data:
+
+S	A	B	Y
+1	1	1	 4.5924
+2	1	1	-0.5488
+3	1	1	 6.1605
+4	1	1	 2.3374
+1	1	2	 5.1873
+2	1	2	 3.3579
+3	1	2	 6.3092
+4	1	2	 3.2831
+1	2	1	 7.3809
+2	2	1	 9.2085
+3	2	1	13.1147
+4	2	1	15.2654
+1	2	2	12.4188
+2	2	2	14.3951
+3	2	2	 8.5986
+4	2	2	 3.4945
+1	3	1	21.3220
+2	3	1	25.0426
+3	3	1	22.6600
+4	3	1	24.1283
+1	3	2	16.5927
+2	3	2	10.2129
+3	3	2	 9.8934
+4	3	2	10.0203
+
+
+Model 4.2(i) A and B are fixed factors, S is a random blocking factor:
+
+                                           Restricted
+                                     Model_1       Model_2  
+  Source   DF       SS      MS      F      P      F      P
+1 S         3     9.07    3.02      -      -   0.27  0.850
+2 A         2   745.36  372.68  67.58 <0.001  32.67 <0.001
+3 B         1    91.65   91.65   4.13  0.135   8.03  0.013
+4 B*A       2   186.37   93.18   7.82  0.021   8.17  0.004
+5 S*A       6    33.09    5.51      -      -      -      -
+6 S*B       3    66.51   22.17      -      -      -      -
+7 S*B*A     6    71.51   11.92      -      -      -      -
+8 P(S*B*A)  0        -       - 
+  Total    23  1203.56
+
+
+Model 4.2(ii) A is a fixed factor, B is a random factor, S is a random blocking factor:
+
+                                          Restricted
+                                    Model_1      Model_2
+  Source   DF       SS      MS     F      P     F      P
+1 S         3     9.07    3.02  0.14  0.932  0.27  0.850
+2 A         2   745.36  372.68  4.29  0.214* 4.00  0.200
+3 B         1    91.65   91.65  4.13  0.135  8.03  0.013
+4 B*A       2   186.37   93.18  7.82  0.021  8.17  0.004
+5 S*A       6    33.09    5.51  0.46  0.815     -      -
+6 S*B       3    66.51   22.17     -      -     -      -
+7 S*B*A     6    71.51   11.92     -      -     -      -
+8 P(S*B*A)  0        -       -
+  Total    23  1203.56
+
+* Quasi F-ratio.
+
+
+Model 4.2(iii) A and B are random factors, S is a random blocking factor:
+
+                                    Model_1      Model_2
+  Source   DF       SS      MS     F      P     F      P
+1 S         3     9.07    3.02  0.19  0.893* 0.27  0.850
+2 A         2   745.36  372.68  4.29  0.214* 4.00  0.200
+3 B         1    91.65   91.65  0.89  0.433* 0.98  0.426
+4 B*A       2   186.37   93.18  7.82  0.021  8.17  0.004
+5 S*A       6    33.09    5.51  0.46  0.815     -      -
+6 S*B       3    66.51   22.17  1.86  0.237     -      -
+7 S*B*A     6    71.51   11.92     -      -     -      -
+8 P(S*B*A)  0        -       -
+  Total    23  1203.56
+
+* Quasi F-ratio.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

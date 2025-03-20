@@ -1,0 +1,20 @@
+HTTrack3.49-5 launched on Thu, 20 Mar 2025 13:56:53 at http://deanvossdraguljic.ietsandbox.net/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/*
+(webhttrack -q -%i -w http://deanvossdraguljic.ietsandbox.net/ -O "/media/tuhocr/CLOUD1/TURTLE/meadow/angela" -n -%P -N0 -s2 -p7 -D -a -K0 -c4 -%k -A100000 -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -%s -%u )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+14:03:35	Error: 	"Not Found" (404) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/SAS-data/deconbeta1.sas (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/SAS-data.html)
+14:03:36	Error: 	"Not Found" (404) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/mung.data, (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code/mungbean.r)
+14:03:37	Warning: 	HTML file (2408 bytes) retransferred due to lack of cache: deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/chapters.htm
+14:03:38	Warning: 	HTML file (12292 bytes) retransferred due to lack of cache: deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/SAS-code.html
+14:03:39	Warning: 	HTML file (183 bytes) retransferred due to lack of cache: deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/SAS-code/randomize.sas
+14:03:40	Error: 	"Not Found" (404) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/mungbean.txt (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code.html)
+14:03:40	Error: 	"Not Found" (404) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/heartlungpump.txt (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code.html)
+14:03:40	Error: 	"Not Found" (404) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/dye2.txt (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-code.html)
+14:03:40	Warning: 	Retry after error -4 (No data (connection closed)) at link deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/lithium.txt (from deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data.html)
+
+HTTrack Website Copier/3.49-5 mirror complete in 6 minutes 48 seconds : 372 links scanned, 368 files written (2316920 bytes overall) [2394161 bytes received at 5868 bytes/sec], 70133 bytes transferred using HTTP compression in 6 files, ratio 17%, 21.3 requests per connection
+(5 errors, 4 warnings, 0 messages)

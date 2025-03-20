@@ -1,0 +1,67 @@
+TWO COVARIATES MODEL Y = A + B + e
+
+Analysis of per capita growth response r to ln(N_t) + ln(N_t+1),
+declaring terms: t + tplus1
+
+Ln density data for Figure 11(a):
+
+ t  tplus1      r
+10	10	 0.1
+10	15	 5.2
+10	20	 9.7
+15	15	 0.0
+15	20	 4.8
+15	25	10.1
+20	20	 0.0
+20	25	 5.0
+20	30	10.0
+
+
+t and tplus1 are both covariates of the response:
+
+  Source    DF  Seq SS  Adj SS  Adj MS        F      P
+1 t          1    0.00   73.51   73.51  2536.36 <0.001
+2 tplus1     1  147.02  147.02  147.02  5072.72 <0.001
+3 Error      6    0.17    0.17    0.03
+  Total      8  147.19
+
+COMMENT: These covariates are not orthogonal, and information 
+about one increases the explanatory power of the other. Covariate t 
+contributes nothing to explaining r without the presence also of 
+covariate tplus1 (it has Seq SS = 0.00).
+
+
+
+Ln density data for Figure 11(b):
+
+   t  tplus1    r
+12.0	17.5	5
+15.5	18.8	4
+19.0	22.2	3
+21.5	24.0	2
+24.0	25.1	1
+26.0	26.7	0
+
+
+t and tplus1 are both covariates of the response:
+
+  Source    DF  Seq SS  Adj SS  Adj MS     F      P
+1 t          1   17.29    0.28    0.28  4.02  0.139
+2 tplus1     1    0.00    0.00    0.00  0.01  0.923
+3 Error      3    0.21    0.21    0.07
+  Total      5   17.50
+
+COMMENT: These covariates are not orthogonal, and information 
+about one reduces the explanatory power of the other. Covariate tplus1 
+contributes negligible variation beyond that contributed by covariate 
+t, which loses explanatory power when adjusted for tplus1 (it has
+reduced adjusted SS). More information is obtained from analysis with 
+sequential SS, or the inclusion of an interaction term.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

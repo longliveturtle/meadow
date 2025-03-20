@@ -1,0 +1,2096 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/WriteWinBUGSScript.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:08 GMT -->
+<head>
+<title>WriteWinBUGSScript: The writing of WinBUGS Scripts made easier</title>
+<meta name="description" content=" WriteWinBUGSScript is a Perl program that facilitates writing WinBUGS scripts. Once you prepare your model, data and initial values files, the rest of the task of writing a WinBUGS script is fully automated. WriteWinBUGSScript will examine these files, identify which nodes are data and which are stochastic and write a WinBUGS script that will load the model and appropriate data/inits files, compile the model, run WinBUGS for some burn-in iterations, monitor stochastic nodes for more iterations and then save their histories/traces and summary statistics to both odc and text output files.">
+<meta name="keywords" content="data, inits, log, model, odc, output, pgm, program, programming, script, tool, WinBUGS, write, writing">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 11 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 2.1 (November 2015)</div>
+<div class=title0>WriteWinBUGSScript</div>
+<div class=title>The writing of WinBUGS Scripts made easier</div>
+
+If you have worked with <a href="http://www.mrc-bsu.cam.ac.uk/bugs/">WinBUGS</a> for some time, 
+you certainly know how using WinBUGS script can make life easier, especially if you run WinBUGS repeatedly!
+<br>
+If you have to write lots of WinBUGS scripts, however, you may feel the need for an automated and faster way to write them.
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>WriteWinBUGSScript</b>  is a Perl program that facilitates writing WinBUGS scripts. 
+Once you prepare your model, data and initial values files, the rest of the 
+task of writing a WinBUGS script is fully automated. <b>WriteWinBUGSScript</b> will 
+examine these files, identify which nodes are data and which are stochastic 
+and write a WinBUGS script that will load the model and appropriate 
+data/inits files, compile the model, run WinBUGS for some burn-in 
+iterations, monitor stochastic nodes for more iterations and then save their 
+histories/traces and summary statistics to both odc and text output files.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+<br><br>
+
+Aside from the above basic task, when running WinBUGS models, one often wants to try out different initial values, different prior distributions, or even different data sets.
+A convenient way to do so is to write WinBUGS scripts; however, each different set-up (in terms of data analyzed, prior distributions used, etc.)
+must be specified by the mean of a different script, which involves writing a lot of WinBUGS script files being very similar to each other
+but each with its own peculiarities.<br>
+That's where <b>WriteWinBUGSScript</b> becomes interesting, since it can automate this process as well.
+<br><br>
+
+<a name="top"></a>
+The present document introduces the reader to the syntax of <b>WriteWinBUGSScript</b> input files and gives a few examples that will hopefully 
+make its use straightforward.
+
+<ul>
+<li><a href="#syntax">Syntax</a>
+<li><a href="#details">Details</a>
+<li><a href="#notes">Notes</a>
+<li><a href="#examples">Examples</a>
+<li><a href="#multiplescripts">Preparing multiple scripts</b></a>
+<li><a href="#download">Download <b>WriteWinBUGSScript</b></a>
+<li><a href="#how2use">How to use <b>WriteWinBUGSScript</b></a>
+</ul>
+
+<a name="syntax"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Syntax</div>
+<br>
+The input files that <b>WriteWinBUGSScript</b> will read are plain text files 
+consisting of a series of commands (one command per line). 
+<br>
+The exhaustive list of <b>WriteWinBUGSScript </b> commands is given below 
+(and &#150; in an attempt to make their interpretation more intuitive &#150; illustrated with either file names or node names); 
+each command is explained in detail in the next section.
+Click any command line to jump to the related detailed subsection.
+<br><br>
+<div class=pgm>
+<a href="#model">../models/model1.txt</a> <a href="#niter">500/10k</a>
+<br>
+<a href="#data">-d ../data/data.txt</a>
+<br>
+<a href="#data">-d ../data/data.txt ../data/hyperparameters1.txt</a>
+<br>
+<a href="#inits">-i ../inits/inits.txt</a>
+<br>
+<a href="#inits">-i b.age=0 b.cigsperday=0</a>
+<br>
+<a href="#inits">-i b=-2{J}</a>
+<br>
+<a href="#inits">-i b.race=c(NA,0,0,0)</a>
+<br>
+<a href="#inits">-i b.race=0{4*}</a>
+<br>
+<a href="#inits">-i healthy=dbern(p=0.6){4}</a>
+<br>
+<a href="#inits">-i healthy=dbern(p=0.7){C}</a>
+<br>
+<a href="#inits">-i healthy=dbern(logit.p=-0.35){C}</a>
+<br>
+<a href="#inits">-i a.variable.with.missing.values=dbern(logit.p=-1.2)</a>
+<br>
+<a href="#dnm">-dnm alpha.mean node2 node3</a>
+<br>
+<a href="#dnm">-dnm predicted.*</a>
+<br>
+<a href="#dnm">-dnm *.predicted</a>
+<br>
+<a href="#dnm">-dnm *[i]</a>
+<br>
+<a href="#dnm">-dnm mu{N\10}</a>
+<br>
+<a href="#m">-m node4 node5 node6</a>
+<br>
+<a href="#dnp">-dnp x.dichot node7</a>
+<br>
+<a href="#exp">-exp log.or</a>
+<br>
+<a href="#exp">-exp b.*</a>
+<br>
+<a href="#exp">-exp b.age*10-&gt;decade.effect</a>
+<br>
+<a href="#dnrs">-dnrs some.node</a>
+<br>
+<a href="#invlogit">-inv.logit logit.p</a>
+<br>
+<a href="#invlogit">-inv.logit logit.sensitivity-&gt;sensitivity</a>
+<br>
+<a href="#x">-x datavar1 datavar2</a>
+<br>
+<a href="#coda">-coda some.node</a>
+<br>
+<a href="#coda">-coda&gt; ../log/coda/NodeValues.txt</a>
+<br>
+<a href="#o">-o ../log/model1a.odc</a>
+<br>
+<a href="#s">-s ../scripts/model1a.txt</a>
+</div>
+
+<br><br> 
+<a name="details"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Details</div>
+<br>
+Note that every <b>WriteWinBUGSScript</b> command line (above) except the first starts with a <i>flag</i> (that is, a letter or keyword preceded by a dash)
+that indicates the nature of the information on the corresponding line.
+Only the first line (path to the model to be compiled) and <b>-s</b> lines are <b>mandatory</b>.
+
+<br><br>
+The different pieces of information
+that can be passed to <b>WriteWinBUGSScript</b> (<b>WriteWinBUGSScript </b>) are:
+<br><br>
+<table class=wwbskeyword cellpadding=0 cellspacing=0>
+<tr>
+<td class=wwbsleftmargin></td>
+<td class=wwbskeyword0>Flag</td>
+<td class=wwbssignification0>Signification</td>
+</tr>
+<tr>
+<td class=wwbsleftmargin></td>
+<td class=wwbskeyword>
+<a href="#data">             -d </a><br>
+<a href="#inits">            -i </a><br>
+<a href="#dnm">            -dnm </a><br>
+<a href="#m">                -m </a><br>
+<a href="#dnp">            -dnp </a><br>
+<a href="#exp">            -exp </a><br>
+<a href="#invlogit"> -inv.logit </a><br>
+<a href="#x">                -x </a><br>
+<a href="#coda">          -coda </a><br>
+<a href="#coda">      -coda&gt; </a><br>
+<a href="#o">                -o </a><br>
+<a href="#s">                -s </a><br>
+</td><td class=wwbssignification>
+Data file (path)<br>
+Initial values<br>
+Do Not Monitor<br>
+Monitor<br>
+Do Not Plot<br>
+report descriptive statistics for Exp() of listed nodes<br>
+report descriptive statistics for Inverse logit() of listed nodes<br>
+variables to drop from data files prior to running WinBUGS script<br>
+Monitor a node for further CODA or BOA analysis<br>
+CODA Output file location<br>
+WinBUGS Output file location<br>
+Script file location (<b>WriteWinBUGSScript</b> output file location)<br>
+</td>
+</tr>
+</table>
+
+<br><br>
+<a name=model></a>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Model</div>
+<br>
+The first line of each block of code <b>must</b> consist in the path to the model to be compiled, followed by a series of 2, 3 or 4 numbers specifying the <a href="#niter">number of iterations to run</a>.
+<br><br>
+<div class=subsection>File paths</div>
+I personally always design a project directory the same way when it involves WinBUGS programming,
+making it easier to find the different relevant files. For a project &#150; MyProject, say &#150; I save the different 
+models used in the subdirectory <i>MyProject/WinBUGS/models</i>, the inits files in <i>MyProject/WinBUGS/inits</i>, 
+parameters and data files in <i>MyProject/WinBUGS/data</i>, 
+WinBUGS output files in <i>MyProject/WinBUGS/log</i>, 
+the scripts &#151; which I write almost exclusively through <b>WriteWinBUGSScript</b> &#151; in <i>MyProject/WinBUGS/scripts</i> 
+and the <b>WriteWinBUGSScript</b> input files in <i>MyProject/WinBUGS/scripts-src</i>; the file paths used in <b>WriteWinBUGSScript </b> input files can be absolute or <a href="#relativepaths">relative</a>,
+which explains the presence of the <b>../</b> leading the file names given in the <a href="#examples">examples throughout this document</a>.
+<br><br>
+Note that slashes (<b>/</b>) and backslashes (<b>\</b>) can be used equally in file paths and that file paths including spaces must be surrounded by quotes.
+<br><br>
+<a name="relativepaths"></a>
+<div class=subsection>Relative paths</div>
+When used in a <b>WriteWinBUGSScript</b> input file, relative paths are relative to the directory where your <b>WriteWinBUGSScript</b> input file is found.
+<br><br>Dot-dot (<b>..</b>) refers to the directory one level above the one where the <b>WriteWinBUGSScript </b> input file is; 
+you can use as many dot-dot's as necessary to point out the file you need,
+e.g. <i>../../AnotherProject/WinBUGS/data/mydata.txt</i>.
+
+
+<br><br>
+<a name=niter></a>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Number of burn-in and monitored iterations</div>
+<br>
+The first line of code may be completed by the number of burn-in and monitored iterations, separated by a slash (/).
+Note that the <i>k</i>-notation, that is, 2k = 2000, 10k = 10,000, etc, can be used.
+If thinning is necessary, its value will be given in a third component, e.g. 1k/10k/20, which would mean: burn-in for 1000 iterations,
+monitor nodes values for 10,000 iterations, keeping values for each 20th value only.
+<br><br>
+<div class=section>Memory clear</div>
+<br>
+When running a program that monitors a large number of nodes and/or runs for
+a very large number of iterations, WinBUGS sometimes fails due to a lack of
+available memory, leading to a <i>Trap error message</i>.
+One work-around is to
+clear the memory after a pre-specified number of iterations.  For example, we
+may decide to clear memory after each 1000 or 2000 iterations, etc.
+<br><br>
+To specify a number of iterations to run before a memory clear, a fourth
+number (see the above notation) can be added.
+<br>
+The first example below would
+clear the memory after each block of 2000 iterations, with a thinning factor
+of 2.
+<br>
+In the second example, the two consecutive slashes (and hence the
+missing third argument) would indicate that no thinning is to be done, but
+the memory is to be cleared after each block of 2500 iterations.
+<br><br>
+<pre class=example>
+../models/model.txt 1k/20k/2/2k
+../models/model.txt 1k/20k//2500
+</pre>
+
+
+<br><br>
+<a name=data>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Data files</div>
+<br>
+<div class=pgm>
+-d ../data/data.txt ../data/hyperparameters1.txt
+</div>
+<br>
+
+List data files to be loaded in WinBUGS.<br>
+I often use data files to specify hyperparameters' values (rather than explicitely using them in the WinBUGS program),
+as we often want to compare results obtained  with different sets of hyperparameters' values. Doing so, we only need one copy of the WinBUGS program (and not one program per set of hyperparameters' values);
+<b>WriteWinBUGSScript</b> will write one script per set, which is all we need (and we'll be careful to save the results in different <a href="#o">output files</a>).
+<br><br>
+WinBUGS input data files can be either rectangular data structures or lists.
+Multiple data files can be listed on the same <b>-d</b> command line or on multiple lines, as long as each line starts with the <b>-d</b> flag.
+
+
+<br><br>
+<a name=inits>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Initial values</div>
+<br>
+Initial values can be given in text files or as a series values for each node.
+<br><br>
+<div class=pgm>
+-i b.age=0 b.weight=0 mu=2.5
+</div>
+<br>
+When given node values directly (rather than through an inits file), <b>WriteWinBUGSScript</b> saves initial values to a temporary file. 
+See <a href="#example3">example 3</a> for details and <a href="#rmtmpinits">Removing temporary inits files</a> section for inits files removal.
+
+<br><br>
+Sometimes, the number of components of a vector will depend on the data and may differ from run to run
+(e.g. when different data subsets are analyzed [female or male only], or when data are dropped if some explanatory variables are missing 
+[age, weight, etc.]); that can be easily worked around through the use of the data-dependent vector length indicator, given between curly brackets.
+<br><br>
+The line
+<br><br>
+<div class=pgm>
+-i b=-2{J}
+</div>
+<br>
+would initialize the vector <b>b</b> as b = c(-2, -2, -2, -2, ..., -2), of length <b>J</b>, where <b>J</b> would be defined in a data file referenced to by a <b>-d</b> flag.
+Not only does this save you from typing the value -2 a possibly large number of times, 
+but it most interestingly makes your <b>WriteWinBUGSScript </b> input file readily reusable. 
+Indeed, if the length if the vector <b>b</b>
+changes in an (often unexpected but often happening) data update, you need not worry about updating your inits files as well; simply resubmit your <b>WriteWinBUGSScript </b> input file and a new temporary inits file
+(including the right number of <b>b</b> components) will be rewritten as well as the WinBUGS script (it will link to the updated inits file).
+<br><br>
+(Remember that <b>WriteWinBUGSScript </b> reads your data file(s) before writing the script(s): 
+thus the length of <b>b</b> in the initial values file will correspond to the value of <b>J</b> (in the data file) when <b>WriteWinBUGSScript </b> was run: 
+if data changes, scripts written by <b>WriteWinBUGSScript </b> should be rewritten.)
+
+<br><br>
+Finally, it is possible to define initial values for a vector in which the first component is fixed: suppose that in your model a vector called
+<b>b.race</b> &#150; of length 4 &#150; models the differences between categories 2, 3 and 4 and the reference category race=1, as in
+
+<pre class=example>
+  b.race[1] <- 0 # reference category
+
+  for (i in 2:4)
+  {
+    b.race[i] ~ dnorm(0, 0.0001)
+  }
+</pre>
+
+
+The following <b>WriteWinBUGSScript</b> command line
+
+<br><br>
+<div class=pgm>
+-i b.race=0{4*} 
+</div>
+<br>
+would initially set <b>b.race=c(NA, 0, 0, 0)</b>.
+<br><br>
+It is also possible to let <b>WriteWinBUGSScript</b> randomly select the initial
+values from a Bernoulli distribution.  In this case, the probability of
+sampling the value 1 can be specified directly through the Bernoulli
+probability <i>p</i> argument, or alternatively through its logit value, via the
+<i>logit.p</i> argument, as shown in code below.
+<br><br>
+If the node thus initialized is a chance node, it is necessary to specify its length between
+curly brackets after the <i>dbern()</i> statement. <nr>
+On the other hand, if the variable is data with missing values for which we want to impute 0/1 data
+with some specified probability <i>p</i> of sampling a 1, then specifying its
+length is not necessary.  See last line of the examples below, with node
+<i>a.variable.with.missing.values</i> being imputed when NAs occur in the data.
+<br><br>
+<pre class=example>
+-i healthy=dbern(p=0.6){4}
+-i healthy=dbern(p=0.7){C}
+-i healthy=dbern(logit.p=-0.35){C}
+-i a.variable.with.missing.values=dbern(logit.p=-1.2)
+</pre>
+
+<br><br>
+<a name=dnm>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Stochastic nodes not to monitor</div>
+<br>
+
+<div class=pgm>
+-dnm node1 node2<br>
+-dnm tau.*<br>
+-dnm mu{N\10}
+</div>
+<br>
+This options allows you to give the list of stochastic nodes that are not of interest:
+neither summary statistics nor history/density plots will be saved for nodes listed in <b>-dnm</b> instruction line(s).
+<br><br>
+The *-notation (as in tau.*, above) can be used to indicate a series of nodes names beginning with the same letters.
+<br><br>
+Sometimes, it is of interest &#151; for the sake of safety &#151; to monitor a node for a limited number of its components only.
+Consider the example where a node <b>mu</b> is defined for a large number of individuals <b>N</b> (N=10,000, say); monitoring the nodes
+mu[1], mu[2], ..., mu[N] will most likely be of little interest 
+&#151; not accounting for the additional work load it would impose to WinBUGS, possibly making it substantially slower &#151;
+but monitoring a limited (and randomly selected) number of them  may be a good idea 
+&#151; at least in the first stages of the WinBUGS program development &#150; 
+to assess the good behavior of the program (in terms of <b>mu</b> estimation).
+The <b>-dnm</b> command variant above (where 10 can be replaced by any number less than the dimension of the node, 
+which can be stated in terms of a constant read through data files 
+&#150; <b>N</b>, in this example &#150; 
+or by a specified number, e.g., <b>-dnm mu{200\10}</b>) would monitor 10 randomly selected items from the vector <b>mu</b>.
+
+<br><br>
+<a name=m>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Force node monitoring</div>
+<br>
+The <b>-m</b> flag forces the monitoring of the following nodes declared, 
+no matter what was said through the <b>-dnm</b> option.
+
+<br><br>
+<div class=pgm>
+-dnm *[i]<br>
+-m somevar
+</div>
+<br>
+This option shows useful when all variables indexed by [i] (for example) are not to be monitored <b>but</b> for <b>somevar[i]</b>.
+
+<br><br>
+<a name=dnp>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Stochastic nodes not to plot (history/density)</div>
+<br>
+The <b>-dnp</b> flag allows to give a list of stochastic nodes for which neither estimated densities nor histories are to be plotted (in .odc output file);
+summary statistics for these nodes will still be reported, though
+(unless they already appear in a <b>-dnm</b> instruction line, in which case it is not necessary to list them again 
+in a <b>-dnp</b> instruction line).
+<br><br>
+<div class=pgm>
+-dnp some.binary.node
+</div>
+
+<br><br>
+<a name=exp>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Exp()</div>
+<br>
+It is sometimes interesting to define exp() of some nodes and monitor these exponentiated values, e.g. in computation of odds ratios.
+While models involving such nodes
+will often be based on log odds (log.OR, say), the values of interest are the actual values of the odds ratios. It seems (and often is) natural to simply
+define the node of interest (e.g., OR <- exp(log.OR)), but in practice it will sometimes cause WinBUGS to crash, especially if log.OR can take 
+&#151; even with low probability &#151;
+high values: taking the exp() of high values in WinBUGS can lead to numerical problems and indeed cause it to crash.
+<br><br>
+<div class=pgm>
+-exp log.OR<br>
+-exp b.*
+</div>
+<br>
+A possible workaround in such cases is to not compute and monitor the actual values of exp(log.OR) but simply take the exp() of the summary statistics for log.OR in the WinBUGS output,
+which (
+&#151; for median, 2.5% and 97.5% percentiles, not for mean and s.d.!! &#151;
+will give some useful info on OR.
+The instructions line <b> -exp log.OR </b> would add a comment to the script written by <b>WriteWinBUGSScript</b>, as in
+
+<br><br>
+<pre class=out>
+display(log)
+check('c:/users/pbelisle/My Documents/Home/SomeProject/WinBUGS/models/model.txt')
+compile(1)
+gen.inits()
+update(1000)
+set(log.OR)
+update(1000)
+stats(*)
+save('c:/users/pbelisle/My Documents/Home/SomeProject/WinBUGS/log/OddsRatio.txt')
+save('c:/users/pbelisle/My Documents/Home/SomeProject/WinBUGS/log/OddsRatio.odc')
+quit()
+# when done, compute stats for exp() of log.OR
+</pre>
+<br><br>
+
+This comment will of course be ignored by WinBUGS if you use
+it 'as is', but the program <a href="RunWinBUGSScript.html">RunWinBUGSScript</a> will take good note of its presence, run the script and, after completion,
+read the .txt WinBUGS output file, compute the exp() of the summary statistics for the nodes listed in the <b>-exp</b> instructions line(s) and add them to the <b>Node statistics</b> section.
+<br><br>
+
+Exp() of nodes multiplied by a numeric constant can be computed:
+<br><br>
+<div class=pgm>
+-exp b.age*5 b.avgrent/10
+</div>
+<br>
+
+Is is also possible to label the nodes computed through the <b>-exp</b> command above through the "&rarr;" notation, as in
+
+<br><br>
+<div class=pgm>
+-exp b.age*10->decade.effect
+</div>
+<br>
+
+which would add the label <b>decade.effect</b> to the node <b>exp(b.age*10)</b>, as illustrated below.
+
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0 class=wblog>
+<tr>
+<td colspan=9 class=wblog>Node statistics</td>
+</tr>
+<tr>
+<td class=wblog>node</td>
+<td class=wblog>mean</td>  
+<td class=wblog>sd</td>
+<td class=wblog>MC error</td>  
+<td class=wblog>2.5%</td>
+<td class=wblog>median</td>
+<td class=wblog>97.5%</td>
+<td class=wblog>start</td>
+<td class=wblog>sample</td>
+</tr><tr>
+<td class=wblog>b.age</td>         
+<td class=wblog>0.01753</td>
+<td class=wblog>0.3143</td>
+<td class=wblog>0.002933</td>
+<td class=wblog>-0.6043</td>
+<td class=wblog>0.0185</td>
+<td class=wblog>0.6362</td>
+<td class=wblog>501</td>
+<td class=wblog>10000</td>
+</tr><tr>
+<td class=wblog colspan=9>/odds ratio/</td>
+</tr><tr>
+<td class=wblog>decade.effect</td> 
+<td class=wblog>-></td>
+<td class=wblog>-></td> 
+<td class=wblog>-></td>   
+<td class=wblog>0.002374</td>  
+<td class=wblog>1.2032</td>
+<td class=wblog>579.4040</td>
+<td class=wblog>501</td>
+<td class=wblog>10000    exp(10*b.age)</td>
+</tr>
+</table>
+
+
+<br><br>
+<a name=invlogit>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Inverse logit()</div>
+<br>
+In our experience, monitoring the values of a binomial proportion when it is extremely close to 0 or 1 will cause WinBUGS to crash when it tries to write the corresponding node statistics to output file.
+A work-around is not to monitor it but to define its inverse logit through a WinBUGS code line such as <i>logit.p &lt;- logit(p)</i> 
+and monitor the latter through the <b>WriteWinBUGSScript </b> command:
+<br><br>
+<div class=pgm>
+-inv.logit logit.p
+</div>
+<br> 
+The WinBUGS <i>.txt</i> output file will contain descriptive statistics for both <b>logit.p</b> and <b>p</b> (through <b>inv.logit(logit.p)</b>).
+<br><br>
+
+<a href="#exp">As illustrated above</a> for <b>-exp</b>, nodes for which descriptive statistics are requested through the <b>-inv.logit</b> command can be labeled through the "&rarr;" notation, as in
+<br><br>
+<div class=pgm>
+-inv.logit logit.sensitivity->sensitivity
+</div>
+
+<br><br>
+<a name=x>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Dropping variables from data files</div>
+<br>
+When developping WinBUGS models, one sometimes starts with models less complex than the <i>final</i> model and increase its complexity step by step, after some
+validation of its <i>good behavior</i>. In that process, all data may not be used at every step; a hierarchical model, for example, may be built by adding independent
+explanatory variables one at a time. In theory, that implies preparing new data files at each step, as WinBUGS will not
+allow data variables not to be used in a model.<br><br>
+
+<div class=pgm>
+-x datavar1 datavar2
+</div>
+<br>
+
+The <b>-x</b> option adds a comment to the WinBUGS script generated, which will read
+
+<br><br>
+<pre class=out>
+check('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/models/SomeModel.txt')
+data('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/list.txt')
+data('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/data/rectangle.txt')
+# RunWinBUGSScript will drop the following variable(s) from file(s) above:
+# datavar1 datavar2
+</pre>
+
+As is the case for the comments generated by the <b><a href="#exp">-exp</a></b> command, this will
+have no effect if you run the generated script in WinBUGS directly:
+<a href="RunWinBUGSSCript-3.html">RunWinBUGSScript</a>, however, will read the comment and drop the listed variables from data files
+at run time. Data files will remain unchanged on disk, as temporary copies of the files that are dropped one or more variables will be used.
+
+<br><br>
+<a name=coda>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>CODA</div>
+<br>
+Some nodes may need further analysis through <a href="http://www.mrc-bsu.cam.ac.uk/bugs/classic/coda04/readme.shtml" target="_blank">CODA</a> or <a href="http://www.public-health.uiowa.edu/boa/FAQ.html" target="_blank">BOA</a> after your WinBUGS program has finished; 
+that will be possible only if you saved the values for the node(s) in question for each iteration, which is done through this option.
+<br><br>
+<div class=pgm>
+-coda node1.to.monitor node2.to.monitor<br>
+-coda&gt; ../log/coda/mynodevalues.txt
+</div>
+<br><br>
+
+Note that the <b>-coda</b> flag must be used jointly with a <b>-coda&gt;</b> flag, which gives the (relative) path of the file where the values of the <i>coda</i>-monitored
+nodes will be saved.
+<br><br>
+If only one node is monitored through the <b>-coda</b> command, node values will be saved in files with the name specified on the <b>-coda&gt;</b> command line 
+augmented with the coda <i>Index</i> and <i>1</i> suffixes
+&#151; <i>../log/coda/mynodevaluesIndex.txt</i> and <i>../log/coda/mynodevalues1.txt</i> in the example above. <br><br>
+If more than one node is monitored, two CODA files will be written for each node, and the file names given above will be augmented by a litteral extension for each node (<i>_a, _b, _c</i> and so on). 
+<br><br>
+It is possible to save values for every stochastic node to the CODA output file through the command
+<br><br>
+<div class=pgm>
+-coda *
+</div>
+<br><br>
+
+<a name=o>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>WinBUGS Output file location</div>
+<br>
+The <b>-o</b> command line specifies the WinBUGS output file location.
+<br><br>
+<div class=pgm>
+-o output.txt
+</div>
+<br>
+Whether you use a file name with .txt or .odc file extension &#150; or even without a file extension &#150; is irrelevant ; both <i>.txt</i> and <i>.odc</i> output files will be created
+by the WinBUGS script written by <b>WriteWinBUGSScript</b>; actually, the output files created will be 
+&#150; in this example &#150;
+<i>output-WinBUGSlog.txt</i> and <i>output.odc</i>.
+<br><br>
+
+<a name=s>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Script file location</div>
+<br>
+Specify where the script written by <b>WriteWinBUGSScript</b> will be saved through the <b>-s</b> command.
+<br><br>
+<div class=pgm>
+-s script.txt
+</div>
+
+<br><br>
+<a name=dnrs>
+<table class=back2top>
+  <tr><td class=back2top><a href="#top">Top</a></td></tr>
+</table>
+<div class=section>Exclude a few nodes from the node statistics section</div>
+<br>
+Specify a few nodes to exclude from node statistics section.
+<br><br>
+<div class=pgm>
+-drns b.x b.y b.z
+</div>
+<br>
+This option can be useful if the model includes, for example, the definition of a few Odds Ratios, e.g.,
+
+<pre class=example>
+  b.x ~ dnorm(0, 0.0001)
+  b.y ~ dnorm(0, 0.0001)
+  b.z ~ dnorm(0, 0.0001)
+  
+  exp.b.x <- exp(b.x)
+  exp.b.y <- exp(b.y)
+  exp.b.z <- exp(b.z)
+</pre>
+where one would plot the density and the trace (or history) of the regression parameters <i>b.x, b.y</i> and <i>b.z</i>
+but would not really be interested in the corresponding node statistics but only in the node statistics of their exponential counterpart, which whould be done through the options below.
+
+<br><br>
+<div class=pgm>
+-dnp exp.b.x exp.b.y exp.b.y<br>
+-dnrs b.x b.y b.z
+</div>
+
+
+<br><br>
+<a name="notes"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Notes</div>
+<br>
+<ul>
+<li> Multiple scripts can be written through a single <b>WriteWinBUGSScript </b> input file; simply insert one or more blank lines between each script's description;
+<li> a script can be ignored by typing the line "# skip" on the line before its description;
+<li> comments are allowed (everything after a sharp sign (#) is ignored &#151; except for <i># skip</i>, above);
+<li> flags <b>must</b> appear in first column;
+<li> file names (either model, data or inits files) with spaces must be surrounded by double quotes
+(as illustrated in <a href="#example-logreg">logreg example</a>);
+<li> after completion, a list of scripts written can be found in WriteWinBUGSScript.log.
+</ul>
+<br><br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=noteendL>))</td>
+<td class=note>
+<b>WriteWinBUGSScript</b> was written to fill my own personal needs in terms of WinBUGS scripting: hence it may not fill all of <b>your</b> needs.
+It certainly does not exploit all the possibilities of WinBUGS scripting, and thus certainly should not be seen as a complete alternative to learning the basics of WinBUGS scripting.
+Nonetheless, the experienced (and frequent) WinBUGS user may still appreciate the time saved by using <b>WriteWinBUGSScript</b>. <br><br>
+If you come to use <b>WriteWinBUGSScript</b> on a regular basis but often need to modify/complete the WinBUGS scripts obtained, please do not hesitate
+to contact me if you feel that a larger audience may benefit from an upgraded version &#151; along the lines that would meet your needs &#151; of <b>WriteWinBUGSScript</b>.
+If I agree with you, I may very well consider the possibility of implementing new characteristics in versions to come.
+</td>
+</tr>
+</table>
+
+<br><br>
+<a name="examples"></a>
+<a name="example-logreg"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Examples</div>
+<br>
+<div class=sub>Example 1</div>
+<br>
+
+Let's consider a logistic regression model, presented on <a href="http://www.med.mcgill.ca/epidemiology/Joseph/Bugs-Examples.html">Lawrence Joseph webpage</a>.
+Model, data and initial values are reproduced below.
+<br><br>
+
+
+<pre class=example>
+# Data (saved to file c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/data/fractures.txt)
+
+list(sex=c(1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0,
+1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0,
+0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1,
+0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1,
+1, 1, 0, 1, 1, 1, 1, 1),
+age= c(69, 57, 61, 60, 69, 74, 63, 68, 64, 53, 60, 58, 79, 56, 53, 74,
+56, 76, 72, 56, 66, 52, 77, 70, 69, 76, 72, 53, 69, 59, 73, 77, 55, 77,
+68, 62, 56, 68, 70, 60, 65, 55, 64, 75, 60, 67, 61, 69, 75, 68, 72, 71,
+54, 52, 54, 50, 75, 59, 65, 60, 60, 57, 51, 51, 63, 57, 80, 52, 65, 72,
+80, 73, 76, 79, 66, 51, 76, 75, 66, 75, 78, 70, 67, 51, 70, 71, 71, 74,
+74, 60, 58, 55, 61, 65, 52, 68, 75, 52, 53, 70),
+frac=c(1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0,
+1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1,
+0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1,
+1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
+0, 0, 1, 0, 0, 1),
+n=100)
+</pre>
+
+<pre class=example>
+# Model (saved to file c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/models/age and sex.txt)
+
+model
+{
+  age.bar <- mean(age[])
+
+    for (i in 1:n) {
+          logit(p[i]) <- alpha + b.sex*sex[i] + b.age*(age[i] - age.bar)
+          frac[i]   ~ dbern(p[i])
+    }
+    alpha    ~ dnorm(0.0,1.0E-4)
+    b.sex     ~ dnorm(0.0,1.0E-4)
+    b.age     ~ dnorm(0.0,1.0E-4)
+}
+</pre>
+
+<pre class=example>
+# Inits (saved to file c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/inits/logreg_parms.txt)
+
+list(alpha=0, b.sex=1, b.age=1)
+</pre>
+
+A <b>WriteWinBUGSScript</b> input file for this problem would be:
+
+<br><br>
+<div class=pgm>
+"../models/age and sex.txt" 250/5k<br>
+-d ../data/fractures.txt<br>
+-i ../inits/logreg_parms.txt<br>
+-o "../log/age and sex"<br>
+-s "../scripts/age and sex.txt"
+</div>
+<br>
+
+The code above was saved to file <i>c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/scripts-src/pines.txt</i>;<br>
+as the model used is found in file <i>c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/models/age and sex.txt</i>, 
+the first line of code could have consisted in the absolute path
+
+<br><br>
+<div class=pgm>
+"c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/models/age and sex.txt" 250/5k
+</div>
+<br>
+
+but I personally prefer to use the shorter <a href="#relativepaths">relative paths</a>, as in
+<br><br>
+
+<div class=pgm>
+"../models/age and sex.txt" 250/5k
+</div>
+
+<br><br>
+The <b>WriteWinBUGSScript</b> output file (a WinBUGS script) would look like:
+
+<pre class=out>
+display(log)
+check('c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/models/age and sex.txt')
+data('c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/data/fractures.txt')
+compile(1)
+inits(1, 'c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/inits/logreg_parms.txt')
+gen.inits()
+update(250)
+set(alpha)
+set(b.age)
+set(b.sex)
+set(p)
+update(5000)
+stats(*)
+density(alpha)
+density(b.age)
+density(b.sex)
+density(p)
+history(alpha)
+history(b.age)
+history(b.sex)
+history(p)
+save('c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/log/age and sex.odc')
+save('c:/users/pbelisle/My Documents/Home/logreg/WinBUGS/log/age and sex-WinBUGSlog.txt')
+quit()
+</pre>
+
+Note that the node <b>age.bar</b>, defined in the model, does not appear in the list of monitored nodes since <b>WriteWinBUGSScript</b>
+recognizes it as being deterministic, as it is the mean of other deterministic nodes.<br><br>
+
+Since list of nodes for which initial values were given is small (three nodes only), one could prefer to specify initial values 
+directly in <b>WriteWinBUGSScript </b> input file, as shown below
+
+<br><br>
+<div class=pgm>
+"../models/age and sex.txt" 250/5k<br>
+-d ../data/fractures.txt<br>
+-i alpha=0 b.sex=1 b.age=1<br>
+-o "../log/age and sex"<br>
+-s "../scripts/age and sex.txt"
+</div>
+<br>
+
+rather than through actually writing and saving an inits file and giving its path (through the same <b>-i</b> option).
+<br><br>
+
+Finally, the nodes <b>p[1]--p[n]</b> (if judged of no practical interest) could have been dropped from the monitoring list 
+with the <b>WriteWinBUGSScript </b> input file below:
+
+<br><br>
+<div class=pgm>
+"../models/age and sex.txt" 250/5k<br>
+-d ../data/fractures.txt<br>
+-i alpha=0 b.sex=1 b.age=1<br>
+-dnm p<br>
+-o "../log/age and sex"<br>
+-s "../scripts/age and sex.txt"
+</div>
+<br>
+
+This will potentially make the WinBUGS script faster to run and the WinBUGS <i>odc</i> output file smaller.
+
+<br><br>
+
+<a name="example2"></a>
+<div class=sub>Example 2</div>
+<br>
+
+Let's consider a more complex model
+&#150; that is, a program with numerous nodes &#150;
+where the idea of writing a WinBUGS script <i>by hand </i>
+is much less attractive. Consider the <b> pines</b> example, presented on 
+<a href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/examples.shtml">The BUGS project webpage</a>, for which models, data and initial values are reproduced below.
+<br><br>
+
+<pre class=example>
+# MODEL (was saved in c:/users/pbelisle/My Documents/Home/pines/WinBUGS/models/pines.txt)
+#
+# Bayes factors using Carlin and Chib method.  
+# For full description see Page 47 of Classic BUGS examples Vol 2.
+
+model
+{
+# standardise data
+
+   for(i in 1:N){
+       Ys[i] <- (Y[i] - mean(Y[]))/sd(Y[])
+       xs[i] <- (x[i] - mean(x[]))/sd(x[])
+       zs[i] <- (z[i] - mean(z[]))/sd(z[])
+    }
+ 
+# model node
+
+       j  ~ dcat(p[])
+   p[1] <- 0.9995
+  p[2] <- 1-p[1] # use for joint modelling
+     pM2 <- step(j - 1.5)
+
+
+# model structure
+
+   for(i in 1:N){
+       mu[1,i] <- alpha + beta *xs[i]
+       mu[2,i] <- gamma + delta*zs[i]
+       Ys[i]    ~ dnorm(mu[j,i],tau[j])
+   }
+
+# Model 1 
+
+   alpha  ~ dnorm(mu.alpha[j],tau.alpha[j])
+   beta   ~ dnorm(mu.beta[j],tau.beta[j])
+   tau[1] ~ dgamma(r1[j],l1[j])
+
+
+# Model 2
+
+   gamma  ~ dnorm(mu.gamma[j],tau.gamma[j])
+   delta  ~ dnorm(mu.delta[j],tau.delta[j])
+   tau[2] ~ dgamma(r2[j],l2[j])
+
+# Code below appears uncommented in the original WinBUGS code;
+# I personally prefer to specify these values through data files 
+# rather than through WinBUGS coding. 
+# (Furthermore, doing so will allow <b>WriteWinBUGSScript</b> 
+# to recognize the nodes below as deterministic!)
+
+## estimation priors
+#
+#   mu.alpha[1]<- 0
+#   tau.alpha[1] <- 1.0E-6
+#   mu.beta[1] <- 0
+#   tau.beta[1]  <- 1.0E-4
+#   r1[1]      <- 0.0001
+#   l1[1] <- 0.0001
+#
+## pseudo-priors 
+#
+#   mu.alpha[2]<- 0
+#   tau.alpha[2] <- 256
+#   mu.beta[2] <- 1
+#   tau.beta[2]  <- 256
+#   r1[2]      <- 30    
+#   l1[2] <- 4.5
+#
+## pseudo-priors
+#
+#   mu.gamma[1] <- 0
+#   tau.gamma[1] <- 400
+#   mu.delta[1] <- 1
+#   tau.delta[1] <- 400
+#   r2[1]       <- 46      
+#   l2[1] <- 4.5
+#
+## estimation priors
+#
+#   mu.gamma[2] <- 0
+#   tau.gamma[2] <- 1.0E-6
+#   mu.delta[2] <- 0
+#   tau.delta[2] <- 1.0E-4 
+#   r2[2]       <- 0.0001
+#   l2[2] <- 0.0001
+}
+</pre>
+
+<pre class=example>
+# DATA (were saved in c:/users/pbelisle/My Documents/Home/pines/WinBUGS/data/pines.txt)
+#
+
+list(N=42,
+Y = c(3040, 2470, 3610, 3480, 3810, 2330, 1800, 3110, 3160, 2310,
+           4360, 1880, 3670, 1740, 2250, 2650, 4970, 2620, 2900, 1670,
+           2540, 3840, 3800, 4600, 1900, 2530, 2920, 4990, 1670, 3310,
+           3450, 3600, 2850, 1590, 3770, 3850, 2480, 3570, 2620, 1890,
+           3030,3030),
+     x = c(29.2, 24.7, 32.3, 31.3, 31.5, 24.5, 19.9, 27.3, 27.1, 24.0,
+           33.8, 21.5, 32.2, 22.5, 27.5, 25.6, 34.5, 26.2, 26.7, 21.1,
+           24.1, 30.7, 32.7, 32.6, 22.1, 25.3, 30.8, 38.9, 22.1, 29.2,
+           30.1, 31.4, 26.7, 22.1, 30.3, 32.0, 23.2, 30.3, 29.9, 20.8,
+           33.2, 28.2),
+
+     z = c(25.4, 22.2, 32.2, 31.0, 30.9, 23.9, 19.2, 27.2, 26.3, 23.9, 
+           33.2, 21.0, 29.0, 22.0, 23.8, 25.3, 34.2, 25.7, 26.4, 20.0,
+           23.9, 30.7, 32.6, 32.5, 20.8, 23.1, 29.8, 38.1, 21.3, 28.5,
+           29.2, 31.4, 25.9, 21.4, 29.8, 30.6, 22.6, 30.3, 23.8, 18.4,
+           29.4, 28.2))
+</pre>
+
+<pre class=example>
+# DATA [parameters list] 
+# (were saved in c:/users/pbelisle/My Documents/Home/pines/WinBUGS/data/parameters.txt)
+#
+list(mu.alpha  = c(0, 0),
+     mu.beta   = c(0, 1),
+     mu.gamma  = c(0, 0),
+     mu.delta  = c(1, 0),
+
+     tau.alpha = c(1.0E-6, 256),
+     tau.beta  = c(1.0E-4, 256),
+     tau.gamma = c(400, 1.0E-6),
+     tau.delta = c(400, 1.0E-4),
+
+     l1 = c(0.0001, 4.5),
+     l2 = c(4.5, 0.0001),
+     r1 = c(0.0001, 30),
+     r2 = c(46, 0.0001)
+)
+</pre>
+
+<pre class=example>
+# INITS (were saved in file c:/users/pbelisle/My Documents/Home/pines/WinBUGS/inits/pines1.txt)
+#
+
+list(j = 2, tau = c(1,1), alpha = 0, beta = 0, gamma = 0, delta = 0)
+</pre>
+
+A <b>WriteWinBUGSScript </b> input file could be as follows:
+
+<br><br>
+<div class=pgm>
+../models/pines.txt 1k/10k<br>
+-d ../data/pines.txt ../data/parameters.txt<br>
+-i ../inits/inits1.txt<br>
+-dnm j mu p xs Ys zs<br>
+-dnp pM2<br>
+-o ../log/pines<br>
+-s ../scripts/pines.txt
+</div>
+<br>
+
+In this <b>WriteWinBUGSScript </b> input file, we listed a bunch of nodes not to be monitored (<b>-dnm</b> nodes lists), for diverse reasons:
+<ul>
+<li> deterministic nodes (<b>xs</b>, <b>Ys</b> and <b>zs</b>): if you omit them from this list, the WinBUGS script written will still be valid but less <i>esthetic</i>
+as it will cause WinBUGS <i>warnings</i> (<b>monitor could not be set</b>) when run;
+<li> nodes of little interest, e.g. <b>mu</b> (be it in terms of posterior densities or nodes statistics);
+<li> nodes that are only interesting after some computation (e.g. <b>j</b> is ignored in favor of <b>pM2</b>);
+<li> since <b>pM2</b> is a binary variable, its density plot and trace are not interesting, hence it is listed in a 'do not plot' (<b>-dnp</b>) instruction line.
+</ul>
+<br>
+The result to the above <b>WriteWinBUGSScript </b> input file will look like below:
+
+<br>
+<pre class=out>
+display(log)
+check('c:/users/pbelisle/My Documents/Home/pines/WinBUGS/models/pines.txt')
+data('c:/users/pbelisle/My Documents/Home/pines/WinBUGS/data/pines.txt')
+data('c:/users/pbelisle/My Documents/Home/pines/WinBUGS/data/parameters.txt')
+compile(1)
+inits(1, 'c:/users/pbelisle/My Documents/Home/pines/WinBUGS/inits/inits1.txt')
+gen.inits()
+update(1000)
+set(alpha)
+set(beta)
+set(delta)
+set(gamma)
+set(pM2)
+set(tau)
+update(10000)
+stats(*)
+density(alpha)
+density(beta)
+density(delta)
+density(gamma)
+density(tau)
+history(alpha)
+history(beta)
+history(delta)
+history(gamma)
+history(tau)
+save('c:/users/pbelisle/My Documents/Home/pines/WinBUGS/log/pines.odc')
+save('c:/users/pbelisle/My Documents/Home/pines/WinBUGS/log/pines-WinBUGSlog.txt')
+quit()
+</pre>
+
+<br>
+<a name="example3"></a>
+<div class=sub>Example 3</div>
+<br>
+
+Let's consider a last example, the <b>pig weights</b>, also presented on 
+<a href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/examples.shtml">The BUGS project webpage</a>, for which model and data are reproduced below.
+<br><br>
+
+<pre class=example>
+# Model (was saved in c:\users\pbelisle\My Documents\Home\pigweights\WinBUGS\models\pigweights.txt)
+
+# Histogram smoothing adapted from Example 5.9 from Congdon (2001), p 180.  
+#  Illustrates a structured precision matrix for a multivariate normal prior
+#
+# Pig Weight Gain
+	
+model{ 
+	y[1:s] ~ dmulti(th[1 : s] , n)
+	sum.g <- sum(g[])
+
+# smoothed frequencies
+
+	for (i in 1 : s) {     
+		Sm[i] <- n * th[i]
+		g[i] <- exp(gam[i])    
+		th[i]  <- g[i] / sum.g
+	}
+
+# prior on elements of AR Precision Matrix  
+
+	rho ~ dunif(0, 1)
+	tau ~ dunif(0.5, 10)
+
+# MVN for logit parameters
+
+	gam[1 : s] ~ dmnorm(mu[], T[ , ])
+	for (j in 1:s) { 
+		mu[j] <- -log(s)
+	}
+
+# Define Precision Matrix
+
+	for (j in 2 : s - 1) {
+		T[j, j] <- tau * (1 + pow(rho, 2))
+	}
+
+	T[1, 1] <- tau T[s, s] <- tau
+
+	for (j in 1 : s-1) { 
+		T[j, j + 1] <- -tau * rho
+		T[j + 1, j] <- T[j, j + 1]
+	}
+
+	for (i in 1 : s - 1) {
+		for (j in 2 + i: s) {
+			T[i, j] <- 0
+			T[j, i] <- 0 
+		}
+	}
+
+}
+</pre>
+
+<pre class=example>
+# Data (were saved in c:\users\pbelisle\My Documents\Home\pigweights\WinBUGS\data\pigweights.txt)
+
+list(y=c(1,1,0,7,5,10,30,30,41,48,66,72,56,46,45,22,24,12,5,0,1),n=522,s=21)
+</pre>
+
+A <b>WriteWinBUGSScript </b> input file could be as follows:
+
+<br><br>
+<div class=pgm>
+../models/pigweights.txt 500/10k<br>
+-d ../data/pigweights.txt<br>
+-i gam=-3{s}<br>
+-o ../log/pigweights<br>
+-s ../scripts/pigweights.txt
+</div>
+<br>
+
+where each component of the vector <b>gam</b> (of length <b>s</b>, defined through data file) is initialized with the value -3.
+
+<br>
+<pre class=out>
+display(log)
+check('c:/users/pbelisle/My Documents/Home/pigweights/WinBUGS/models/pigweights.txt')
+data('c:/users/pbelisle/My Documents/Home/pigweights/WinBUGS/data/pigweights.txt')
+compile(1)
+inits(1, 'C:/DOCUME~1/patrick/LOCALS~1/Temp/WBugs/__wbinits20071008i.txt')
+gen.inits()
+update(500)
+set(Sm)
+set(T)
+set(g)
+set(gam)
+set(mu)
+set(rho)
+set(sum.g)
+set(tau)
+set(th)
+update(10000)
+stats(*)
+density(Sm)
+density(T)
+density(g)
+density(gam)
+density(mu)
+density(rho)
+density(sum.g)
+density(tau)
+density(th)
+history(Sm)
+history(T)
+history(g)
+history(gam)
+history(mu)
+history(rho)
+history(sum.g)
+history(tau)
+history(th)
+save('c:/users/pbelisle/My Documents/Home/pigweights/WinBUGS/log/pigweights.odc')
+save('c:/users/pbelisle/My Documents/Home/pigweights/WinBUGS/log/pigweights-WinBUGSlog.txt')
+quit()
+</pre>
+
+Note the line giving the path to the file where initial values were temporarily written,
+<i>C:/DOCUME~1/patrick/LOCALS~1/Temp/WBugs/__wbinits20071008i.txt</i> in this case.
+<br><br>
+By default, temporary files (including initials values) are written to your system temporary directory,
+which <b>WriteWinBUGSScript</b> will find through system environment variables.
+However, if you do not like that location, you can choose your own by editing the program WriteWinBUGSScript.pl and change the line
+<pre>
+# $TMPDIR = "c:/my computer/my tmp dir";
+</pre>
+for, e.g.,
+<pre>
+$TMPDIR = "c:/myname/tmp";
+</pre>
+(Do not forget to remove the leading sharp sign (#), which is used to comment out lines in Perl programs.)
+<br><br>
+
+Note that temporary inits files are not removed automatically, in case you'd wish to resubmit a <b>WriteWinBUGSScript</b>-generated WinBUGS script involving one of them
+in the future: however, <b>WriteWinBUGSScript</b> can easily be used to <a href="#rmtmpinits">remove the tmp inits file it has written in the past upon a simple request</a>.
+
+<br><br>
+<a name="multiplescripts"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Preparing multiple scripts</div>
+<br>
+
+Very often, we want to run an analysis on a data set with slightly different models, different sets of parameters, different sets of initial values, etc.
+Preparing a WinBUGS script file for each desired scenario can be done by writing the relevant code to the <b>WriteWinBUGSScript</b> source file, separating the code for each script by a blank line.
+<br><br>
+The code below, for example, will create two scripts (saved to files <i>../scripts/age and sex-1.txt</i> and <i>../scripts/age and sex-2.txt</i>)
+when submitted to <b>WriteWinBUGSScript</b>, 
+one for the initial values found in file <i>../inits/inits-1.txt</i> and another for the initial values found in file <i>../inits/inits-1.txt</i>, respectively.
+
+<br><br>
+<div class=pgm>
+"../models/age and sex.txt" 250/5k<br>
+-d ../data/fractures.txt<br>
+-i ../inits/inits-1.txt     <br>
+-o "../log/age and sex-1"       <br>
+-s "../scripts/age and sex-1.txt"   <br>
+                                        <br>
+"../models/age and sex.txt" 250/5k          <br>
+-d ../data/fractures.txt                        <br>
+-i ../inits/inits-2.txt                             <br>
+-o "../log/age and sex-2"                               <br>
+-s "../scripts/age and sex-2.txt"                           <br>
+</div>
+<br>
+
+The writing of such source files can be made easier through the use of <a href="loop.html">loop</a>, a tool to repeat code with slight modifications each time the code is repeated.
+The code below, for example, when submitted to <b>loop</b>, would write a <b>WriteWinBUGSScript</b> source file consisting of the code to 
+prepare 24 WinBUGS scripts, one for each combination of the two models, the three data sets and the four sets of initial values compared, listed in the upper part of the file.
+
+
+<br><br>
+<div class=pgm>
+"age and sex scripts.txt"<br>
+{                            <br>
+&nbsp;&nbsp;&nbsp; M &nbsp;&nbsp;&nbsp; 1 2                          <br>
+&nbsp;&nbsp;&nbsp; PART &nbsp;&nbsp;&nbsp; hip knee femur                <br>
+&nbsp;&nbsp;&nbsp; I &nbsp;&nbsp;&nbsp; 1 2 3 4                              <br>
+}                                            <br>
+<br>
+"../models/model-&lt;M&gt;.txt" 250/5k          <br>
+-d ../data/&lt;PART&gt;.txt                        <br>
+-i ../inits/inits-&lt;I&gt;.txt                        <br>
+-o "../log/age and sex-&lt;M&gt;-&lt;PART&gt;-&lt;I&gt;"   <br>
+-s "../scripts/age and sex-&lt;M&gt;-&lt;PART&gt;-&lt;I&gt;.txt" <br>
+</div>
+<br>
+
+See the page on <a href="loop.html">loop</a> Perl program for details.
+
+
+<br><br>
+<a name="download"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Download <b>WriteWinBUGSScript</b></div>
+<br>
+
+<b>WriteWinBUGSScript</b> is a free program: <a href="zip/WriteWinBUGSScript.zip">version 2.1 is directly available from this page</a>. 
+Save and unzip it under the name <b>WriteWinBUGSScript.pl</b> and read the section below.
+
+<br><br>
+<a name="how2use"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>How to use <b>WriteWinBUGSScript</b></div>
+<br>
+
+<b>WriteWinBUGSScript</b> is a program written in Perl. 
+Please refer to my generic page on <a href="Submitting-Perl-programs.html">running Perl programs</a> for instructions.
+<br><br>
+You can use WinBUGS scripts written by <b>WriteWinBUGSScript </b> as you would for any <i>manually typed</i> scripts
+but some features &#151; like <a href="#exp">computing exp()</a> and <a href="#invlogit">computing inverse logits</a> &#151; will only be handled by <a href="RunWinBUGSScript.html">RunWinBUGSScript</a>.
+
+<br><br>
+<a name="rmtmpinits"></a>
+<div class=sub>Removing temporary inits files</div>
+<br>
+Temporary inits files written by <b>WriteWinBUGSScript</b> can be easily removed: at the DOS-prompt, type the path to Perl followed by the path to <b>WriteWinBUGSScript.pl</b> with the <b>-clean</b> flag, as in, e.g.,
+<br><br>
+<div class=pgm>
+c:\perl\bin\perl.exe c:\users\pbelisle\My Documents\Home\bin\WriteWinBUGSScript.pl -clean
+</div>
+<br>
+<div class=sub>Log file</div>
+<br>
+Success or error messages are written to the log file <i>WriteWinBUGSScript.log</i>, found in the directory where you saved <b>WriteWinBUGSScript.pl</b>.
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+
+
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/WriteWinBUGSScript.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:10 GMT -->
+</html>

@@ -1,0 +1,37 @@
+* coating.sas, coating experiment, Table 7.19, p240;
+;
+* Data as arranged in Table 7.19;
+data coating;
+  do A=2,1;
+    do B=2,1;
+      do C=2,1;
+        do D=2,1;
+          input y @@;
+          output;
+  end; end; end; end;
+  lines;
+   5.95  4.57  4.03  2.17  3.43  1.02  4.25  2.13
+  12.28  9.57  6.73  6.07  8.49  4.92  6.95  5.31
+;
+* Data by observation;
+data coating;
+  input A B C D   y;
+  lines;
+        2 2 2 2  5.95
+        2 2 2 1  4.57
+        2 2 1 2  4.03
+        2 2 1 1  2.17
+        2 1 2 2  3.43
+        2 1 2 1  1.02
+        2 1 1 2  4.25
+        2 1 1 1  2.13
+        1 2 2 2 12.30
+        1 2 2 1  9.57
+        1 2 1 2  6.73
+        1 2 1 1  6.07
+        1 1 2 2  8.49
+        1 1 2 1  4.92
+        1 1 1 2  6.95
+        1 1 1 1  5.31
+;
+run;

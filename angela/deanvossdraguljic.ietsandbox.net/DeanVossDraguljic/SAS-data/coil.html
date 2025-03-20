@@ -1,0 +1,57 @@
+* coil.sas, coil experiment, Table 11.18 (p378), Table 13.15 (p456);
+;
+* Data as arranged in Table 13.15;
+data coil;
+  input block ABC1 $ 6-8 y1 ABC2 $ 16-18 y2 ABC3 $ 26-28 y3 ABC4 $ 36-38  y4;
+  ABC=ABC1; A=substr(ABC,1,1); B=substr(ABC,2,1); C=substr(ABC,3,1); y=y1; output;
+  ABC=ABC2; A=substr(ABC,1,1); B=substr(ABC,2,1); C=substr(ABC,3,1); y=y2; output;
+  ABC=ABC3; A=substr(ABC,1,1); B=substr(ABC,2,1); C=substr(ABC,3,1); y=y3; output;
+  ABC=ABC4; A=substr(ABC,1,1); B=substr(ABC,2,1); C=substr(ABC,3,1); y=y4; output;   
+  keep block ABC A B C y;
+  lines;
+  1  000 2208  110 2133  101 2459  011 3096 
+  2  100 2196  010 2086  001 3356  111 2776 
+  3  000 2004  110 2112  001 3073  111 2631 
+  4  100 2179  010 2073  101 3474  011 3360 
+  5  001 2839  100 2189  011 3522  110 2095 
+  6  000 1916  101 2979  010 2151  111 2500 
+  7  100 2056  000 2010  011 3209  111 3066 
+  8  010 1878  110 2156  001 3423  101 2524 
+;
+* Data by observation, as in Table 11.18;
+DATA COIL;
+  INPUT BLOCK A B C  Y;
+  LINES;
+          1   0 0 0 2208
+          1   1 1 0 2133
+          1   1 0 1 2459
+          1   0 1 1 3096
+          2   1 0 0 2196
+          2   0 1 0 2086
+          2   0 0 1 3356
+          2   1 1 1 2776
+          3   0 0 0 2004
+          3   1 1 0 2112
+          3   0 0 1 3073
+          3   1 1 1 2631
+          4   1 0 0 2179
+          4   0 1 0 2073
+          4   1 0 1 3474
+          4   0 1 1 3360
+          5   0 0 1 2839
+          5   1 0 0 2189
+          5   0 1 1 3522
+          5   1 1 0 2095
+          6   0 0 0 1916
+          6   1 0 1 2979
+          6   0 1 0 2151
+          6   1 1 1 2500
+          7   1 0 0 2056
+          7   0 0 0 2010
+          7   0 1 1 3209
+          7   1 1 1 3066
+          8   0 1 0 1878
+          8   1 1 0 2156
+          8   0 0 1 3423
+          8   1 0 1 2524
+;

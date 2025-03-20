@@ -1,0 +1,15 @@
+/* 1997 variables */
+
+
+%mymacro(ctplus97)
+%mymacro(gcs97)
+%mymacro(polytrauma97)
+%mymacro(timing97)
+
+
+/* 1998 variables */
+
+
+%mymacro(ctplus98)
+%mymacro(gcs98)
+%mymacro(tsah98)

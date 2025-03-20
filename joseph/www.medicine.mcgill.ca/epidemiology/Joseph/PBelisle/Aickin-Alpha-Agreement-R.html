@@ -1,0 +1,1074 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/Aickin-Alpha-Agreement-R.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:23 GMT -->
+<head>
+<title>aickin.alpha: [R] Aickin's Alpha agreement coefficient</title>
+<meta name="description" content=" aickin.alpha is an R function to compute Aickin's Alpha agreement coefficient.">
+<meta name="keywords" content="agreement, Aickin, alpha, diagnostic, kappa, measure, observers, raters, tools">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 14 jun 2017</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.0 (March 2013)</div>
+<div class=title0>aickin.alpha</div>
+<div class=title>[R] Aickin's Alpha agreement coefficient</div>
+
+The function presented below computes the agreement coefficient &alpha; defined in<br>
+<b>Maximum Likelihood Estimation of Agreement in the Constant Predictive Probability Model, and Its Relation to Cohen's Kappa</b><br>
+Mikel Aickin<br>
+<i>Biometrics 46, 293-302, June 1990.</i>
+<br><br>
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<b>aickin.alpha</b> is an R function to compute Aickin's Alpha agreement coefficient.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><b>aickin.alpha</b> arguments</a><br>
+<a href="#output">Output dimensions</a><br>
+<a href="#example">Example</a><br>
+<a href="#rcode">R code</a><br>
+<a href="#download">Download</a><br>
+<a href="#sas">Also available as a SAS macro</a>
+</div>
+
+<a name="syntax"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+aickin.alpha(n, d=diag(1, nrow=nrow(n), ncol=ncol(n)), epsilon=1e-7, level=0.95)
+</div>
+
+<a name="arguments"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main><b>aickin.alpha</b> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>n</td>
+<td class=rfctargumentvalue>
+observed cell counts matrix;
+</td>
+<td class=rfctcomment>
+<span class=argname>n</span> must be a square matrix;
+</td>
+</tr>
+<td class=rfctargumentname>d</td>
+<td class=rfctargumentvalue>
+agreement matrix.<br><span class=argname>d</span> is a matrix with same dimensions as <span class=argname>n</span>: it consists in 1's and 0's, 
+where 1's indicate agreeing scores cells, and 0's disagreeing scores cells;
+</td>
+<td class=rfctcomment>
+default is a diagonal matrix of same dimension as <span class=argname>n</span>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>epsilon</td>
+<td class=rfctargumentvalue>convergence criterion;</td>
+<td class=rfctcomment>
+algorithm stops when two consecutive &alpha; estimates differ by less than <span class=argname>epsilon</span>;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>level</td>
+<td class=rfctargumentvalue>
+confidence interval level;
+</td>
+<td class=rfctcomment>
+default is 0.95.
+</td>
+</tr>
+</table>
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="output"></a>
+<div class=main>Output</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Output dimension</td>
+<td class=tableheader>Value</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$alpha</td>
+<td class=rfctargumentvalue>
+point estimate for Aickin's Alpha agreement coefficient;
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>$lcl<br>$ucl</td>
+<td class=rfctargumentvalue>
+the lower and upper confidence intervals limits for Aickin's Alpha agreement coefficient, respectively.
+</td>
+</tr>
+</table>
+
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+We illustrate the use of <b>aickin.alpha</b> through the <i>Alcohol consumption classification</i> example presented
+in Aickin's paper (cited above), Table 4. <br><br>
+
+The R code below first loads the macro definition, then defines both the data and the agreement matrix, and finally calls <b>aickin.alpha</b> function.
+Note that in that example, the variables <i>registry</i> and <i>interview</i> are considered as agreeing
+if <i>registry=interview</i> OR (<i>interview=3</i> AND <i>registry</i> &isin; {2,4}).
+
+<br><br>
+<div class=pgm>
+&gt; source('c:/users/pbelisle/My Documents/Home/bin/R/fcts/AickinAlpha.R') # load file where aickin.alpha R function is defined<br>
+&gt; # Table 3 data<br>
+&gt; n3 <- c(60,  2, 7,   0, 2,   0,  1,<br>
+&nbsp;&nbsp;&nbsp;        5, 67, 2,   0, 1,   2,  0,<br>
+&nbsp;&nbsp;&nbsp;         1,  0, 67,  0, 0,   2,  0,<br>
+&nbsp;&nbsp;&nbsp;         0,  1,  1, 27, 0,   1,  0,<br>
+&nbsp;&nbsp;&nbsp;         3,  1,  3,  1, 64,  5,  0,<br>
+&nbsp;&nbsp;&nbsp;         1,  2,  6,  1,  7, 82,  2,<br>
+&nbsp;&nbsp;&nbsp;         0,  0,  0,  0,  0,  0, 13)<br>
+<br><br>
+&gt; n3 <- matrix(n3, ncol=sqrt(length(n3)))<br>
+&gt; d3 <- diag(1, nrow=nrow(n3), ncol=ncol(n3))<br>
+&gt; d3[6,5] <- 1<br>
+&gt; d3[5,6] <- 1<br>
+&gt; aickin.alpha(n3, d3)<br>
+<br>
+<table class=rout>
+<tr><td>
+$alpha<br>
+[1] 0.8677077<br>
+<br>
+$lcl<br>
+[1] 0.832636<br>
+<br>
+$ucl<br>
+[1] 0.9027793<br>
+</td></tr></table>
+</div>
+<br>
+
+
+<a name="rcode"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="R/AickinAlpha.R">One-click download</a>
+</div>
+<div class=rcode>
+aickin.alpha <- function(n, d=diag(1, nrow=nrow(n), ncol=ncol(n)), epsilon=1e-7, level=0.95)<br>
+{<br>
+&#160;&#160;  # Version 1.0 (March 2013)<br>
+&#160;&#160;  #<br>
+&#160;&#160;&#160;&#160;# This function computes the alpha coefficient described in:<br>
+&#160;&#160;  # Maximum Likelihood Estimation of Agreement in the Constant Predictive Probability Model, and Its Relation to Cohen-s Kappa<br>
+&#160;&#160;&#160;&#160;# Mikel Aickin<br>
+&#160;&#160;&#160;&#160;# Biometrics 46, 293-302, June 1990.<br>
+&#160;&#160;  #<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # Function developed by <br>
+&#160;&#160;  # Lawrence Joseph and Patrick Bélisle<br>
+&#160;&#160;  # Division of Clinical Epidemiology<br>
+&#160;&#160;  # Montreal General Hospital<br>
+&#160;&#160;  # Montreal, Qc, Can<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # patrick.belisle@rimuhc.ca<br>
+&#160;&#160;  # http://www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/Aickin-Alpha-Agreement-R.html<br>
+&#160;&#160;  #<br>
+&#160;&#160;  # Please refer to our webpage for details on each argument.<br>
+  <br>
+&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;if (any(dim(n) != dim(d))) stop("n and d must be of equal dimensions.")<br>
+&#160;&#160;&#160;&#160;if (diff(dim(n)) != 0) stop("n and d must be square matrices.")<br>
+<br>
+&#160;&#160;  m <- nrow(n)<br>
+&#160;&#160;  n <- n + 1/(m^2)<br>
+&#160;&#160;  J <- rep(1, m)<br>
+&#160;&#160;  ssize <- sum(n)<br>
+&#160;&#160;  A <- sum(n*d)<br>
+&#160;&#160;  p0 <- A/ssize<br>
+&#160;&#160;  rows.tot <- as.vector(n%*%matrix(J, ncol=1))<br>
+&#160;&#160;  cols.tot <- as.vector(matrix(J, nrow=1)%*%n)<br>
+&#160;&#160;  pr <- rows.tot/ssize<br>
+&#160;&#160;  pc <- cols.tot/ssize<br>
+&#160;&#160;  s <- sum(matrix(pc, nrow=m, ncol=m, byrow=T)*pr*d)<br>
+&#160;&#160;  alpha <- (p0 - s) / (1 - s)<br>
+&#160;&#160;  continue <- T<br>
+  <br>
+&#160;&#160;  while (continue)<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    previous.alpha <- alpha<br>
+&#160;&#160;&#160;&#160;    pr.denominator <- ssize * (1 - alpha + alpha * as.vector(d%*%matrix(pc, ncol=1)) / s)<br>
+&#160;&#160;&#160;&#160;    pr <- rows.tot/pr.denominator<br>
+&#160;&#160;&#160;&#160;    pr[1] <- 1- sum(pr[-1])<br>
+&#160;&#160;&#160;&#160;    pc.denominator <- ssize * (1 - alpha + alpha * as.vector(matrix(pr, nrow=1)%*%d) / s)<br>
+&#160;&#160;&#160;&#160;    pc <- cols.tot/pc.denominator<br>
+&#160;&#160;&#160;&#160;    pc[1] <- 1- sum(pc[-1])<br>
+&#160;&#160;&#160;&#160;    s <- sum(matrix(pc, nrow=m, ncol=m, byrow=T)*pr*d)<br>
+&#160;&#160;&#160;&#160;    alpha <- (p0 - s) / (1 - s)<br>
+<br>
+&#160;&#160;&#160;&#160;    continue <- abs(alpha-previous.alpha) > epsilon<br>
+&#160;&#160;  }<br>
+  <br>
+&#160;&#160;  prdiff <- pr[-1] - pr[1] # m-1 x 1<br>
+&#160;&#160;  pcdiff <- pc[-1] - pc[1] # m-1 x 1<br>
+  <br>
+&#160;&#160;  d2L.da2 <- - ssize * (1-s)/(1-alpha)/((1-alpha)*s+alpha)<br>
+&#160;&#160;  R <- alpha/s/((1-alpha)*s+alpha)<br>
+&#160;&#160;  U <- 1/alpha - 1<br>
+&#160;&#160;  d2L.dadpri <- - A * pcdiff * ((ssize/A)^2) # m-1 x 1<br>
+&#160;&#160;  d2L.dadpcj <- - A * prdiff * ((ssize/A)^2) # m-1 x 1<br>
+  <br>
+&#160;&#160;  d2L.dpridprj <- -sum(n[1,])/(pr[1]^2) + A*(2*s*U+1)*R*R*matrix(pcdiff, ncol=1) %*% matrix(pcdiff, nrow=1) # m-1 x m-1<br>
+&#160;&#160;  d2L.dpri2 <- -rows.tot[-1]/(pr[-1]^2) - rows.tot[1]/(pr[1]^2) + A*(2*s*U + 1)*R*R*(pcdiff^2)<br>
+&#160;&#160;  diag(d2L.dpridprj) <- d2L.dpri2<br>
+  <br>
+&#160;&#160;  d2L.dpridpcj <- -A*R + A*(2*s*U+1)*R*R* matrix(pcdiff, ncol=1) %*% matrix(prdiff, nrow=1) # m-1 x m-1<br>
+&#160;&#160;  d2L.dpridpci <- -2*A*R + A*(2*s*U+1)*R*R*prdiff*pcdiff<br>
+&#160;&#160;  diag(d2L.dpridpcj) <- d2L.dpridpci<br>
+  <br>
+&#160;&#160;  d2L.dpcidpcj <- -sum(n[,1])/(pc[1]^2) + A*(2*s*U+1)*R*R*matrix(prdiff, ncol=1) %*% matrix(prdiff, nrow=1) # m-1 x m-1<br>
+&#160;&#160;  d2L.dpci2 <- -cols.tot[-1]/(pc[-1]^2) - cols.tot[1]/(pc[1]^2) + A*(2*s*U + 1)*R*R*(prdiff^2)<br>
+&#160;&#160;  diag(d2L.dpcidpcj) <- d2L.dpci2<br>
+<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The matrix of second derivatives is composed of vectors and matrices<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;computed above. The variance of alpha-s estimator is the top-left component of its inverse.<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The matrix is symetric and constructed as follows:<br>
+&#160;&#160;  #<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; alpha&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;  Pr1  Pr2 ... Prq&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;    Pc1  Pc2 ... Pcq<br>
+&#160;&#160;  #<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-----------------------    &#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha  - d2L.da2  -   -   t(d2L.dadpri)     -    &#160;&#160;&#160;&#160;-  t(d2L.dadpcj)  -<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ------------   -----------------------    &#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;  #<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pr1                   ----------------------   &#160;&#160;&#160;&#160;  ------------------<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pr2                   -   d2L.dpridprj     -      -  d2L.dpridpcj  -<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;...                   -                    -      -                -<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Prq                   ----------------------      ------------------<br>
+&#160;&#160;  #<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pc1                                             &#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pc2                                             &#160;&#160;&#160;&#160;-  d2L.dpcidpcj   -<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;...                                             &#160;&#160;&#160;&#160;-                 -<br>
+&#160;&#160;&#160;&#160;#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pcq                                             &#160;&#160;&#160;&#160;-------------------<br>
+  <br>
+&#160;&#160;  matrix.second.derivatives.top <- matrix(c(d2L.da2, d2L.dadpri, d2L.dadpcj), nrow=1)<br>
+&#160;&#160;  matrix.second.derivatives.middle <- cbind(matrix(d2L.dadpri, ncol=1), d2L.dpridprj, d2L.dpridpcj)<br>
+&#160;&#160;  matrix.second.derivatives.bottom <- cbind(matrix(d2L.dadpcj, ncol=1), t(d2L.dpridpcj), d2L.dpcidpcj)<br>
+&#160;&#160;  matrix.second.derivatives <- rbind(matrix.second.derivatives.top, matrix.second.derivatives.middle, matrix.second.derivatives.bottom)<br>
+  <br>
+&#160;&#160;  parms.cov.matrix <- solve(-matrix.second.derivatives)<br>
+&#160;&#160;  alpha.sd <- sqrt(parms.cov.matrix[1])<br>
+&#160;&#160;  z <- qnorm((1+level)/2)<br>
+&#160;&#160;  lcl <- alpha - z*alpha.sd<br>
+&#160;&#160;  ucl <- alpha + z*alpha.sd<br>
+&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;list(alpha=alpha, lcl=lcl, ucl=ucl)<br>
+}<br>
+</div>
+<br>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<b>aickin.alpha</b> is a free R function.
+<a href="R/AickinAlpha.R">Download version 1.0</a> now.
+<br>
+
+<a name="sas"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>SAS version</div>
+<br>
+<b>aickin.alpha</b> is also available as a SAS macro (<a href="Aickin-Alpha-Agreement.html">see %AickinAlpha page</a>).
+<br>
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/Aickin-Alpha-Agreement-R.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:24 GMT -->
+</html>

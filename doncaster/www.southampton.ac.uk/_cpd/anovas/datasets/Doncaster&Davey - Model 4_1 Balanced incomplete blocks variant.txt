@@ -1,0 +1,43 @@
+4.1 ONE FACTOR RANDOMISED BLOCK 
+BALANCED INCOMPLETE BLOCKS VARIANT Y = S'|A
+
+Analysis of terms: S + A
+
+Data:
+
+S	A	Y
+1	1	18
+1	2	20
+2	3	 7
+2	4	 7
+3	1	19
+3	3	15
+4	2	21
+4	4	13
+5	1	23
+5	4	 9
+6	2	32
+6	3	20
+
+
+Model 4.1(balanced incomplete blocks variant) 
+A is a fixed factor, S is a random blocking factor:
+
+                                         Model_2
+  Source  DF  Seq SS  Adj SS Adj MS     F      P
+1 S        5  372.00  180.33  36.07  4.01  0.141
+2 A        3  185.00  185.00  61.67  6.85  0.074
+3 S*A      3   27.00   27.00   9.00
+4 P(S*A)   0       -       -
+  Total   11  584.00
+
+COMMENT: Uses adjusted SS for tests.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/
+http://www.southampton.ac.uk/~cpd/anovas/datasets/Latin squares.htm

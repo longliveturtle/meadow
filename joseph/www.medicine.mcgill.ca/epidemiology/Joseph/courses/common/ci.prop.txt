@@ -1,0 +1,54 @@
+ci.prop <- function(x, n, level = 0.95)
+{
+        # Confidence interval for a single probability
+        #
+        # Returns the exact level% confidence interval for a single binomial
+        # proportion when x successes are observed, out of n trials.
+        # Formula was found in Johnson & Kotz, Discrete distributions, pp. 58-60.
+        # keywords: confidence_interval binomial proportion
+        if(length(n) == 1 && length(x) > 1) n <- rep(n, length(x))
+        if(length(level) == 1 && length(x) > 1)
+                level <- rep(level, length(x))
+        bounds <- matrix(NA, length(x), 2)
+        xs <- x
+        ns <- n
+        levelss <- level
+        which.0 <- seq(along = x)[x == 0]
+        which.n <- seq(along = x)[x == n]
+        which.to.remove <- c(which.0, which.n)
+        if(length(which.to.remove) > 0) {
+                which.others <- seq(along = x)[ - which.to.remove]
+        }
+        else {
+                which.others <- seq(along = x)
+        }
+        if(length(which.0) > 0) {
+                level.0 <- level[which.0]
+                n.0 <- n[which.0]
+                bounds[which.0, 1] <- 0
+                bounds[which.0, 2] <- 1 - (1 - level.0)^(1/n.0)
+        }
+        if(length(which.n) > 0) {
+                level.n <- level[which.n]
+                n.n <- n[which.n]
+                bounds[which.n, 2] <- 1
+                bounds[which.n, 1] <- (1 - level.n)^(1/n.n)
+        }
+        if(length(which.others) > 0) {
+                x <- x[which.others]
+                n <- n[which.others]
+                level <- level[which.others]
+                v1 <- c(2 * x, 2 * (x + 1))
+                v2 <- c(2 * (n - x + 1), 2 * (n - x))
+                F.quantiles <- qf(c((1 - level)/2, (1 + level)/2), v1, v2)
+                other.bounds <- matrix((v1 * F.quantiles)/(v2 + v1 *
+                        F.quantiles), ncol = 2)
+                bounds[which.others, 1] <- other.bounds[, 1]
+                bounds[which.others, 2] <- other.bounds[, 2]
+        }
+        results <- matrix(c(xs, ns, xs/ns, levelss, c(bounds)), nrow = length(
+                xs))
+        dimnames(results) <- list(NULL, c("x", "n", "x/n", "level", "p_L",
+                "p_U"))
+        results
+}

@@ -1,0 +1,48 @@
+* DCIS.sas, DCIS experiment, Table 10.8, p319;
+;
+* Data as arranged in Table 10.8;
+data dcis;
+  do row=1 to 4; drop row;
+    input block @@;
+    do time=1 to 3;
+      do position=1,2;
+        trtmt = 2*(time-1) + position;
+        input y @@;
+        output;
+  end; end; end;
+  lines;
+  1 0.637 0.174 0.886 0.378 0.396 0.386
+  1 0.645 0.238 0.655 0.459 0.415 0.453
+  2 0.675 0.187 0.528 0.270 0.594 0.799
+  2 0.480 0.183 0.701 0.426 0.545 0.413
+;
+* Data by observation;
+data dcis;
+  input block time position trtmt   y;
+  lines;
+          1     1      1      1   0.637
+          1     1      2      2   0.174
+          1     2      1      3   0.886
+          1     2      2      4   0.378
+          1     3      1      5   0.396
+          1     3      2      6   0.386
+          1     1      1      1   0.645
+          1     1      2      2   0.238
+          1     2      1      3   0.655
+          1     2      2      4   0.459
+          1     3      1      5   0.415
+          1     3      2      6   0.453
+          2     1      1      1   0.675
+          2     1      2      2   0.187
+          2     2      1      3   0.528
+          2     2      2      4   0.270
+          2     3      1      5   0.594
+          2     3      2      6   0.799
+          2     1      1      1   0.480
+          2     1      2      2   0.183
+          2     2      1      3   0.701
+          2     2      2      4   0.426
+          2     3      1      5   0.545
+          2     3      2      6   0.413
+;
+run;

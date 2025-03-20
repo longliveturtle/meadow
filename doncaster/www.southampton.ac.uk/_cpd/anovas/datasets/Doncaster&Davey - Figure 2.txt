@@ -1,0 +1,33 @@
+1.1  ONE-FACTOR MODEL Y = A + e
+
+Analysis of response Y to covariate X, declaring term: X
+
+Data for Figure 2:
+
+X	Y
+27.71	12.85
+26.56	 6.53
+23.32	 7.83
+22.00	16.38
+20.00	22.49
+18.89	15.23
+15.17	14.87
+14.37	24.81
+10.82	22.62
+8.85	34.62
+
+ 
+Model 1.1(ii) X is a covariate of the response:
+
+  Source   DF       SS      MS      F      P
+1 X         1   440.11  440.11  17.15  0.003
+2 Residual  8   205.29  205.29 
+  Total     9   645.40
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

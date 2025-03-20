@@ -1,0 +1,65 @@
+5.2 THREE FACTOR SPLIT PLOT MODEL (I) Y = C|P'(S'|B|A)
+
+Analysis of terms: S|B|A + C|B|A
+
+S	A	B	C	Y
+1	1	1	1	-3.8558
+2	1	1	1	 4.4076
+1	1	1	2	-4.1752
+2	1	1	2	 1.4913
+1	1	2	1	 5.9699
+2	1	2	1	 5.2141
+1	1	2	2	 9.1467
+2	1	2	2	 5.8209
+1	2	1	1	 9.4082
+2	2	1	1	 6.0296
+1	2	1	2	15.3014
+2	2	1	2	12.1900
+1	2	2	1	 6.9754
+2	2	2	1	14.3012
+1	2	2	2	10.4266
+2	2	2	2	 2.3707
+1	3	1	1	19.1834
+2	3	1	1	18.3855
+1	3	1	2	23.3385
+2	3	1	2	21.9134
+1	3	2	1	16.4482
+2	3	2	1	11.6765
+1	3	2	2	17.9727
+2	3	2	2	15.1760
+
+
+Model 5.2(i) A and B in plots (P) and C in sub-plots (Q) are fixed factors, 
+S is a random blocking factor:
+
+                                      Restricted  Unrestricted
+   Source      DF       SS      MS      F      P      F      P
+ 1 S            1     2.14    2.14      -      -   0.23  0.837*
+ 2 A            2   905.27  452.63  29.48  0.002  29.48  0.002
+ 3 B            1     0.19    0.19   0.01  0.916   0.01  0.916
+ 4 B*A          2   167.65   83.82   5.46  0.055   5.46  0.055
+ 5 S*A          2    28.49   14.24      -      -      -      -
+ 6 S*B          1    12.90   12.90      -      -      -      -
+ 7 S*B*A        2    35.37   17.68      -      -      -      -
+ 8 P(S*B*A)     0        -       -      -      -      -      -
+ 9 C            1    11.80   11.80   1.11  0.332   1.11  0.332
+10 C*A          2    10.02    5.01   0.47  0.645   0.47  0.645
+11 C*B          1    10.90   10.90   1.03  0.350   1.03  0.350
+12 C*B*A        2    48.84   24.42   2.30  0.181   2.30  0.181
+13 C*S          1    14.94   14.94      -      -      -      -
+14 C*S*A        2    17.18    8.59      -      -      -      -
+15 C*S*B        1     7.06    7.06      -      -      -      -
+16 C*S*B*A      2    24.39   12.20      -      -      -      -
+17 C*P(S*B*A)   0        -       -      -      -      -      -
+18 Q(C*P(S*B*A) 0        -       -            
+   Total       23  1297.13
+
+* Quasi F-ratio.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

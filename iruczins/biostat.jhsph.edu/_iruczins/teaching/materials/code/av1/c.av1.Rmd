@@ -1,0 +1,256 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+options(width=110)
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance
+
+We are starting to use functions and data from the SPH.140.615 GitHub package. Uncomment and execute the line calling the function `install.packages` if you have not yet installed devtools. 
+
+```{r}
+# install.packages("devtools")
+library(devtools,quiet=TRUE)
+devtools::install_github("bllfrg/SPH.140.615",quiet=TRUE)
+library(SPH.140.615)
+```
+
+#### Example from class: test for equality of variances
+
+The data.
+
+```{r}
+xa <- c(672, 747, 749, 792, 875, 888, 930, 962, 994,1295)
+xb <- c(290, 359, 384, 466, 510, 516, 522, 532, 595, 706)
+```
+
+Plot the data, using the custom function `dot.plot` from the SPH.140.615 package. 
+
+```{r}
+dot.plot(xa,xb, includeCI=FALSE)
+```
+
+Plot the data, using the `stripchart` function. Look at the help file to explore what all the arguments do.
+
+```{r,fig.width=4}
+par(las=1)
+stripchart(list(xa,xb), method="jitter", pch=1, vertical=TRUE, xlim=c(0.5,2.5), group.names=c("A","B"))
+abline(v=1:2,lty=2)
+```
+
+The 95% confidence interval for the ratio of the population variances, the pedestrian way.
+
+```{r}
+ratio <- var(xa)/var(xb)
+ratio
+na <- length(xa)
+na
+nb <- length(xb)
+nb
+L <- qf(0.025,na-1,nb-1)
+L
+U <- qf(0.975,na-1,nb-1)
+U
+c(ratio/U,ratio/L)
+```
+
+The 95% confidence interval for the ratio of the population standard deviations.
+
+```{r}
+sqrt(c(ratio/U,ratio/L))
+```
+
+The built-in function.
+
+```{r}
+var.test(xa,xb)
+attributes(var.test(xa,xb))
+var.test(xa,xb)$estimate
+var.test(xa,xb)$p.value
+var.test(xa,xb)$conf.int
+sqrt(var.test(xa,xb)$conf.int)
+```
+
+#### Example from class: diets and blood coagulation times 
+
+```{r}
+coag <- c(62, 60, 63, 59,
+          63, 67, 71, 64, 65, 66,
+          68, 66, 71, 67, 68, 68,
+          56, 62, 60, 61, 63, 64, 63, 59)
+ttt <-  c("A","A","A","A",
+          "B","B","B","B","B","B",
+          "C","C","C","C","C","C",
+          "D","D","D","D","D","D","D","D")
+ttt
+LETTERS[1:4]
+ttt <- rep(LETTERS[1:4],c(4,6,6,8))
+ttt
+```
+
+Make the treatment "ttt" a factor.
+
+```{r}
+str(ttt)
+ttt <- factor(ttt,levels=c("A","B","C","D"))
+str(ttt)
+```
+
+Plot the data. In the `stripchart` function you want to jitter the data points horizontally, vertically, or stack them, since there are identical coagulation times recorded in some of the groups.
+
+```{r,fig.width=5}
+set.seed(1)
+par(las=1) 
+stripchart(coag~ttt, method="jitter", pch=1, vertical=TRUE, xlab="diet", ylab="coagulation time [ sec ]") 
+stripchart(jitter(coag,factor=2)~ttt, pch=1, vertical=TRUE, xlab="diet", ylab="coagulation time [ sec ]")  
+stripchart(coag~ttt, method="stack", pch=1, vertical=TRUE, xlab="diet", ylab="coagulation time [ sec ]") 
+```
+
+Note: the function `tapply` splits the first vector into groups according to the values in the second vector, and then "applies" the function, here 'mean', to each group.
+
+The within-group means.
+
+```{r}
+tapply(coag,ttt,mean)
+```
+
+The number of data points per group.
+
+```{r}
+tapply(coag,ttt,length)
+```
+
+One-way ANOVA, the pedestrain way.
+
+```{r}
+k <- 4
+m <- tapply(coag,ttt,mean)
+m
+gm <- mean(coag)
+gm
+n <- tapply(coag,ttt,length)
+n
+N <- sum(n)
+N
+
+m-gm
+SB <- sum(n*(m-gm)^2)
+SB
+coag
+rep(m,n)
+coag-rep(m,n)
+SW <- sum((coag-rep(m,n))^2)
+SW
+MB <- SB/(k-1)
+MB
+MW <- SW/(N-k)
+MW
+Fstat <- MB/MW
+Fstat
+p <- pf(Fstat,k-1,N-k,lower=FALSE)
+p
+```
+
+The built-in function.
+
+```{r}
+aov(coag~ttt)
+summary(aov(coag~ttt)) 
+anova(aov(coag~ttt))
+```
+
+#### Example from class: meioses in females and males
+
+The `meiosis` data used in this lecture are available in the SPH.140.615 R package you installed and loaded above.  
+
+Reference: Broman et al. (1998) Am J Hum Genet 63:861-869.
+
+The data have three columns: family, female, male.  These last two give the total number of crossovers on the 22 autosomes in each of the male and female meioses.
+
+```{r}
+head(meioses)
+str(meioses)
+```
+
+We need to make the family column a "factor" to get the ANOVA to work properly.
+
+```{r}
+meioses$family <- as.factor(meioses$family)
+str(meioses)
+```
+
+Plot the data for the female meioses, get the within-group means, and add the means to the plot.
+
+```{r}
+par(las=1) 
+stripchart(meioses$female~meioses$family,method="jitter",pch=1)
+female.me <- tapply(meioses$female,meioses$family,mean)
+segments(female.me,(1:8)-0.25,female.me,(1:8)+0.25,lwd=2,col="blue")
+```
+
+Same for the male counts.
+
+```{r}
+par(las=1)
+stripchart(meioses$male~meioses$family,method="jitter",pch=1)
+male.me <- tapply(meioses$male,meioses$family,mean)
+segments(male.me,(1:8)-0.25,male.me,(1:8)+0.25,lwd=2,col="blue")
+```
+
+The ANOVA tables.
+
+```{r}
+out.fem <- aov(female~family,data=meioses)
+summary(out.fem)
+out.mal <- aov(male~family,data=meioses)
+summary(out.mal)
+```
+
+#### Another example
+
+```{r,fig.width=5}
+xA <- c(47,48,51,54)
+xB <- c(39,44,38,39)
+xC <- c(47,49,41,43)
+x <- c(xA,xB,xC)
+treat <- rep(1:3,rep(4,3))
+x
+treat
+ex <- data.frame(rsp=x,trt=treat)
+ex
+par(las=1)
+stripchart(ex$rsp~ex$trt, method="jitter", pch=1, vertical=TRUE)
+stripchart(jitter(ex$rsp,factor=2)~ex$trt, pch=1, vertical=TRUE)
+```
+
+The following is wrong.
+
+```{r}
+aov.out <- aov(rsp~trt,data=ex)
+summary(aov.out)
+```
+
+The correct way.
+
+```{r}
+treat <- factor(rep(1:3,rep(4,3)))
+ex.c <- data.frame(rsp=x,trt=treat)
+aov.out.c <- aov(rsp~trt,data=ex.c)
+summary(aov.out.c)
+```
+
+Compare.
+
+```{r}
+summary(aov.out)
+summary(aov.out.c)
+str(ex)
+str(ex.c)
+summary(ex)
+summary(ex.c)
+```
+
+
+
+

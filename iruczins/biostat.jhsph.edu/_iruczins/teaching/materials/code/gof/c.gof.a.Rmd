@@ -1,0 +1,149 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Goodness of Fit - Advanced
+
+### Example from class: simulations 
+
+```{r}
+o <- c(35,43,22)
+p <- c(0.25,0.50,0.25)
+e <- sum(o)*p
+e
+```
+
+Functions to calculate the test statistics.
+
+```{r}
+f.xsq <- function(o,p){
+  e <- (p*sum(o))
+  sum((o-e)^2/e)
+}
+
+f.lrt <- function(o,p){
+  e <- (p*sum(o))
+  2*sum(o*log(o/e),na.rm=TRUE)
+}
+
+xsq <- f.xsq(o,p)
+xsq
+lrt <- f.lrt(o,p)
+lrt
+```
+
+The Multinomial distribution.
+
+```{r}
+set.seed(1)
+rmultinom(1,100,c(0.25,0.50,0.25))
+rmultinom(5,100,c(0.25,0.50,0.25))
+```
+
+Simulate 10,000 test statistics under the null.
+
+```{r}
+set.seed(45)
+simdat <- rmultinom(10000,100,c(0.25,0.50,0.25))
+dim(simdat)
+
+res.xsq <- apply(simdat,2,f.xsq,p=c(0.25,0.50,0.25))
+str(res.xsq)
+
+res.lrt <- apply(simdat,2,f.lrt,p=c(0.25,0.50,0.25))
+str(res.lrt)
+```
+
+Plot the histograms of the test statistics, and estimate the p-values.
+
+```{r}
+hist(res.xsq,col="lightgrey",prob=TRUE,breaks=seq(0,20,1))
+abline(v=xsq,col="red",lwd=2)
+mean(res.xsq>xsq)
+
+hist(res.lrt,col="lightgrey",prob=TRUE,breaks=seq(0,20,1))
+abline(v=lrt,col="red",lwd=2)
+mean(res.lrt>lrt)
+```
+
+### Example from class: fit of Poisson counts
+
+```{r}
+x <- c(2, 2, 0, 0, 0,   0, 0, 1, 0, 0,
+       0, 0, 4, 0, 0,   3, 0, 0, 0, 3,
+       0, 5, 0, 1, 0,   1, 2, 0, 2, 1,
+       0, 0, 0, 0, 0,   0, 0, 0)
+
+ob <- table(x)
+ob
+mu <- mean(x)
+mu
+```
+
+Binning 5+ together.
+
+```{r}
+dpois(0:10,mu)
+dpois(0:4,mu)
+ppois(4,mu)
+ppois(4,mu,lower=FALSE)
+ppois(4,mu)+ppois(4,mu,lower=FALSE)
+p <- c(dpois(0:4,mu),ppois(4,mu,lower=FALSE))
+p
+e <- p*length(x)
+e
+```
+
+The parametric hypothesis tests.
+
+```{r}
+lrt <- f.lrt(ob,p)
+lrt
+pchisq(lrt,4,lower=FALSE)
+
+xsq <- f.xsq(ob,p)
+xsq
+pchisq(xsq,4,lower=FALSE)
+```
+
+Inference via simulations. 
+
+```{r}
+n <- length(x)
+n
+set.seed(1)
+tmp <- rpois(n,mu)
+tmp
+table(tmp)
+table(factor(tmp))
+table(factor(tmp,levels=0:10))
+tmp[tmp>5] <-5
+table(factor(tmp,levels=0:5))
+
+nit <- 10000
+res.lrt <- rep(NA,nit)
+res.xsq <- rep(NA,nit)
+
+set.seed(1)
+for(j in 1:nit){
+  tmp <- rpois(n,mu)
+  tmp[tmp>5] <-5
+  x <- table(factor(tmp,levels=0:5))
+  res.lrt[j] <- f.lrt(x,p)
+  res.xsq[j] <- f.xsq(x,p)
+}
+```
+
+Plot the histograms of the test statistics, and estimate the p-values.
+
+```{r}
+hist(res.lrt,col="lightgrey",prob=TRUE,breaks=101)
+abline(v=lrt,col="red",lwd=2)
+mean(res.lrt>lrt)
+
+hist(res.xsq,col="lightgrey",prob=TRUE,breaks=101)
+abline(v=xsq,col="red",lwd=2)
+mean(res.xsq>xsq)
+```

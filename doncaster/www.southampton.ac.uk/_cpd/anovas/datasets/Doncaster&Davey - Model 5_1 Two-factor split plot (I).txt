@@ -1,0 +1,49 @@
+5.1 TWO FACTOR SPLIT PLOT MODEL (I) Y = B|P'(S'|A)
+
+Analysis of terms: B|A + S|A
+
+Data:
+
+S	A	B	Y
+1	1	1	 3.29706
+2	1	1	-1.46064
+3	1	1	 4.84585
+4	1	1	 4.75133
+1	1	2	 3.29706
+2	1	2	-1.46064
+3	1	2	 4.84585
+4	1	2	 5.11626
+1	2	1	 6.07394
+2	2	1	-1.92254
+3	2	1	-4.42968
+4	2	1	 6.07394
+1	2	2	-1.92254
+2	2	2	 5.11626
+3	2	2	-4.42968
+4	2	2	 4.75133
+
+
+Model 5.1(i) A in plots (P) and B in sub-plots (Q) are fixed factors, 
+S is a random blocking factor:
+
+                                  Restricted Unrestricted
+   Source     DF      SS     MS     F      P     F      P
+ 1 S           3   69.92  23.31     -      -  0.82  0.562
+ 2 A           1   12.11  12.11  0.43  0.560  0.43  0.560
+ 3 S*A         3   84.99  28.33     -      -     -      -
+ 4 P(S*A)      0       -      -     -      -     -      -
+ 5 B           1    0.23   0.23  0.02  0.882  0.02  0.882
+ 6 B*A         1    0.44   0.44  0.05  0.837  0.05  0.837
+ 7 B*S         3   28.37   9.46     -      -     -      -
+ 8 B*S*A       3   28.65   9.55     -      -     -      -
+ 9 B*P(S*A)    0       -      -     -      -     -      -
+10 Q(B*P(S*A)  0       -      -
+   Total      15  224.71
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

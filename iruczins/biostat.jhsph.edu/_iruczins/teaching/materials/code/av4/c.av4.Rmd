@@ -1,0 +1,121 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Non-Parametric Methods
+
+#### Example from class: IL10 cytokines
+
+Read the data, and include log10 of IL10 as a column.
+
+```{r}
+library(SPH.140.615)
+il10 <- cbind(il10, logIL10=log10(il10$IL10))
+```
+
+The analysis of variance tables.
+
+```{r}
+aov.il10 <- aov(IL10 ~ Strain, data=il10)
+anova(aov.il10)
+aov.logil10 <- aov(logIL10 ~ Strain, data=il10)
+anova(aov.logil10)
+```
+
+The Kruskal-Wallis test.
+
+```{r}
+kruskal.test(IL10 ~ Strain, data=il10)
+kruskal.test(logIL10 ~ Strain, data=il10)
+```
+
+#### Example from class: diets and blood coagulation times 
+
+```{r}
+coag <- c(62, 60, 63, 59,
+          63, 67, 71, 64, 65, 66,
+          68, 66, 71, 67, 68, 68,
+          56, 62, 60, 61, 63, 64, 63, 59)
+ttt <- factor(rep(LETTERS[1:4],c(4,6,6,8)))
+```
+
+The analysis of variance table.
+
+```{r}
+summary(aov(coag~ttt)) 
+```
+
+The Kruskal-Wallis test by brute-force.
+
+```{r}
+ranks <- rank(coag)
+ranks
+rbar <- tapply(ranks, ttt, mean)
+rbar
+nt <- tapply(ranks, ttt, length)
+nt
+N <- sum(nt)
+N
+e <- (N+1)/2
+e
+H <- 12/(N*(N+1))*sum(nt*(rbar-e)^2)
+H
+ties <- table(coag)
+ties
+D <- 1-sum(ties^3-ties)/(N^3-N)
+D
+kw <- H/D
+kw
+pchisq(kw, length(nt)-1, lower.tail=FALSE)
+```
+
+The Kruskal-Wallis test with the built-in function.
+
+```{r}
+kruskal.test(coag ~ ttt)
+```
+
+#### Example from class: the fake data with the outlier
+
+Read and plot the data.
+
+```{r, fig.width=8}
+datA <- data.frame(x=c(33,34,35,36,39,  30,31,32,32,33,  31,33,33,34,36),
+                   g=factor(rep(c("A","B","C"), rep(5,3))))
+datB <- datA
+datB$x[5] <- 50
+
+set.seed(1)
+par(las=1, mfrow=c(1,2))
+stripchart(x ~ g, data=datA, pch=1, method="jitter", jitter=0.05, xlim=c(30,50))
+abline(h=1:3, lty="dotted", col="lightgrey")
+stripchart(x ~ g, data=datB, pch=1, method="jitter", jitter=0.05, xlim=c(30,50))
+abline(h=1:3, lty="dotted", col="lightgrey")
+```
+
+
+
+The ANOVA with dataset A.
+
+```{r}
+anova(aov(x ~ g, data=datA))
+```
+
+The ANOVA with dataset B.
+
+```{r}
+anova(aov(x ~ g, data=datB))
+```
+
+The Kruskal-Wallis test.
+
+```{r}
+kruskal.test(x ~ g, data=datA)
+kruskal.test(x ~ g, data=datB)
+```
+
+
+
+

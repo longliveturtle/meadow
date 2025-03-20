@@ -1,0 +1,227 @@
+3.1  TWO FACTOR FULLY CROSS-FACTORED MODEL Y = B|A + e 
+Planned orthogonal contrasts on factor A
+
+Analysis by GLM of terms: C + D(C) + B + B*C + B*D(C)
+
+Data:
+
+A	 C	 D	B	 Y
+1	 2	 0	1	 4.5924
+1	 2	 0	1	-0.5488
+1	 2	 0	1	 6.1605
+1	 2	 0	1	 2.3374
+1	 2	 0	2	 5.1873
+1	 2	 0	2	 3.3579
+1	 2	 0	2	 6.3092
+1	 2	 0	2	 3.2831
+2	-1	 1	1	 7.3809
+2	-1	 1	1	 9.2085
+2	-1	 1	1	13.1147
+2	-1	 1	1	15.2654
+2	-1	 1	2	12.4188
+2	-1	 1	2	14.3951
+2	-1	 1	2	 8.5986
+2	-1	 1	2	 3.4945
+3	-1	-1	1	21.3220
+3	-1	-1	1	25.0426
+3	-1	-1	1	22.6600
+3	-1	-1	1	24.1283
+3	-1	-1	2	16.5927
+3	-1	-1	2	10.2129
+3	-1	-1	2	 9.8934
+3	-1	-1	2	10.0203
+
+COMMENT: If A[1] is a control, and A[2], A[3] are treatment levels, contrasts C and D
+test for a control-versus-treatment effect, and a between-treatments effect. 
+Significant interactions with factor B indicate that these contrasts 
+vary from one level of B to another. Orthogonality means that:
+SS[C] + SS[D(C)] = SS[A], and SS[B*C] + SS[B*D(C)] = SS[B*A]; likewise 
+DF[C] + DF[D(C)] = DF[A], and DF[B*C] + DF[B*D(C)] = DF[B*A].
+
+
+Model 3.1(i) A and B are both fixed factors:
+
+  Source  DF       SS      MS      F      P
+1 A        2   745.36  372.68  37.23 <0.001
+2 B        1    91.65   91.65   9.16  0.007
+3 B*A      2   186.37   93.18   9.31  0.002
+4 S(B*A)  18   180.18   10.01
+  Total   23  1203.56
+
+
+Orthogonal contrasts, with A, C, D and B all fixed factors:
+
+  Source  DF   Seq SS  Adj SS  Seq MS      F      P
+1 C        1   549.39  549.39  549.39  54.88 <0.001 = A[1] versus average{A[2],A[3]}
+2 D(C)     1   195.97  195.97  195.97  19.58 <0.001 = A[2] versus A[3]
+3 B        1    91.65   35.54   91.65   9.16  0.007
+4 B*C      1    84.50   84.50   84.50   8.44  0.009 = B*(A[1] versus average{A[2],A[3]})
+5 B*D(C)   1   101.87  101.87  101.87  10.18  0.005 = B*(A[2] versus A[3])
+6 S(B*A)  18   180.18  180.18   10.01
+  Total   23  1203.56
+
+NOTE: The design is orthogonal, so uses Type I (sequential) SS.
+The analysis can also be done by requesting the model:
+C + D + B + C*B + D*B
+with variables C and D declared as covariates. Adjusted SS are
+then the same as Sequential SS.
+
+
+__________________________________________________________________
+
+TWO FACTOR FULLY CROSS-FACTORED MODEL Y = B|A + e 
+Planned orthogonal contrasts on factors A and B and contrast*contrast interactions
+
+Analysis by GLM of terms: C + D(C) + E + F(E) + G(E) + E*C + C*F(E) + C*G(E) + E*D(C) +
+                          F*D(E C) + G*D(E C)
+
+Data:
+
+A	 C	 D	B	 E	 F	 G	 Y
+1	 2	 0	1	 1	 1	 0	 4.5924
+1	 2	 0	1	 1	 1	 0	-0.5488
+1	 2	 0	2	 1	-1	 0	 6.1605
+1	 2	 0	2	 1	-1	 0	 2.3374
+1	 2	 0	3	-1	 0	 1	 5.1873
+1	 2	 0	3	-1	 0	 1	 3.3579
+1	 2	 0	4	-1	 0	-1	 6.3092
+1	 2	 0	4	-1	 0	-1	 3.2831
+2	-1	 1	1	 1	 1	 0	 7.3809
+2	-1	 1	1	 1	 1	 0	 9.2085
+2	-1	 1	2	 1	-1	 0	13.1147
+2	-1	 1	2	 1	-1	 0	15.2654
+2	-1	 1	3	-1	 0	 1	12.4188
+2	-1	 1	3	-1	 0	 1	14.3951
+2	-1	 1	4	-1	 0	-1	 8.5986
+2	-1	 1	4	-1	 0	-1	 3.4945
+3	-1	-1	1	 1	 1	 0	21.3220
+3	-1	-1	1	 1	 1	 0	25.0426
+3	-1	-1	2	 1	-1	 0	22.6600
+3	-1	-1	2	 1	-1	 0	24.1283
+3	-1	-1	3	-1	 0	 1	16.5927
+3	-1	-1	3	-1	 0	 1	10.2129
+3	-1	-1	4	-1	 0	-1	 9.8934
+3	-1	-1	4	-1	 0	-1	10.0203
+
+COMMENT: This example uses one of three alternative models for the set of orthogonal
+contrasts E-G amongst the four levels of factor B.
+
+
+Model 3.1(i) A and B are both fixed factors:
+
+  Source  DF       SS      MS      F      P
+1 A        2   745.36  372.68  60.36 <0.001
+2 B        3   150.05   50.02   8.10  0.003
+3 B*A      6   234.05   39.01   6.32  0.003
+4 S(B*A)  12    74.10    6.17
+  Total   23  1203.56
+
+
+Orthogonal contrasts, with A, C, D, E, F and G all fixed factors:
+
+   Source   DF   Seq SS  Adj SS  Seq MS      F      P
+ 1 C         1   549.39  549.39  549.39  88.97 <0.001 = A[1] versus average{A[2],A[3]}
+ 2 D(C)      1   195.97  195.97  195.97  31.74 <0.001 = A[2] versus A[3]
+ 3 E         1    91.65   91.65   91.65  14.84  0.002 = average{B[1],B[2] versus average{B[3],B[4]
+ 4 F(E)      1    23.15   23.15   23.15   3.75  0.077 = B[1] versus B[2]
+ 5 G(E)      1    35.25   35.25   35.25   5.71  0.034 = B[3] versus B[4]
+ 6 E*C       1    84.50   84.50   84.50  13.69  0.003 = interaction of contrast E with contrast C
+ 7 C*F(E)    1     0.46    0.46    0.46   0.07  0.791 = interaction of contrast F with contrast C
+ 8 C*G(E)    1    23.42   23.42   23.42   3.79  0.075 = interaction of contrast G with contrast C
+ 9 E*D(C)    1   101.15  101.15  101.15  16.50  0.002 = interaction of contrast E with contrast D
+10 F*D(E C)  1    16.15   16.15   16.15   2.62  0.132 = interaction of contrast F with contrast D
+11 G*D(E C)  1     7.66    7.66    7.66   1.24  0.287 = interaction of contrast G with contrast D
+12 S(B*A)   12    74.10   74.10    6.17
+   Total    23  1203.56
+
+NOTE: The design is orthogonal, so uses Type I (sequential) SS.
+The analysis can also be done by requesting the model:
+C + D + E + F + G + E*C + F*C + G*C + E*D + F*D + G*D
+with all variables C to G declared as covariates.
+
+
+__________________________________________________________________
+
+Contrasts for analysing two cross-factors A and B with one missing cell
+(i.e., not having one of the combinations of factor levels)
+
+Analysis by GLM of terms: A + B(A) and A + B
+
+Data:
+
+A	B	 Y
+1	1	 4.5924
+1	1	-0.5488
+1	2	 6.1605
+1	2	 2.3374
+1	3	 5.1873
+1	3	 3.3579
+1	4	 6.3092
+1	4	 3.2831
+2	1	 7.3809
+2	1	 9.2085
+2	2	13.1147
+2	2	15.2654
+2	3	12.4188
+2	3	14.3951
+2	4	 8.5986
+2	4	 3.4945
+3	1	21.3220
+3	1	25.0426
+3	2	22.6600
+3	2	24.1283
+3	3	16.5927
+3	3	10.2129
+
+COMMENT: The design is unbalanced  by virtue of missing data, with an empty
+A3B4 cell.
+
+
+Model 3.1(i) A and B are both fixed factors
+
+Step 1. Analysis by GLM of terms A + B(A):
+
+  Source  DF   Seq SS  Adj SS  Adj MS      F      P
+1 A        2   895.54  895.54  447.77  66.48 <0.001
+2 B(A)     8   233.01  233.01   29.13   4.32  0.014
+3 S(B(A)) 11    74.09   74.09    6.74
+  Total   21  1202.65
+
+NOTE: These contrasts partition the explained variation among 11 cells
+(in an AxB = 3x4 array with one cell missing) into the A main effect before 
+adjustment for B, and B main effect adjusted for A but confounded with the A*B 
+interaction. The interaction is unconfounded by subtracting the SS[B] in the 
+following analysis from SS[B(A)] above, to get SS[B*A], with 8-3 = 5 degrees of 
+freedom for calculating MS[B*A]. Then all three terms are tested against the error 
+MS of the first model for the final model with Type-II adjusted MS.
+
+Step 2. Analysis by GLM of terms A + B:
+
+  Source   DF   Seq SS  Adj SS  Adj MS      F      P
+1 A         2   895.54  777.51  388.75      -      -
+2 B         3    58.53   58.53   19.51      -      -
+3 Residual 16   248.57  248.57   15.54
+Total      21  1202.65
+
+
+Step 3. Composite model with SS[B*A] = SS[B(A)-B]:
+
+  Source  DF   Seq SS   Adj SS  Adj MS      F      P
+1 A        2   895.54   777.51  388.75  57.68 <0.001
+2 B        3    58.53    58.53   19.51   2.89  0.084
+3 B*A      5   174.48   174.48   34.90   5.18  0.011
+4 S(B*A)  11    74.09    74.09    6.74
+  Total   21  1202.65
+
+NOTE: The SS[B*A] can also be obtained by subtracting the Seq SS[A]+SS[B] = 954.07
+in step 2 from SS[C] = 1128.55, given by a one-factor ANOVA (factor C with two 
+observations in each of 11 levels). 
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/
+http://www.soton.ac.uk/~cpd/anovas/datasets/Orthogonal contrasts.htm

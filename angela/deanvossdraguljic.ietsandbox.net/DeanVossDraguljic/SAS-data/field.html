@@ -1,0 +1,43 @@
+* field.sas, field experiment, Table 13.4, p437;
+;
+* Data as arranged in Table 13.4;
+data field;
+  do row=1 to 8;
+    do block=1 to 2;
+      input TC $ yield @@;
+      A=substr(TC,1,1); B=substr(TC,2,1); 
+      C=substr(TC,3,1); D=substr(TC,4,1);
+      output;
+  end; end;
+  lines;
+  0000 58  0001 55 
+  0011 51  0010 45 
+  0101 44  0100 42 
+  0110 50  0111 36 
+  1001 43  1000 53 
+  1010 50  1011 55 
+  1100 41  1101 41  
+  1111 44  1110 48 
+;
+* Data by observation;
+data field2;
+  input block  TC $ A B C D yield;
+  lines;
+          1   0000  0 0 0 0   58
+          2   0001  0 0 0 1   55
+          1   0011  0 0 1 1   51
+          2   0010  0 0 1 0   45
+          1   0101  0 1 0 1   44
+          2   0100  0 1 0 0   42
+          1   0110  0 1 1 0   50
+          2   0111  0 1 1 1   36
+          1   1001  1 0 0 1   43
+          2   1000  1 0 0 0   53
+          1   1010  1 0 1 0   50
+          2   1011  1 0 1 1   55
+          1   1100  1 1 0 0   41
+          2   1101  1 1 0 1   41
+          1   1111  1 1 1 1   44
+          2   1110  1 1 1 0   48
+;
+run;

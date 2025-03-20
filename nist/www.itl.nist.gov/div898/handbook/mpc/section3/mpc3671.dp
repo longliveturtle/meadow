@@ -1,0 +1,21 @@
+. Step 1: Read the data
+skip 25
+read loadcell.dat x y
+skip 0
+set write decimals -7
+.
+. Step 2: Perform the fit
+.
+.
+. Step 3: Extract relevant quantitites
+.
+.
+let y0 = sequence 2 0.1 5
+feedback off
+capture screen on
+capture mpc3671.out
+quadratic fit y x
+print "ressd: ^ressd"
+quadratic calibration y x y0
+end of capture
+.

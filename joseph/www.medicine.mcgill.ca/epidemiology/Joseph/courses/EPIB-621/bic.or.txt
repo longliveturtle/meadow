@@ -1,0 +1,22 @@
+bic.or <- function(output.bic, level=0.95)
+{
+################################################################
+#                                                              #
+#  This function takes the output from a bic.glm               #
+#  command in R and provides not                               #
+#  only the usual output from the summary command, but         #
+#  adds Odds Ratios with confidence intervals.                 #
+#                                                              #
+#                                                              #
+################################################################
+
+summary(output.bic)
+OR <- exp(output.bic$mle)
+OR.lower <- exp(output.bic$mle - qnorm(1-(1-level)/2)*output.bic$se)
+OR.upper <- exp(output.bic$mle + qnorm(1-(1-level)/2)*output.bic$se)
+
+output.temp <- list(OR = OR, OR.lower = OR.lower, OR.upper = OR.upper)
+return(output.temp)
+}
+
+

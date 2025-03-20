@@ -1,0 +1,43 @@
+* reaction.time.sas, reaction time experiment, Table 6.13, p178;
+;
+DATA RTIME;
+  INPUT ORDER TRTMT A B Y;
+  TC = PUT(10*A+B, 2.); * Create TC as character variable for plots;
+  LINES;
+  1 6 2 3 0.256
+  2 6 2 3 0.281
+  3 2 1 2 0.167
+  4 6 2 3 0.258
+  5 2 1 2 0.182
+  6 5 2 2 0.283
+  7 4 2 1 0.257
+  8 5 2 2 0.235
+  9 1 1 1 0.204
+ 10 1 1 1 0.170
+ 11 5 2 2 0.260
+ 12 2 1 2 0.187
+ 13 3 1 3 0.202
+ 14 4 2 1 0.279
+;
+PROC GLM;
+  CLASS A B;
+  MODEL Y = A B A*B;
+  LSMEANS A / PDIFF CL ALPHA=0.01;
+  LSMEANS B / PDIFF = ALL CL ADJUST = TUKEY ALPHA = 0.01;
+  CONTRAST '11-13-21+23' A*B  1  0 -1 -1  0  1;
+  CONTRAST 'B1-B2' B  1 -1  0;
+  ESTIMATE 'B1-B2' B  1 -1  0;
+  ESTIMATE 'B1-B3' B  1  0 -1;
+  ESTIMATE 'B2-B3' B  0  1 -1;
+;
+PROC GLM;
+  CLASS TC;
+  MODEL Y = TC;
+  LSMEANS TC / PDIFF = ALL CL ADJUST = TUKEY ALPHA = 0.01;
+  LSMEANS TC / PDIFF = CONTROL CL ADJUST = DUNNETT ALPHA = 0.01;
+  LSMEANS TC / PDIFF = CONTROLL CL ADJUST = DUNNETT ALPHA = 0.01;
+  LSMEANS TC / PDIFF = CONTROLU CL ADJUST = DUNNETT ALPHA = 0.01;
+  CONTRAST '11-13-21+23' TC  1  0 -1 -1  0  1;
+  CONTRAST 'B1-B2'       TC  1 -1  0  1 -1  0;
+;
+run;

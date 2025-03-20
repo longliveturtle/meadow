@@ -1,0 +1,136 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+Some of the data used in the following examples are in the SPH.140.615 package.
+
+```{r}
+library(SPH.140.615)
+```
+
+## Linear Mixed Effects - Analysis of Variance 
+
+Use the function install.packages() if you haven't installed the following packages, i.e. use install.packages("lme4") etc in the code chunk. Alternatively, hit the 'Knit' button, and you should be prompted about installing the packages.
+
+```{r}
+library(lattice)
+library(Matrix)
+library(lme4)
+```
+
+The more complicated ANOVA examples in class (involving random effects) had balanced designs, so the sums of squares approach was appropriate. When you have an unbalanced designs, all sorts of problems can arise which can invalidate your inference (for example, the null distribution of the test statistics might not be F anymore), and using likelihood-based approaches are typically better for the inference. Here, we re-visit some of the examples and designs, using likelihood-based linear mixed effects methods. 
+
+### The mosquito example from class - a nested ANOVA
+
+Plot the data.
+
+```{r}
+xyplot(length ~ individual|cage, data=mosq,type=c("p"), layout=c(3,1), xlab="mosquito",
+       strip=strip.custom(var.name=c("Cage"), strip.names=TRUE))
+```
+
+##### Fit cage as a fixed effect
+
+```{r}
+lme.fit <- lmer(length ~ cage + (1|cage:individual), data=mosq)
+summary(lme.fit)
+```
+
+Test for the cage effect.
+
+```{r}
+lme.fit.red <- lmer(length ~ 1 + (1|cage:individual), data=mosq)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+##### Fit cage as a random effect
+
+```{r}
+lme.fit <- lmer(length ~ 1 + (1|cage) + (1|cage:individual), data=mosq)
+summary(lme.fit)
+summary(lme.fit)$varcor
+```
+
+### The penicillin example - a two-way ANOVA without replicates 
+
+After loading the lme4 package, type ?Penicillin to see a description of the experiment.
+
+```{r}
+attach(Penicillin)
+interaction.plot(plate, sample, diameter, col=rainbow(6))
+interaction.plot(sample, plate, diameter, col=rainbow(24))
+```
+
+##### Fit both plate and sample as random effects
+
+```{r}
+lme.fit <- lmer(diameter ~ 1 + (1|plate) + (1|sample), data=Penicillin)
+summary(lme.fit)
+```
+
+##### Fit sample as fixed and plate as random effect
+
+```{r}
+lme.fit <- lmer(diameter ~ sample + (1|plate), data=Penicillin)
+summary(lme.fit)
+```
+
+Test for the sample effect.
+
+```{r}
+lme.fit.red <- lmer(diameter ~ 1 + (1|plate), data=Penicillin)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+### A simulated example - a two-way ANOVA with replicates
+
+Five replicates for each of four treatments (A-D; fixed effects) recorded on each of 5 separate days (blocks B1-B5; random effects).
+
+```{r}
+head(simdat,20)
+summary(simdat)
+str(simdat)
+```
+
+Plot the data.
+
+```{r}
+interaction.plot(simdat$block, simdat$treat, simdat$response)
+interaction.plot(simdat$treat, simdat$block, simdat$response)
+```
+
+A two-way mixed effects ANOVA with interaction.
+
+```{r}
+lme.fit <- lmer(response ~ treat + (1|block) + (1|treat:block), data=simdat)
+summary(lme.fit)
+```
+
+Note the REML estimate for the (random) interaction. The formal test for no interaction.
+
+```{r}
+lme.fit.red <- lmer(response ~ treat + (1|block), data=simdat)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+The two-way mixed effects ANOVA without interaction, re-fit.
+
+```{r}
+lme.fit <- lmer(response ~ treat + (1|block), data=simdat)
+summary(lme.fit)
+```
+
+Testing for a treatment effect.
+
+```{r}
+lme.fit.red <- lmer(response ~ 1 + (1|block), data=simdat)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+

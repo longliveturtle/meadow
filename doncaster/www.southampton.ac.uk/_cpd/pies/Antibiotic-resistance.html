@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/pies/Antibiotic-resistance.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:49:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antibiotic resistance</title>
+
+<base target="_blank">
+<style>
+body, html {
+ margin: 0;
+ padding: 5pt;
+}
+a {
+ text-decoration: none;
+}
+p {
+ max-width: 720px;
+ margin-top:5px;
+ margin-bottom:10px;
+ -webkit-text-size-adjust:none;
+ text-size-adjust:none;
+}
+	/* style for desktop devices */
+	@media only screen and (min-width: 720px) {
+	.iframe-container {
+      position: relative;
+      width: 720px;
+      height: 405px;
+	}
+	}
+	/* style for mobile devices */
+	@media only screen and (max-width: 719px) {
+	.iframe-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: calc(9/16 * 100%); /* 16:9 aspect ratio */		
+	}
+	}
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 0; /* Remove iframe border */
+    }
+    #playerWrap {
+        display: inline-block;
+        position: relative;
+    }
+    #playerWrap.shown::after {
+        content:"";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        background-color: black;
+        background-repeat: no-repeat;
+        background-position: center; 
+        background-size: 64px 64px;
+        background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgNTEwIDUxMCI+PHBhdGggZD0iTTI1NSAxMDJWMEwxMjcuNSAxMjcuNSAyNTUgMjU1VjE1M2M4NC4xNSAwIDE1MyA2OC44NSAxNTMgMTUzcy02OC44NSAxNTMtMTUzIDE1My0xNTMtNjguODUtMTUzLTE1M0g1MWMwIDExMi4yIDkxLjggMjA0IDIwNCAyMDRzMjA0LTkxLjggMjA0LTIwNC05MS44LTIwNC0yMDQtMjA0eiIgZmlsbD0iI0ZGRiIvPjwvc3ZnPg==); /* must be on same line as 'background-image: ...' */
+}
+</style>
+</head>
+
+<body>
+<p><font face="Arial, Helvetica, sans-serif">Antibiotic resistance</font></p>
+<p>Over the course of 11 days, <em>Escherichia coli</em> bacteria evolved resistance to a 1,000-fold increase in concentration of trimethoprim antibiotic above its minimum inhibitory concentration.</p>
+<div>
+    <div class="iframe-container" id="playerWrap">
+      <iframe
+            src="https://www.youtube.com/embed/plVk4NVIUh8?rel=0&amp;enablejsapi=1"
+            frameborder="0"
+            allowfullscreen="true"
+        ></iframe>
+  </div>
+</div>
+
+<script>
+ var playerFrame = document.currentScript.previousElementSibling.children[0].children[0];
+
+ var tag = document.createElement('script');
+ tag.src = "../../../www.youtube.com/iframe_api";
+ var firstScriptTag = document.getElementsByTagName('script')[0];
+ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+ var player;
+ function onYouTubeIframeAPIReady() {
+ player = new YT.Player(playerFrame, {
+ videoId: 'M7lc1UVf-VE',
+ events: {
+ 'onStateChange': onPlayerStateChange
+ }
+ });
+ }
+
+ function onPlayerStateChange(event) {
+ if (event.data == YT.PlayerState.ENDED) {
+ document.getElementById("playerWrap").classList.add("shown");
+ }
+ }
+
+ document.getElementById("playerWrap").addEventListener("click", function() {
+ player.seekTo(0);
+ document.getElementById("playerWrap").classList.remove("shown");
+ });
+</script>
+
+<p style="text-indent: -17px; padding-left: 15px;">Baym, M., Lieberman, T. D., Kelsic, E. D., Chait, R., Gross, R., Yelin, I., and Kishony, R. (2016) Spatiotemporal microbial evolution on antibiotic landscapes. <em>Science</em>. doi: 
+<a href="https://doi.org/10.1126/science.aag0822">https://doi.org/10.1126/science.aag0822</a>.</p>
+
+<p style="text-align: right;"><a href="../history.html#III-7"><em>Timeline of the Human Condition</em></a>, <font size="-1">CE </font>1928</p>
+
+</body>
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/pies/Antibiotic-resistance.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:49:18 GMT -->
+</html>

@@ -1,0 +1,33 @@
+* rail.weld.sas, rail weld experiment, Table 7.10, p229;
+;
+* Data as arranged in Table 7.10;
+data railweld;
+  input T V S y1 y2;
+  rep=1; y=y1; output; * Create SAS observation for y = y1;
+  rep=2; y=y2l putput; * Create SAS observation for y = y2;
+  lines;
+  1 1 1 84.0 91.0
+  1 1 2 77.7 80.5
+  2 1 1 95.5 84.0
+  2 1 2 99.7 95.4
+  2 2 1 76.0 98.0
+  2 2 2 93.7 81.7
+;
+* Data by observation;
+data railweld;
+  input T V S rep  y;
+  lines;
+        1 1 1  1  84.0
+        1 1 1  2  91.0
+        1 1 2  1  77.7
+        1 1 2  2  80.5
+        2 1 1  1  95.5
+        2 1 1  2  84.0
+        2 1 2  1  99.7
+        2 1 2  2  95.4
+        2 2 1  1  76.0
+        2 2 1  2  98.0
+        2 2 2  1  93.7
+        2 2 2  2  81.7
+;
+run;

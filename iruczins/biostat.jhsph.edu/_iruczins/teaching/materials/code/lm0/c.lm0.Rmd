@@ -1,0 +1,58 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Correlation
+
+#### Example from class: fathers' and daughters' heights
+
+The Pearson & Lee (1906) data.
+
+```{r}
+library(SPH.140.615)
+example(pear)
+```
+
+Plot the data.
+
+```{r}
+plot(pear)
+```
+
+Calculate the sample means and the sample standard deviations of the fathers' and daughters' heights.
+
+```{r}
+mes <- apply(pear, 2, mean)
+mes
+sds <- apply(pear, 2, sd)
+sds
+```
+
+Calculate the Pearson correlation between the fathers' and daughters' heights.
+
+```{r}
+cor(pear) 
+cor(pear)[1,2]
+cor(pear$father, pear$daughter)
+```
+
+Spearman's rank correlation coefficient.
+
+```{r}
+cor(pear$father, pear$daughter, method="spearman")
+```
+
+Plot the ranks.
+
+```{r}
+plot(rank(pear$father), rank(pear$daughter), cex=0.5)
+cor(rank(pear$father), rank(pear$daughter))
+```
+
+Test for association between the fathers' and daughters' heights.
+
+```{r}
+cor.test(pear$father, pear$daughter)
+```

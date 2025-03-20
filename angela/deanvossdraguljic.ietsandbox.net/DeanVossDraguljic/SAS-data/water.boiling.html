@@ -1,0 +1,78 @@
+* water.boiling.sas, water boiling experiment, Table 6.26, p199;
+;
+* Data as arranged in Table 6.26;
+data waterboiling;
+  input burner @@;
+  do rep=1 to 3; drop rep;
+    do salt=0, 2, 4, 6;
+	  input time order @@;
+	  output;
+  end; end;
+  lines;
+  1   7  7   4 13   7 24   5 15 
+      8 21   7 25   7 34   7 33 
+      7 30   7 26   7 41   7 37 
+  2   4  6   4 36   4  1   4 28 
+      4 20   5 44   4 14   4 31 
+      4 27   4 45   5 18   4 38 
+  3   6  9   6 46   7  8   5 35 
+      7 16   6 47   6 12   6 39 
+      6 22   5 48   7 43   6 40 
+  4   9 29   8  5   8  3   8  2 
+      9 32   8 10   9 19   8  4 
+      9 42   8 11  10 23   7 17  
+;
+* Data by observation, sorted by salt and burner;
+data waterboiling;
+  input salt burner time order;
+  lines;
+          0     1     7     7
+          0     1     8    21
+          0     1     7    30
+          0     2     4     6
+          0     2     4    20
+          0     2     4    27
+          0     3     6     9
+          0     3     7    16
+          0     3     6    22
+          0     4     9    29
+          0     4     9    32
+          0     4     9    42
+          2     1     4    13
+          2     1     7    25
+          2     1     7    26
+          2     2     4    36
+          2     2     5    44
+          2     2     4    45
+          2     3     6    46
+          2     3     6    47
+          2     3     5    48
+          2     4     8     5
+          2     4     8    10
+          2     4     8    11
+          4     1     7    24
+          4     1     7    34
+          4     1     7    41
+          4     2     4     1
+          4     2     4    14
+          4     2     5    18
+          4     3     7     8
+          4     3     6    12
+          4     3     7    43
+          4     4     8     3
+          4     4     9    19
+          4     4    10    23
+          6     1     5    15
+          6     1     7    33
+          6     1     7    37
+          6     2     4    28
+          6     2     4    31
+          6     2     4    38
+          6     3     5    35
+          6     3     6    39
+          6     3     6    40
+          6     4     8     2
+          6     4     8     4
+          6     4     7    17
+;
+run;

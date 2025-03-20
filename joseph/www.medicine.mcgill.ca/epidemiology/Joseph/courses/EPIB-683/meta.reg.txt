@@ -1,0 +1,11 @@
+# rt = number of events in the treatment (stent) group across trials
+# rc = number of events in the control group across trials
+# nt = number of subjects in the treatment (stent) group across trials
+# cc = number of subjects in the control (stent) group across trials
+
+list(rc = c(15, 25, 2, 14, 10, 24, 30, 10, 5, 15, 2, 20, 5, 16, 31),
+     nc = c(118, 525, 50, 177, 30, 263, 652, 125, 138, 512, 26, 300, 125, 125, 650),
+     rt = c(4,  15, 1, 8,   1, 8,  23, 3, 2, 7, 1, 7, 5, 5, 20),
+     nt = c(120, 533, 50, 175, 31, 260, 662, 117, 152, 517, 24, 310, 118, 132, 642),
+     coating = c(0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0)
+)

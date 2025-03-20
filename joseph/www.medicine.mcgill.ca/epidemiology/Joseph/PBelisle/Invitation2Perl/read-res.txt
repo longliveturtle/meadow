@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+
+@CRITERIA = ("acc", "alc", "mwoc");
+@LEVELS   = (50, 90, 95, 99);
+@L        = ("01", "02", "05", "10", "15", "20", "25", "30", "40", "50");
+
+$DIR = "res"; # output files were saved in subdirectory res/
+
+chdir($DIR) || die "Cannot cd to directory $DIR. Abort.\n";
+
+
+
+foreach $level (@LEVELS)
+{
+  foreach $l (@L)
+  {
+    print "1-alpha=0.$level l=0.$l   "; # print a line label
+
+    foreach $criterion (@CRITERIA)
+    {
+      $file = "$criterion-$l-$level.out";
+
+      # test for file existence
+      if (-e $file)
+      {
+        open(TMP, $file) || die "Cannot read file $file. Abort.\n";
+        $ssize = "not_found";
+
+        while ($line = <TMP>)
+        {
+          if ($line =~ /Optimal sample size/)
+          {
+            chomp $line;              # remove the trailing newline character
+            @tmp = split(" ", $line); # expand the line into a vector
+            $ssize = pop @tmp;        # take last field
+            last;                     # exit the while-loop
+          }
+        }
+
+        close TMP;
+      }
+      else
+      {
+        # file $file does not exist
+
+        $ssize = "not_done";
+      }
+
+      print "  " . $ssize;
+    }
+
+    print "\n"; # newline character
+  }
+}

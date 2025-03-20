@@ -1,0 +1,37 @@
+* caffeine.sas, caffeine experiment, Table 12.19, p427;
+;
+* Data as arranged in Table 12.19;
+data caffeine;
+  do Day=1,5,2,6,3,7,4,8;
+    do Time=9,2;
+      input Caffeine Sys @@;
+      output;
+  end; end;
+  lines;
+  1 121  0 118   0 126 1 130
+  1 123  0 119   1 129 0 123
+  0 111  1 117   1 127 0 118
+  0 120  1 129   0 121 1 130
+;
+* Data by observation;
+data caffeine;
+  input Day Time Caffeine Sys;
+  lines;
+         1    9      1    121
+         1    2      0    118
+         2    9      1    123
+         2    2      0    119
+         3    9      0    111
+         3    2      1    117
+         4    9      0    120
+         4    2      1    129
+         5    9      0    126
+         5    2      1    130
+         6    9      1    129
+         6    2      0    123
+         7    9      1    127
+         7    2      0    118
+         8    9      0    121
+         8    2      1    130
+;
+run;

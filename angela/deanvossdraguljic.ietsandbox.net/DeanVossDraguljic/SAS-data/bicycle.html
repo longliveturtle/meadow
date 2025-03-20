@@ -1,0 +1,37 @@
+* bicycle.sas, bicycle experiment, Table 5.19 (p135), Table 8.13 (p281);
+;
+* Data as arranged in Table 5.19;
+data bicycle;
+  input code trtmt @@;
+  do rep=1 to 3; drop rep;
+    input rate @@;
+    output;
+  end;
+  lines;
+  1  5  15 19 22
+  2 10  32 34 27
+  3 15  44 47 44
+  4 20  59 61 61
+  5 25  75 73 75
+;
+* Data by observation;
+data bicycle;
+  input code trtmt rate;
+  lines;
+          1     5   15
+          1     5   19
+          1     5   22
+          2    10   32
+          2    10   34
+          2    10   27
+          3    15   44
+          3    15   47
+          3    15   44
+          4    20   59
+          4    20   61
+          4    20   61
+          5    25   75
+          5    25   73
+          5    25   75
+;
+run;

@@ -1,0 +1,16 @@
+* optex.sas, Table 11.17, p376;
+;
+* Using proc optex to search for an efficient block design with v = 7, b = 7, k = 3;
+DATA CANDIDATE;
+  DO TREATMNT = 1 to 7;
+    OUTPUT;
+  END;
+;
+PROC OPTEX DATA = CANDIDATE SEED = 72145;
+  CLASS TREATMNT;
+  MODEL TREATMNT;
+  * For 7 blocks of size 3;
+  BLOCKS STRUCTURE = (7)3;
+  EXAMINE DESIGN;
+;
+run;

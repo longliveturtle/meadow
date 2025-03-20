@@ -1,0 +1,203 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Survival Analysis
+
+We will use the 'survival' and the 'MASS' R packages for the analyses. If you have not installed these packages, uncomment the first two lines in the code chunk. 
+
+```{r}
+# install.packages("survival") 
+# install.packages("MASS") 
+library(survival)
+library(MASS)
+```
+
+#### Example from class: the Gehan data
+
+Gehan, E.A. (1965) 
+A generalized Wilcoxon test for comparing arbitrarily single-censored samples. 
+Biometrika 52, 203–233.
+
+```{r}
+gehan
+Surv(gehan$time,gehan$cens)
+```
+
+The Kaplan-Meier plots.
+
+```{r}
+par(las=1)
+gehan.surv <- survfit(Surv(time,cens) ~ treat, data=gehan)
+plot(gehan.surv)
+```
+
+A fancier plot.
+
+```{r}
+par(las=1, yaxs="i")
+plot(gehan.surv, xlab="time of remission (weeks)", ylab="S(t)", col=c("red","blue"), ylim=c(0,1.05), lwd=2) 
+legend(25, 1, c("Control","6-MP"), lty=1, col=c("blue","red"), lwd=2) 
+```
+
+Kaplan-Meier plots with confidence intervals.
+
+```{r,fig.width=11}
+par(mfrow=c(1,2), las=1, yaxs="i")
+gehan.0 <- survfit(Surv(time,cens) ~ 1, data=subset(gehan, treat=="control"))
+gehan.1 <- survfit(Surv(time,cens) ~ 1, data=subset(gehan, treat=="6-MP"))
+plot(gehan.0, xlab="time of remission (weeks)", ylab="S(t)", xlim=c(0,35), ylim=c(0,1.05), col=c("blue")) 
+plot(gehan.1, xlab="time of remission (weeks)", ylab="S(t)", xlim=c(0,35), ylim=c(0,1.05), col=c("red")) 
+```
+
+The log-rank test.
+
+```{r}
+survdiff(Surv(time,cens) ~ treat, data=gehan)
+```
+
+The Cox proportional hazards model.
+
+```{r}
+gehan.cox <- coxph(Surv(time,cens) ~ treat, data=gehan)
+summary(gehan.cox)
+```
+
+##### Interpretation of the model
+
+The hazard for coming out of remission is
+
+```{r}
+round(exp(gehan.cox$coefficients),2)
+```
+
+times higher in the control group, with a 95% confidence interval of
+
+```{r}
+round(exp(confint(gehan.cox)),2)
+```
+
+Changing the contrast.
+
+```{r}
+gehan$treat <- factor(gehan$treat, levels=c("control","6-MP"))
+gehan.cox <- coxph(Surv(time,cens) ~ treat, data=gehan)
+summary(gehan.cox)
+```
+
+Comparing the treatment to the control group, the relative risk of coming out of remission is
+
+```{r}
+round(exp(gehan.cox$coefficients),2)
+```
+
+The 95% confidence interval for the relative risk is
+
+```{r}
+round(exp(confint(gehan.cox)),2)
+```
+
+#### Example from class: leukemia patients
+
+Survival times are given for 33 patients who died from acute myelogenous leukemia. Also measured was the patient's white blood cell count at the time of diagnosis. The patients were also factored into 2 groups according to the presence or absence of a morphologic characteristic of white blood cells. 
+
+```{r}
+leuk
+summary(leuk)
+```
+
+The Cox proportional hazards model.
+
+```{r}
+leuk.cox <- coxph(Surv(time) ~ ag + log10(wbc), data=leuk)
+summary(leuk.cox)
+```
+
+##### Interpretation of the model
+
+The relative risk comparing patients with the morphologic characteristic of the white blood cells to the ones without the characteristic is
+
+```{r}
+round(exp(leuk.cox$coefficients[1]),2)
+```
+
+assuming the patients have the same white blood cell count. The 95% confidence interval for this relative risk is
+
+```{r}
+round(exp(confint(leuk.cox)[1,]),2)
+```
+
+Comparing patients in the same morphologic characteristic group that differ ten-fold in the white blood cell count, the relative risk is
+
+```{r}
+round(exp(leuk.cox$coefficients[2]),2)
+```
+
+The 95% confidence interval for this relative risk is
+
+```{r}
+round(exp(confint(leuk.cox)[2,]),2)
+```
+
+##### Alternative analysis
+
+There are no censored observations in these data, so we could also use a linear model to analyze the data, with a log-transformed response.
+
+```{r,fig.width=8}
+par(mfrow=c(1,2))
+hist(leuk$time, xlab="", main="survival time")
+hist(log2(leuk$time), xlab="", main="log2 survival time")
+```
+
+Let's explore the relationship between the predictors (test results and log-transformed white blood cell counts), and the log-transformed response.
+
+```{r,fig.width=8}
+par(mfrow=c(1,2))
+plot(log10(leuk$wbc), log2(leuk$time), xlab="log10 white blood cell count", ylab="log2 survival time")
+abline(lsfit(log10(leuk$wbc),log2(leuk$time)), col="red", lty=2)
+boxplot(split(log2(leuk$time),leuk$ag), ylab="log2 survival time")
+```
+
+The linear model.
+
+```{r}
+leuk.lm <- lm(log2(time) ~ ag + log10(wbc), data=leuk)
+summary(leuk.lm)
+leuk.lm$coefficients
+confint(leuk.lm)
+```
+
+##### Interpretation of the linear model
+
+Comparing patients with the morphologic characteristic of the white blood cells to the ones without the characteristic, we expect the survival time to be 
+
+```{r}
+round(2^leuk.lm$coefficients[2],2)
+```
+
+times higher in the group with the characteristic, assuming the patients have the same white blood cell count. The 95% confidence interval for this fold change is
+
+```{r}
+round(2^(confint(leuk.lm)[2,]),2)
+```
+
+Comparing patients in the same morphologic characteristic group that differ ten-fold in the white blood cell count, we expect the ratio of survival times to be
+
+```{r}
+round(2^leuk.lm$coefficients[3],2)
+```
+
+The 95% confidence interval for this fold change is
+
+```{r}
+round(2^(confint(leuk.lm)[3,]),2)
+```
+
+##### Remember
+
+All models are wrong, but some are useful.
+
+https://en.wikipedia.org/wiki/All_models_are_wrong
+

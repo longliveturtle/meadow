@@ -1,0 +1,76 @@
+{smcl}
+{* 31mar2006}
+{cmd:help newlog}
+{hline}
+
+{title:Title}
+
+{p 4 8 2}
+{bf:newlog -- Closes the current output log and opens a new log} 
+
+
+{title:Syntax}
+
+{p 8 17 2}
+{cmd:newlog} [{it:logfilename}]
+
+
+{title:Description}
+
+{p 4 4 2}
+{cmd:newlog} closes the current output log, if any, and opens a new
+log. If the {cmd:newlog} command includes a {it:logfilename},
+that filename is used. Otherwise, the name of the current output log, if any,
+is used. Otherwise, the name is "C:\stata.log" (text format).
+
+
+{title:Remarks}
+
+{p 4 4 2}
+If you specify a {it:logfilename} with the .log extension,
+the log file will be in text format; with any other extension, it
+will be in SMCL format.
+
+{p 4 4 2}
+A log file in SMCL format can be read only in Stata's Viewer. A log file
+in text format can be read in the Viewer
+or in any text editor or word processor.
+
+{p 4 4 2}
+The command's intended use is described in more detail in Juul
+(2006, sec. 1.7).
+
+
+{title:Examples}
+
+{p 4 8 2}{cmd:. newlog}
+
+{p 4 8 2}{cmd:. newlog out}
+
+{p 4 8 2}{cmd:. newlog "c:\tmp\out.txt"}
+
+{p 4 8 2}{cmd:. newlog out.log}
+
+
+{title:Author}
+
+{p 4 4 2}
+{browse "sj@soci.au.dk":Svend Juul}, Department of Epidemiology, 
+Institute of Public Health, University of Aarhus, Aarhus, Denmark.
+
+
+{title:Reference}
+
+{p 4 8 2} 
+Juul, S. 2006. {it:Introduction to Stata for Health Researchers}.
+College Station, TX: Stata Press.
+
+
+{title:Also see}
+
+{p 4 13 2}
+Manual:  {hi:[U] 15 Printing and preserving output}, {hi:[R] log}
+
+{p 4 13 2}
+Online:  {help log}
+{p_end}

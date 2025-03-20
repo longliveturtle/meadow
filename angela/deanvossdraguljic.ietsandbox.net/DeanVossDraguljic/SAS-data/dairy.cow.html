@@ -1,0 +1,41 @@
+* dairy.cow.sas, dairy cow experiment, Table 12.8, p409;
+;
+* Data as arranged in Table 12.8;
+data dairycow;
+  input cow @@;
+  do period=1 to 3;
+    input diet yield @@;
+    output;
+  end;
+  lines;
+  6  2 63  3 101  1  1 
+  4  3 76  1  86  2 46 
+  2  3 86  2 109  1 39 
+  5  1 35  2  75  3 34 
+  1  2 25  1  38  3 15 
+  3  1 72  3 124  2 27 
+;
+* Data by observation, sorted by cow and period;
+data dairycow;
+  input cow period diet yield;
+  lines;
+         1     1     2    25
+         1     2     1    38
+         1     3     3    15
+         2     1     3    86
+         2     2     2   109
+         2     3     1    39
+         3     1     1    72
+         3     2     3   124
+         3     3     2    27
+         4     1     3    76
+         4     2     1    86
+         4     3     2    46
+         5     1     1    35
+         5     2     2    75
+         5     3     3    34
+         6     1     2    63
+         6     2     3   101
+         6     3     1     1
+;
+run;

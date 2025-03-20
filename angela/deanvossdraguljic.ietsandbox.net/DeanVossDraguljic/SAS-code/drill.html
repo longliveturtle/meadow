@@ -1,0 +1,55 @@
+* drill.sas, drill advance experiment, Table 7.8, p226;
+;
+DATA DRILL;
+  INPUT A B C D ADVANCE;
+  Y = LOG10(ADVANCE); * log to base 10;
+  * Compute contrast coefficients +/-0.5;
+  A = A - 1.5; B = B - 1.5; C = C - 1.5; D = D - 1.5;
+  AB = 2*A*B; AC = 2*A*C; AD = 2*A*D; BC = 2*B*C; BD = 2*B*D;
+  CD = 2*C*D;
+  ABC = 4*A*B*C; ABD = 4*A*B*D; ACD = 4*A*C*D; BCD = 4*B*C*D;
+  ABCD = 8*A*B*C*D;
+  LINES;
+  1 1 1 1   1.68   
+  1 1 1 2   2.07    
+  1 1 2 1   4.98    
+  1 1 2 2   7.77    
+  1 2 1 1   3.28    
+  1 2 1 2   4.09    
+  1 2 2 1   9.97    
+  1 2 2 2  11.75   
+  2 1 1 1   1.98 
+  2 1 1 2   2.44
+  2 1 2 1   5.70
+  2 1 2 2   9.43
+  2 2 1 1   3.44
+  2 2 1 2   4.53
+  2 2 2 1   9.07
+  2 2 2 2  16.30
+;
+* Compute coefficient estimates corresponding to each contrast,
+* and output the estimates to a new data set named "drill2";
+PROC REG OUTEST = DRILL2 NOPRINT;
+  MODEL Y = A B C D AB AC AD BC BD CD ABC ABD ACD BCD ABCD;
+
+* Keep only the variables containing effect estimates;
+DATA DRIILL2; SET DRILL2; KEEP A--ABCD;
+
+* Transpose the data set "drill2" to get the effect estimates in
+* a new data set "drill3" under the variable name "est1";
+PROC TRANSPOSE PREFIX = EST OUT = DRILL3;
+
+* Compute absolute estimates and corresponding half-normal scores;
+DATA DRILL3; SET DRILL3;
+  ABS_EST = ABS(EST1); * ABS_EST = 4*ABS(EST1) would normalize;
+PROC SORT; BY ABS_EST;
+DATA DRILL3; SET DRILL3; P = _N_/16; HP = 0.5*(1+P);
+  HNSCORE = PROBIT(HP);
+
+* Generate high-resolution half-normal probability plot;
+PROC SGPLOT;
+  SCATTER Y = ABS_EST X = HNSCORE;
+  TITLE "Half-Normal Probability Plot of Contrast Absolute Estimates";
+  YAXIS LABEL = "Absolute Estimate"; XAXIS LABEL = "Half-Normal Score";
+
+run;

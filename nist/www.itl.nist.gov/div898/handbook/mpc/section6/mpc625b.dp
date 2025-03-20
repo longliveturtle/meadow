@@ -1,0 +1,12 @@
+reset data
+reset plot control
+reset i/o
+dimension 30 columns
+title Test of normality assumption
+skip 50
+read mpc62.dat crystal wafer mo day hour min op hum probe temp y sw df
+skip 0
+normal probability plot y
+xlabel Normal probability plot of measurements on check standard #137
+x1label Linewidth measurements with an optical imaging system
+. end of calculations

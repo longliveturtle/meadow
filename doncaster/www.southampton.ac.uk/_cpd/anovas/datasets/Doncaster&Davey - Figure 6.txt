@@ -1,0 +1,86 @@
+Example data for Figure 6(a) on Irrigation treatment A cross
+factored with sowing density treatment B in a fully replicated design:
+
+A	B	Y
+Control	Low	 2.046
+Control	Low	 1.780
+Control	Low	 8.150
+Control	Low	 4.020
+Control	High	16.778
+Control	High	22.871
+Control	High	23.142
+Control	High	21.105
+Water	Low	12.300
+Water	Low	19.100
+Water	Low	13.651
+Water	Low	14.991
+Water	High	14.240
+Water	High	 7.900
+Water	High	14.043
+Water	High	11.953
+
+
+3.1  TWO FACTOR FULLY CROSS-FACTORED MODEL Y = B|A + e
+
+Analysis of terms: B|A
+
+Model 3.1(i) A and B are both fixed factors:
+
+  Source  DF      SS      MS      F      P
+1 A        1    4.29    4.29   0.50  0.495
+2 B        1  195.96  195.96  22.65 <0.001
+3 B*A      1  398.06  398.06  46.01 <0.001
+4 S(B*A)  12  103.81    8.65
+  Total   15  702.12
+
+
+
+Example data for Figure 6(b) on Irrigation treatment A cross
+factored with sowing density treatment B in a design of randomised
+blocks (S):
+
+S	A	B	Y
+1	Control	Low	 2.046
+2	Control	Low	 1.780
+3	Control	Low	 4.020
+4	Control	Low	 8.150
+1	Control	High	16.778
+2	Control	High	21.105
+3	Control	High	23.142
+4	Control	High	22.871
+1	Water	Low	13.651
+2	Water	Low	19.100
+3	Water	Low	12.300
+4	Water	Low	14.991
+1	Water	High	11.953
+2	Water	High	14.240
+3	Water	High	 7.900
+4	Water	High	14.043
+
+
+
+4.2 TWO FACTOR RANDOMISED BLOCK MODEL Y = S'|B|A
+
+Analysis of terms: S|B|A - S*B*A (Model 1) or S + B|A (Model 2)
+
+Model 4.2(i) A and B are fixed factors, S is a random blocking factor:
+
+                                     Model_1       Model_2  
+  Source   DF      SS      MS        F      P      F      P
+1 S         3   40.40   13.47        -      -   1.91  0.198
+2 A         1    4.29    4.29     0.27  0.639   0.61  0.455
+3 B         1  195.96  195.96  1365.41 <0.001  27.81  0.001
+4 B*A       1  398.06  398.06    77.78  0.003  56.49 <0.001
+5 S*A       3   47.63   15.88        -      -      -      -
+6 S*B       3    0.43    0.14        -      -      -      -
+7 S*B*A     3   15.35    5.12        -      -      -      -
+8 P(S*B*A)  0       -       - 
+  Total    15  702.12
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

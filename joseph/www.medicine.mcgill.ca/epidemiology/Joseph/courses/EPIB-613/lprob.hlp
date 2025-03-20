@@ -1,0 +1,80 @@
+{smcl}
+{* 31mar2006}
+{cmd:help lprob}
+{hline}
+
+{title:Title}
+
+{p 4 8 2}
+{bf:lprob -- Calculates probability of outcome after logistic or logit}
+
+
+{title:Syntax}
+
+{p 8 17 2}
+{cmd:lprob} {it:exp}
+
+{p 4 8 2}
+where {it:exp} is any linear combination of coefficients of
+the predictors included in a preceding {cmd:logistic} or
+{cmd:logit} command. You need not include {cmd:_cons}
+in {it:exp}; it is included automatically.
+
+
+{title:Description}
+
+{p 4 4 2}
+{cmd:lprob} uses the saved results after {cmd:logistic} or
+{cmd:logit} to estimate the probability of outcome for given
+values of the predictors. 
+
+
+{title:Remarks}
+
+{p 4 4 2}
+With {cmd:lincom} after {cmd:logistic} or {cmd:logit}
+you may estimate the odds for the outcome for given values of 
+the predictors. The results saved by {cmd:lincom} are
+used to estimate the probability of outcome.
+
+{p 4 4 2}
+The validity of the results depends on study design,
+and results should be interpreted with caution, e.g., in a
+case-control study.
+
+{p 4 4 2}
+The program is described in more detail in Juul (2006, sec. 17.3),
+where it was used to illustrate the development of a program (ado-file).
+
+
+{title:Examples}
+
+{phang}{cmd:. logistic stenosis renogram crea}{p_end}
+{phang}{cmd:. lprob 1*renogram + 70*crea}
+
+{phang}{cmd:. quietly logistic stenosis renogram crea}{p_end}
+{phang}{cmd:. lprob}
+
+
+{title:Author}
+
+{p 4 4 2}
+{browse "sj@soci.au.dk":Svend Juul}, Department of Epidemiology, 
+Institute of Public Health, University of Aarhus, Aarhus, Denmark.
+
+
+{title:Reference}
+
+{p 4 8 2} 
+Juul, S. 2006. {it:Introduction to Stata for Health Researchers}.
+College Station, TX: Stata Press.
+
+
+{title:Also see}
+
+{p 4 13 2}
+Manual:  {hi:[R] logistic}; {hi:[R] lincom}
+
+{p 4 13 2}
+Online:  {help lincom}
+{p_end}

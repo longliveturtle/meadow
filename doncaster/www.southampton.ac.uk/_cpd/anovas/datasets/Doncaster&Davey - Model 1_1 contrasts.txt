@@ -1,0 +1,113 @@
+1.1 ONE-FACTOR MODEL Y = A + e with planned orthogonal contrasts
+
+Three-level factor A. Analysis by GLM of terms: B + C(B)
+
+Data:
+
+A	 B	 C	 Y
+1	 2	 0	 4.5924
+1	 2	 0	-0.5488
+1	 2	 0	 6.1605
+1	 2	 0	 2.3374
+1	 2	 0	 5.1873
+1	 2	 0	 3.3579
+1	 2	 0	 6.3092
+1	 2	 0	 3.2831
+2	-1	 1	 7.3809
+2	-1	 1	 9.2085
+2	-1	 1	13.1147
+2	-1	 1	15.2654
+2	-1	 1	12.4188
+2	-1	 1	14.3951
+2	-1	 1	 8.5986
+2	-1	 1	 3.4945
+3	-1	-1	21.3220
+3	-1	-1	25.0426
+3	-1	-1	22.6600
+3	-1	-1	24.1283
+3	-1	-1	16.5927
+3	-1	-1	10.2129
+3	-1	-1	 9.8934
+3	-1	-1	10.0203
+
+COMMENT: If A[1] is a control, and A[2], A[3] are treatment levels, contrasts B and
+C test for a control-versus-treatment effect, and a between-treatments effect.
+SS[B] + SS[C(B)] = SS[A]; likewise DF[B] + SS[C(B)] = DF[A].
+
+
+Model 1.1(i) A is a fixed or random factor:
+
+  Source  DF       SS      MS      F      P
+1 A        2   745.36  372.68  17.08 <0.001
+2 S(A)    21   458.20   21.82
+  Total   23  1203.56
+
+
+Orthogonal contrasts, with fixed factors B and C:
+
+  Source  DF   Seq SS  Adj SS  Seq MS      F      P
+1 B        1   549.39  549.39  549.39  25.18 <0.001  = A[1] versus average{A[2],A[3]}
+2 C(B)     1   195.97  195.97  195.97   8.98  0.007  = A[2] versus A[3]
+3 S(A)    21   458.20  458.20   21.82
+  Total   23  1203.56
+
+
+__________________________________________________________________
+
+Five-level factor A. Analysis by GLM of terms: B + C(B) + D(C B) + E(C B)
+
+Data:
+
+A 	 B 	 C 	 D 	 E 	 Y 
+1	 4	 0	 0	 0	 4.5924
+1	 4	 0	 0	 0	-0.5488
+1	 4	 0	 0	 0	 6.1605
+1	 4	 0	 0	 0	 2.3374
+2	-1	 1	 1	 0	 5.1873
+2	-1	 1	 1	 0	 3.3579
+2	-1	 1	 1	 0	 6.3092
+2	-1	 1	 1	 0	 3.2831
+3	-1	 1	-1	 0	 7.3809
+3	-1	 1	-1	 0	 9.2085
+3	-1	 1	-1	 0	13.1147
+3	-1	 1	-1	 0	15.2654
+4	-1	-1	 0	 1	12.4188
+4	-1	-1	 0	 1	14.3951
+4	-1	-1	 0	 1	 8.5986
+4	-1	-1	 0	 1	 3.4945
+5	-1	-1	 0	-1	21.3220
+5	-1	-1	 0	-1	25.0426
+5	-1	-1	 0	-1	22.6600
+5	-1	-1	 0	-1	24.1283
+
+COMMENT: This example uses one of four alternative models for the
+set of orthogonal contrasts B-E amongst the five levels of factor A.
+
+
+Model 1.1(i) A is a fixed or random factor:
+
+  Source  DF        SS      MS      F      P
+1 A        4   1017.79  254.45  25.80 <0.001
+2 S(A)    15    147.95    9.86
+  Total   19   1165.74
+
+
+Orthogonal contrasts, with fixed factors B, C, D and E:
+
+  Source     DF   Seq SS  Adj SS  Seq MS      F      P
+1 B           1   262.82  262.82  262.82  26.65 <0.001
+2 C(B)        1   297.16  297.16  297.16  30.13 <0.001
+3 D(B C)      1    89.99   89.99   89.99   9.12  0.009
+4 E(B C)      1   367.83  367.83  367.83  37.29 <0.001
+5 S(A)       15   147.95  147.95    9.86
+  Total      19  1165.74
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/
+http://www.southampton.ac.uk/~cpd/anovas/datasets/Orthogonal contrasts.htm
+

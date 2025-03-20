@@ -1,0 +1,86 @@
+* maximin.LHD.sas, use 3 macros (Tables 20.3-5, pp780-2) to find an approximate maximin LHD;
+;
+* Read the Table 20.3 (p780) macro that constructs an LHD,
+* but suppress printing each LHD;
+%macro createLHD(n=, d=);
+  %do i = 1 %to &d;
+    data temp&i;
+      %do j = 1 %to &n;
+        x&i = (2*&j - 1)/(2*&n) + (1/&n)*ranuni(-1) - 1/(2*&n);
+        ranno&i = ranuni(0);
+        output;
+      %end;
+    run;
+    proc sort data = temp&i; by ranno&i; run;
+    data temp&i; set temp&i; drop ranno&i; run;
+  %end;
+  data lhd; merge temp1 - temp&d; run;
+  *** proc print data = Lhd; * run; * Suppress printing each LHD;
+%mend createLHD;
+
+;
+* Read the Table 20.4 (p781) macro that calculates the minimum interpoint distance,
+* but suppress printing each minimum distance;
+%macro mipd(x=, d=);
+  proc distance data = &x out = dist method = Euclid nostd;
+    var interval(x1 - x&d); run;
+  data dist;
+    set dist;
+    array var _numeric_;
+    do over var;
+      if var = 0 then var = .;
+    end;
+  run;
+  proc means nolabels data = dist min noprint;
+    output out = colmins; run;
+  data colmins;
+    set colmins;
+    where _STAT_ = "MIN";
+    drop _TYPE_ _FREQ_ _STAT_;
+  run;
+  proc transpose data = colmins out = colminslong; run;
+  proc means nolabels data = colminslong min NOPRINT; * Suppress printing each min distance;
+    var COL1;
+    output out = Mindist min = minimum; run;
+%mend mipd;
+;
+* Read the Table 20.5 (p782) macro that finds an approximate maximin LHD;
+%macro MmLHD(nrow=, ncol=, iter=);
+  %createLHD(n = &nrow, d = &ncol)
+  %let design = lhd;
+  %mipd(x = &design, d = &ncol)
+  data Best; set &design; run; quit;
+  data _null_;
+    set mindist;
+    if _N_ = 1 then call symput("mipd", minimum);
+    else stop;
+  run; quit;
+  %do k = 2 %to &iter;
+    %createLHD(n = &nrow, d = &ncol)
+    %mipd(x = &design, d = &ncol)
+    data _null_;
+      set mindist;
+      if _N_ = 1 then call symput("mipdnew", minimum);
+      else stop;
+    run; quit;
+    %if &mipdnew > &mipd %then %do;
+      %let mipd = &mipdnew;
+      data Best; set &design; run; quit;
+    %end;
+  %end;
+  proc datasets library = work noprint;
+    delete temp1 - temp&ncol mindist colmins colminslong dist lhd;
+  run; quit;
+  * Print the best LHD;
+  proc print data = Best noobs; run;
+  * Display the smallest interpoint distance for the best LHD;
+  %mipd(x = Best, d = &ncol)
+  proc print data = Mindist noobs; var minimum; run;
+%mend MmLHD;
+;
+* Use the above 3 macros to do the following;
+* Create 100 30 × 3 LHDs, find the one with the largest minimum interpoint 
+* distance, and store this best design in the SAS data set Best, and print it;
+%MmLHD(nrow = 30, ncol = 3, iter = 100)
+;
+run;

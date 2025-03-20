@@ -1,0 +1,89 @@
+3.3  CROSS-FACTORED WITH NESTING MODEL Y = C|B(A) + e
+
+Analysis of settlement Density response in terms of: 
+Recruit|Trtmnt + Trtmnt|Shore(Recruit)
+
+Data:
+
+Site	 Shore	Recruit	Trtmnt	Density
+Cowes	 1	High	 2	0.386
+Cowes	 1	High	 2	0.397
+Cowes	 1	High	 2	0.432
+Cowes	 1	High	 8	0.484
+Cowes	 1	High	 8	0.482
+Cowes	 1	High	 8	0.514
+Cowes	 1	High	32	0.484
+Cowes	 1	High	32	0.520
+Cowes	 1	High	32	0.569
+Seaview	 2	High	 2	0.279
+Seaview	 2	High	 2	0.411
+Seaview	 2	High	 2	0.260
+Seaview	 2	High	 8	0.625
+Seaview	 2	High	 8	0.531
+Seaview	 2	High	 8	0.478
+Seaview	 2	High	32	0.738
+Seaview	 2	High	32	0.570
+Seaview	 2	High	32	0.620
+Totland	 1	Low	 2	0.190
+Totland	 1	Low	 2	0.177
+Totland	 1	Low	 2	0.300
+Totland	 1	Low	 8	0.268
+Totland	 1	Low	 8	0.261
+Totland	 1	Low	 8	0.396
+Totland	 1	Low	32	0.384
+Totland	 1	Low	32	0.319
+Totland	 1	Low	32	0.334
+Ventnor	 2	Low	 2	0.304
+Ventnor	 2	Low	 2	0.302
+Ventnor	 2	Low	 2	0.278
+Ventnor	 2	Low	 8	0.402
+Ventnor	 2	Low	 8	0.351
+Ventnor	 2	Low	 8	0.254
+Ventnor	 2	Low	32	0.244
+Ventnor	 2	Low	32	0.401
+Ventnor	 2	Low	32	0.324
+
+
+Model 3.3(i) Recruit and Trtmnt are fixed factors, Shore is a random factor:
+
+  	 	 	                           Restricted  Unrestricted
+  Source    		 DF        SS        MS      F      P      F      P
+1 Recruit                 1  0.300852  0.300852  95.93  0.010* 95.93  0.010
+2 Shore(Recruit)          2  0.006272  0.003136   0.82  0.453   0.31  0.748
+3 Trtmnt                  2  0.144142  0.072071   7.18  0.047   7.18  0.047
+4 Trtmnt*Recruit          2  0.033243  0.016622   1.66  0.299   1.66  0.299
+5 Trtmnt*Shore(Recruit)   4  0.040128  0.010032   2.62  0.060   2.62  0.060
+6 Error                  24  0.091985  0.003833
+  Total                  35  0.616622
+
+*Pooled error MS gives F(1,26) = 79.60, P < 0.001
+
+COMMENT: The four study sites have been reclassified in the factor Shore as 
+two shores nested in high recruitment, and two (different) shores nested in low
+recruitment.
+
+
+Model 3.3(v) Recruit is a fixed factor, Shore is a random factor, Trtment is 
+a covariate of the response:
+
+  Source                 DF    Seq SS    Seq MS      F      P
+1 Recruit                 1  0.300852  0.300852  95.93  0.010*
+2 Shore(Recruit)          2  0.006272  0.003136   0.56  0.575
+3 Trtmnt                  1  0.097297  0.097297   6.30  0.129
+4 Trtmnt*Recruit          1  0.025629  0.025629   1.66  0.327
+5 Trtmnt*Shore(Recruit)   2  0.030891  0.015446   2.78  0.079
+6 Error                  28  0.155681  0.005560
+  Total                  35  0.616622
+
+*Pooled error MS gives F(1,30) = 55.73, P < 0.001
+
+COMMENT: This example is balanced and therefore orthogonal, 
+so uses Type I (sequential) SS. 
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

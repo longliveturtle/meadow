@@ -1,0 +1,1567 @@
+<html
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns:a="urn:schemas-microsoft-com:office:access"
+xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882"
+xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema"
+xmlns:b="urn:schemas-microsoft-com:office:publisher"
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+xmlns:oa="urn:schemas-microsoft-com:office:activation"
+xmlns:q="http://schemas.xmlsoap.org/soap/envelope/" xmlns:D="DAV:"
+xmlns:x2="http://schemas.microsoft.com/office/excel/2003/xml"
+xmlns:ois="http://schemas.microsoft.com/sharepoint/soap/ois/"
+xmlns:dir="http://schemas.microsoft.com/sharepoint/soap/directory/"
+xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+xmlns:dsp="http://schemas.microsoft.com/sharepoint/dsp"
+xmlns:udc="http://schemas.microsoft.com/data/udc"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:sub="http://schemas.microsoft.com/sharepoint/soap/2002/1/alerts/"
+xmlns:ec="http://www.w3.org/2001/04/xmlenc#"
+xmlns:sp="http://schemas.microsoft.com/sharepoint/"
+xmlns:sps="http://schemas.microsoft.com/sharepoint/soap/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:udcxf="http://schemas.microsoft.com/data/udc/xmlfile">
+
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/anovas/datasets/index.htm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:46:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-364FP6J5FG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-364FP6J5FG');
+</script>
+
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link rel=Edit-Time-Data href="index_files/editdata.html">
+<title>Analysis of Variance and Covariance</title>
+<style>
+<!--
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+h2
+	{margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:9.0pt;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-weight:bold;
+	}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:none;
+	text-decoration:none;
+	}
+a:visited
+	{color:purple;
+	text-decoration:none;
+	text-decoration:none;
+	}
+p
+	{margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	}
+</style>
+<![endif]-->
+</head>
+
+<body lang=EN-GB link=blue vlink=purple>
+
+<div class=Section1>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center;text-autospace:none'>
+<span lang=EN-US style='font-size:24.0pt;font-family:
+Arial;'>Examples of Analysis of Variance and Covariance</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center;text-autospace:none'>
+<span lang=EN-US style='font-size:14.0pt;font-family:
+Arial;'>C. P. Doncaster and A. J. H. Davey</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>This page presents example datasets and
+outputs for analysis of variance (<a href="ANOVA.html">ANOVA</a>) and covariance
+(<a href="ANCOVA.html">ANCOVA</a>), and computer programs for planning data
+collection designs and estimating power. All of the statistical models are detailed in <a
+href="https://doi.org/10.1017/CBO9780511611377"
+target="_blank">Doncaster and Davey (2007)</a>, with pictorial representation
+of the designs and options for troubleshooting common issues with analysis. </span></p>
+<p class=MsoNormal style='text-autospace:none'>&nbsp;
+</p>
+<p class=MsoNormal style='text-autospace:none'>
+<span
+  lang=EN-US> Click 
+	<span style='background:
+  aqua;'><a target="_blank" href="ANOVA%20in%20R.html">here</a></span>
+  for </span><span lang="en-us">the suite of commands in </span>
+<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif">R (freeware 
+statistical package, R Development Core Team 2010) </span><span lang="en-us">
+that will analyze each of the example datasets below, and calculate the power of the design.</span></p>
+
+<h2><span lang=EN-US>Contents</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#_What_is_a_statistical_model?">What is a statistical model?</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#_Examples_of_ANOVA_and_ANCOVA_models">Examples of ANOVA and
+ANCOVA models</a></span><span class=MsoHyperlink></span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter1">1 One-factor designs</a> </span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter2">2 Nested designs</a> </span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter3">3 Fully replicated
+factorial designs</a> </span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter4">4 Randomized-block designs</a>
+</span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter5">5 Split-plot designs</a> </span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter6">6 Repeated-measures
+designs</a> </span></p>
+
+<p class=MsoNormal style='margin-left:32.6pt;text-indent:-11.35pt;'>
+<span lang=EN-US><a href="#Chapter7">7 Unreplicated designs</a>
+</span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#Book_figs">Analyses for figures and worked examples in
+Doncaster and Davey (2007)</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#_Computer_programs_for_planning_ANOV">Computer programs for
+planning designs and estimating design power</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#_Key_to_types_of_statistical_models">Key to types of
+statistical models</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#_References">References</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>- <a href="#Glossary">
+<span style="color: #0000FF">Glossary</span></a></span><span class=MsoHyperlink></span></p>
+
+<h2><a name="_What_is_a_statistical_model?"></a><span lang=EN-US>What is a statistical model?</span></h2>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>Any statistical test of pattern requires a <a
+href="Model.html">model</a> against which to test the null <a
+href="Hypothesis.html">hypothesis</a> of no pattern. Models for ANOVA and ANCOVA
+take the form: <a href="Response.html">Response</a> = <a href="Factor.html">Factor</a>(s)
++ <a href="Residual.html">&#949;</a>, where the response refers to the data that
+require explaining, the factor or factors are the putative explanatory
+variables contributing to the observed pattern of variation in the response,
+and &#949; is the residual variation in the response left unexplained by the
+factor(s). For each of the examples illustrated here, we use a standard <b><a href="Notation.html" target="_blank">notation</a></b>
+to describe the full model and its testable <a href="Terms.html">terms</a>. For example, the two-factor
+nested model in </span><span lang=EN-US>Section
+<a href="#Chapter2"><b>2</b></a> </span>
+<span
+lang=EN-US style='font-family:AdvTimes;'>below is described by: </span></p>
+
+<p class=MsoNormal style='margin-left:21.3pt;text-indent:-21.3pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>(i)
+The full model, packed up into a single expression: Y = B(A) + &#949;;</span></p>
+
+<p class=MsoNormal style='margin-left:21.3pt;text-indent:-21.3pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>(ii)
+Its testable terms to declare in a statistics package, unpacked from the full
+model: A + B(A).</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>A statistics package will require you to
+specify the model desired for a given dataset. You will need to declare which
+column contains the response variable Y, which column(s) contain the
+explanatory variable(s) to be tested, any <a href="Nesting.html">nesting</a> or <a
+href="Cross%20factor.html">cross factoring</a> of the explanatory variables, whether
+any of the variables are <a href="Factor.html">random</a> rather than fixed
+factors, and whether any are <a href="Covariate.html">covariates</a> of the
+response.</span></p>
+
+<h2><a name="_Examples_of_ANOVA_and_ANCOVA_models"></a><span lang=EN-US>Examples of ANOVA and ANCOVA models</span></h2>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>Each of the links in Sections 1 to 7 below
+shows a full suite of analyses of a hypothetical dataset. Where appropriate,
+these include alternative <a href="Restricted.html">restricted</a> and <a
+href="Unrestricted.html">unrestricted</a> models (Searle 1971), and <a
+href="Model%201.html">Model-1</a> and <a href="Model%202.html">Model-2</a>
+designs (Newman <i>et al</i>. 1997). Refer
+to the protocols in <a
+href="http://www.cambridge.org/uk/catalogue/catalogue.asp?isbn=9780521684477"
+target="_blank">Doncaster and Davey (2007)</a> to see which mean squares are
+used for the <i><a href="F%20ratio.html">F<span
+style='font-style:normal'>-ratio</span></a></i> denominators, and consequently how
+many error <a href="Degrees%20of%20freedom.html">degrees of freedom</a> are
+available for testing <a href="Significance.html">significance</a>. The examples
+have not used <i>post-hoc</i> <a
+href="Pooling.html">pooling</a> though this may be an option or an alternative
+to some <a href="Quasi%20F.html">quasi <i>F</i>-ratios</a>,
+and the underlying <a href="Assumptions.html">assumptions</a> have not been
+evaluated though this would need doing for real datasets.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>A statistics package may give different 
+<a href="F%20ratio.html"> <i>F</i> ratios</a>
+and <a href="Significance.html"> <i>P</i> values</a> to those shown here, for a variety of reasons:</span></p>
+
+<p class=MsoNormal style='margin-left:7.1pt;text-indent:-7.1pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>-
+In <a href="Balance.html">unbalanced</a> and <a href="Orthogonality.html">non-orthogonal</a>
+designs and ANCOVA models, default use of Type-III <a href="Adjusted%20SS.html">adjusted
+SS</a> for models that require Type II.</span></p>
+
+<p class=MsoNormal style='margin-left:7.1pt;text-indent:-7.1pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>-
+In balanced <a href="Mixed%20model.html">mixed models</a> and ANCOVA models,
+default use of an <a href="Unrestricted.html">unrestricted</a> model when the
+design may suite a <a href="Restricted.html">restricted</a> model.</span></p>
+
+<p class=MsoNormal style='margin-left:7.1pt;text-indent:-7.1pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>- In
+designs with randomized blocks and split plots, default use of <a
+href="Model%201.html">Model-1</a> analysis when the test hypothesis may require <a
+href="Model%202.html">Model 2</a>.</span></p>
+
+<p class=MsoNormal style='margin-left:7.1pt;text-indent:-7.1pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>-
+In ANCOVA mixed models, default use of <a href="Residual.html">residual error</a>
+for all denominator mean squares when the test hypothesis may have a different <a
+href="Residual.html">error variance</a>. </span></p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;
+</p>
+<p class=MsoNormal style='text-autospace:none'>
+<span
+  lang=EN-US> Click 
+	<span style='background:
+  aqua;'><a target="_blank" href="ANOVA%20in%20R.html">here</a></span>
+  for </span><span lang="en-us">the suite of commands that will analyze each of 
+these example datasets in the </span>
+<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif">freeware 
+statistical package R (R Development Core Team 2010).</span><span lang="en-us">
+</span></p>
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0 width="100%"
+ style='width:100.0%;border-collapse:collapse;'>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter1><b><span lang=EN-US style='font-family:AdvP3D9181;'>1 One-factor designs</span></b></a><b><span lang=EN-US
+  style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of differences between sample means of one categorical factor (</span><span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>including <a href="Orthogonal%20contrasts.html">orthogonal contrasts</a></span><span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>),
+  or trend with one <a href="Covariate.html">covariate</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%201_1%20One%20factor.txt"
+  target="_blank">1.1 One-factor model Y =
+  A + &#949; </a><a name="Model1_1"></a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:58.4pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%201_1%20contrasts.txt" target="_blank">Planned
+  orthogonal contrasts</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter2><b><span lang=EN-US style='font-family:AdvP3D9181;'>2 Nested designs</span></b></a><b><span lang=EN-US style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of two or more factors in a <a href="Replication.html">replicated</a> 
+	hierarchy with levels of each <a href="Nesting.html">nested</a> in (belonging to) levels of the 
+	next</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%202_1%20Two%20factor%20nested.txt"
+  target="_blank">2.1 Two-factor nested model Y = B(A) + &#949;</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%202_2%20Three%20factor%20nested.txt"
+  target="_blank">2.2 Three-factor nested model Y = C(B(A)) + &#949;</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter3><b><span lang=EN-US style='font-family:AdvP3D9181;'>3 Fully replicated factorial designs</span></b></a><b><span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of <a href="Cross%20factor.html">crossed</a> combinations of factor levels randomly assigned to
+  sampling units in <a href="Replication.html">replicated</a> samples </span>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>(including <a href="Orthogonal%20contrasts.html">orthogonal contrasts</a></span><span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>), and/or of trends with cross-factored
+  <a href="Covariate.html">covariates</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%203_1%20Two%20factor%20fully%20cross%20factored.txt"
+  target="_blank">3.1 Two-factor fully cross-factored model Y = B|A + &#949;</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:58.4pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%203_1%20contrasts.txt" target="_blank">Planned
+  orthogonal contrasts</a> for levels of factors B and/or A, and contrasts for 
+	two-factor analysis missing one combination of levels</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%203_2%20Three%20factor%20fully%20cross%20factored.txt"
+  target="_blank">3.2 Three-factor fully cross-factored model Y = C|B|A + &#949;
+  </a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'><a name="Model3_3"></a><a
+  href="Doncaster%26Davey%20-%20Model%203_3%20Cross%20factored%20with%20nesting.txt"
+  target="_blank"><span lang=EN-US
+  style='font-family:AdvTimes;'>3.3 Cross-factored with nesting model Y =
+  C|B(A) + &#949;</span></a><span style='font-family:AdvTimes;'> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'><a name="Model3_4"></a><a
+  href="Doncaster%26Davey%20-%20Model%203_4%20nested%20cross%20factored.txt"
+  target="_blank"><span lang=EN-US
+  style='font-family:AdvTimes;'>3.4 Nested cross-factored model Y = C(B|A)
+  + &#949;</span></a><span style='font-family:AdvTimes;'> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter4><b><span lang=EN-US style='font-family:AdvP3D9181;'>4 Randomized-block designs</span></b></a><b><span lang=EN-US
+  style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of one or more categorical factors with levels, or
+  combinations of levels, randomly assigned in <a
+  href="Blocked%20sampling%20units.html" target="_blank">blocked sampling units</a>
+  of plots within <a href="Block.html">blocks</a>, and <a href="Replication.html">replicated</a> only across blocks (including
+	<a href="Orthogonal%20contrasts.html">orthogonal contrasts</a>, and
+	<a href="Balanced%20incomplete%20block.html">balanced incomplete block</a>,
+	<a href="Latin%20squares.html">Latin squares</a>, and
+	<a href="Youden%20square.html">Youden square</a> variants on the one-factor
+	<a href="Complete%20block.html">complete-block</a> 
+	design)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%204_1%20One%20factor%20randomised%20block.txt"
+  target="_blank">4.1 One-factor randomized complete-block model Y = S<span
+  style='font-family:"Times New Roman"'>&#900;|A</span></a> and with
+	<a target="_blank" href="Doncaster%26Davey%20-%20Model%204_1%20contrasts.txt">planned 
+	orthogonal contrasts</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:58.4pt;text-indent:-14.2pt;text-autospace:none'><a name=BIBvar><a
+  href="Doncaster%26Davey%20-%20Model%204_1%20Balanced%20incomplete%20blocks%20variant.txt"
+  target="_blank"><span lang=EN-US
+  style='font-family:AdvTimes;'>Balanced incomplete-block variant Y = S&#900;|A</span></a></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:58.4pt;text-indent:-14.2pt;text-autospace:none'><a name=Latinvar><a
+  href="Doncaster%26Davey%20-%20Model%204_1%20Latin%20square%20variant.txt"
+  target="_blank"><span lang=EN-US
+  style='font-family:AdvTimes;'>Latin square variant Y = C|B|A</span></a></a><span
+  lang=EN-US> with replicate </span>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>
+	<a href="Latin%20squares.html">Latin squares</a> </span><span
+  lang=EN-US> in blocks
+  and stacked squares for crossover designs. Click 
+	<span style='background:
+  aqua;'><a href="LatinSquare.exe">here</a></span>
+  to download a computer program (LatinSquare.exe) that allocates treatment
+  levels at random.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:58.4pt;text-indent:-14.2pt;text-autospace:none'><a name=Youdenvar><a
+  href="Doncaster%26Davey%20-%20Model%204_1%20Youden%20square%20variant.txt"
+  target="_blank"><span lang=EN-US
+  style='font-family:AdvTimes;'>Youden square variant Y = C|B|A</span></a></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%204_2%20Two%20factor%20randomised%20block.txt"
+  target="_blank">4.2 Two-factor randomized complete-block model Y = S&#900;|B|A</a> </span>
+	<span lang=EN-US style='font-family:AdvTimes;'>and with
+	<a target="_blank" href="Doncaster%26Davey%20-%20Model%204_2%20contrasts.txt">planned 
+	orthogonal contrasts</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%204_3%20Three%20factor%20randomised%20block.txt"
+  target="_blank">4.3 Three-factor randomized complete-block model Y = S&#900;|C|B|A</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter5><b><span lang=EN-US style='font-family:AdvP3D9181;'>5 Split-plot designs</span></b></a><b><span lang=EN-US
+  style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of two or more categorical <a href="Cross%20factor.html">cross factors</a> with levels randomly
+  assigned in <a href="Split-plot%20sampling%20units.html" target="_blank">split-plot
+  sampling units</a> of sub-sub-plots <a href="Nesting.html">nested</a> in sub-plots and/or sub-plots
+  nested in plots and/or plots nested in blocks and <a href="Replication.html">replicated</a> only across
+  levels of the nesting (repeated-measures) factor(s)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_1%20Two-factor%20split%20plot%20(I).txt"
+  target="_blank">5.1 Two-factor split-plot model (i) Y = B|P&#900;(S&#900;|A)</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_2%20Three%20factor%20split%20plot%20(I).txt"
+  target="_blank">5.2 Three-factor split-plot model (i) Y = C|P&#900;(S&#900;|B|A)</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_3%20Three%20factor%20split%20plot%20(II).txt"
+  target="_blank">5.3 Three-factor split-plot model (ii) Y = C|B|P&#900;(S&#900;|A)</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_4%20Split-split%20plot%20(I).txt"
+  target="_blank">5.4 Split-split-plot model (i) Y = C|Q&#900;(B|P&#900;(S&#900;|A))</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_5%20Split-split%20plot%20(II).txt"
+  target="_blank">5.5 Split-split-plot model (ii) Y = C|P&#900;(B|S&#900;(A))</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_6%20Two%20factor%20split%20plot%20(II).txt"
+  target="_blank">5.6 Two-factor split-plot model (ii) Y = B|S&#900;(A) </a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_7%20Three%20factor%20split%20plot%20(III).txt"
+  target="_blank">5.7 Three-factor split-plot model (iii) Y = C|B|S&#900;(A) </a>
+	and with
+	<a target="_blank" href="Doncaster%26Davey%20-%20Model%205_7%20Three%20factor%20split%20plot%20(III)%20contrasts.txt">
+	planned orthogonal contrasts</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_8%20Split%20plot%20with%20nesting.txt"
+  target="_blank">5.8 Split-plot model with nesting Y = C|S&#900;(B(A))</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%205_9%20Three%20factor%20split%20plot%20(IV).txt"
+  target="_blank">5.9 Three-factor split-plot model (iv) Y = C|S&#900;(B|A)</a>
+  	and for
+	<a target="_blank" href="Doncaster%26Davey%20-%20Model%205_9%20binomial%20error%20structure.txt">data with a binomial error structure</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter6><b><span lang=EN-US style='font-family:AdvP3D9181;'>6 Repeated-measures designs</span></b></a><b><span lang=EN-US
+  style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of one or more categorical factors with levels, or
+  combinations of levels, assigned in <a
+  href="Repeated-measures%20sampling%20units.html" target="_blank">repeated-measures
+  sampling units</a> of subjects repeatedly tested in a temporal or spatial sequence,
+  and <a href="Replication.html">replicated</a> only across subjects</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_1%20One%20factor%20repeated%20measures.txt"
+  target="_blank">6.1 One-factor repeated-measures model Y = S&#900;|A</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_2%20Two%20factor%20repeated%20measures.txt"
+  target="_blank">6.2 Two-factor repeated-measures model Y = S&#900;|B|A</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_3%20Two%20factor%20model%20with%20RM%20on%20one%20cross%20factor.txt"
+  target="_blank">6.3 Two-factor model with repeated measures on one cross
+  factor Y = B|S&#900;(A)</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_4%20Three%20factor%20with%20RM%20on%20nested%20cross%20factors.txt"
+  target="_blank">6.4 Three-factor model with repeated measures on nested cross
+  factors Y = C(B)|S&#900;(A)</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_5%20Three%20factor%20model%20with%20RM%20on%20two%20cross%20factors.txt"
+  target="_blank">6.5 Three-factor model with repeated measures on two cross
+  factors Y = C|B|S&#900;(A)</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_6%20Nested%20model%20with%20RM%20on%20a%20cross%20factor.txt"
+  target="_blank">6.6 Nested model with repeated measures on a cross factor Y =
+  C|S&#900;(B(A)) </a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%206_7%20Three%20factor%20model%20with%20RM%20on%20a%20cross%20factor.txt"
+  target="_blank">6.7 Three-factor model with repeated measures on one factor Y
+  = C|S&#900;(B|A)</a></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:0cm;text-autospace:none'><a
+  name=Chapter7><b><span lang=EN-US style='font-family:AdvP3D9181;'>7 Unreplicated designs</span></b></a><b><span lang=EN-US
+  style='font-family:AdvP3D9181;'> </span></b></p>
+  <p class=MsoNormal style='margin:2.0pt 0cm; text-autospace:none'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analysis of fully randomized factorial (crossed) combinations of factor
+  levels without replication</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%207_1%20Two-factor%20cross%20factored%20unreplicated.txt"
+  target="_blank">7.1 Two-factor cross factored unreplicated model Y = B|A</a> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'><a
+  href="Doncaster%26Davey%20-%20Model%207_2%20Three-factor%20cross%20factored%20unreplicated.txt"
+  target="_blank">7.2 Three-factor cross factored unreplicated model Y = C|B|A</a>
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<span lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:1.7pt'><a name="Book_figs"><b>
+	<span lang=EN-US
+  style='font-family:AdvP3D9181;'>Figures and worked examples in Doncaster
+  and Davey (2007)</span></b></a></p>
+  <p class=MsoNormal style='margin-top:4.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:1.7pt'>
+	<span
+  lang=EN-US style='font-family:AdvP3D9181;
+  '>Analyses of illustrations to sections introducing analysis of variance
+  and model structures, and general linear models for unbalanced designs</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%201.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  1 One-factor ANOVA model 1.1(<i>i</i>)</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%202.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  2 One-factor ANCOVA model 1.1(<i>ii</i>)</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%203.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  3 One-factor design for model 1.1(<i>i</i>)</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%204.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  4 Nested design for model 2.1</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%205.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  5 Cross factored design for model 3.1</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%206.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  6 Fully randomized design for model 3.1 versus randomized-block design for
+  model 4.2</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%207.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  7 Split-plot designs for models 5.1 and 5.6</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%208.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  8 Cross factored ANCOVA model 3.1(<i>iv</i>)</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%209.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure
+  9 Transformation of response and covariate for ANCOVA model 1.1(<i>ii</i>)</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%2010.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure 10 Alternative significances of main effects and interactions</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<a
+  href="Doncaster%26Davey%20-%20Figure%2011.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Figure 11 Interpretation of sequential and adjusted SS</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<a
+  href="Doncaster%26Davey%20-%20Worked%20example%201.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Worked example 1: Nested analysis of variance</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<a
+  href="Doncaster%26Davey%20-%20Worked%20example%202.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Worked example 2: Cross-factored analysis of variance</span></a></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-top:2.0pt;margin-right:0cm;margin-bottom:
+  2.0pt;margin-left:37.15pt;text-indent:-14.2pt;text-autospace:none'>
+	<a
+  href="Doncaster%26Davey%20-%20Worked%20example%203.txt" target="_blank">
+	<span lang=EN-US style='font-family:AdvTimes;'>Worked example 3: Split plot, pooling and covariate analysis</span></a></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a
+name="_Computer_programs_for_planning_ANOV"><span lang=EN-US>Computer programs for planning designs and estimating design power</span></a></h2>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:-14.2pt;text-autospace:none'>
+<span lang="EN-US">1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span dir=LTR><i><span lang=EN-US
+style='font-family:AdvTimes;'>List all terms and degrees of freedom in any
+model for analysis of variance or covariance</span></i></span><span
+lang=EN-US style='font-family:AdvTimes;'>. Click </span><a
+href="Terms.exe">
+<span lang=EN-US style='font-family:AdvTimes;background:aqua;
+'>here</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> to download a computer program (Terms.exe)
+that will list</span><span lang=EN-US> all of the main effects and interactions and their </span><a
+href="Degrees%20of%20freedom.html"><span lang=EN-US>degrees of freedom</span></a><span lang=EN-US> for a model of your own specification with any
+number of levels for each of any number of cross-factored or nested categorical
+or continuous variables (yielding up to a maximum of 2047 terms). </span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:21.25pt;text-autospace:none'>
+<span lang=EN-US>Specify the model as a hierarchical nesting of sampling units in
+factors, representing each variable by a single letter. Thus for example,
+requesting: 'P(B|S(A))' will yield testable <a href="Terms.html">terms</a> for any of models 3.3, 5.6 or
+6.3 above, depending on the nature of the variables and the 
+<a href="Replication.html">replication</a> of
+sampling unit P. </span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:21.25pt;text-autospace:none'>
+<span lang=EN-US>A text file 'Terms.txt' will be created to store the list of terms
+comprising all main effects and interactions and their degrees of freedom; it
+will also contain </span><span lang=EN-US style='font-family:AdvTimes;'>the <i>N</i> lines of factor-level combinations against which to tag
+your <i>N</i> observations of the response.</span><span
+lang=EN-US> </span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:-14.2pt;text-autospace:none'>
+<span
+style='font-family:AdvTimes' lang="EN-US">2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span dir=LTR><i><span lang=EN-US
+style='font-family:AdvTimes;'>List testable terms, degrees of freedom, and
+critical </span></i></span><span lang=EN-US style='font-family:AdvTimes;'>F<i>-values for any of the numbered designs above</i>. Click </span><a
+href="CritiF.exe">
+<span lang=EN-US style='font-family:AdvTimes;background:aqua;
+'>here</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> to download a computer program (CritiF.exe)
+that allows you to specify your own sample sizes in the numbered ANOVA and
+ANCOVA designs above, </span><span
+lang=EN-US style='font-family:AdvTimes;'> assuming fixed treatment factors. For 
+each</span><span
+lang=EN-US style='font-family:AdvTimes;'> estimable effect, it shows the test and
+error </span><a href="Degrees%20of%20freedom.html">
+<span
+lang=EN-US style='font-family:AdvTimes;'>degrees of freedom</span></a><span
+lang=EN-US style='font-family:AdvTimes;'>, and the </span><a
+href="Critical%20F.html"><span lang=EN-US style='font-family:AdvTimes;'>critical <i>F</i></span></a><span lang=EN-US
+style='font-family:AdvTimes;'> at </span><span
+lang=EN-US>&#945;</span><span
+lang=EN-US style='font-family:AdvTimes;'> = 0.05. For fixed effects, it shows the 
+standardized effect size with 80% 
+detection probability (the value of </span><i><span
+lang=EN-US>&#952; </span></i><span
+lang=EN-US style='font-family:AdvTimes;'>/</span><i><span lang=EN-US>&#963;</span></i><span lang="en-us"> 
+that gives the test a <a href="Power.html">power</a> of 0.8).</span><span
+lang=EN-US style='font-family:AdvTimes;'> </span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:14.15pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>Use the program to evaluate 
+alternative experimental designs for a given workload of data points, targeting 
+a low standardized effect size for treatments. This value will vary according to the distribution of data
+points between levels of sampling units and treatments. For a given total data
+points, it will be increased by
+the inclusion of nesting, covariates, blocking, split plots, or repeated
+measures. These may be desirable or intrinsic features of the experimental
+design, and they will increase </span><a href="Power.html">
+<span
+lang=EN-US style='font-family:AdvTimes;'>power</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> to detect treatment effects if they reduce </span><a
+href="Residual.html"><span lang=EN-US style='font-family:AdvTimes;'>error variances</span></a><span lang=EN-US
+style='font-family:AdvTimes;'> sufficiently to compensate for the </span><span
+lang=EN-US style='font-family:AdvTimes;'> reduction in error </span><a href="Degrees%20of%20freedom.html">
+<span
+lang=EN-US style='font-family:AdvTimes;'>degrees of freedom</span></a><span
+lang=EN-US style='font-family:AdvTimes;'>.</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:14.15pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>A text file 'Factor_levels.txt' will be created to store the <i>N</i>
+lines of factor-level combinations against which to tag your <i>N</i>
+observations of the response.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:-14.2pt;text-autospace:none'>
+<span
+style='font-family:AdvTimes' lang="EN-US">3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span dir=LTR><i><span lang=EN-US
+style='font-family:AdvTimes;'>Calculate statistical power for any balanced
+model</span></i></span><span lang=EN-US style='font-family:AdvTimes;'>. Click </span><a href="Power.exe">
+<span lang=EN-US
+style='font-family:AdvTimes;background:aqua;'>here</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> to download a computer program (Power.exe)
+that calculates </span><a href="Power.html">
+<span
+lang=EN-US style='font-family:AdvTimes;'>statistical power</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> prospectively for fixed or random
+<a href="Factor.html">factors</a> in any balanced model with a
+proposed <a href="Replication.html">size of samples</a>, given a threshold ratio of treatment effect size,
+</span><i><span
+lang=EN-US>&#952;</span></i><span
+lang=EN-US> (the
+standard deviation of </span><span lang=EN-US style='font-family:AdvTimes;'>the treatment variability)</span><span lang=EN-US> to </span>
+<span
+lang=EN-US style='font-family:AdvTimes;'>error effect size, </span><i>
+<span lang=EN-US>&#963;</span></i><span
+lang=EN-US style='font-family:AdvTimes;'> (the standard deviation of the random
+unmeasured variation). It can also calculate the value of </span><i><span
+lang=EN-US>&#952; </span></i><span
+lang=EN-US style='font-family:AdvTimes;'>/</span><i><span lang=EN-US>&#963;</span></i><span
+lang=EN-US style='font-family:AdvTimes;'> required to achieve a target power.</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:21.25pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>A pilot study may be needed to obtain an initial observed </span>
+<i><span lang=EN-US>F</span></i><span
+lang=EN-US> from
+samples of size <i>n</i>. Then</span><span
+lang=EN-US style='font-family:AdvTimes;'> [</span><span
+lang=EN-US>(<i>F</i> - 1)/<i>n</i>]<sup>1/2</sup></span><span
+lang=EN-US style='font-family:AdvTimes;'> will provide an unbiased estimate of the
+population </span><i><span
+lang=EN-US>&#952; </span></i><span
+lang=EN-US style='font-family:AdvTimes;'>/</span><i><span lang=EN-US>&#963;</span></i><span lang=EN-US>, with which to 
+evaluate the potential to gain
+power from more <a href="Replication.html">replication</a> (e.g., Kirk 1968).</span><span
+lang=EN-US style='font-family:AdvTimes;'> Freeware is available elsewhere on the 
+web to further explore the relationships between <i>n</i>, </span><i><span lang=EN-US>&#952;, </span></i>
+<span
+lang=EN-US><i>&#963;</i></span><span
+lang=EN-US style='font-family:AdvTimes;'> and power for specified designs (e.g., </span><a
+href="http://www.cs.uiowa.edu/~rlenth/Power/" target="_blank">
+<span
+lang=EN-US style='font-family:AdvTimes;'>Piface</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> by Russell V. Lenth).</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:21.25pt;text-autospace:none'>&nbsp;
+</p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:-14.2pt;text-autospace:none'>
+<span lang="en-us">4</span><span
+style='font-family:AdvTimes' lang="EN-US">.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span dir=LTR><i><span lang=EN-US
+style='font-family:AdvTimes;'>Calculate relative performance for any balanced
+model</span></i></span><span lang=EN-US style='font-family:AdvTimes;'>. Click </span>
+<span lang=EN-US
+style='font-family:AdvTimes;background:aqua;'>
+<a style="color: blue; text-decoration: none" href="Performance.exe">here</a></span><span
+lang=EN-US style='font-family:AdvTimes;'> to download a computer program (Performance.exe)
+that calculates the </span>performance of a balanced analysis of variance design 
+relative to a reference design for the same treatment(s). The relative 
+performance of the design is given by the fractional size of its error variance 
+that will just match the power of the reference. The value of relative 
+performance is robustly approximated by the ratio of reference to alternative <i>
+&#945;</i> quantiles of the <i>F</i> distribution, multiplied by the ratio of 
+alternative to reference effective sample sizes (Doncaster, Davey &amp; Dixon 2014). 
+By comparing the precision of two designs at equal sensitivity,&nbsp;relative 
+performance provides a useful way to enumerate trade-offs between error variance 
+and error degrees of freedom when considering whether to block random variation 
+or to sample from a more or less restricted domain<span
+lang=EN-US style='font-family:AdvTimes;'>.</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:21.25pt;text-autospace:none'>
+<span lang=EN-US style='font-family:AdvTimes;'>&nbsp;&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:14.2pt;text-indent:-14.2pt;text-autospace:none'>
+<span lang="en-us">5</span><span
+style='font-family:AdvTimes' lang="EN-US">.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span dir=LTR><i><span lang=EN-US
+style='font-family:AdvTimes;'>Find critical </span></i></span>
+<span
+lang=EN-US style='font-family:AdvTimes;'>F<i>-values for any number of test and error
+degrees of freedom, and value of </i></span><span
+lang=EN-US>&#945;</span><span
+lang=EN-US style='font-family:AdvTimes;'>. Click </span><a
+href="Ftable.exe">
+<span lang=EN-US style='font-family:AdvTimes;background:aqua;
+'>here</span></a><span
+lang=EN-US style='font-family:AdvTimes;'> to download a computer program (Ftable.exe)
+that </span>provides <a href="Critical%20F.html">critical
+<i>F</i></a>-values
+for a chosen <i>&#945;</i>, and also gives
+the <a href="Type-1%20error.html">Type-I error</a>
+probability associated with an observed value of <i>F</i>, given test and error <a
+href="Degrees%20of%20freedom.html">degrees of freedom</a>.</p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><b><i><span lang=EN-US>Program citations </span></i></b></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang=EN-US>Doncaster, C. P. (2007) Computer software for
+design of analysis of variance and covariance. Retrieved [date] from
+http://www.southampton.ac.uk/~cpd/anovas/.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<h2><a
+name="_Key_to_types_of_statistical_models"><span lang=EN-US>Key to types of statistical models</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>Use this
+key to identify the appropriate section of model structures above, then look at
+example datasets and analyses.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><span lang="EN-US">1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US dir="LTR">Can you take observations with 
+independently varying residuals that randomly sample from the populations of 
+interest (i.e., from the levels of each factor or factor combination)?
+</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 2.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>No</span></i></span><span
+lang=EN-US> &#8594; identify the dependency structure and explore options to control 
+it in your model, for example by factoring in nuisance variables or 
+subpopulations or by 
+sub-sampling; otherwise the data may not suit
+statistical analysis of any sort.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref65822546"><span lang="EN-US">2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Are you interested
+either in differences between sample averages or in relationships between
+covariates? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 3. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; the data may not suit ANOVA or ANCOVA.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref145007775"><span lang="EN-US">3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Does one or more of
+your explanatory factors vary on a continuous scale (e.g., distance,
+temperature etc) as opposed to a categorical scale (e.g., taxon, sex etc)? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>Yes</span></i></span><span lang=EN-US> &#8594; consider treating the continuous factor as a covariate and
+using ANCOVA designs in Sections </span><a href="#Chapter1"><b>
+<span
+lang=EN-US>1 to 3</span></b></a><span
+lang=EN-US> above; this will be the only option
+if each sampling unit takes a unique value of the factor. The response and/or
+covariate may require transformation to meet the assumption of linearity.
+Analyze with a General Linear Model (GLM) and for non-orthogonal designs
+consider using Type II adjusted SS if cross factors are fixed, or Type III
+adjusted SS if one or more cross factors are random (and an unrestricted model,
+checking correct identification of the denominator MS to the covariate). Be
+aware that adjusted SS can increase or decrease the power to detect main
+effects.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; 4.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref139359366"><span lang="EN-US">4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Can all factor levels
+be randomly assigned to sampling units without stratifying any crossed factors
+and without taking repeated measures on plots or subjects? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 5. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; 9.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a name="_Ref143243470">
+<span lang="EN-US">5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US dir="LTR">Are all combinations of factor levels fully replicated? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 6. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>No</span></i></span><span
+lang=EN-US> &#8594; use an unreplicated design (Section </span><a href="#Chapter7">
+<b><span lang=EN-US>7</span></b></a><span lang=EN-US> above).</span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt'><b><i><span lang=EN-US>Fully randomized and fully replicated designs</span></i></b></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref128920775"><span lang="EN-US">6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Do your samples
+represent the levels of more than one explanatory factor? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 7. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; use a one-factor design (Section </span><a href="#Chapter1">
+<b><span
+lang=EN-US>1</span></b></a><span
+lang=EN-US> above), considering options for
+orthogonal contrasts (e.g., </span><a href="#Model1_1"><span lang=EN-US>model 1.1</span></a><span lang=EN-US> above).</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref128920790"><span lang="EN-US">7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Is each level of one
+factor present in each level of another? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span lang=EN-US>Yes</span></i></span><span
+lang=EN-US> &#8594; 8. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; use a nested design with each level of one factor present in only one level of another
+(Section </span><a href="#Chapter2"><b><span lang=EN-US>2</span></b></a><span lang=EN-US> above).</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref128920828"><span lang="EN-US">8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Use a fully replicated
+factorial design (Section </span><a href="#Chapter3"><b><span lang=EN-US>3</span></b></a><span
+lang=EN-US> above), taking account of any nesting
+within the cross factors (</span><a href="#Model3_3"><span lang=EN-US>model 3.3</span></a><span lang=EN-US> or </span><a href="#Model3_4">
+<span
+lang=EN-US>model 3.4</span></a><span
+lang=EN-US> above). For balanced and orthogonal designs
+with one or more random cross factors, consider using a restricted model, and
+consider <i>post hoc</i> pooling if an
+effect has no exact <i>F</i>-test. If cross
+factors are not orthogonal (e.g., sample sizes are not balanced), use GLM and
+consider using Type II adjusted SS if cross factors are fixed, or Type III
+adjusted SS if one or more cross factors are random (and an unrestricted
+model).</span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt'><b><i><span lang=EN-US>Stratified random designs</span></i></b></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref143661176"><span lang="EN-US">9.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Are sampling units
+grouped spatially or temporally and all treatment combinations randomly
+assigned to units within each group? </span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>Yes</span></i></span><span lang=EN-US> &#8594; use a design with randomized blocks (Section </span><a href="#Chapter4">
+<b><span lang=EN-US>4</span></b></a><span
+lang=EN-US> above). If all factor combinations
+are fully replicated, analyze with Section-</span><a href="#Chapter3"><span lang=EN-US>3</span></a><span lang=EN-US> ANOVA tables; otherwise consider analysis by Model 1 (assumes
+treatment-by-block interactions) or Model 2 (assumes no treatment-by-block
+interactions). For a single treatment factor, consider options to use a </span><a
+href="#BIBvar"><span lang=EN-US>balanced incomplete block</span></a><span
+lang=EN-US> or, with cross factored blocks, a </span><a
+href="#Latinvar"><span lang=EN-US>Latin square</span></a><span
+lang=EN-US> or </span><a
+href="#Youdenvar"><span lang=EN-US>Youden square</span></a><span
+lang=EN-US>. </span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; 10.</span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:25.5pt;text-indent:-25.5pt;'><a
+name="_Ref143661238"><span lang="EN-US">10.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span>
+<span lang=EN-US dir="LTR">Are different
+treatments applied at different spatial scales and their levels randomly
+assigned to blocks or to plots within blocks, etc?</span></a></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>Yes</span></i></span><span lang=EN-US> &#8594; use a design with split plots (Section </span></span><a href="#Chapter5">
+<b><span
+lang=EN-US>5</span></b></a><span
+lang=EN-US> above), taking account of nesting
+among sampling units.<i> </i></span></p>
+
+<p class=MsoNormal style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;
+margin-left:68.05pt;text-indent:-34.05pt;'><span dir=LTR><i><span
+lang=EN-US>No</span></i></span><span lang=EN-US> &#8594; use a repeated-measures 
+design (Section </span><a
+href="#Chapter6"><b><span lang=EN-US>6</span></b></a><span
+lang=EN-US> above) for repeated measurement of
+each sampling unit at treatment levels applied in a temporal or spatial
+sequence. If all factor combinations are fully replicated, analyze with
+Section-</span><a href="#Chapter3"><b><span lang=EN-US>3</span></b></a><span lang=EN-US> ANOVA tables.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_References"><span lang=EN-US>References</span></a></h2>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang=EN-US>Doncaster, C. P. and Davey, A. J. H. (2007) <i>Analysis of Variance and Covariance: How to
+Choose and Construct Models for the Life Sciences</i>. Cambridge University
+Press, Cambridge 302 pp. ISBN-13: 9780521684477. <a href="https://doi.org/10.1017/CBO9780511611377" target="_blank"> https://doi.org/10.1017/CBO978051161137</a></span></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang="en-us">Doncaster, C. P., Davey, A. J. H. 
+&amp; Dixon, P. M. (2014) Prospective evaluation of designs for analysis of variance 
+without knowledge of effect sizes. <i>Environmental and Ecological Statistics</i>, 
+21: </span><span id="page-range">239-261</span><span lang="en-us">.
+<a href="https://doi.org/10.1007/s10651-013-0253-4" target="_blank">https://doi.org/10.1007/s10651-013-0253-4</a>.</span></p>
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang=EN-US>Kirk, R. E. (1968, 1982, 1994) <i>Experimental Design: Procedures for the Behavioral Sciences</i>.
+Brooks/Cole, Belmont, CA.</span></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang=EN-US>Newman, J. A., Bergelson, J. and Grafen, A. (1997)
+Blocking factors and hypothesis tests in ecology: is your statistics text
+wrong? <i>Ecology</i>, 78, 1312-20.</span></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'>
+<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif">R 
+Development Core Team (2010). <i>R: A language and environment for statistical 
+computing</i>. R Foundation for Statistical Computing, Vienna, Austria. ISBN 
+3-900051-07-0, URL
+<a style="color: blue; text-decoration: none; text-underline: none" href="http://www.r-project.org/">
+http://www.R-project.org</a>.</span></p>
+
+<p style='margin-top:3.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:
+21.3pt;text-indent:-21.3pt'><span lang=EN-US>Searle, S. R. (1971, 1997) <i>Linear Models</i>. New York: John Wiley.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>
+<span
+lang=EN-US style='font-family:AdvTimes;'>&nbsp;</span></p>
+
+<h2><span lang="en-us"><a name="Glossary">Glossary</a></span></h2>
+
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Adjusted%20SS.html">adjusted SS</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">analysis of covariance: <i>see</i>
+<a href="ANCOVA.html" style="color: blue; text-decoration: none">ANCOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">analysis of variance: <i>see</i>
+<a href="ANOVA.html" style="color: blue; text-decoration: none">ANOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="ANCOVA.html">ANCOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="ANOVA.html">ANOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">a priori contrasts: <i>see</i>
+<a href="Orthogonal%20contrasts.html" style="color: blue; text-decoration: none">
+orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Assumptions.html">assumptions</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Balance.html">balance</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">balanced non-orthogonal designs: <i>see</i>
+<a href="Balanced%20incomplete%20block.html" style="color: blue; text-decoration: none">balanced incomplete block</a> <i>and</i>
+<a href="Youden%20square-2.html">Youden square</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">balanced complete block: <i>see</i>
+<a href="Complete%20block.html">randomized complete block</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Balanced%20incomplete%20block.html">balanced incomplete block 
+design</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><span style="color: #0000FF"><a href="Block.html">block</a></span></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter4">blocked designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Blocked%20sampling%20units.html">blocked sampling 
+units</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">categorical factor: <i>see</i>
+<a href="Factor.html" style="color: blue; text-decoration: none">factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">continuous factor: <i>see</i> <a href="Covariate.html">
+covariate</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">contrasts: <i>see</i>
+<a href="Orthogonal%20contrasts.html" style="color: blue; text-decoration: none">
+orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">
+<a href="Contrast%20sets.html">contrast sets</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">
+<a href="Covariate.html">covariates</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Critical%20F.html">critical <i>F</i></a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Cross%20factor.html">cross factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">crossover trials: <i>see</i> <a href="Latin%20squares.html">
+Latin squares</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Degrees%20of%20freedom.html">degrees of freedom</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">effect: <i>see</i>
+<a href="Model.html" style="color: blue; text-decoration: none">model</a> <i>and</i>
+<a href="Terms.html">terms</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">effect size: <i>see </i>
+<a href="Power.html" style="color: blue; text-decoration: none">power</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">effective 
+sample size: <i>see</i> <a href="Replication.html">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">error variance: <i>see</i>
+<a href="Residual.html" style="color: blue; text-decoration: none">residual error</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="F%20ratio.html"><i>F</i> ratio</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Factor.html">factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter3">factorial designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">fixed factor: <i>see</i>
+<a href="Factor.html" style="color: blue; text-decoration: none">factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">general linear model: <i>see</i>
+<a href="GLM.html" style="color: blue; text-decoration: none">GLM</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">generalized linear model: <i>see</i>
+<a href="GLM.html" style="color: blue; text-decoration: none">GLM</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="GLM.html">GLM</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">Helmert contrasts: <i>see</i>
+<a href="Orthogonal%20contrasts.html" style="color: blue; text-decoration: none">
+orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Hypothesis.html">hypothesis</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">independent replicates: <i>see</i>
+<a href="Replication.html" style="color: blue; text-decoration: none">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">interaction: <i>see</i>
+<a href="Cross%20factor.html" style="color: blue; text-decoration: none">cross factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Latin%20squares.html">Latin square</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">linear model: <i>see</i>
+<a href="GLM.html" style="color: blue; text-decoration: none">GLM</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">main effect: <i>see </i>
+<a href="Model.html" style="color: blue; text-decoration: none">model</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">mean square: <i>see</i>
+<a href="F%20ratio.html" style="color: blue; text-decoration: none"><i>F</i> 
+ratio</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">missing cell: <i>see</i>
+<a href="Doncaster%26Davey%20-%20Model%203_1%20contrasts.txt">examples of 
+orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Mixed%20model.html">mixed model</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Model%201.html">Model 1</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Model%202.html">Model 2</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Model.html">model</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">multiple regression: <i>see</i>
+<a href="ANCOVA.html" style="color: blue; text-decoration: none">ANCOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter2">nested designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Nesting.html">nesting</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Notation.html">notation</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">null hypothesis: <i>see</i>
+<a href="Hypothesis.html" style="color: blue; text-decoration: none">hypothesis</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">observation: <i>see</i>
+<a href="Replication.html" style="color: blue; text-decoration: none">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter1">one-factor designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">one-way designs: <i>see</i>
+<a href="#Chapter1" style="color: blue; text-decoration: none">one-factor 
+designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Orthogonal%20contrasts.html">orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Orthogonality.html">orthogonality</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">orthogonal unbalanced designs: <i>see</i>
+<a href="Orthogonal%20contrasts.html">orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">planned 
+comparisons: <i>see</i>
+<a href="Orthogonal%20contrasts.html" style="color: blue; text-decoration: none">
+orthogonal contrasts</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Pooling.html">pooling</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Power.html">power</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Quasi%20F.html">quasi <i>F</i></a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">random factor: <i>see</i>
+<a href="Factor.html" style="color: blue; text-decoration: none">factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter4">randomized-block designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Complete%20block.html">randomized complete-block</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">random replicates: <i>see</i>
+<a href="Replication.html" style="color: blue; text-decoration: none">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">regression: <i>see</i>
+<a href="ANCOVA.html" style="color: blue; text-decoration: none">ANCOVA</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter6">repeated-measures designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Repeated-measures%20sampling%20units.html">
+repeated-measures sampling units</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Replication.html">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Residual.html">residual error</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Response.html">response</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Restricted.html">restricted model</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">sample: <i>see</i>
+<a href="Replication.html" style="color: blue; text-decoration: none">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">sampling unit: <i>see</i>
+<a href="Replication.html" style="color: blue; text-decoration: none">replication</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Sequential%20SS.html">sequential SS</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Significance.html">significance</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="#Chapter5">split-plot designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Split-plot%20sampling%20units.html">split-plot 
+sampling units</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">sum of squares: <i>see</i>
+<a href="Adjusted%20SS.html" style="color: blue; text-decoration: none">adjusted 
+SS</a> <i>and</i>
+<a href="Sequential%20SS.html" style="color: blue; text-decoration: none">
+sequential SS</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">
+<a href="Terms.html">terms</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">test hypothesis: <i>see</i>
+<a href="Hypothesis.html" style="color: blue; text-decoration: none">hypothesis</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">treatment: see
+<a href="Factor.html" style="color: blue; text-decoration: none">factor</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">two-way designs: <i>see</i>
+<a href="#Chapter3" style="color: blue; text-decoration: none">factorial designs</a> 
+<i>and</i> <a href="#Chapter4" style="color: blue; text-decoration: none">
+randomized-block designs</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Type-1%20error.html">type-I error</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">type-II error: <i>see</i> <a href="Type-1%20error.html">type-I error</a> 
+<i>and</i> <a href="Power.html" style="color: blue; text-decoration: none">power</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><span style="color: #0000FF"><a href="#Chapter7">unreplicated 
+designs</a></span></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Unrestricted.html">unrestricted model</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">variance: <i>see</i>
+<a href="Residual.html" style="color: blue; text-decoration: none">residual error</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm">variance 
+component: <i>see </i>
+<a href="Power.html" style="color: blue; text-decoration: none">power</a></p>
+<p class=MsoNormal style="text-indent: -21px; margin-left: 0.6cm"><a href="Youden%20square.html">Youden square</a></p>
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'>
+<span lang=EN-US
+style='font-size:9.0pt;font-family:Arial;'>Page
+maintained by <a href="../../index.html">C. P. Doncaster</a></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'>
+<span lang=EN-US
+style='font-size:9.0pt;font-family:Arial;'>Last updated <!--webbot bot="Timestamp" S-Type="EDITED" S-Format="%d %B %Y" startspan -->2 July 2024<!--webbot bot="Timestamp" endspan i-checksum="27306" --></span></p>
+
+<p class=MsoNormal>
+<span lang=EN-US style='font-size:9.0pt;font-family:Arial;
+'><script  type="text/javascript">
+var sc_project=3049886; 
+var sc_invisible=0; 
+var sc_partition=33; 
+var sc_security="3188b015"; 
+</script><script  type="text/javascript" src="../../../../www.statcounter.com/counter/counter_xhtml.js">
+</script></span><span lang=EN-US><a href="http://www.statcounter.com/"><noscript><img
+border=0 width=1 height=1 id="_x0000_i1027"
+src="../../../../c34.statcounter.com/3049886/0/3188b015/0/index.html" alt="hit tracker"
+class=statcounter><o:p></o:p>
+</p>
+
+<p class=MsoNormal><span style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/anovas/datasets/index.htm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:46:22 GMT -->
+</html>

@@ -1,0 +1,15 @@
+Dataplot commands and output:
+
+reset data
+reset i/o
+reset plot control
+set convert character on
+skip 25
+read linewid.dat day position x y
+skip 0
+let b0 = 0.2357
+let b1 = 0.9870
+let w = ((y - b0)/b1) - x
+let sdcal = standard deviation w
+
+> THE COMPUTED VALUE OF THE CONSTANT SDCAL  =  0.62036246E-01 

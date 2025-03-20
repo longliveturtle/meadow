@@ -1,0 +1,786 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/bhpd1/README.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:14 GMT -->
+<head><title> Bayesian software / bhpd1 / instructions </title>
+<style type="text/css">
+a.dumblink:hover
+{
+  text-decoration:underline;
+}
+a.dumblink:link
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink:visited
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink0:visited
+{
+  color:inherit;
+}
+a.dumblink0
+{
+  color:inherit;
+}
+body
+{
+  font-family:Franklin Gothic Medium; font-size:14px;
+}
+div.menuitem1
+{
+  font-size:14px; color:darkgoldenrod; font-weight:bold; padding:0 20px 0 20px;
+}
+div.menuitem1 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem1 a:link
+{
+  text-decoration:none; color:darkgoldenrod;
+}
+div.menuitem1 a:visited
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+div.menuitem2
+{
+  font-size:13px; color:navy; padding:0 20px 0 40px;
+}
+div.menuitem2 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem2 a:link
+{
+  text-decoration:none; color:navy;
+}
+div.menuitem2 a:visited
+{
+  color:navy; text-decoration:none;
+}
+div.menuitem3
+{
+  font-size:12px; color:gray; padding:0 20px 0 50px;
+}
+div.menuitem3 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem3 a:link
+{
+  text-decoration:none; color:gray;
+}
+div.menuitem3 a:visited
+{
+  color:gray; text-decoration:none;
+}
+div.pagesubtitle
+{
+  text-align:left; font-size:20px; font-family:arial black;
+  color:white; padding-left:20px; font-style:italic;
+}
+div.pagetitle
+{
+  text-align:left; font-size:28px; font-family:arial black; font-weight:bold;
+  color:white; padding-left:20px;
+}
+div.pkgnameover
+{
+  color:#6699CC; font-size:20px; padding-top:10px; font-family:haettenschweiler;
+}
+div.softwarename
+{
+  color:#6699CC; font-size:32px; padding-bottom:20px; font-family:bookman old style;
+}
+div.softwaresection
+{
+  color:darkgoldenrod; font-size:16px; padding:30px 0 20px 0;
+}
+li.topmenu a:hover
+{
+  text-decoration:underline;
+}
+li.topmenu a:link
+{
+  color:black; text-decoration:none;
+}
+li.topmenu a:visited
+{
+  color:gray; text-decoration:underline;
+}
+li.whereami a:hover
+{
+  text-decoration:underline;
+}
+li.whereami a:link
+{
+  color:gray; text-decoration:none;
+}
+li.whereami a:visited
+{
+  color:gray; text-decoration:none;
+}
+span.pgmname
+{
+  color:darkgoldenrod; font-size:14px; font-weight:bold;
+}
+td.address
+{
+  color:black; background-color:#6699CC; font-size:14px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 0 1px 0;
+}
+td.menuitems
+{
+  width:400px; vertical-align:top;
+}
+td.normal
+{
+  color:black; font-size:14px;
+}
+td.normal a:link
+{
+  color:black;
+}
+td.normal a:visited
+{
+  color:gray;
+}
+td.pagetitle
+{
+  background-color:#000099; background-image:url(../../img/homepage/idea4i.jpg);
+}
+td.raddress
+{
+  color:black; background-color:#6699CC; font-size:13px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 0;
+}
+td.whereami
+{
+  padding-left:0;
+}
+tr.pagetitle
+{
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 1px;
+}
+ul.topmenu
+{
+  text-align:right;
+}
+ul.topmenu li
+{
+  font-size:14px; color:black; padding-left:20px; display:inline;
+  text-align:right; border-style:solid; border-width:0 1px 0 0;
+  color:#000099;
+}
+ul.whereami
+{
+  text-align:left; border-style:solid; border-width:0 0 1px 0; border-color:darkgoldenrod;
+}
+ul.whereami li
+{
+  font-size:14px; display:inline; text-align:left; color:gray;
+}
+ul.whereami li.here
+{
+  font-size:14px; display:inline; text-align:right; color:crimson;
+}
+</style>
+</head>
+<body>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr><td colspan=3>
+<ul class=topmenu>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/epi-biostat-occh/"> Departement of Epidemiology and Biostatistics </a></li>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/"> McGill University </a></li>
+<li class=topmenu> <a class=dumblink href="../../SiteMap.html"> Site Map </a></li>
+<!-- /ul -->
+</td></tr>
+<tr class=pagetitle>
+<td class=pagetitle>
+<div class=pagetitle> Lawrence Joseph </div>
+<div class=pagesubtitle> Bayesian statistics </div>
+</td>
+<td class=address width="20%" valign=top>
+<a class=dumblink0 href="mailto:lawrence.joseph@mcgill.ca"> </a><br>
+<!--
+-->
+<a class=dumblink href="../../pdf/ljcv.pdf">  </a><br>
+</td>
+<td class=raddress width="20%" valign=top>
+Please Note: Prof. Joseph has retired. <br>
+These pages are left up in case they prove<br>
+useful, but the pages and software will <br>
+no longer be updated. All material and <br>
+software is "as is" with no guarantees <br>
+of functionality or correctness.<br>
+</td>
+</tr>
+<tr><td class=whereami colspan=3>
+<ul class=whereami>
+<li class=whereami> &gt; <a href="../../index.html"> Home </a> </li> &gt <li class=whereami> Bayesian software </li> &gt <li class=whereami> <a href="../Bayesian-Sample-Size.html"> Bayesian Sample Size </a> </li> &gt <li class=here> bhpd1 </li>
+</ul></td></tr>
+</table>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr>
+<td class=menuitems>
+<div class=menuitem1><a href="../../pdf/ljcv.pdf">Complete CV</a></div>
+<div class=menuitem1><a href="../../Research-Interests.html">Research interests</a></div>
+<div class=menuitem1><a href="../../Courses-Taught.html">Courses taught</a></div>
+<div class=menuitem1>Previous courses taught</div>
+<div class=menuitem2><a href="../../courses/EPIB-607/main.html">EPIB-607 Principles of Inferential Statistics in Medicine</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-613/main.html">EPIB-613 Introduction to Statistical Software</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-621/main.html">EPIB-621 Data Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-651/main.html">EPIB-651 Bayesian Analysis in Medicine</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-668/main.html">EPIB-668 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-669/main.html">EPIB-669 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-675/main.html">EPIB-675 Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-682/main.html">EPIB-682 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-683/main.html">EPIB-683 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem1>Publications</div>
+<div class=menuitem2>Methodological publications</div>
+<div class=menuitem3><a href="../../publications/Methodological/Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Meta-Analysis.html">Meta analysis</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Other-Topics.html">Other topics</a></div>
+<div class=menuitem2>Medical publications</div>
+<div class=menuitem3><a href="../../publications/Medical/Allergy-And-Immunology.html">Allergy and immunology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Asthma.html">Asthma</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Cardiology.html">Cardiology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Gastroenterology.html">Gastroenterology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Osteoporosis.html">Osteoporosis</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Quality-Of-Life.html">Quality of Life</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Rheumatology.html">Rheumatology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Other.html">Other</a></div>
+<div class=menuitem2><a href="../../publications/Book.html">Book</a></div>
+<div class=menuitem1>Bayesian software</div>
+<div class=menuitem2><a href="../Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem2><a href="../Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem2><a href="../Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem2><a href="../Diagnostic-Testing-In-Genetics.html">Diagnostic testing in Genetics</a></div>
+<div class=menuitem1><a href="../../Links.html">Links</a></div>
+</td>
+<td class=normal valign=top>
+<div class=pkgnameover>bhpd1</div>
+<div class=softwarename>Sample size calculations for binomial proportions via highest posterior density intervals</div>
+<div class=softwaresection>Summary</div>
+<span class=pgmname>bhpd1</span> is a FORTRAN 77 program to calculate sample size requirements
+in the context of a binomial experiment. The program was written by
+Lawrence Joseph, David B. Wolfson and Roxane du Berger and
+developed in a SunOS 4.1.2 operating environment on a SPARC
+station ELC. bhpd1 uses three different Bayesian approaches to
+sample size calculations based on highest posterior density
+intervals (HPD). These criteria are given by:
+<ul>
+<li> Average Coverage Criterion
+<li> Average Length Criterion
+<li> Worst Outcome Criterion
+</ul>
+In addition, bhpd1 calculates minimum possible HPD coverage probability
+and maximum HPD length for each given sample size, as well as the
+pre-posterior probability that these events will occur, according
+to the prior input. Finally, bhpd1 calculates the sample size
+requirements for a binomial parameter by the Standard Normal
+Theory Based Frequentist Method.
+<br><br>
+The successful programming of the algorithms is largely due to
+the following sources for which we are thankful:
+<pre>
+Abramowitz, M., and Stegun, I.A. (ed.) (1972)
+Handbook of Mathematical Functions
+New York: Dover Publications Inc.
+<br>
+Press, W.H., Flannery, B.P., Teukolsky, S.A., and  Vetterling, W.T. (1990)
+Numerical Recipes, The Art of Scientific Computing (Fortran Version)
+New York: Cambridge University Press.
+</pre>
+<div class=softwaresection>Documentation</div>
+Detailed information about the implementation of the Bayesian
+approaches to sample size requirements are found in our manuscript:
+<br><br>
+<a href="../../publications/Methodological/ss_binom.pdf" target="_blank">
+Sample size calculations for binomial proportions via highest
+posterior density intervals </a> <br>
+by Lawrence Joseph, David B. Wolfson and Roxane du Berger. <br>
+The Statistician, 1995;44(2):143-154
+<br><br>
+Questions or comments regarding the program bhpd1 or requests for a
+copy of the manuscript may be e-mailed to Lawrence Joseph at
+<a href="mailto:lawrence.joseph@mcgill.ca"> lawrence.joseph@mcgill.ca</a>.
+<div class=softwaresection>Files</div>
+Once you open the package bhpd1.doc (with sh), you will note the presence
+of the following files:
+<br><br>
+<pre>
+Ex.input     README.BHPD1  bhpd.f       frqsmp.f     readpar.f    util.f
+Makefile     baysmp.f      cover.f      headers.f    search.f
+</pre>
+<div class=softwaresection>Makefile</div>
+For convenience, we have provided a Makefile to compile  <br>
+and link the FORTRAN code into one executable file,  <br>
+called bhpd1. The command <i> make </i> works on a Sparc station.  <br>
+If you encounter unnecessary difficulties, compile and link  <br>
+with the following command:
+<pre>
+f77 -o bhpd1 *.f
+</pre>
+<div class=softwaresection>Example of execution</div>
+bhpd1 is primarily designed for interactive use. bhpd1 usually executes
+in a reasonable amount of time (a few minutes). When the coverage
+requested is large (close to one), or the interval length
+small (close to zero), or both, bhpd1 will finish execution in a much
+longer time. In the latter case, it is wise to run bhpd1 in background.
+We have not yet experienced strange program behaviours in the extreme
+coverage and length limits, but this occurence is not impossible.
+<br><br>
+To illustrate interactive use of bhpd1, type
+<pre>
+% bhpd1
+***************************************************************************
+This program calculates the sample size requirements for a
+Binomial Parameter using four different methods:
+1. Standard Normal Theory Based Frequentist Method
+2. Bayesian Average Coverage Criterion (ACC)
+3. Bayesian Average Length   Criterion (ALC)
+4. Bayesian Worst   Outcome  Criterion (WOC)
+This program also calculates minimum possible HPD coverage
+probability and maximum HPD length for each given sample
+size, as well as the pre-posterior probability that these
+events will occur, according to the prior input.
+These criteria are described in
+Joseph,L., Wolfson, D. and du Berger, R.
+Sample size calculations for binomial proportions
+via highest posterior density intervals,
+The Statistician, to appear in 1995, 44(2).
+The following parameters must be input:
+- Beta prior parameters (a,b) for the binomial parameter.
+The mean of this distribution is a/(a+b),
+and the variance is a*b/((a+b)^2*(a+b+1));
+- The desired HPD coverage probability;
+- The desired HPD interval length;
+- The point estimate for the binomial parameter
+(used for frequentist method only).
+***************************************************************************
+The default values for the prior parameters are a = 1.00000
+and b = 1.00000, which give a uniform distribution
+Type &lt;y&gt;&lt;enter&gt; to accept these values, other &lt;key&gt; to MODIFY:
+y
+The default value for HPD coverage
+is = 0.95000
+Type &lt;y&gt;&lt;enter&gt; to accept this value, other &lt;key&gt; to MODIFY:
+n
+Enter HPD coverage
+.96
+The default value for HPD length
+is = 0.10000
+Type &lt;y&gt;&lt;enter&gt; to accept this value, other &lt;key&gt; to MODIFY:
+n
+Enter HPD length
+.09
+The default value for the point estimate of the binomial
+parameter is a/(a+b) = 0.50000,
+the mean of the prior distribution
+Type &lt;y&gt;&lt;enter&gt; to accept this value, other &lt;key&gt; to MODIFY:
+y
+***************************************************************************
+You have chosen the following parameters:
+Beta parameters:          a = 0.10000000000D+01
+b = 0.10000000000D+01
+HPD coverage probability  c = 0.96000000000D+00
+HPD interval length       w = 0.90000000000D-01
+Point estimate            p = 0.50000000000D+00
+Type &lt;y&gt;&lt;enter&gt; to CONFIRM, other &lt;key&gt; to further MODIFY any parameter:
+n
+Modify which parameter?
+Type [&lt;a&gt;&lt;b&gt;&lt;c&gt;&lt;w&gt;&lt;p&gt;or&lt;all&gt;]&lt;enter&gt;
+a
+Enter Beta a
+and Beta b
+2
+1.5
+***************************************************************************
+You have chosen the following parameters:
+Beta parameters:          a = 0.20000000000D+01
+b = 0.15000000000D+01
+HPD coverage probability  c = 0.96000000000D+00
+HPD interval length       w = 0.90000000000D-01
+Point estimate            p = 0.57142857143D+00
+Type &lt;y&gt;&lt;enter&gt; to CONFIRM, other &lt;key&gt; to further MODIFY any parameter:
+y
+***************************************************************************
+Do you wish results output to Screen or File?
+Type &lt;y&gt;&lt;enter&gt; for SCREEN, other &lt;key&gt; for FILE:
+y
+***************************************************************************
+The program may take a few minutes to run.
+Running time varies with the input parameters.
+Please be patient...
+***************************************************************************
+Given point estimate = 0.57142857143
+Frequentist sample size =        511
+***************************************************************************
+Average Coverage Criterion
+Step   0            511
+Step   1            255
+Step   2            383
+Step   3            447
+Step   4            415
+Step   5            399
+Step   6            407
+Step   7            411
+Step   8            413
+Step   9            412
+ACC sample size =        412
+For a sample size of        412,
+the minimum HPD coverage of fixed length   0.90000D-01
+over all possible data values is 0.93381538084D+00.
+This interval is (0.45560132480D+00, 0.54560132480D+00).
+For a sample size of        412,
+the maximum length
+required for 0.96000000000D+00 equal-tailed (non HPD)
+coverage is 0.10055879113D+00.
+This interval is (0.45031918322D+00, 0.55087797435D+00).
+For a sample size of        412,
+the maximum HPD length
+required for 0.96000000000D+00 HPD
+coverage is 0.10055879082D+00.
+This interval is (0.45032111542D+00, 0.55087990624D+00).
+The event of        205 successes
+in        412 trials occurs with
+prior probability of 0.31976102838D-02.
+***************************************************************************
+Average Length Criterion
+Step   0            412
+Step   1            206
+Step   2            309
+Step   3            360
+Step   4            386
+Step   5            373
+Step   6            379
+Step   7            376
+Step   8            377
+Step   9            378
+ALC sample size =        378
+For a sample size of        378,
+the maximum HPD length   of fixed coverage 0.96000D+00
+over all possible data values is 0.10492601361D+00.
+This interval is (0.44819090894D+00, 0.55311692255D+00).
+For a sample size of        378,
+the minimum HPD coverage
+required for 0.90000000000D-01 HPD
+length   is 0.92164407237D+00.
+This interval is (0.45565519843D+00, 0.54565519843D+00).
+The event of        188 successes
+in        378 trials occurs with
+prior probability of 0.34832345729D-02.
+***************************************************************************
+Worst Outcome Criterion
+Step   0           1022
+Step   1            511
+Step   2            766
+Step   3            638
+Step   4            574
+Step   5            542
+Step   6            526
+Step   7            518
+Step   8            514
+Step   9            516
+Step  10            515
+WOC sample size =        516
+For a sample size of        516,
+the minimum HPD coverage of fixed length   0.90000D-01
+over all possible data values is 0.96007401092D+00.
+This interval is (0.45548047885D+00, 0.54548047885D+00).
+For a sample size of        516,
+the maximum length
+required for 0.96000000000D+00 equal-tailed (non HPD)
+coverage is 0.89966629412D-01.
+This interval is (0.45549593033D+00, 0.54546255974D+00).
+For a sample size of        516,
+the maximum HPD length
+required for 0.96000000000D+00 HPD
+coverage is 0.89966629269D-01.
+This interval is (0.45549716615D+00, 0.54546379542D+00).
+The event of        257 successes
+in        516 trials occurs with
+prior probability of 0.25564038885D-02.
+***************************************************************************
+</pre>
+<br><br>
+We have included in this package a parameter file called
+<a href="Ex.html"> Ex.input </a>
+to illustrate background execution of bhpd1. This is especially
+useful when a job is suspected to require much time.
+<br><br>
+<pre>
+% cat Ex.input
+n                      #Default Beta parameters a,b where mean=a/(a+b)
+2,1.5                  #Beta parameters
+n                      #Default Coverage
+0.99                   #Coverage
+n                      #Default interval length
+0.04                   #Length
+n                      #Default binomial parameter estimate
+0.5                    #Point estimate of binomial parameter
+y                      #Choice confirmation
+n                      #Screen output
+b-2-1.5-.99-.04-.5     #File name
+</pre>
+<br>
+For <i> nice </i> background execution of bhpd1, type <br>
+<pre>
+% nice bhpd1 < Ex.input > out &
+</pre>
+<br>
+bhpd1 reads the contents of <a href="Ex.html">Ex.input</a> and dumps to <b>out</b>
+all the successfully read parameter information, including
+the file name <b> b-2-1.5-.99-.04-.5 </b>. This file will contain
+sample size calculations for each of the Bayesian criteria.
+<br><br>
+<pre>
+% cat -n b-2-1.5-.99-.04-.5
+1      Given the following user input:
+2
+3        Beta parameters:          a = 0.20000000000D+01
+4
+5                                  b = 0.15000000000D+01
+6
+7        HPD coverage probability  c = 0.99000000000D+00
+8
+9        HPD interval length       w = 0.40000000000D-01
+10
+11
+12      ***************************************************************************
+13
+14        Given point estimate = 0.50000000000
+15          Frequentist sample size =       4147
+16
+17      ***************************************************************************
+18
+19
+20      Average Coverage Criterion
+21
+22        Step   0           4147
+23        Step   1           2073
+24        Step   2           3110
+25        Step   3           3628
+26        Step   4           3369
+27        Step   5           3498
+28        Step   6           3433
+29        Step   7           3465
+30        Step   8           3449
+31        Step   9           3441
+32        Step  10           3437
+33        Step  11           3435
+34        Step  12           3434
+35
+36
+37                            ACC sample size =       3435
+38
+39          For a sample size of       3435,
+40            the minimum HPD coverage of fixed length   0.40000D-01
+41            over all possible data values is 0.98104004914D+00.
+42              This interval is (0.47992732919D+00, 0.51992732919D+00).
+43
+44          For a sample size of       3435,
+45            the maximum length
+46            required for 0.99000000000D+00 equal-tailed (non HPD)
+47            coverage is 0.43909109763D-01.
+48              This interval is (0.47797281841D+00, 0.52188192817D+00).
+49
+50          For a sample size of       3435,
+51            the maximum HPD length
+52            required for 0.99000000000D+00 HPD
+53            coverage is 0.43909109763D-01.
+54              This interval is (0.47797279023D+00, 0.52188189999D+00).
+55
+56          The event of       1717 successes
+57            in       3435 trials occurs with
+58            prior probability of 0.38573669212D-03.
+59
+60      ***************************************************************************
+61
+62
+63        Average Length Criterion
+64
+65        Step   0           3435
+66        Step   1           1717
+67        Step   2           2576
+68        Step   3           3005
+69        Step   4           3220
+70        Step   5           3112
+71        Step   6           3058
+72        Step   7           3031
+73        Step   8           3044
+74        Step   9           3037
+75        Step  10           3040
+76        Step  11           3042
+77        Step  12           3041
+78
+79
+80                            ALC sample size =       3041
+81
+82          For a sample size of       3041,
+83            the maximum HPD length   of fixed coverage 0.99000D+00
+84            over all possible data values is 0.46661439137D-01.
+85              This interval is (0.47658723049D+00, 0.52324866962D+00).
+86
+87          For a sample size of       3041,
+88            the minimum HPD coverage
+89            required for 0.40000000000D-01 HPD
+90            length   is 0.97274051750D+00.
+91              This interval is (0.47991791841D+00, 0.51991791841D+00).
+92
+93          The event of       1520 successes
+94            in       3041 trials occurs with
+95            prior probability of 0.43567886022D-03.
+96
+97      ***************************************************************************
+98
+99
+100         Worst Outcome Criterion
+101
+102        Step   0           4147
+103        Step   1           2073
+104        Step   2           3110
+105        Step   3           3628
+106        Step   4           3887
+107        Step   5           4017
+108        Step   6           4082
+109        Step   7           4114
+110        Step   8           4130
+111        Step   9           4138
+112        Step  10           4142
+113        Step  11           4140
+114        Step  12           4141
+115
+116
+117                            WOC sample size =       4141
+118
+119          For a sample size of       4141,
+120            the minimum HPD coverage of fixed length   0.40000D-01
+121            over all possible data values is 0.99000456637D+00.
+122              This interval is (0.47993971436D+00, 0.51993971436D+00).
+123
+124          For a sample size of       4141,
+125            the maximum length
+126            required for 0.99000000000D+00 equal-tailed (non HPD)
+127            coverage is 0.39997549597D-01.
+128              This interval is (0.47994095896D+00, 0.51993850855D+00).
+129
+130          For a sample size of       4141,
+131            the maximum HPD length
+132            required for 0.99000000000D+00 HPD
+133            coverage is 0.39997549597D-01.
+134              This interval is (0.47994093956D+00, 0.51993848915D+00).
+135
+136          The event of       2070 successes
+137            in       4141 trials occurs with
+138            prior probability of 0.32000608811D-03.
+139
+140      ***************************************************************************
+141
+142
+143            Elapsed time 1301.940     seconds
+144
+</pre>
+<div class=softwaresection>Output description</div>
+In this section, we describe in detail the output
+file <b> b-2-1.5-.99-.04-.5 </b> produced above.
+<br><br>
+<ul type=disc>
+<li>Lines 1-9 contain the requested parameters: Beta parameters (a=2,b=1.5),
+99% HPD coverage probability and .04 HPD interval length.
+<br><br>
+<li>Given the binomial parameter point estimate, bhpd1 computes the
+sample size, according to the standard Normal theory based
+frequentist method.
+Lines 14 and 15 are the result of this calculation (4147).</li>
+</ul>
+Lines 22 to 58: (Average Coverage Criterion)
+<br><br>
+<ul type=disc>
+<li>Lines 22-37 - bhpd1 takes 12 bisection steps and concludes that,
+given the specified Beta parameters (a,b), on average a 99%
+coverage of fixed length .04 requires a sample size of 3435.</li>
+<li>Lines 39-54 - the minimum HPD coverage of fixed length 0.04
+is 98.10%, the maximum equal-tailed (non HPD) length is 0.0439,
+and the maximum HPD length is 0.0439. Note that Beta distributions
+are not always symmetric, such that equal-tailed and HPD interval
+lengths may differ.</li>
+<li>lines 56-58 - The minimum HPD coverage of fixed length
+occurs at 1717. In a sample size of 3435, this event
+occurs with prior probability of 0.0004. </li>
+</ul>
+Lines 65 to 95: (Average Length Criterion)
+<br><br>
+<ul type=disc>
+<li>Lines 65-80 - bhpd1 takes 12 bisection steps and concludes that,
+given the specified Beta parameters (a,b), on average a 0.04
+length of fixed coverage 99% requires a sample size of 3041.</li>
+<li>Lines 82-91 - the maximum HPD length of fixed coverage 99%
+is 0.0467, the minimum HPD coverage required for 0.04 HPD
+length is 97.27%. </li>
+<li>Lines 93-95 - The maximum HPD length of fixed coverage
+occurs at 1520. In a sample size of 3041, this event
+occurs with prior probability of 0.0004.</li>
+</ul>
+<br><br>
+Lines 102 to 139: (Worst Outcome Criterion)
+<br><br>
+<ul type=disc>
+<li>Lines 102-117 - bhpd1 takes 12 bisection steps and concludes that,
+given the specified Beta parameters (a,b), a fixed 99%
+coverage of fixed length .04 requires a sample size of 4141.</li>
+<li>Lines 119-134 - the minimum HPD coverage of fixed length 0.04
+is 99.00%, the maximum equal-tailed (non HPD) length is 0.0400,
+and the maximum HPD length is 0.0400. Note that Beta distributions
+are not always symmetric, such that equal-tailed and HPD interval
+lengths may differ.</li>
+<li>Lines 136-138 - The minimum HPD coverage of fixed length
+occurs at 2070. In a sample size of 4141, this event
+occurs with prior probability of 0.0003. </li>
+</ul>
+<div class=softwaresection>Copyright</div>
+&copy; Copyright Lawrence Joseph, David Wolfson and Roxane du Berger 1994
+<br><br>
+<span class=pgmname>bhpd1</span> is a program written by Lawrence Joseph, David Wolfson and
+Roxane du Berger at the Division of Clinical Epidemiology,
+Department of Medicine, Montreal General Hospital. This program
+is an implementation of the manuscript
+<br><br>
+<a href="../../publications/Methodological/ss_binom.pdf" target="_blank">
+Sample size calculations for binomial proportions via highest
+posterior density intervals </a> <br>
+by Lawrence Joseph, David B. Wolfson and Roxane du Berger. <br>
+The Statistician, 1995;44(2):143-154
+<br><br>
+You are free to use this program, for non-commercial purposes only,
+under two conditions:<br>
+<ol>
+<li> This note is not to be removed;
+<li> Publications using bhpd1 results should reference the publication
+mentioned above.
+</ol>
+<br>
+Please e-mail questions, comments, responses or requests to
+<a href="mailto:lawrence.joseph@mcgill.ca"> lawrence.joseph@mcgill.ca </a>
+<br>
+or write to
+<pre>
+Lawrence Joseph
+Division of Clinical Epidemiology
+McGill University Health Centre
+Royal Victoria Hospital
+687 Pine Avenue West
+V Building, Room V2.10
+Montreal, Quebec
+Canada, H3A 1A1
+</pre>
+</td>
+</tr>
+</table>
+</body>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/bhpd1/README.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:14 GMT -->
+</html>

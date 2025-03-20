@@ -1,0 +1,50 @@
+1.1  ONE-FACTOR MODEL Y = A + e
+
+
+Data for Figure 9(a):
+
+Ingestion rate	Prey density
+0.2500		0.1136
+0.1250		0.0833
+0.0833		0.0625
+0.0625		0.0592
+0.0500		0.0500
+0.0417		0.0458
+0.0357		0.0357
+0.0313		0.0339
+0.0278		0.0302
+0.0250		0.0255
+
+
+Data for Figure 9(b), where x = 1/{ingestion rate} and y = 1/{prey density}:
+
+X	Y
+ 4.00	 8.80
+ 8.00	12.00
+12.00	16.00
+16.00	16.88
+20.00	20.00
+24.00	21.83
+28.00	28.00
+32.00	29.53
+36.00	33.13
+40.00	39.29
+
+
+Analysis of response Y (item-item interval) to the term X (area per item),
+declaring term: X
+
+Model 1.1(ii) X is a covariate of the response:
+
+  Source   DF       SS      MS       F      P
+1 X         1   835.74  835.74  386.74 <0.001
+2 Residual  8    17.29    2.16 
+  Total     9   853.02
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

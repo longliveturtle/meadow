@@ -1,0 +1,62 @@
+script command            menu/dialog box equivalent
+
+display(option)           Options -> Output options... -> option = "window" or "log"
+
+check(model file)         Model -> Specification... -> check model
+data(data file)           Model -> Specification... -> load data
+blockfe(option)           Options -> Blocking options... -> fixed effects => option
+compile(chains)           Model -> Specification... -> num of chains => chains + compile
+inits(chain, inits file)  Model -> Specification... -> for chain => chain + load inits
+gen.inits()               Model -> Specification... -> gen inits
+
+update(iterations)        Model -> Update... -> updates => iterations + update
+refresh(every)            Model -> Update... -> refresh => every
+over.relax(option)        Model -> Update... -> over relax => option
+thin.updater(thin)        Model -> Update... -> thin => thin
+
+beg(iter)                 Inference -> Samples... -> beg => iter
+end(iter)                 Inference -> Samples... -> end => iter
+first(iter)               Inference -> Samples... -> chains => iter
+last(iter)                Inference -> Samples... -> to => iter
+thin.samples(thin)        Inference -> Samples... -> thin => thin
+set(node)                 Inference -> Samples... -> node => node + set
+clear(node)               Inference -> Samples... -> node => node + clear
+stats(node)               Inference -> Samples... -> node => node + stats
+density(node)             Inference -> Samples... -> node => node + density
+autoC(node)               Inference -> Samples... -> node => node + auto cor
+trace(node)               Inference -> Samples... -> node => node + trace
+history(node) ) ) )       Inference -> Samples... -> node => node + history
+quantiles(node)           Inference -> Samples... -> node => node + quantiles
+gr(node)                  Inference -> Samples... -> node => node + bgr diag
+coda(node, file stem)1    Inference -> Samples... -> node => node + coda
+
+set.summary(node)         Inference -> Summary... -> node => node + set
+stats.summary(node)       Inference -> Summary... -> node => node + stats
+mean.summary(node)        Inference -> Summary... -> node => node + mean
+clear.summary(node)   )   Inference -> Summary... -> node => node + clear
+
+set.rank(node)            Inference -> Rank... -> node => node + set
+stats.rank(node)          Inference -> Rank... -> node => node + stats
+hist.rank(node)           Inference -> Rank... -> node => node + histogram
+clear.rank(node)          Inference -> Rank... -> node => node + clear
+
+dic.set()                 Inference -> DIC... -> set
+dic.stats()               Inference -> DIC... -> DIC
+
+quit()                    File -> Exit
+save(file)2               File -> Save As... -> File name: => file + Save
+
+script(file)3             Model -> Script
+
+1 If the file stem is left blank the CODA output is written to windows
+(one for each chain plus one for the index).  If the file stem is not
+blank then the CODA output is written to separate text files, each
+starting with file stem.
+
+2 If the file ends with ".txt" the log window is saved to a text file
+(with all graphics, fonts, etc., stripped out); otherwise the log window
+is saved as is.
+
+3 Runs the script stored in file.
+
+

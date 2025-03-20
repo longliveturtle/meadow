@@ -1,0 +1,24 @@
+* copper.sas, acid copper pattern plating experiment, Table 16.15, p594;
+;
+* Enter data of the first-order design and code levels;
+DATA COPPER;
+  INPUT XA XB S;
+  ZA = (XA - 10.5);
+  ZB = (XB - 36)/5;
+  LINES;
+   9.5 31 5.60
+   9.5 41 6.45
+  11.5 31 4.84
+  11.5 41 5.19
+  10.5 36 4.32
+  10.5 36 4.25
+;
+* Analysis of the first-order design;
+PROC GLM;
+  MODEL S = ZA ZB;
+;
+* Add model terms to test for lack of fit;
+PROC GLM;
+  MODEL S = ZA ZB ZA*ZB ZA*ZA;
+;
+run;

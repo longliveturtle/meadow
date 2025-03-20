@@ -1,0 +1,68 @@
+* UAV3.sas, UAV switch experiment, Table 19.19, p736;
+;
+DATA UAV3;
+  INPUT A W B TIME;
+  LINES;
+  1 1 1  6
+  1 1 2 16
+  1 2 1  5
+  1 2 2 22
+  1 3 1  5
+  1 3 2 16
+  1 4 1  5
+  1 4 2 20
+  1 5 1  5
+  1 5 2 12
+  1 6 1  7
+  1 6 2 18
+  1 7 1  5
+  1 7 2 16
+  1 8 1  6
+  1 8 2 14
+  2 1 1  7
+  2 1 2  6
+  2 2 1  6
+  2 2 2  7
+  2 3 1  5
+  2 3 2  6
+  2 4 1  6
+  2 4 2  8
+  2 5 1  5
+  2 5 2  6
+  2 6 1  6
+  2 6 2  6
+  2 7 1  4
+  2 7 2  7
+  2 8 1  4
+  2 8 2  6
+;
+PROC GLM;
+  TITLE 'Proc GLM: full model';
+  CLASS A W B;
+  MODEL TIME = A | B W(A);
+  RANDOM W(A) / TEST;
+  LSMEANS A / CL PDIFF E = W(A); * need PDIFF, else E = mse;
+  LSMEANS A*B; * SAS would erroneously use MSE for CLs;
+;
+PROC MIXED NOBOUND;
+  TITLE 'Proc Mixed NoBound';
+  CLASS A W B;
+  MODEL TIME = A | B / DDFM = SAT;
+  RANDOM W(A);
+  LSMEANS A A*B / CL DIFF;
+;
+PROC MIXED;
+  TITLE 'Proc Mixed (Bounded)';
+  CLASS A W B;
+  MODEL TIME = A | B / DDFM = SAT;
+  RANDOM W(A);
+  LSMEANS A A*B / CL DIFF;
+;
+* Dropping W(A) from the Proc GLM model;
+PROC GLM;
+  TITLE 'Proc GLM: W(A) dropped from model';
+  CLASS A B;
+  MODEL TIME = A | B;
+  LSMEANS A A*B / CL PDIFF;
+;
+run;

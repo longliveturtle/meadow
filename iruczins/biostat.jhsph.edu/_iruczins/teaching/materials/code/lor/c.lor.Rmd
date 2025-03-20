@@ -1,0 +1,291 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Logistic Regression
+
+#### Example from class: spider mites 
+
+The data are in the SPH.140.615 package.
+
+```{r}
+library(SPH.140.615)
+example(spiders)
+```
+
+Fit the logistic regression model.
+
+```{r}
+glm.out <- glm(n.dead/n ~ dose, data=spiders, weights=n, family=binomial(link=logit))
+summary(glm.out)$coef
+```
+
+Plot the data with the fitted curve.
+
+```{r}
+par(las=1)
+plot(n.dead/n ~ dose, data=spiders, lwd=2, ylim=c(0,1), ylab="proportion dead")
+u <- par("usr")
+x <- seq(0,u[2],len=250)
+y <- predict(glm.out, data.frame(dose=x), type="response")
+lines(x, y, col="blue", lwd=2)
+```
+
+##### Interpretation of the model
+
+The model parameters from the logistic model.
+
+```{r}
+params <- glm.out$coef
+params
+```
+
+When the dose is equal to zero, the log odds of death among the spider mites is
+
+```{r}
+params[1]
+```
+
+When the dose is equal to zero, the probability of death among the spider mites is
+
+```{r}
+exp(params[1])/(1+exp(params[1]))
+```
+
+Comparing a spider mite receiving a dose one unit larger than another spider mite, the log odds ratio (or equivalently, difference in log odds) of death is 
+
+```{r}
+params[2]
+```
+
+In other words, the odds of death are
+
+```{r}
+exp(params[2])
+```
+
+times larger for the spider mite receiving the higher dose.
+
+##### What is the LD50?
+
+```{r}
+ld50 <- -params[1]/params[2]
+ld50
+```
+
+Calculate the 95% confidence interval using a function from the SPH.140.615 package to calculate the estimated standard error.
+
+```{r}
+se.ld50 <- ld50se(glm.out)
+se.ld50
+ci.ld50 <- ld50 + c(-1,1) * qnorm(0.975) * se.ld50
+ci.ld50
+```
+
+##### Alternative fitting of the logistic regression
+
+Sometimes the data are recorded for each experimental unit, with individual outcome (e.g., 0/1, alive/dead, etc).
+
+```{r}
+d <- spiders$dose
+n0 <- 25-spiders$n.dead
+n1 <- spiders$n.dead
+d0 <- rep(d,n0)
+d1 <- rep(d,n1)
+y0 <- rep(0,sum(n0))
+y1 <- rep(1,sum(n1))
+dat <- data.frame(y=c(y0,y1),dose=c(d0,d1))
+dim(dat)
+head(dat)
+tail(dat)
+table(dat$y,dat$dose)
+```
+
+The logistic regression for this data format.
+
+```{r}
+glm.out <- glm(y ~ dose, data=dat, family=binomial(link=logit))
+summary(glm.out)$coef
+```
+
+#### Example from class: tobacco budworms
+
+The data are in the SPH.140.615 package, and use log2 dose.
+
+```{r}
+worms
+worms$log2dose <- log2(worms$dose)
+worms
+```
+
+Fit the model, sexes completely different.
+
+```{r}
+glm.out <- glm(n.dead/n ~ sex*log2dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.out)$coef
+```
+
+Fit the model with different slopes but common intercept.
+
+```{r}
+glm.out <- glm(n.dead/n ~ log2dose + sex:log2dose, weights=n, data=worms, family=binomial(link=logit))
+summary(glm.out)$coef
+```
+
+Plot the data with the fitted curves.
+
+```{r}
+par(las=1)
+plot(n.dead/n ~ log2dose, data=worms, col=ifelse(sex=="male","blue","red"), lwd=2, ylim=c(0,1), 
+     xlab="log2 dose", ylab="proprtion dead")
+u <- par("usr")
+x <- seq(0,u[2],len=250)
+ym <- predict(glm.out, data.frame(log2dose=x,sex=factor(rep("male",length(x)))), type="response")
+lines(x, ym, col="blue")
+yf <- predict(glm.out, data.frame(log2dose=x,sex=factor(rep("female",length(x)))), type="response")
+lines(x, yf, col="red")
+legend(u[2], u[3], col=c("blue","red"), lty=1, xjust=1, yjust=0, c("Male","Female"))
+```
+
+##### Interpretation of the model
+
+The model parameters from the logistic model.
+
+```{r}
+params <- glm.out$coef
+params
+```
+
+The intercept and slope for the female tobacco budworms.
+
+```{r}
+params[1:2]
+```
+
+The slope for the male tobacco budworms.
+
+```{r}
+params[2]+params[3]
+```
+
+The intercept and slope for the male tobacco budworms.
+
+```{r}
+c(params[1], params[2]+params[3])
+```
+
+When the dose is equal to one (i.e., the log2 dose is 0), the log odds of death among the tobacco budworms (both male and female) is
+
+```{r}
+params[1]
+```
+
+When the dose is equal to one (i.e., the log2 dose is 0), the probability of death among the tobacco budworms (both male and female) is
+
+```{r}
+exp(params[1])/(1+exp(params[1]))
+```
+
+Comparing a female tobacco budworm receiving a dose twice as large as another female tobacco budworm (i.e., the log2 dose difference is 1), the log odds ratio of death is 
+
+```{r}
+params[2]
+```
+
+In other words, the odds of death are
+
+```{r}
+exp(params[2])
+```
+
+times larger for the female tobacco budworm receiving the higher dose.
+
+Comparing a male tobacco budworm receiving a dose twice as large as another male tobacco budworm (i.e., the log2 dose difference is 1), the log odds ratio of death is 
+
+```{r}
+params[2]+params[3]
+```
+
+In other words, the odds of death are
+
+```{r}
+exp(params[2]+params[3])
+```
+
+times larger for the male tobacco budworm receiving the higher dose.
+
+#### Example from class: the ticks on the clay islands, revisited
+
+The data.
+
+```{r}
+ticks
+```
+
+Calculating the total number of ticks under the respective conditions.
+
+```{r}
+ticks$n <- ticks$T + ticks$U
+ticks
+```
+
+Fit the full model, will all higher order interactions.
+
+```{r}
+glm.out1 <- glm(T/n ~ Tsex * Leg * Dsex, data=ticks, weights=n, family=binomial(link=logit))
+summary(glm.out1)$coef
+```
+
+The three-way interaction is not significant. Fit the model without the three-way interaction.
+
+```{r}
+glm.out2 <- glm(T/n ~ Tsex * Leg * Dsex - Tsex:Leg:Dsex, data=ticks, weights=n, family=binomial(link=logit))
+summary(glm.out2)$coef
+```
+
+Alternative syntax.
+
+```{r}
+glm.out2 <- glm(T/n ~ (Tsex + Leg + Dsex)^2, data=ticks, weights=n, family=binomial(link=logit))
+summary(glm.out2)$coef
+```
+
+The two-way interactions are not very significant. Fit an additive model, and test for a significant decrease in the likelihood.
+  
+```{r}
+glm.out3 <- glm(T/n ~ Tsex + Leg + Dsex, data=ticks, weights=n, family=binomial(link=logit))
+summary(glm.out3)$coef
+anova(glm.out3, glm.out2, test="Chisq")
+```
+
+Calculate the confidence intervals.
+
+```{r}
+confint(glm.out3)
+```
+
+Summary: the ticks seems to have a preference for the treated tubes (since 0 is not in the 95% CI for the intercept), but neither tick sex, deer sex, or type of leg seem to matter as far as rates are concerned. So we fit a model with an intercept only.
+
+```{r}
+glm.out <- glm(T/n ~ 1, data=ticks, weights=n, family=binomial(link=logit))
+summary(glm.out)$coef
+```
+
+Estimate the proportion of ticks running to the treated tube on average.
+
+```{r}
+b0 <- summary(glm.out)$coef[1,1]
+b0
+exp(b0)/(1+exp(b0))
+```
+
+Get the confidence interval for the proportion of ticks running to the treated tube on average.
+
+```{r}
+ci <- confint(glm.out)
+ci
+exp(ci)/(1+exp(ci))
+```
+

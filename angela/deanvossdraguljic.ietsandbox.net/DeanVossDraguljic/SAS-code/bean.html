@@ -1,0 +1,115 @@
+* bean.sas, bean-soaking experiment, Table 8.9, p275;
+;
+DATA BEAN;
+  INPUT X LENGTH;
+  X2 = X**2; X3 = X**3;
+  LINES;
+  12    5
+  12   11
+  12    8
+  12   11
+  12    4
+  12    4
+  12    8
+  12    3
+  12    6
+  12    4
+  12    7
+  12    3
+  12    5
+  12    4
+  12    6
+  12    9
+  12    3
+  18   11
+  18   16
+  18   18
+  18   24
+  18   18
+  18   18
+  18   21
+  18   14
+  18   21
+  18   19
+  18   17
+  18   24
+  18   14
+  18   20
+  18   16
+  18   20
+  18   22
+  24   17
+  24   16
+  24   26
+  24   18
+  24   14
+  24   24
+  24   18
+  24   14
+  24   24
+  24   26
+  24   21
+  24   21
+  24   22
+  24   19
+  24   14
+  24   19
+  24   19
+  30   20
+  30   18
+  30   22
+  30   20
+  30   21
+  30   17
+  30   16
+  30   23
+  30   25
+  30   19
+  30   21
+  30   20
+  30   27
+  30   25
+  30   22
+  30   23
+  30   23
+;
+* create extra x-values for plotting the fitted curve;
+DATA TOPLOT;
+  DO X = 8 TO 34; X2 = X**2; X3 = X**3;
+    LENGTH = .; * "." denotes a missing value;
+    OUTPUT;
+  END; * X loop;
+;
+* concatenate data sets BEAN and TOPLOT;
+DATA; SET BEAN TOPLOT;
+;
+* do the analysis;
+PROC REG; MODEL LENGTH = X X2 X3 / SS1;
+  QUAD:   TEST X3 = 0; * test adequacy of quadratic model;
+  LINEAR: TEST X2 = 0, X3 = 0; * test adequacy of linear model;
+  OUTPUT PREDICTED = LHAT RESIDUAL = E
+    L95M = L95M U95M = U95M STDP = STDM    
+    L95 = L95I U95 = U95I STDI = STDI;
+;
+* plot the data and fitted model, overlayed on one plot;
+PROC SGPLOT;
+  SCATTER Y = LENGTH X = X / LEGENDLABEL = 'Observed data'
+    MARKEREATTRS = (SIZE = 0.25cm COLOR = BLACK);
+  SCATTER Y = LHAT X = X / LEGENDLABEL = 'Cubic model fit'
+    MARKEREATTRS = (SYMBOL = SQUARE SIZE = 0.25cm COLOR = BLACK);
+  YAXIS LABEL = "Sprout length (mm)" VALUES = (-20 TO 30 by 5);
+  XAXIS LABEL = "Soaking time (hrs)" VALUES = (8 TO 36 by 4);
+;
+* 95% confidence intervals and standard errors for mean response;
+PROC PRINT; VAR X L95M LHAT U95M STDM;
+;
+* 95% prediction intervals and standard errors for new observations;
+PROC PRINT; VAR X L95I LHAT U95I STDI;
+;
+* generate residual plots;
+PROC RANK NORMAL = BLOM; VAR E; RANKS NSCORE;
+PROC SGPLOT; SCATTER Y = E X = X;
+PROC SGPLOT; SCATTER Y = E X = LHAT;
+PROC SGPLOT; SCATTER Y = E X = NSCORE;
+;
+run;

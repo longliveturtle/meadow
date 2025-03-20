@@ -1,0 +1,664 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/Bayesian-Sample-Size.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:29:41 GMT -->
+<head><title> Bayesian software / Bayesian Sample Size </title>
+<style type="text/css">
+a.dumblink:hover
+{
+  text-decoration:underline;
+}
+a.dumblink:link
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink:visited
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink0:visited
+{
+  color:inherit;
+}
+a.dumblink0
+{
+  color:inherit;
+}
+a.implementation:hover
+{
+  background-color:beige;
+}
+a.implementation:link
+{
+  color:darkkhaki; border-bottom:1px dashed; text-decoration:none;
+}
+a.implementation:visited
+{
+  color:darkkhaki; border-bottom:0; text-decoration:none;
+}
+body
+{
+  font-family:Franklin Gothic Medium; font-size:14px;
+}
+div.implementation
+{
+  color:darkkhaki; font-size:12px; padding:0 20px 0 150px;
+}
+div.implementation0
+{
+  color:tan; font-size:12_px; padding:0 20px 0 150px;
+}
+div.menuitem1
+{
+  font-size:14px; color:darkgoldenrod; font-weight:bold; padding:0 20px 0 20px;
+}
+div.menuitem1 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem1 a:link
+{
+  text-decoration:none; color:darkgoldenrod;
+}
+div.menuitem1 a:visited
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+div.menuitem2
+{
+  font-size:13px; color:navy; padding:0 20px 0 40px;
+}
+div.menuitem2 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem2 a:link
+{
+  text-decoration:none; color:navy;
+}
+div.menuitem2 a:visited
+{
+  color:navy; text-decoration:none;
+}
+div.menuitem3
+{
+  font-size:12px; color:gray; padding:0 20px 0 50px;
+}
+div.menuitem3 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem3 a:link
+{
+  text-decoration:none; color:gray;
+}
+div.menuitem3 a:visited
+{
+  color:gray; text-decoration:none;
+}
+div.pagesubtitle
+{
+  text-align:left; font-size:20px; font-family:arial black;
+  color:white; padding-left:20px; font-style:italic;
+}
+div.pagetitle
+{
+  text-align:left; font-size:28px; font-family:arial black; font-weight:bold;
+  color:white; padding-left:20px;
+}
+div.pkgdesc
+{
+  color:black; font-size:14px; vertical-align:top; padding:10px 20px 25px 0;
+}
+div.pkgdesc a:link
+{
+  color:black;
+}
+div.pkgdesc a:visited
+{
+  color:gray;
+}
+div.pkgname
+{
+  color:darkgoldenrod; font-size:16px; font-weight:bold; padding-right:20px;
+}
+div.pkgversion
+{
+  color:#6699CC; font-size:13px; font-style:italic;
+}
+div.pkgversion a:hover
+{
+  color:#6699CC; text-decoration:underline;
+}
+div.pkgversion a:link
+{
+  color:#6699CC; text-decoration:none; font-style:italic;
+}
+div.pkgversion a:visited
+{
+  color:#6699CC; text-decoration:none;
+}
+div.support
+{
+  color:#990033; font-size:16px; font-weight:bold;
+}
+div.support a
+{
+  font-size:14px; color:#990033;
+}
+div.support a:visited
+{
+  color:#990033;
+}
+li.topmenu a:hover
+{
+  text-decoration:underline;
+}
+li.topmenu a:link
+{
+  color:black; text-decoration:none;
+}
+li.topmenu a:visited
+{
+  color:gray; text-decoration:underline;
+}
+li.whereami a:hover
+{
+  text-decoration:underline;
+}
+li.whereami a:link
+{
+  color:gray; text-decoration:none;
+}
+li.whereami a:visited
+{
+  color:gray; text-decoration:none;
+}
+td.address
+{
+  color:black; background-color:#6699CC; font-size:14px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 0 1px 0;
+}
+td.download1click
+{
+  font-size:13px; text-align:left; list-style-type:none;
+  padding:0 5px 5px 5px; background-color:beige;
+}
+td.download1click a:hover
+{
+  text-decoration:underline;
+}
+td.download1click a:link
+{
+  text-decoration:none; color:darkkhaki;
+}
+td.download1click a:visited
+{
+  text-decoration:none; color:darkkhaki;
+}
+td.menuitems
+{
+  width:400px; vertical-align:top;
+}
+td.msi
+{
+  font-size:14px; color:white; text-align:top; background-color:darkkhaki; padding:0 5px 0 5px;
+}
+td.msidetails
+{
+  font-size:13px; color:black; background-color:beige; padding:0 5px 0 5px;
+}
+td.pagetitle
+{
+  background-color:#000099; background-image:url(../img/homepage/idea4i.jpg);
+}
+td.pkg
+{
+  color:darkgoldenrod; border-style:solid; border-width:1px 0 0 0; border-color:navy; font-size:14px;
+  margin-top:20px; margin-bottom:20px; vertical-align:top; padding:0 20px 25px 0;
+}
+td.pkginfo
+{
+  padding-bottom:25px; vertical-align:top; width:400px;
+}
+td.raddress
+{
+  color:black; background-color:#6699CC; font-size:13px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 0;
+}
+td.softwaremenu
+{
+  font-size:14px; text-align:left; color:white; list-style-type:none;
+  border-width:0 0 1px 0; background-color:darkkhaki; padding-left:5px;
+}
+td.softwaremenu a:hover
+{
+  text-decoration:underline;
+}
+td.softwaremenu a:link
+{
+  font-size:14px; text-align:left; color:#339999;
+  text-decoration:none;
+}
+td.softwaremenu a:visited
+{
+  text-decoration:none; color:#33CC99;
+}
+td.softwaremenu0
+{
+  font-size:14px; text-align:left; color:white; list-style-type:none; background-color:darkkhaki; padding-left:5px;
+}
+td.softwaremenu0 a:hover
+{
+  text-decoration:underline;
+}
+td.softwaremenu0 a:link
+{
+  font-size:14px; text-align:left; color:#339999;
+  text-decoration:none;
+}
+td.softwaremenu0 a:visited
+{
+  color:#33CC99; text-decoration:none;
+}
+td.softwaresubmenu
+{
+  font-size:13px; text-align:right; color:black; list-style-type:none; padding:0 5px 0 5px; background-color:beige;
+}
+td.softwaresubmenu a:hover
+{
+  text-decoration:underline;
+}
+td.softwaresubmenu a:link
+{
+  color:black; text-decoration:none;
+}
+td.softwaresubmenu a:visited
+{
+  color:gray; text-decoration:none;
+}
+td.topmenu
+{
+  color:navy; vertical-align:top;
+  font-weight:bold; font-style:italic; font-size:14px;
+  border-color:#6699CC; border-style:solid; border-width:1px 1px 0 0;
+  text-align:right; padding:0 5px 0 20px;
+}
+td.topmenu a:hover
+{
+  text-decoration:underline; font-weight:normal; font-style:normal;
+}
+td.topmenu a:link
+{
+  color:black; text-decoration:none; font-weight:normal; font-style:normal;
+}
+td.topmenu a:visited
+{
+  color:black; text-decoration:none; font-weight:normal; font-style:normal;
+}
+td.topmenu0
+{
+  text-align:right; font-size:14px;
+}
+td.whereami
+{
+  padding-left:0;
+}
+tr.pagetitle
+{
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 1px;
+}
+ul.topmenu
+{
+  text-align:right;
+}
+ul.topmenu li
+{
+  font-size:14px; color:black; padding-left:20px; display:inline;
+  text-align:right; border-style:solid; border-width:0 1px 0 0;
+  color:#000099;
+}
+ul.whereami
+{
+  text-align:left; border-style:solid; border-width:0 0 1px 0; border-color:darkgoldenrod;
+}
+ul.whereami li
+{
+  font-size:14px; display:inline; text-align:left; color:gray;
+}
+ul.whereami li.here
+{
+  font-size:14px; display:inline; text-align:right; color:crimson;
+}
+</style>
+</head>
+<body>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr><td colspan=3>
+<ul class=topmenu>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/epi-biostat-occh/"> Departement of Epidemiology and Biostatistics </a></li>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/"> McGill University </a></li>
+<li class=topmenu> <a class=dumblink href="../SiteMap.html"> Site Map </a></li>
+<!-- /ul -->
+</td></tr>
+<tr class=pagetitle>
+<td class=pagetitle>
+<div class=pagetitle> Lawrence Joseph </div>
+<div class=pagesubtitle> Bayesian statistics </div>
+</td>
+<td class=address width="20%" valign=top>
+<a class=dumblink0 href="mailto:lawrence.joseph@mcgill.ca"> </a><br>
+<!--
+-->
+<a class=dumblink href="../pdf/ljcv.pdf">  </a><br>
+</td>
+<td class=raddress width="20%" valign=top>
+Please Note: Prof. Joseph has retired. <br>
+These pages are left up in case they prove<br>
+useful, but the pages and software will <br>
+no longer be updated. All material and <br>
+software is "as is" with no guarantees <br>
+of functionality or correctness.<br>
+</td>
+</tr>
+<tr><td class=whereami colspan=3>
+<ul class=whereami>
+<li class=whereami> &gt; <a href="../index.html"> Home </a> </li> &gt <li class=whereami> Bayesian Software </li> &gt <li class=here> Bayesian Sample Size </li>
+</ul></td></tr>
+<tr><td colspan=3 class=topmenu0>
+<table border=0 cellpadding=0 cellspacing=0 align=right><tr>
+<td class=topmenu>Bayesian Sample Size<br><a href="../publications/Methodological/Bayesian-Sample-Size.html">See related papers</a></td>
+<td class=topmenu><a href="Change-point-Methods-And-Applications.html">Change-point methods and applications</a></td>
+<td class=topmenu><a href="Diagnostic-Testing.html">Diagnostic testing</a></td>
+<td class=topmenu><a href="Diagnostic-Testing-In-Genetics.html">Diagnostic testing in Genetics</a></td>
+</tr></table>
+</td></tr>
+</table>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr>
+<td class=menuitems>
+<div class=menuitem1><a href="../pdf/ljcv.pdf">Complete CV</a></div>
+<div class=menuitem1><a href="../Research-Interests.html">Research interests</a></div>
+<div class=menuitem1><a href="../Courses-Taught.html">Courses taught</a></div>
+<div class=menuitem1>Previous courses taught</div>
+<div class=menuitem2><a href="../courses/EPIB-607/main.html">EPIB-607 Principles of Inferential Statistics in Medicine</a></div>
+<div class=menuitem2><a href="../courses/EPIB-613/main.html">EPIB-613 Introduction to Statistical Software</a></div>
+<div class=menuitem2><a href="../courses/EPIB-621/main.html">EPIB-621 Data Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../courses/EPIB-651/main.html">EPIB-651 Bayesian Analysis in Medicine</a></div>
+<div class=menuitem2><a href="../courses/EPIB-668/main.html">EPIB-668 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../courses/EPIB-669/main.html">EPIB-669 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem2><a href="../courses/EPIB-675/main.html">EPIB-675 Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../courses/EPIB-682/main.html">EPIB-682 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../courses/EPIB-683/main.html">EPIB-683 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem1>Publications</div>
+<div class=menuitem2>Methodological publications</div>
+<div class=menuitem3><a href="../publications/Methodological/Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem3><a href="../publications/Methodological/Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem3><a href="../publications/Methodological/Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem3><a href="../publications/Methodological/Meta-Analysis.html">Meta analysis</a></div>
+<div class=menuitem3><a href="../publications/Methodological/Other-Topics.html">Other topics</a></div>
+<div class=menuitem2>Medical publications</div>
+<div class=menuitem3><a href="../publications/Medical/Allergy-And-Immunology.html">Allergy and immunology</a></div>
+<div class=menuitem3><a href="../publications/Medical/Asthma.html">Asthma</a></div>
+<div class=menuitem3><a href="../publications/Medical/Cardiology.html">Cardiology</a></div>
+<div class=menuitem3><a href="../publications/Medical/Gastroenterology.html">Gastroenterology</a></div>
+<div class=menuitem3><a href="../publications/Medical/Osteoporosis.html">Osteoporosis</a></div>
+<div class=menuitem3><a href="../publications/Medical/Quality-Of-Life.html">Quality of Life</a></div>
+<div class=menuitem3><a href="../publications/Medical/Rheumatology.html">Rheumatology</a></div>
+<div class=menuitem3><a href="../publications/Medical/Other.html">Other</a></div>
+<div class=menuitem2><a href="../publications/Book.html">Book</a></div>
+<div class=menuitem1>Bayesian software</div>
+<div class=menuitem2><a href="Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem2><a href="Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem2><a href="Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem2><a href="Diagnostic-Testing-In-Genetics.html">Diagnostic testing in Genetics</a></div>
+<div class=menuitem1><a href="../Links.html">Links</a></div>
+</td>
+<td valign=top>
+<div class=support>
+Please Note: Prof. Joseph has retired. These software packages remain
+available in case they prove<br>
+useful, but the software will no longer be updated or supported. All
+material and software is "as is"<br>
+with no guarantees of functionality or correctness.<br>
+</div>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=pkg>
+<div class=pkgname>CBSS</div>
+Consensus-Based Sample Size
+<div class=pkgversion>Version 1.0, July 2019</div>
+<div class=pkgdesc>
+Four sets of R functions for calculating sample size requirements to ensure posterior agreement from different priors using a variety of Bayesian criteria. Each package includes functions for designing an experiment to estimate, respectively: <ul> <li>a single binomial proportion <li>the difference between two binomial proportions <li>a single normal mean <li>the difference between two normal means. </ul>
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/CBSS.pdf" class=implementation>Bayesian consensus-based sample size criteria for binomial proportions</a><br>
+Lawrence Joseph and Patrick B&eacute;lisle<br>Statistics in Medicine; 2019
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0>Zipped R packages</td></tr>
+<tr><td class=softwaresubmenu>
+<a href="CBSS/SampleSizeConsensusBinomialProportion_1.0.tar.gz">SampleSizeConsensusBinomialProportion_1.0.tar.gz</a><br>
+<a href="CBSS/SampleSizeConsensusBinomialProportionsDiff_1.0.tar.gz">SampleSizeConsensusBinomialProportionsDiff_1.0.tar.gz</a><br>
+<a href="CBSS/SampleSizeConsensusNormalMean_1.0.tar.gz">SampleSizeConsensusNormalMean_1.0.tar.gz</a><br>
+<a href="CBSS/SampleSizeConsensusNormalMeansDiff_1.0.tar.gz">SampleSizeConsensusNormalMeansDiff_1.0.tar.gz</a><br>
+</td></tr>
+<tr><td class=msi> Install instructions</td></tr>
+<tr><td class=msidetails>
+For each of the four packages, follow the instructions written for <a href="SampleSizeBinomial/README.html">SampleSizeBinomial</a>.<br>
+For both <i>BinomialProportion</i> packages, follow each step listed in the instructions, as these packages include a <i>.C</i> program.<br>
+For the other two packages (<i>NormalMean</i>), skip the first two steps.<br>
+</div>
+</td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>SampleSizeRegression</div>
+Bayesian Sample Size Criteria for Linear and Logistic Regression in the Presence of Confounding and Measurement Error
+<div class=pkgversion><a href="SampleSizeRegression/SampleSizeRegression.zip">Version 1.0</a>, July 2019</div>
+<div class=pkgdesc>
+A package to calculate Bayesian sample sizes to estimate linear or logistic regression model parameters, with or without the possibility of confounding variables and/or independent variable measurement error; requires that the free software packages R, Winbugs and Perl be installed.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/SSReg.pdf" class=implementation>Bayesian Sample Size Criteria for Linear and Logistic Regression in the Presence of Confounding and Measurement Error</a><br>
+Lawrence Joseph and Patrick Bélisle<br>Unpublished
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Instructions </td></tr>
+<tr><td class=softwaresubmenu><a href="SampleSizeRegression/InstructionManual.pdf">InstructionManual.pdf</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=download1click><a href="SampleSizeRegression/SampleSizeRegression.zip">One-click download</a></td></tr>
+<tr><td class=msi> Install instructions</td></tr>
+<tr><td class=msidetails>
+<ol>
+  <li>follow <a href="SampleSizeRegression/InstallInstructions.html">these install instructions</a> for software necessary for this package to work properly
+      (and ignore the Install Instructions found in the files provided with the package as they are slightly outdated)</li>
+  <li>download and unzip the zipped file (above)</li>
+  <li>double-click setup.exe</li>
+</ol>
+</div>
+</td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>SSCOR</div>
+Odds Ratio in presence of exposure misclassification
+<div class=pkgversion><a href="SSCOR/SSCOR.zip">Version 1.8.1</a>, February 2019</div>
+<div class=pkgdesc>
+A package to calculate sample sizes based on highest posterior density intervals in the context of estimating odds ratios when exposure may be misclassified; requires that the free software packages R, Winbugs and Perl be installed.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/sscor.AJE.2013.pdf" class=implementation>Bayesian sample size determination for case-control studies when exposure may be misclassified</a><br>
+Lawrence Joseph and Patrick Bélisle<br>American Journal of Epidemiology<br>Accepted
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Instructions </td></tr>
+<tr><td class=softwaresubmenu><a href="SSCOR/InstructionManual.pdf">InstructionManual.pdf</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=download1click><a href="SSCOR/SSCOR.zip">One-click download</a></td></tr>
+<tr><td class=msi> Install instructions</td></tr>
+<tr><td class=msidetails>
+<ol>
+  <li>follow <a href="SSCOR/InstallInstructions.html">these install instructions</a> for software necessary for this package to work properly
+      (and ignore the Install Instructions found in the files provided with the package as they are slightly outdated)</li>
+  <li>download and unzip the zipped file (above)</li>
+  <li>double-click setup.exe</li>
+</ol>
+</div>
+</td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>PropMisclassSampleSize</div>
+Prevalence and diagnostic test sensitivity or specificity
+<div class=pkgversion><a href="PropMisclassSampleSize/PropMisclassSampleSize.zip">Version 6.0</a>, February 2019</div>
+<div class=pkgdesc>
+A package to calculate sample sizes based on highest posterior density intervals in the context of diagnostic testing in presence of one, two or three imperfect tests; requires that the free software packages R, Winbugs and Perl be installed.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/sstest.pdf" class=implementation>Bayesian Sample Size Determination for Prevalence and Diagnostic Test Studies in the Absence of a Gold Standard Test</a><br>
+Nandini Dendukuri, Elham Rahme, Patrick Bélisle and Lawrence Joseph<br>Biometrics 60, pp. 388-397<br>June 2004
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Instructions </td></tr>
+<tr><td class=softwaresubmenu><a href="PropMisclassSampleSize/InstructionManual.pdf">InstructionManual.pdf</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=download1click><a href="PropMisclassSampleSize/PropMisclassSampleSize.zip">One-click download</a></td></tr>
+<tr><td class=msi> Install instructions</td></tr>
+<tr><td class=msidetails>
+<ol>
+  <li>follow <a href="PropMisclassSampleSize/InstallInstructions.html">these install instructions</a> for software necessary for this package to work properly
+      (and ignore the Install Instructions found in the files provided with the package as they are slightly outdated)</li>
+  <li>download and unzip the zipped file (above)</li>
+  <li>double-click setup.exe</li>
+</ol>
+</div>
+</td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>SampleSizeMeans</div>
+Normal means
+<div class=pkgversion>Version 1.2, February 2023</div>
+<div class=pkgdesc>
+A set of R functions for calculating sample size requirements using three different Bayesian criteria in the context of designing an experiment to estimate a normal mean or the difference between two normal means.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/normsize.pdf" class=implementation>Bayesian sample size determination for Normal means and differences between Normal means</a><br>
+Joseph L, B&eacute;lisle P<br>The Statistician 1997;46(2):209-226
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Available from CRAN </td></tr>
+<tr><td class=softwaresubmenu><a href="http://cran.r-project.org/package=SampleSizeMeans">SampleSizeMeans R package</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>SampleSizeBinomial</div>
+Binomial proportion
+<div class=pkgversion>Version 1.1, March 2018</div>
+<div class=pkgdesc>
+A set of R functions for calculating sample size requirements using three different Bayesian criteria in the context of a binomial experiment.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/ss_binom.pdf" class=implementation>Sample size calculations for binomial proportions via highest posterior density intervals</a><br>
+Lawrence Joseph, David B. Wolfson and Roxane du Berger<br>The Statistician, 1995;44(2):143-154
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0>Zipped R package</td></tr>
+<tr><td class=softwaresubmenu>
+<a href="SampleSizeBinomial/SampleSizeBinomial_1.1.tar.gz">SampleSizeBinomial_1.1.tar.gz</a><br>
+</td></tr>
+<tr><td class=softwaremenu>Install Instructions</td></tr>
+<tr><td class=softwaresubmenu><a href="SampleSizeBinomial/README.html">Install Instructions</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>bhpd1</div>
+Binomial proportion
+<div class=pkgdesc>
+A FORTRAN program to calculate sample sizes based on highest posterior density intervals in the context of a binomial experiment using three different Bayesian approaches.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/ss_binom.pdf" class=implementation>Sample size calculations for binomial proportions via highest posterior density intervals</a><br>
+Lawrence Joseph, David B. Wolfson and Roxane du Berger<br>The Statistician, 1995;44(2):143-154
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Instructions </td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/README.html">Instructions</a></td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/Ex.html">Ex.input</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=softwaremenu> Files </td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/Makefile.html">Makefile</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/bhpd.html">bhpd.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/cover.html">cover.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/headers.html">headers.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/search.html">search.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/baysmp.html">baysmp.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/frqsmp.html">frqsmp.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/readpar.html">readpar.f</td></tr>
+<tr><td class=softwaresubmenu><a href="bhpd1/util.html">util.f</td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=download1click><a href="bhpd1/ss-binomialprop.zip">One-click download</a></td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+Binomial proportion in the presence of misclassification error
+<div class=pkgdesc>
+An S-Plus program to calculate average coverage probabilities when finding sample sizes for estimating a binomial proportion in the presence of misclassification errors.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/diagsmp.pdf" class=implementation>Bayesian Sample size determination for estimating binomial parameters from data subject to misclassification</a><br>
+Rahme E, Joseph L, and Gyorkos T<br>Applied Statistics 2000;49(1):119-228
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Instructions </td></tr>
+<tr><td class=softwaresubmenu><a href="binom_prop_misclass/README.html">Instructions</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=softwaremenu> Files </td></tr>
+<tr><td class=softwaresubmenu><a href="binom_prop_misclass/avgcov-ss.txt">avgcov-ss.txt</td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+<tr><td class=download1click><a href="binom_prop_misclass/ss-binomialprop_misclass.zip">One-click download</a></td></tr>
+</table></td>
+</tr>
+<tr>
+<td class=pkg>
+<div class=pkgname>SampleSizeProportions</div>
+Binomial proportions
+<div class=pkgversion>Version 1.1, February 2023</div>
+<div class=pkgdesc>
+A set of R functions for calculating sample size requirements using three different Bayesian criteria in the context of designing an experiment to estimate the difference between two binomial proportions.
+</div>
+<div class=implementation0>This package is an implementation of the methods presented in</div>
+<div class=implementation><a href="../publications/Methodological/bin2samp.pdf" class=implementation>Bayesian and mixed Bayesian/likelihood criteria for sample size determination</a><br>
+Joseph L, du Berger R, and B&eacute;lisle P<br>Statistics in Medicine 1997;16(7):769-781
+</div>
+</td>
+<td class=pkginfo><table border=0 cellpadding=0 cellspacing=0 width=100%>
+<tr><td class=softwaremenu0> Available from CRAN </td></tr>
+<tr><td class=softwaresubmenu><a href="http://cran.r-project.org/package=SampleSizeProportions">SampleSizeProportions R package</a></td></tr>
+<tr><td class=softwaresubmenu></td></tr>
+</table></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/Bayesian-Sample-Size.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:30:23 GMT -->
+</html>

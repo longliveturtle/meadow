@@ -1,0 +1,41 @@
+3.1  TWO FACTOR FULLY CROSS-FACTORED MODEL Y = B|A + e
+
+Data for Figure 5(c) on Irrigation treatment A and sowing 
+density treatment B, declaring terms: B|A
+
+A	B	Y
+Control	Low	 1.146
+Control	Low	 1.780
+Control	Low	 4.000
+Control	Low	 9.050
+Control	High	15.878
+Control	High	22.871
+Control	High	21.000
+Control	High	24.042
+Water	Low	11.400
+Water	Low	20.000
+Water	Low	15.000
+Water	Low	13.651
+Water	High	15.140
+Water	High	 7.000
+Water	High	12.000
+Water	High	14.043
+
+
+
+Model 3.1(i) A and B are both fixed factors:
+
+  Source  DF      SS      MS      F      P
+1 A        1    4.48    4.48   0.34  0.568
+2 B        1  195.63  195.63  15.01  0.002
+3 B*A      1  396.84  396.84  30.46 <0.001
+4 S(B*A)  12  156.36   13.03
+  Total   15  753.30
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

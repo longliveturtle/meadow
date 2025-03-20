@@ -1,0 +1,223 @@
+HTTrack3.49-5 launched on Tue, 04 Mar 2025 13:31:06 at https://www.itl.nist.gov/div898/handbook/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/*
+(webhttrack -q -%i -w https://www.itl.nist.gov/div898/handbook/ -O "/media/tuhocr/CLOUD1/TURTLE/meadow/nist" -n -%P -N0 -s2 -p7 -D -a -K0 -c4 -%k -A100000 -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -%s -%u )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+13:31:08	Warning: 	Found for https://www.itl.nist.gov/robots.txt
+13:31:08	Warning: 	File has moved from https://www.itl.nist.gov/robots.txt to https://www.nist.gov/itl/
+14:22:33	Warning: 	Found for https://www.itl.nist.gov/div898/handbook/eda/
+14:22:33	Warning: 	File has moved from https://www.itl.nist.gov/div898/handbook/eda/ to https://www.nist.gov/itl/
+14:43:09	Warning: 	HTML file (2726 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/navi.htm
+14:43:10	Warning: 	HTML file (7729 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/stoc.htm
+14:43:20	Warning: 	HTML file (84282 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/changes.htm
+14:43:22	Warning: 	HTML file (1198 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/index.htm
+14:43:25	Warning: 	HTML file (7280 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm
+14:43:38	Warning: 	HTML file (5508 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/toolaids/eq/index.htm
+14:43:40	Warning: 	HTML file (6386 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc372.htm
+14:43:42	Warning: 	HTML file (12898 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/4plot.htm
+14:43:44	Warning: 	HTML file (3766 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/RANDN.DAT
+14:43:46	Warning: 	HTML file (9732 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/dexmeanp.htm
+14:43:48	Warning: 	HTML file (9558 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm
+14:43:49	Warning: 	HTML file (8479 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/boxcoxli.htm
+14:43:51	Warning: 	HTML file (7953 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/boxcox.htm
+14:43:53	Warning: 	HTML file (11627 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/dexsplot.htm
+14:43:55	Warning: 	HTML file (8253 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/dexsdplo.htm
+14:43:57	Warning: 	HTML file (7954 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/linecorr.htm
+14:43:59	Warning: 	HTML file (7554 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/lineinte.htm
+14:44:01	Warning: 	HTML file (7468 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/lineslop.htm
+14:44:02	Warning: 	HTML file (8128 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/linressd.htm
+14:44:08	Warning: 	HTML file (9747 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/qqplot.htm
+14:44:12	Warning: 	HTML file (8959 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/weibplot.htm
+14:44:14	Warning: 	HTML file (10220 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda33x.htm
+14:44:16	Warning: 	HTML file (12309 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h1.htm
+14:44:18	Warning: 	HTML file (7514 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda33v.htm
+14:44:20	Warning: 	HTML file (154 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc37.r
+14:44:22	Warning: 	HTML file (5323 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc444.htm
+14:44:23	Warning: 	HTML file (2844 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MODEL-4_4_4.DAT
+14:44:32	Warning: 	HTML file (3637 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section3/pri3311.htm
+14:44:36	Warning: 	HTML file (10253 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section3/pri3324.htm
+14:44:38	Warning: 	HTML file (6041 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section1/pri14.htm
+14:44:40	Warning: 	HTML file (3599 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CATAPULT.DAT
+14:44:42	Warning: 	HTML file (1663 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/IMPROVE-5_4_7_3.DAT
+14:44:44	Warning: 	HTML file (3634 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section5/pri542.r
+14:44:46	Warning: 	HTML file (2161 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/IMPROVE-5_5_6.DAT
+14:44:48	Warning: 	HTML file (1275 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/BOXSPRIN.DAT
+14:44:50	Warning: 	HTML file (835 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MONITOR-6_5_2.DAT
+14:44:52	Warning: 	HTML file (4759 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/scattera.htm
+14:44:54	Warning: 	HTML file (2222 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section4/prc44.r
+14:44:56	Warning: 	HTML file (689 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr43.r
+14:44:58	Warning: 	HTML file (887 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr46.r
+14:44:59	Warning: 	HTML file (12307 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/FLICKER.DAT
+14:45:01	Warning: 	HTML file (6937 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/RANDWALK.DAT
+14:45:03	Warning: 	HTML file (33593 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/JAHANMI2.DAT
+14:45:05	Warning: 	HTML file (1922 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/SHEESLE2.DAT
+14:45:07	Warning: 	HTML file (5561 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/RANDU.DAT
+14:45:09	Warning: 	HTML file (696 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/JONES.DAT
+14:45:11	Warning: 	HTML file (5678 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/AUTO83B.DAT
+14:45:13	Warning: 	HTML file (2231 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/SPLETT2.DAT
+14:45:21	Warning: 	HTML file (10348 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/scatplma.htm
+14:45:25	Warning: 	HTML file (1018 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/BOXBIKE2.DAT
+14:45:27	Warning: 	HTML file (5166 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MICHELSO.DAT
+14:45:35	Warning: 	HTML file (8183 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/TUKLAMB.DAT
+14:45:37	Warning: 	HTML file (21069 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/DZIUBA1.DAT
+14:45:39	Warning: 	HTML file (1913 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/ZARR14.DAT
+14:45:41	Warning: 	HTML file (442 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda33e5.r
+14:45:43	Warning: 	HTML file (98963 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/SUNSPOT.DAT
+14:45:51	Warning: 	HTML file (1463 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MAVRO.DAT
+14:45:52	Warning: 	HTML file (3358 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/NORMAL2.DAT
+14:45:54	Warning: 	HTML file (26404 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/HSU12.DAT
+14:45:56	Warning: 	HTML file (8636 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/DRAFT69.DAT
+14:45:58	Warning: 	HTML file (1258 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/NORMAL.DAT
+14:46:00	Warning: 	HTML file (8164 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/RANDDEX.DAT
+14:46:02	Warning: 	HTML file (8230 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/RANDWEIB.DAT
+14:46:04	Warning: 	HTML file (2938 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/BERGER1.DAT
+14:46:06	Warning: 	HTML file (1318 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/LEW3.DAT
+14:46:08	Warning: 	HTML file (1808 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CHWIRUT2.DAT
+14:46:10	Warning: 	HTML file (5394 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/LUTHER.DAT
+14:46:12	Warning: 	HTML file (1309 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CURRIE.DAT
+14:46:14	Warning: 	HTML file (2081 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/PR1.DAT
+14:46:16	Warning: 	HTML file (4526 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/spectru1.htm
+14:46:18	Warning: 	HTML file (40806 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/PBF11.DAT
+14:46:20	Warning: 	HTML file (598 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/FULLER2.DAT
+14:46:21	Warning: 	HTML file (8932 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda33v1.htm
+14:46:28	Error: 	"Not Found" (404) at link https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML (from https://www.itl.nist.gov/div898/handbook/eda/section3/eda3332.htm)
+14:46:28	Warning: 	HTML file (1831 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.r
+14:46:30	Warning: 	HTML file (724 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.r
+14:46:32	Warning: 	HTML file (1102 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda354.r
+14:46:34	Warning: 	HTML file (1648 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda355.r
+14:46:36	Warning: 	HTML file (442 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda357.r
+14:46:38	Warning: 	HTML file (1417 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda358.r
+14:46:40	Warning: 	HTML file (669 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda359.r
+14:46:42	Warning: 	HTML file (1082 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.r
+14:46:44	Warning: 	HTML file (374 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35d.r
+14:46:46	Warning: 	HTML file (1604 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35e.r
+14:46:48	Warning: 	HTML file (1174 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35g.r
+14:46:58	Warning: 	HTML file (3918 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4213.r
+14:47:02	Warning: 	HTML file (9925 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/randn4p/randn4p.htm
+14:47:17	Warning: 	HTML file (5847 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4223.r
+14:47:19	Warning: 	HTML file (4823 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4233.r
+14:47:21	Warning: 	HTML file (6997 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/randwalk/randwalk.htm
+14:47:47	Warning: 	HTML file (3870 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4243.r
+14:47:49	Warning: 	HTML file (10533 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/soulen/soulen.htm
+14:48:13	Warning: 	HTML file (9447 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/lew/lew.htm
+14:48:36	Warning: 	HTML file (3521 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4263.r
+14:48:49	Warning: 	HTML file (8576 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/mavro/mavro.htm
+14:49:14	Warning: 	HTML file (3605 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4273.r
+14:49:16	Warning: 	HTML file (8258 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/resistor/resistor.htm
+14:49:39	Warning: 	HTML file (4305 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4283.r
+14:49:49	Warning: 	HTML file (9895 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/zarr13/zarr13.htm
+14:50:14	Warning: 	HTML file (7155 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4292.r
+14:50:16	Warning: 	HTML file (1036 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda4292_rcode.r
+14:50:18	Warning: 	HTML file (15498 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/eda42a3.r
+14:50:28	Warning: 	HTML file (15118 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section4/jahanmi2/jahanmi2.htm
+14:50:43	Warning: 	HTML file (106 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section2/mpc231d.r
+14:50:56	Warning: 	HTML file (4701 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc341j.htm
+14:50:58	Warning: 	HTML file (745 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc3511.r
+14:51:00	Warning: 	HTML file (94 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc352.r
+14:51:02	Warning: 	HTML file (1939 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc3521.r
+14:51:04	Warning: 	HTML file (1940 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc3522a.r
+14:51:06	Warning: 	HTML file (3675 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/pmd454.htm
+14:51:08	Warning: 	HTML file (1244 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc365.r
+14:51:10	Warning: 	HTML file (3706 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc3671.r
+14:51:12	Warning: 	HTML file (415 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc3672.r
+14:51:14	Warning: 	HTML file (3348 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CALIBRATIONLINE.DAT
+14:51:16	Warning: 	HTML file (1653 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc371.r
+14:51:17	Warning: 	HTML file (1657 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MPC441.DAT
+14:51:20	Warning: 	HTML file (1264 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc441.r
+14:51:22	Warning: 	HTML file (1452 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc442.r
+14:51:24	Warning: 	HTML file (663 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/mpc/section4/mpc443.r
+14:51:26	Warning: 	HTML file (2153 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MPC536.DAT
+14:51:28	Warning: 	HTML file (22807 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MPC61.DAT
+14:51:53	Warning: 	HTML file (3139 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MPC62.DAT
+14:51:56	Warning: 	HTML file (3877 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CHECK_STD.DAT
+14:52:09	Warning: 	HTML file (1182 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CHARACTERIZE-3_2_3_1.DAT
+14:52:11	Warning: 	HTML file (8426 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/ppc/section5/ppc511.r
+14:52:21	Warning: 	HTML file (11111 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/ppc/section5/Furnace/dpm51.htm
+14:52:26	Warning: 	HTML file (5584 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/ppc/section5/ppc521.r
+14:52:28	Warning: 	HTML file (8875 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/ppc/section5/Machine/dpm52.htm
+14:52:34	Warning: 	HTML file (2745 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CLB1.DAT
+14:52:36	Warning: 	HTML file (2745 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CLB2.DAT
+14:52:41	Warning: 	HTML file (2601 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/LNSPCG.DAT
+14:52:43	Warning: 	HTML file (5003 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section8/pmd815.htm
+14:52:45	Warning: 	HTML file (3090 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MODEL-4_4_5_2.DAT
+14:52:48	Warning: 	HTML file (5531 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/dep/dep443.htm
+14:52:49	Warning: 	HTML file (2814 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/dep/dep443b.htm
+14:52:57	Warning: 	HTML file (3021 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/dep/dep452.htm
+14:53:24	Warning: 	HTML file (2925 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/dep/dep452b.htm
+14:53:51	Warning: 	HTML file (6791 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/pmd611.r
+14:53:53	Warning: 	HTML file (1778 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/PONTIUS.DAT
+14:54:03	Warning: 	HTML file (5402 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/ldcll/dpm61.htm
+14:54:29	Warning: 	HTML file (16240 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/pmd621.r
+14:54:38	Warning: 	HTML file (15259 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/pipeline/dpm62.htm
+14:54:41	Warning: 	HTML file (13597 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/pmd631.r
+14:54:43	Warning: 	HTML file (14277 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/ultrason/dpm63.htm
+14:54:45	Warning: 	HTML file (8670 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/pmd641.r
+14:54:51	Warning: 	HTML file (7160 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section6/copper/dpm64.htm
+14:55:19	Warning: 	HTML file (889 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/IMPROVE-5_5_3_1_1.DAT
+14:55:20	Warning: 	HTML file (1009 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/IMPROVE-5_5_3_1_3.DAT
+14:55:22	Warning: 	HTML file (2164 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/IMPROVE-5_5_3_2_2.DAT
+14:55:24	Warning: 	HTML file (1095 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section5/pri5323.r
+14:55:26	Warning: 	HTML file (14274 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section6/pri611.r
+14:55:30	Warning: 	HTML file (12778 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section6/splett3/dpm61.htm
+14:55:44	Warning: 	HTML file (19139 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section6/pri621.r
+14:55:46	Warning: 	HTML file (17768 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section6/inn/dpm62.htm
+14:56:00	Warning: 	HTML file (778 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MONITOR-6_3_3_1.DAT
+14:56:02	Warning: 	HTML file (766 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MONITOR-6_3_3_2.DAT
+14:56:04	Warning: 	HTML file (1060 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MONITOR-6_4_3_6.DAT
+14:56:06	Warning: 	HTML file (8981 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/MLCO2MON.DAT
+14:56:07	Warning: 	HTML file (613 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section4/pmc4431.r
+14:56:09	Warning: 	HTML file (754 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/F_SERIES.DAT
+14:56:11	Warning: 	HTML file (1320 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/G_SERIES.DAT
+14:56:15	Warning: 	HTML file (4765 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section4/pmc44a.r
+14:56:18	Warning: 	HTML file (8840 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section6/pmc611.r
+14:56:20	Warning: 	HTML file (5451 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section6/pmc613.r
+14:56:22	Warning: 	HTML file (13780 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section6/lithogra/lithogra.htm
+14:56:23	Warning: 	HTML file (4019 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section6/pmc621.r
+14:56:25	Warning: 	HTML file (9508 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section6/negiz4/negiz4.htm
+14:56:27	Warning: 	HTML file (816 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section2/prc232.r
+14:56:29	Warning: 	HTML file (417 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.r
+14:56:31	Warning: 	HTML file (1602 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section2/prc263.r
+14:56:33	Warning: 	HTML file (769 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section4/prc474.r
+14:56:35	Warning: 	HTML file (229 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr121.r
+14:56:37	Warning: 	HTML file (738 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr161.r
+14:56:39	Warning: 	HTML file (933 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr162.r
+14:56:41	Warning: 	HTML file (959 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr163.r
+14:56:42	Warning: 	HTML file (1002 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr164.r
+14:56:44	Warning: 	HTML file (1037 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr165.r
+14:56:46	Warning: 	HTML file (1134 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr166.r
+14:56:48	Warning: 	HTML file (657 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr191.r
+14:56:50	Warning: 	HTML file (1193 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section1/apr192.r
+14:56:52	Warning: 	HTML file (903 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section2/apr221.r
+14:56:54	Warning: 	HTML file (999 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section2/apr222.r
+14:56:56	Warning: 	HTML file (989 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section2/apr223.r
+14:56:58	Warning: 	HTML file (3188 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr413.r
+14:56:59	Warning: 	HTML file (2426 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr421.r
+14:57:01	Warning: 	HTML file (1349 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr423.r
+14:57:03	Warning: 	HTML file (316 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/apr/section4/apr451.r
+14:57:05	Warning: 	HTML file (3013 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/datasets/CO2.DAT
+14:57:07	Warning: 	Retry after error -5 (Unable to get server's address: Name or service not known) at link ftp://ftp.nist.gov/pub/dataplot/doc/dataplot.web.tar.Z (from https://www.itl.nist.gov/div898/handbook/toolaids/cd.htm)
+14:57:07	Warning: 	HTML file (535 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h1.r
+14:57:09	Warning: 	HTML file (1109 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h2.r
+14:57:11	Warning: 	HTML file (2076 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h3.r
+14:57:13	Warning: 	HTML file (3653 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section3/pri3312.htm
+14:57:15	Warning: 	HTML file (4392 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section4/prc425.htm
+14:57:17	Warning: 	HTML file (5826 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section4/prc422.htm
+14:57:18	Warning: 	HTML file (6938 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/prc/section4/prc428.htm
+14:57:20	Warning: 	HTML file (812 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/eda/
+14:57:22	Warning: 	Found for https://www.itl.nist.gov/div898/handbook/eda/
+14:57:22	Warning: 	File has moved from https://www.itl.nist.gov/div898/handbook/eda/ to https://www.nist.gov/itl/
+14:57:22	Warning: 	HTML file (5160 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section8/pmd813.htm
+14:57:23	Warning: 	HTML file (8426 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmc/section2/pmc221.htm
+14:57:25	Warning: 	HTML file (2881 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/toolaids/navi.htm
+14:58:03	Warning: 	HTML file (3663 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pri/section3/pri3313.htm
+14:58:05	Warning: 	HTML file (3649 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/pmd456.htm
+14:58:07	Warning: 	HTML file (7993 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/toolaids/stoc.htm
+14:58:35	Warning: 	HTML file (3697 bytes) retransferred due to lack of cache: https://www.itl.nist.gov/div898/handbook/pmd/section4/pmd457.htm
+14:58:36	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link ftp://ftp.nist.gov/pub/dataplot/doc/dataplot.web.tar.Z (from https://www.itl.nist.gov/div898/handbook/toolaids/cd.htm)
+14:58:36	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link ftp://ftp.nist.gov/pub/dataplot/doc/dataplot.web.tar.Z (from https://www.itl.nist.gov/div898/handbook/toolaids/cd.htm)
+
+HTTrack Website Copier/3.49-5 mirror complete in 1 hours 27 minutes 30 seconds : 3022 links scanned, 3218 files written (251411016 bytes overall) [252181651 bytes received at 48034 bytes/sec], 1203774 bytes transferred using HTTP compression in 3 files, ratio 22%
+(2 errors, 210 warnings, 0 messages)

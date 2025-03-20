@@ -1,0 +1,59 @@
+* exercise.bicycle.sas, exercise bicycle experiment, Table 12.10 (p417), 
+* and the factorial model of Section 12.8.1 (pp417, 419);
+;
+DATA BIKE;
+  INPUT DAY SUBJECT PULSE DURAT$ SPEED$ PEDAL$;
+  TRTMT = trim(DURAT)||trim(SPEED)||trim(PEDAL);
+  LINES;
+   1 1  45  1 1 2
+   1 2  25  2 1 2
+   1 3  18  2 2 1
+   2 1  27  2 2 2
+   2 2  20  2 1 1
+   2 3  32  2 1 2
+   3 1  40  2 1 2
+   3 2  23  2 2 2
+   3 3  28  1 1 2
+   4 1  17  2 2 1
+   4 2  32  1 1 2
+   4 3  24  1 2 2
+   5 1  30  2 1 1
+   5 2  36  1 1 1
+   5 3  20  2 2 2
+   6 1  29  1 2 2
+   6 2  13  2 2 1
+   6 3  20  1 2 1
+   7 1  34  1 1 1
+   7 2  18  1 2 1
+   7 3  25  2 1 1
+   8 1  21  1 2 1
+   8 2  22  1 2 2
+   8 3  34  1 1 1
+;
+PROC PRINT;
+* row-column-treatment model;
+PROC GLM;
+  CLASS DAY SUBJECT TRTMT;
+  MODEL PULSE = DAY SUBJECT TRTMT / SOLUTION;
+  OUTPUT OUT=RESIDS PREDICTED=PRED RESIDUAL=Z;
+  ESTIMATE 'DURATION DIFF' TRTMT -1 -1 -1 -1  1  1  1  1 / DIVISOR=4;
+  ESTIMATE 'SPEED DIFF'    TRTMT -1 -1  1  1 -1 -1  1  1 / DIVISOR=4;
+  ESTIMATE 'PEDAL DIFF'    TRTMT -1  1 -1  1 -1  1 -1  1 / DIVISOR=4;
+* Standardize residuals and compute normal scores;
+PROC STANDARD STD=1.0; VAR Z;
+PROC RANK NORMAL=BLOM; VAR Z; RANKS NSCORE;
+* Generate residual plots;
+PROC PLOT;
+  PLOT Z*PRED Z*TRTMT Z*DAY Z*SUBJECT / VREF=0 VPOS=19 HPOS=50;
+  PLOT Z*NSCORE / VREF=0 HREF=0 VPOS=19 HPOS=50;
+;
+* Factorial Model of Section 12.8.1, pp417+419;
+PROC GLM;
+  CLASS DAY SUBJECT DURAT SPEED PEDAL;
+  MODEL PULSE = DAY SUBJECT DURAT SPEED PEDAL DURAT*SPEED
+                DURAT*PEDAL SPEED*PEDAL DURAT*SPEED*PEDAL;
+  ESTIMATE 'DURATION DIFF' DURAT -1 1;
+  ESTIMATE 'SPEED DIFF'    SPEED -1 1;
+  ESTIMATE 'PEDAL DIFF'    PEDAL -1 1;
+;
+run;

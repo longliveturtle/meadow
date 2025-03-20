@@ -1,0 +1,960 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/mpcpn/README.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:18 GMT -->
+<head><title> Bayesian software / mpcpn / instructions </title>
+<style type="text/css">
+a.dumblink:hover
+{
+  text-decoration:underline;
+}
+a.dumblink:link
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink:visited
+{
+  color:inherit; text-decoration:none;
+}
+a.dumblink0:visited
+{
+  color:inherit;
+}
+a.dumblink0
+{
+  color:inherit;
+}
+body
+{
+  font-family:Franklin Gothic Medium; font-size:14px;
+}
+div.menuitem1
+{
+  font-size:14px; color:darkgoldenrod; font-weight:bold; padding:0 20px 0 20px;
+}
+div.menuitem1 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem1 a:link
+{
+  text-decoration:none; color:darkgoldenrod;
+}
+div.menuitem1 a:visited
+{
+  color:darkgoldenrod; text-decoration:none;
+}
+div.menuitem2
+{
+  font-size:13px; color:navy; padding:0 20px 0 40px;
+}
+div.menuitem2 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem2 a:link
+{
+  text-decoration:none; color:navy;
+}
+div.menuitem2 a:visited
+{
+  color:navy; text-decoration:none;
+}
+div.menuitem3
+{
+  font-size:12px; color:gray; padding:0 20px 0 50px;
+}
+div.menuitem3 a:hover
+{
+  text-decoration:underline;
+}
+div.menuitem3 a:link
+{
+  text-decoration:none; color:gray;
+}
+div.menuitem3 a:visited
+{
+  color:gray; text-decoration:none;
+}
+div.pagesubtitle
+{
+  text-align:left; font-size:20px; font-family:arial black;
+  color:white; padding-left:20px; font-style:italic;
+}
+div.pagetitle
+{
+  text-align:left; font-size:28px; font-family:arial black; font-weight:bold;
+  color:white; padding-left:20px;
+}
+div.pkgnameover
+{
+  color:#6699CC; font-size:20px; padding-top:10px; font-family:haettenschweiler;
+}
+div.softwarename
+{
+  color:#6699CC; font-size:32px; padding-bottom:20px; font-family:bookman old style;
+}
+div.softwaresection
+{
+  color:darkgoldenrod; font-size:16px; padding:30px 0 20px 0;
+}
+li.topmenu a:hover
+{
+  text-decoration:underline;
+}
+li.topmenu a:link
+{
+  color:black; text-decoration:none;
+}
+li.topmenu a:visited
+{
+  color:gray; text-decoration:underline;
+}
+li.whereami a:hover
+{
+  text-decoration:underline;
+}
+li.whereami a:link
+{
+  color:gray; text-decoration:none;
+}
+li.whereami a:visited
+{
+  color:gray; text-decoration:none;
+}
+span.pgmname
+{
+  color:darkgoldenrod; font-size:14px; font-weight:bold;
+}
+td.address
+{
+  color:black; background-color:#6699CC; font-size:14px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 0 1px 0;
+}
+td.menuitems
+{
+  width:400px; vertical-align:top;
+}
+td.normal
+{
+  color:black; font-size:14px;
+}
+td.normal a:link
+{
+  color:black;
+}
+td.normal a:visited
+{
+  color:gray;
+}
+td.pagetitle
+{
+  background-color:#000099; background-image:url(../../img/homepage/idea4i.jpg);
+}
+td.raddress
+{
+  color:black; background-color:#6699CC; font-size:13px; padding-left:20px;
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 0;
+}
+td.whereami
+{
+  padding-left:0;
+}
+tr.pagetitle
+{
+  border-style:solid; border-color:#000099; border-width:1px 1px 1px 1px;
+}
+ul.topmenu
+{
+  text-align:right;
+}
+ul.topmenu li
+{
+  font-size:14px; color:black; padding-left:20px; display:inline;
+  text-align:right; border-style:solid; border-width:0 1px 0 0;
+  color:#000099;
+}
+ul.whereami
+{
+  text-align:left; border-style:solid; border-width:0 0 1px 0; border-color:darkgoldenrod;
+}
+ul.whereami li
+{
+  font-size:14px; display:inline; text-align:left; color:gray;
+}
+ul.whereami li.here
+{
+  font-size:14px; display:inline; text-align:right; color:crimson;
+}
+</style>
+</head>
+<body>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr><td colspan=3>
+<ul class=topmenu>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/epi-biostat-occh/"> Departement of Epidemiology and Biostatistics </a></li>
+<li class=topmenu> <a class=dumblink href="http://www.mcgill.ca/"> McGill University </a></li>
+<li class=topmenu> <a class=dumblink href="../../SiteMap.html"> Site Map </a></li>
+<!-- /ul -->
+</td></tr>
+<tr class=pagetitle>
+<td class=pagetitle>
+<div class=pagetitle> Lawrence Joseph </div>
+<div class=pagesubtitle> Bayesian statistics </div>
+</td>
+<td class=address width="20%" valign=top>
+<a class=dumblink0 href="mailto:lawrence.joseph@mcgill.ca"> </a><br>
+<!--
+-->
+<a class=dumblink href="../../pdf/ljcv.pdf">  </a><br>
+</td>
+<td class=raddress width="20%" valign=top>
+Please Note: Prof. Joseph has retired. <br>
+These pages are left up in case they prove<br>
+useful, but the pages and software will <br>
+no longer be updated. All material and <br>
+software is "as is" with no guarantees <br>
+of functionality or correctness.<br>
+</td>
+</tr>
+<tr><td class=whereami colspan=3>
+<ul class=whereami>
+<li class=whereami> &gt; <a href="../../index.html"> Home </a> </li> &gt <li class=whereami> Bayesian software </li> &gt <li class=whereami> <a href="../Change-point-Methods-And-Applications.html"> Change-point methods and applications </a> </li> &gt <li class=here> mpcpn </li>
+</ul></td></tr>
+</table>
+<table cellpadding=0 cellspacing=0 width="100%">
+<tr>
+<td class=menuitems>
+<div class=menuitem1><a href="../../pdf/ljcv.pdf">Complete CV</a></div>
+<div class=menuitem1><a href="../../Research-Interests.html">Research interests</a></div>
+<div class=menuitem1><a href="../../Courses-Taught.html">Courses taught</a></div>
+<div class=menuitem1>Previous courses taught</div>
+<div class=menuitem2><a href="../../courses/EPIB-607/main.html">EPIB-607 Principles of Inferential Statistics in Medicine</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-613/main.html">EPIB-613 Introduction to Statistical Software</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-621/main.html">EPIB-621 Data Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-651/main.html">EPIB-651 Bayesian Analysis in Medicine</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-668/main.html">EPIB-668 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-669/main.html">EPIB-669 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-675/main.html">EPIB-675 Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-682/main.html">EPIB-682 Introduction to Bayesian Analysis in the Health Sciences</a></div>
+<div class=menuitem2><a href="../../courses/EPIB-683/main.html">EPIB-683 Intermediate Bayesian Analysis for the Health Sciences</a></div>
+<div class=menuitem1>Publications</div>
+<div class=menuitem2>Methodological publications</div>
+<div class=menuitem3><a href="../../publications/Methodological/Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Meta-Analysis.html">Meta analysis</a></div>
+<div class=menuitem3><a href="../../publications/Methodological/Other-Topics.html">Other topics</a></div>
+<div class=menuitem2>Medical publications</div>
+<div class=menuitem3><a href="../../publications/Medical/Allergy-And-Immunology.html">Allergy and immunology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Asthma.html">Asthma</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Cardiology.html">Cardiology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Gastroenterology.html">Gastroenterology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Osteoporosis.html">Osteoporosis</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Quality-Of-Life.html">Quality of Life</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Rheumatology.html">Rheumatology</a></div>
+<div class=menuitem3><a href="../../publications/Medical/Other.html">Other</a></div>
+<div class=menuitem2><a href="../../publications/Book.html">Book</a></div>
+<div class=menuitem1>Bayesian software</div>
+<div class=menuitem2><a href="../Bayesian-Sample-Size.html">Bayesian Sample Size</a></div>
+<div class=menuitem2><a href="../Change-point-Methods-And-Applications.html">Change-point methods and applications</a></div>
+<div class=menuitem2><a href="../Diagnostic-Testing.html">Diagnostic testing</a></div>
+<div class=menuitem2><a href="../Diagnostic-Testing-In-Genetics.html">Diagnostic testing in Genetics</a></div>
+<div class=menuitem1><a href="../../Links.html">Links</a></div>
+</td>
+<td class=normal valign=top>
+<div class=pkgnameover>mpcpn / mpcpp</div>
+<div class=softwarename>A Bayesian approach to multiple-path change-point analysis using the gibbs sampler for Normal and Poisson data</div>
+<div class=softwaresection>Summary</div>
+The set of procedures to perform multiple-path change-point analyses
+using a Bayesian approach were written in FORTRAN 77 by Lawrence Joseph,
+Roxane du Berger and David Wolfson and developed in a SunOS 4.1.2
+operating environment on a SPARC station ELC. The method
+was designed for two distributions: Normal and Poisson, each
+packaged separately for purposes of compilation and linking.
+The multiple-path change-point programs are referred to as
+<span class=pgmname>mpcpn</span> for the Normal distribution and <span class=pgmname>mpcpp</span> for the Poisson.
+Both programs share the same spirit with differences found in the
+prior input. Prior information necessary to run the programs is
+detailed further in this document.
+<br><br>
+Users are invited to consult the following manuscripts which discuss
+in full detail Bayesian approaches to change-point analysis:
+<ul>
+<li>A Change-Point Analysis of a Randomized Trial on the Effects of Calcium Supplementation on Blood Pressure
+by Lawrence Joseph, David B. Wolfson, Roxane du Berger and Roseann M. Lyle (1995)
+in the book Bayesian Biostatistics, edited by Don A. Berry and Dalene K. Stangl, published by Marcel Dekker.</li>
+<li>Medical applications of the multi-path change-point model
+by Lawrence Joseph, David B. Wolfson, Roxane du Berger and Roseann M. Lyle (1994)</li>
+</ul>
+<br>
+Queries, questions or comments regarding the above manuscripts or
+programs may be e-mailed to Lawrence Joseph at
+<a href="mailto:lawrence.joseph@mcgill.ca"> lawrence.joseph@mcgill.ca </a>.
+<br><br>
+In this paper, we focus our attention on <span class=pgmname>mpcpn</span> and where relevant,
+will note any differences with <span class=pgmname>mpcpp</span>. The successful
+programming of the algorithms is largely due to the following
+sources for which we are thankful:
+<br>
+<pre>
+Abramowitz, M., and Stegun, I.A. (ed.) (1972)
+Handbook of Mathematical Functions
+New York: Dover Publications Inc.
+<br>
+Cheng, R.C.H (1978)
+Generating Beta Variates with Nonintegral Shape Parameters
+Communications of the ACM, 21:317-322
+(Algorithms BB and BC).
+<br>
+Press, W.H., Flannery, B.P., Teukolsky, S.A., and
+Vetterling, W.T. (1990)
+Numerical Recipes, The Art of Scientific Computing (Fortran Version)
+New York: Cambridge University Press.
+<br>
+Press, W.H., Flannery, B.P., Teukolsky, S.A., and Vetterling, W.T. (1992)
+Numerical Recipes in Fortran, The Art of Scientific Computing, Second Edition
+New York: Cambridge University Press.
+</pre>
+<div class=softwaresection>Files</div>
+Once you open the package mpcpn.doc (Normal version) or
+mpcpp.doc (Poisson version) with a shar program, you will
+note the presence of the following files:
+<br>
+<pre>
+Ex.data       README.MPCP   itp.f         postbet.f     util.f
+Ex.input      gen.f         mpcp.f        setup.f
+Makefile      header.f      post.f        upd.f
+</pre>
+<div class=softwaresection>Makefile</div>
+For convenience, we have provided a Makefile to compile
+and link the FORTRAN code into one executable file. The
+command <i>make</i> works on a Sparc station. If you encounter
+unnecessary difficulties, compile and link as follows:
+<br>
+If the user chose the set of procedures for the Normal distribution,
+type the command
+<br>
+<pre>
+f77 -o mpcpn *.f
+</pre>
+If the user chose the set of procedures for the Poisson distribution, <br>
+type the command<br>
+<pre>
+f77 -o mpcpp *.f
+</pre>
+<div class=softwaresection>Examination of parameter file</div>
+As stated earlier, the multiple path change-point analysis
+requires as input a variety of information. For a detailed
+discussion of this approach, users are invited to consult
+the manuscripts referenced above.
+<br>
+We have included in this package a parameter file called <a href="Ex-2.html"> Ex.input </a>
+and an associated data file <a href="Ex.html"> Ex.data </a>
+to illustrate a typical analysis. In this section, we
+highlight inherent differences between the Normal (mpcpn)
+and Poisson (mpcpp) distributions.
+<br>
+<div class=softwaresection>MPCP - Normal distribution (mpcpn)</div>
+The file Ex.data is a data set in the form of a
+37 row by 10 column matrix, representing 37 different
+sequences of 10 repeated measurements. For this data,
+we provide in <a href="Ex-2.html"> Ex.input </a> the necessary parameter
+inputs, which we examine below:
+<br>
+<pre>
+%cat -n Ex.input
+1  37 10 530           !m rows, n columns, seed
+2  10000 7000          !# cycles, last cycles retained
+3  1000 1 500          !screenview,filedumps,maxfsize(kbytes)
+4  f  -99999           !missing (logical) + (-BIG) indicator
+5  f   99999           !sample size for each row + (BIG) indicator
+6  13 3 2 3 32 23 10 20 22 25       !row indices = min(10,m)
+7  10 4 3 1  5  6  7  8  9  9       !column indices = min(10,n)
+8  mp.g1                !Gamma  parameter updates - distribution 1
+9  mp.g2                !Gamma  parameter updates - distribution 2
+10  mp.n1                !Normal parameter updates - distribution 1
+11  mp.n2                !Normal parameter updates - distribution 2
+12  mp.al                !Dirichlet parameter updates
+13  mp.ad                !avg (iterations) dirichlet updates
+14  mp.ga                !avg (iterations) E(X),X~Gamma
+15  mp.am                !avg E(X2)-E(X1),E(X)=updated Normal mean
+16  mp.ap                !Pr(no change)
+17  16 16                !m prior gamma shapes
+18  16 16
+:
+:
+52  16 16
+53  16 16
+54  .0025 .0025          !m prior gamma scales
+55  .0025 .0025
+:
+:
+89  .0025 .0025
+90  .0025 .0025
+91  115 115 115 115 115 115 115 115 115 115
+92  115 115 115 115 115 115 115 115 115 115
+93  115 115 115 115 115 115 115 115 115 115
+94  115 115 115 115 115 115 115           !m exp mean dist1
+95  115 115 115 115 115 115 115 115 115 115
+96  115 115 115 115 115 115 115 115 115 115
+97  115 115 115 115 115 115 115 115 115 115
+98  115 115 115 115 115 115 115           !m exp mean dist2
+99  .25 .25                               !omega 1 and 2
+100  .0 .0 .0 .1 .1 .1 .1 .1 .1 .1         !n dirichlet parameters
+</pre>
+<ul type=disc>
+<li>Line 1: The first 2 items are number of rows <37> and number of
+columns <10> of the data matrix; item 3 is the seed number <530> for
+the random number generator used in the Gibbs sampler.</li>
+<li>Line 2: Number of Gibbs cycles to run <10000> with the last 7000
+cycles retained for inference. Note that either or both items set to
+zero results in an error.</li>
+<li>Line 3: Item 1 sets the cycle numbers (every <1000>) at which
+the user views intermediate results and is useful for inspection.
+Item 2 (k = 1 filedumps) requires that each of the last 7000 cycles
+requested in item 2 of line 2, be used for inference and output to file.
+If k > 1, then every kth information cycle is used for inference
+and output to file. if k < 0 or > 7000, k is reset to 1. Finally,
+because the Bayesian multiple-path change-point method can generate
+huge amounts of data, item 3 imposes a size limit <500> (approximately
+500 kbytes) to files. If the size limit is very small with respect to
+the number of cycles and the number of filedumps, then only summary
+files are created.</li>
+<li>Lines 4 and 5: Line 4 is a logical missing value indicator.
+If set to true (`t'), the program requires that the missing
+value be a negative number whose value is less than the
+minimum value in the data matrix. For example, the minimum value
+in this data matrix is 93, so that if there were missing data we
+can safely set the missing value indicator to -1 and insert in the
+matrix element the value of -1. Line 5 is the sample size at
+each data matrix row. If the sample size varies from row to row --
+the logical indicator is set to `t', we choose a value of the
+variable sample size indicator which exceeds the maximum
+value in the data matrix. Suppose the maximum value in this data
+set is 140, and that row 23 has a sample size of 8 instead of 10,
+and row 31 has a sample size of 5. We choose a value which exceeds
+140 (i.e. 141 or 99999) and position this value at columns 9 and 6,
+respectively for rows 23 and 31. Note that each row must be of fixed
+length, so that columns 9 and 10 of row 23 and columns 6 to 10 of
+row 31 must be filled; the simplest is to set the rest of the
+columns to 141 or less.</li>
+<li>Lines 6 and 7: Line 6 is the set of row indices required for
+file output of the Gamma and Normal parameter updates. For example,
+the first element of line 6 is 13, which means the selection of the
+13th row. Choosing a row index greater than 37 (see Line 1) results
+in an error. Line 7 is the set of column indices required for file
+output of the Dirichlet parameter updates. For example the fourth
+element  of line 7 is 1, which means the selection of the 1st column.
+Choosing a column index greater than 10 (see Line 1) results in an
+error. If the data matrix contains more than ten rows/columns, the
+user selects a maximum of ten row/column indices in any order. On
+the other hand, if the data matrix contains less than ten
+rows/columns - say eigth rows/columns - the user selects eight
+row/column indices in any order. These criteria are necessary to
+limit the space requirements of the parameter update files.</li>
+<li>Lines 8 to 16: the program outputs a total of nine files
+associated to Normal data. The first five contain information
+at each selected cycle for:
+<br>
+1) Gamma and Normal parameter updates, before and after
+change-point, at selected rows; and
+<br>
+2) Dirichlet parameter updates at selected columns.
+<br>
+The remaining four files contain parameters averaged over
+selected cycles:
+<br>
+1) Dirichlet updates at each data column;
+<br>
+2) Expected values of Gamma parameter updates before
+and after change-point, at each data row;
+<br>
+3) Difference between two expected values before and
+after change-point of Normal parameter updates, at
+each data matrix row; and<br>
+<br>
+4) The probability of no change is the last column value
+of the multinomial generation from Dirichlet parameter
+updates. This information is useful to compute the
+probability that subjects in one group are more
+likely to change than subjects in another group
+using a Mann-Whitney-type statistic.
+</li>
+<li>Lines 17 to 53: To each row of <a href="Ex.html"> Ex.data </a> and to each
+distribution <1 and 2>, set Gamma shape prior parameters.</li>
+<li>Lines 54 to 90: To each row of <a href="Ex.html"> Ex.data </a> and to each
+distribution <1 and 2>, set Gamma scale prior parameters.</li>
+<li>Lines 91 to 94: To each row of <a href="Ex.html"> Ex.data </a>, assign prior
+data mean values for distribution 1.</li>
+<li>Lines 95 to 98: To each row of <a href="Ex.html"> Ex.data </a>, assign prior
+data mean values for distribution 2.</li>
+<li>Line 99: To each distribution, assign a weighting factor, used for Gamma and Normal parameter updates.</li>
+<li>Line 100: Assign to each column of <a href="Ex.html"> Ex.data </a>, a prior
+Dirichlet parameter where, by definition, each is greater
+than zero. If a prior Dirichlet parameter is set to zero
+at column k, than parameter updating is not performed from
+columns 1 to k. Note that an error results if a prior
+Dirichlet parameter is set to zero at the last data matrix
+column. SPECIAL NOTE: an error results if the variable
+sample size at a given row is less than k (see description
+of Line 5).</li>
+</ul>
+<div class=softwaresection>MPCP - Poisson distribution (mpcpp)</div>
+The parameter file for the Poisson is simpler to define than
+the Normal. Much of the information required by the Poisson is
+similar to that given above, with fewer output files to declare
+and fewer prior parameters to choose from.
+<br>
+The file Ex.data is a data set in the form of a
+285 row by 8 column matrix, representing 285 different
+sequences of 8 repeated measurements. For this data,
+we provide in Ex.input the necessary parameter
+inputs, which we examine below:
+<br>
+<pre>
+%cat -n Ex.input
+1  285 8 582           !m rows, n columns, seed
+2  10000 3000          !# cycles, last cycles retained
+3  5000 1 500          !screenview,filedumps,maxfsize(kbytes)
+4  t  -99              !missing(logical) + (-BIG) indicator
+5  f  110              !sample size for each row + (BIG) indicator
+6  246 45 46 76 98 32 54 18 222 271 !row indices = min(10,m)
+7    8  4  7  6  5  3  1  1  10   8 !column indices = min(10,n)
+8  mp.g1                !Gamma parameter updates - distribution 1
+9  mp.g2                !Gamma parameter updates - distribution 2
+10  mp.al                !Dirichlet parameter updates
+11  mp.ad                !avg (iterations) dirichlet updates
+12  mp.ga                !avg (iterations) E(X),X~Gamma
+13  mp.am                !avg E(X2)-E(X1), X~Gamma
+14  mp.ap                !Pr(no change)
+15      1.00000    1.00000           !m prior Gamma shapes
+16      1.00000    1.00000
+:
+:
+300      15.0000    15.0000           !m prior Gamma scales
+301      15.0000    15.0000
+:
+:
+583      15.0000    15.0000
+584      15.0000    15.0000
+585  0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0  !n dirichlet parameters
+</pre>
+<ul type=disc>
+<li>Lines 1 to 7 are defined as in the Normal format.</li>
+<li>Lines 8 to 14: the program outputs a total of seven files associated
+to Poisson data. The first three contain information at each selected
+cycle and row or column for:
+<br>
+1) Gamma parameter updates, before and after
+change-point, at selected rows; and
+<br>
+2) Dirichlet parameter updates at selected columns.
+<br>
+The remaining four files are parameters averaged over selected cycles:
+<br>
+1) Dirichlet updates as in Normal;
+<br>
+2) Expected values of Gamma parameter updates described
+in the Normal format;
+<br>
+3) Difference between two expected values before and
+after change-point of Gamma parameter updates, at
+each data matrix row; and
+<br>
+4) The probability of no change described in the
+Normal format.
+</li>
+<li>Lines 15 to 584 are the Gamma prior parameter information
+described in the Normal format.</li>
+<li>Line 585 is equivalently described in Line 100 of the Normal format.</li>
+</ul>
+<div class=softwaresection>Example of execution</div>
+Both programs require input files <b>mpc.dat</b> and <b>mpc.par</b> to read
+the data matrix and the prior parameters, respectively. Thus, to
+execute, type
+<br>
+<pre>
+% cat Ex.input >! mpc.par    #required parameter file name
+% cat Ex.data >! mpc.dat     #required data file name
+</pre>
+If the input files are created for the Normal distribution, type
+<pre>
+% mpcpn
+</pre>
+If the input files are created for the Poisson distribution, type
+<pre>
+% mpcpp
+</pre>
+<br>
+The program reads the contents of <b>mpc.par</b> and performs a number
+of checks. It creates dump files <b>dump.dat</b>, <b>dump.par</b>
+and, if missing data are present <b>dump.mis</b>, which the user can
+scan in order to ensure that all data and parameters are properly
+read. Further, during execution, messages appear on the
+screen, which inform the user on the program status. We feel obliged
+to print a large number of messages because of the variety of problems
+which can occur. Of course, errors are still possible and the
+user is encouraged to begin execution with a small number of
+cycles, to inspect all messages and dump files, before proceeding
+with a more reasonable number of cycles.
+<br>
+<div class=softwaresection>Output description</div>
+As noted earlier, the Normal version (mpcpn) produces a total of
+nine files and the Poisson (mpcpp) seven. The first five
+are parameter updates at selected cycles for
+1a) Gamma before change-point, 2a) Gamma after change-point,
+3a) Normal before change-point (not applicable to Poisson),
+4a) Normal after change-point (not applicable to Poisson)
+and 5a) Dirichlet. Files 1a) to 4a) are updates at selected rows and
+5a) at selected columns. The following four files are
+information averaged over selected cycles: 1b) Dirichlet parameter
+updates at each column, 2b) Expected values of Gamma parameter
+updates before and after a row change-point, 3b) Difference
+between two expected values before and after a row change-point,
+where the direction is E(X2)-E(X1), and 4b) The probability of
+no change, a Multinomial probability assigned to the last
+column generated from Dirichlet parameter updates. This last file
+is most useful at comparing the probability of no change in one
+group to the probability of no change in another group.
+<br><br>
+We warn users that the program imposes size restraints on
+files 1a) to 5a), because they potentially contain enormous
+amounts of data. The parameter file <b>mpc.par</b> requires
+a row/column index selection (ten row/column indices for data
+containing more row/columns, less than ten for data containing
+fewer row/columns) and a maximum output file size (in kbytes).
+If the Gibbs sampler generates a reasonable amount of data
+(i.e. less than the specified size limit), information is provided
+for each of the selected row/column indices. However, exceeding this
+limit will cause the program to output only one row/column or even
+nothing. Obviously, files 1b) to 4b) are unaffected because
+they contain row/column/cycle summaries.
+<br><br>
+The graphs displayed in the referenced manuscripts are constructed
+with the information contained in the output files. In the following
+paragraphs, we discuss how to create graphics of interest,
+with the help of a graphical tool such as Splus (version 3.1).
+We assume that the program has successfully executed and produced the
+following files:
+<br>
+<table border=2>
+<tr><td>   1a)  mp.g1 </td><td> Gamma  parameter updates - distribution 1 </td></tr>
+<tr><td>   2a)  mp.g2 </td><td> Gamma  parameter updates - distribution 2</td></tr>
+<tr><td>   3a)  mp.n1 </td><td> Normal parameter updates - distribution 1 ***</td></tr>
+<tr><td>   4a)  mp.n2 </td><td> Normal parameter updates - distribution 2 ***</td></tr>
+<tr><td>   5a)  mp.al </td><td> Dirichlet parameter updates  </td></tr>
+<tr><td>   1b)  mp.ad </td><td> avg (iterations) dirichlet updates </td></tr>
+<tr><td>   2b)  mp.ga </td><td> avg (iterations) E(X),X~Gamma </td></tr>
+<tr><td>   3b)  mp.am </td><td> avg E(X2)-E(X1),E(X)=updated Normal mean (Poisson Gamma)</td></tr>
+<tr><td>   4b)  mp.ap </td><td> Pr(no change)  </td></tr>
+<tr><td colspan=2> *** Not applicable to Poisson </td></tr>
+</table>
+<br>
+In Splus, we read some preliminary information, such as the
+number of rows &lt;nrowd&gt; and number of columns &lt;ncold&gt; in data
+matrix, the Dirichlet priors &lt;diric&gt;, the number of rows and
+columns that are effectively output in the iterative files
+&lt;nrowi, ncoli&gt;. This information will be useful later in this
+document.
+<br>
+<pre>
+# Number of rows and columns in data matrix
+nrowd _ as.numeric(unix("head -1 mpc.par | awk '{print $1}'"))
+ncold _ as.numeric(unix("head -1 mpc.par | awk '{print $2}'"))
+# Dirichlet parameter priors
+unix("egrep '!n dirichlet' mpc.par | awk '{print}' &gt; tmp")
+diric _ scan(file='tmp',n=ncold) ; unix("rm tmp")
+# Number of rows and columns output to iterative files
+#  (assuming they exist)
+unix("dat1=`egrep 'Gamma parameter updates - distribution 1' mpc.par | \
+awk '{print $1}'` ; tail -1 $dat1 &gt; tmp")
+nrowi _ length(scan(file='tmp'))/3 ; unix("rm tmp")
+unix("dat1=`egrep 'Dirichlet parameter' mpc.par | \
+awk '{print $1}'`; tail -1 $dat1 &gt; tmp")
+ncoli _ length(scan(file='tmp')) ; unix("rm tmp")
+</pre>
+<div class=softwaresection>GRAPH: Means of the marginal Dirichlet posterior distribution for the change point</div>
+Shown in the form of a bar graph, the heights of the bars
+represent point estimates of the probability that a change
+occurs in a given period. In this representation, the
+vector file <b>mp.ad</b> is much more useful than the matrix
+file <b>mp.al</b>. The latter, if space allows, contains cycled
+Dirichlet parameter updates, however the column order depends
+on the specified column index selection. On the other hand,
+the elements of <b>mp.ad</b> are always based on the natural
+order of the data matrix columns. To illustrate, we issue
+the following Splus commands:
+<br>
+<pre>
+labdir _ c('mp.al')
+colsel _ scan(file=labdir,skip=7,n=ncoli)   # Column index
+marpost _ matrix(scan(file=labdir,skip=18),byrow=T,
+ncol=ncoli)
+rsum _  nrowd+sum(diric)         # Each row sum is identical
+marpost _ marpost/rsum           # Divide each element by row sum
+marpost _ apply(marpost,2,mean)  # Take the mean of each column
+marpost _ marpost[order(colsel)] # ``Natural'' column order
+</pre>
+With file mp.ad, we issue the simpler Splus commands:
+<pre>
+labdir _ c('mp.ad')
+marpost _ scan(labdir,skip=6)
+</pre>
+In either file, a plotting scheme is inspired from the following:
+<pre>
+openlook()                       # Or any valid graphics device
+labx _ c('measurement period')
+laby _ c('change-point \n marginal posterior mean')
+plot(marpost,ylim=c(0,max(marpost)+0.05),xaxt='n',
+type = 'n', lty = 1, xlab = labx, ylab = laby)
+axis(1,at=seq(1,length(marpost),by=1))
+for(j in seq(along = marpost)) {
+segments(j-0.2, 0, j-0.2, marpost[j])
+segments(j-0.2,marpost[j],j+0.2,marpost[j])
+segments(j+0.2,marpost[j],j+0.2,0)
+}
+</pre>
+<br>
+As a last comment, it is understood that a bar constructed <br>
+over the last period constitutes the mean probability of <br>
+no change.
+<div class=softwaresection>GRAPH: Marginal Posterior Beta Densities For The Probability of a Change at a Requested Period</div>
+To produce this graph, we require the Dirichlet parameter updates
+file <b>mp.al</b> created over the selected column indices. Suppose
+we are interested in the mean beta density of column four, and say
+that it is positioned at the second column index of <b>mp.al</b>
+(we assume that the specified file size limit is enough to produce
+a matrix of Dirichlet updates of up to a maximum of ten columns).
+We suggest the following Splus commands:
+<br>
+<pre>
+labdir _ c('mp.al')
+xduf _ matrix(scan(file=labdir,skip=18),
+byrow=T,ncol=ncoli)
+ba _ xduf[,2]   # Second column index - 4th data column
+</pre>
+<br>
+We define a valid domain for the Beta density (0&lt;x&lt;1) first
+over a limited number of points. More domain points can be
+added to obtain finer plots. Consider a random variable X whose
+distribution is Beta with parameters ba and bb and
+E(X) = ba/(ba+bb). We define ba as the vector of Dirichlet
+parameter updates over a given column (here column 4);
+let rsum be the number of rows in data matrix plus the sum
+of Dirichlet priors; then bb=rsum-ba. To compute the Mean
+Posterior Beta Density, we provide the Splus function post.beta:
+<br>
+<pre>
+dec _ 100                     # Number of domain points
+xq _  seq(0.00001,0.99999,length=dec)
+rsum _ nrowd+sum(diric)
+bb _ rsum - ba
+fxbet _ post.beta(xq,ba,bb)   # Mean Beta Density
+post.beta _ function(x,a,b){
+# Compute beta distribution at each
+#  domain point x averaged over beta
+#  parameter vectors a,b
+# Assume that Fortran procedure is in dyn.load
+res _ .Fortran('postbet',
+m = as.integer(length(a)),
+n = as.integer(length(x)),
+fk = as.double(x),
+as.double(x),
+as.double(a),
+as.double(b))$fk
+return(res)
+}
+</pre>
+<br>
+The user will note the Splus FORTRAN call to postbet.
+A similar procedure written in Splus would take too
+long to execute. Assuming that the object code postbet.o
+is in the current working directory, make a single call
+with dyn.load('postbet.o') during your Splus session.
+The source code is filed in the multiple-path
+change-point program package. The following plotting
+scheme is suggested for the mean Beta density fxbet:
+<br>
+<pre>
+openlook()                   # Or any valid graphics device
+labx _ c('')
+laby _ paste(c('marginal posterior density \n'),
+c('given Dirichlet column updates '))
+plot(xq[-c(1,length(xq))],fxbet[-c(1,length(fxbet))],
+type = 'l',lty = 1, xlab = labx, ylab = laby)
+</pre>
+<br>
+Often, the above procedure is useful to compute the
+Beta densities of no change, i.e. the last column
+of the Dirichlet parameter updates. Of particular
+interest is when we have at our disposal two groups
+(say, a control and a treatment group). Besides the
+Beta densities of no change, we can compute
+the probablity that subjects in one group are more
+likely to change than subjects in another group.
+This can be estimated using a Mann-Whitney-type
+statistic (see manuscripts for details). Assume we
+have files <b>mp.ap1</b> and <b>mp.ap2</b> (not shown here)
+which represent the probability of no change in data
+sets 1 and 2, respectively. The Mann-Whitney statistic
+is computed as follows:
+<br>
+<pre>
+labnoch1 _ c('mp.ap1')
+labnoch2 _ c('mp.ap2')
+noch1 _ scan(labnoch1,skip=9)
+noch2 _ scan(labnoch2,skip=9)
+prnoch _ prob.nochange(noch1,noch2)
+</pre>
+where the Splus function prob.nochange is displayed below:
+<pre>
+prob.nochange _ function(pn1,pn2)
+{
+# Mann-Whitney statistic wm
+# wm = wilc - term, wilc = Wilcoxon,
+# term = 0.5*k*(k+1), k=vector length of both pn1,pn2
+# For large k, wm = wilc*sqrt(Var(wilc)) + e(wilc) - term,
+# wilc=uncorrected Z,
+# Pr(Pr(pn1)&lt;Pr(pn2)) = 1 - wm/k^2
+k &lt;- length(pn1)
+if (k!=length(pn2)) stop('sample sizes different')
+term &lt;- 0.5 * k * (k + 1)
+wilc &lt;- wilcox.test(pn1, pn2, correct = F)$statistic
+if(names(wilc) == "rank-sum statistic W") {
+wm &lt;- wilc - term
+}
+else {
+ewilc &lt;- 0.5 * k * (2 * k + 1)
+svars &lt;- sqrt((1/12) * k^2 * (2 * k + 1))
+wm &lt;- wilc * svars + ewilc - term
+}
+pwm _ 1 - wm/k^2
+return(ifelse(pwm&gt;=0&pwm&lt;=1,pwm,NA))
+}
+</pre>
+<div class=softwaresection>GRAPH: Difference in rates before and after a change-point for a given subject (row)</div>
+Here, we focus on the Gamma parameter updates over a
+selected row. Files <b>mp.g1</b> and <b>mp.g2</b> represent Gamma
+parameter updates for Distributions 1 and 2, respectively.
+The first two columns represent the Gamma shapes and scales,
+where E(X)=shape*scale. The last column indicates whether
+or not a change-point has occurred (yes=1, no=0). Given the
+parameter update values, we wish to assign to each positive
+domain point, a Gamma density averaged over the number of
+Gibbs cycles. Note that in Distribution 2, only updates for
+which a change has occurred are used for calculations.
+<br>
+<pre>
+labgam1 _ c('mp.g1')
+labgam2 _ c('mp.g2')
+rowsel _ scan(file=labgam1,skip=9,n=nrowi)          # Row index
+k _ 8                    # Choose row index element that exists
+if (k&gt;length(rowsel)|k&lt;1) stop('\n \n ****** bad index element')
+ind _ (k-1)*3 + 1                       # Matrix column element
+#Gamma updates for Distributions 1 and 2
+gam1 _ matrix(scan(file=labgam1,skip=20),byrow=T,
+ncol=3*length(rowsel))
+gam2 _ matrix(scan(file=labgam2,skip=20),byrow=T,
+ncol=3*length(rowsel))
+#Gamma shape and scale - Distribution 1
+a1 _ gam1[,ind]
+b1 _ gam1[,ind+1]
+#Gamma shape and scale - Distribution 2 (change-points only)
+a2 _ gam2[gam2[,ind+2]&gt;0,ind]
+b2 _ gam2[gam2[,ind+2]&gt;0,ind+1]
+#Domain determination (*****to be refined to taste*****)
+#Care should be taken in choosing domain points. In the
+#beginning, use only a limited number of domain points.
+#Once the location of f&gt;0 is found, add more domain points to
+#obtain a smoother plot. This is necessary, because Splus
+#can run into memory allocation problems.
+dec _ 20
+xq1 _ seq(0,1,length=dec)
+xq2 _ seq(1,8,length=dec)
+xq _ unique(c(xq1,xq2))
+#Compute Gamma densities
+fx1 _ dens.gam(xq1,a1,b1)
+fx2 _ dens.gam(xq2,a2,b2)
+</pre>
+<br>
+For convenience, procedures dens.fgam and f.gam (called by dens.gam)
+are given below:
+<pre>
+dens.gam _ function(x,a,b) {
+# compute Gamma density whose domain is x and
+# vector elements parameters a,b
+# Output is mean density at each domain point.
+mrows _ length(x)
+ncols _ length(a)
+fmat _ t(matrix(x,mrows,ncols))
+fmat1 _ apply(fmat,2,f.gam,a,b)
+return(apply(fmat1,2,mean))
+}
+f.gam _ function(x,a,b) {
+#Divide the domain points by scale b to make
+#density function scaleless (i.e. dgamma(a,1))
+#Divide result by scale b to make density function
+#scaled (i.e. density gamma(a,b))
+#return(dgamma(x/b,a))   #scaleless result
+return(dgamma(x/b,a)/b)  #scaled result
+}
+</pre>
+<br>
+A plotting scheme is given as follows:
+<pre>
+openlook()                       # Or any valid graphics device
+labx _ paste('observation number',rowsel[k])
+laby _ paste('probability density')
+plot(c(xq[1],xq[length(xq)]),c(0,max(fx1,fx2)+0.01),
+type ='n', lty = 1, xlab = labx, ylab = laby)
+lines(xq1,fx1,lty=6)  # Rate before change
+lines(xq2,fx2,lty=1)  # Rate after change
+leg.names _ c('Rate before change',
+'Rate after change')
+legend(max(xq)*0.5,max(fx1,fx2)*0.5,leg.names,
+bty="n", lty=c(6,1))
+</pre>
+<br><br>
+The above were demonstrations of possible graphical analysis and
+estimates. Further insight can be gained by generating, for instance,
+summary figures for the differences between two distributions (see
+the referenced manuscripts). It is also possible to output other
+distributions of interest simply by modifying the multiple-path change-point programs.
+Most of the information of interest is found in the
+FORTRAN file <a href="itp.html"> itp.f </a>.
+<div class=softwaresection>Note of general interest</div>
+It is a good idea to run mpcp with different seeds and compare
+results. Substantial differences which occur from run to run
+may be caused by lack of convergence. This could require a
+greater number of Gibbs cycles or a change in prior parameters
+or both. It is not surprising to note more variation in the
+Normal distribution than in the Poisson, because of the greater
+number of priors to choose from. In all cases however, it is wise
+to scrutinize the parameter file and the results. Choice
+of seed in this program ranges from -2147483648 to 2147483647.
+<div class=softwaresection>Copyright</div>
+&copy; Copyright Lawrence Joseph, David Wolfson and Roxane du Berger 1994
+<br>
+mpcpn and mpcpp are programs written by Lawrence Joseph,
+Roxane du Berger and David Wolfson at the Division of Clinical
+Epidemiology, Department of Medicine, Montreal General Hospital.
+These programs are an implementation of the manuscripts mentioned
+at the beginning of this document.
+<br>
+You are free to use these programs, for non-commercial purposes only,
+under two conditions:
+<br>
+<ol>
+<li> This note is not to be removed;
+<li> Publications using mpcpn or mpcpp results should reference the
+manuscripts mentioned above.
+</ol>
+<br>
+Please e-mail all comments, questions or responses to
+<a href="mailto:lawrence.joseph@mcgill.ca"> lawrence.joseph@mcgill.ca </a>.
+</td>
+</tr>
+</table>
+</body>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/mpcpn/README.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:18 GMT -->
+</html>

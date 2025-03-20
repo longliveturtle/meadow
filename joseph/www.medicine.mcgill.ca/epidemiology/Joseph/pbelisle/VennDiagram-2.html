@@ -1,0 +1,1466 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/VennDiagram.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:44:12 GMT -->
+<head>
+<title>SAS macro %VennDiagram: 3-Way Non-proportional Venn diagram</title>
+<meta name="description" content=" %VennDiagram is a SAS macro to plot 3-way Venn diagrams, with values displayed in each set and/or set intersections.">
+<meta name="keywords" content="3-Way, diagram, Non-proportional, Venn">
+<link rel="icon" type="image/png" href="img/favicon-2.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs-2.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook-2.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode-2.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-2.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros-2.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl-2.html">Invitation to Perl</a></li>
+      <li><a href="bic-process-2.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary-2.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript-2.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript-2.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb-2.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary-2.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software-2.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.1 (July 2011)</div>
+<div class=title0>SAS macro %VennDiagram</div>
+<div class=title>3-Way Non-proportional Venn diagram</div>
+
+
+The SAS code presented on this page is largely inspired by 
+<a href="http://robslink.com/SAS/democd14/vennmap_info.htm">Rob Allison's SAS code</a> for plotting a 3-way Venn diagram.
+My contribution was to wrap his code into the macro presented below while refreshing it to make it more flexible and robust.
+Main improvements to the existing code include more flexible data entry options.
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%VennDiagram</span> is a SAS macro to plot 3-way Venn diagrams, with values displayed in each set and/or set intersections.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#argslist">Arguments list</a><br>
+<a href="#example">Examples</a><br>
+<a href="#sascode">SAS code</a><br>
+<a href="#more">More Venn Diagrams</a><br>
+<a href="#download">Download</a>
+</div>
+
+<a name="syntax"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+%VennDiagram(dsSrc, set1var, set2var, set3var, idvar=patkey, display=, count=, outfmt=8.0, OutName=VennDiagram, OutDir=c:\users\pbelisle\My Documents\Home\tmp, title=Venn Diagram, set1label=, set2label=, set3label=, set1HoverText=, set2HoverText=, set3HoverText=, set12HoverText=, set13HoverText=, set23HoverText=, set123HoverText=, fontSize=4, setlabelFontSize=4, imgFmt=gif, valuesColor=white, bgColor=white, undef=0);
+</div>
+
+<a name="argslist"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main><span class=sasmacroname>%VennDiagram</span> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>dsSrc</td>
+<td class=rfctargumentvalue>the name of the sas data set containing three set indicator variables along with a fourth variable (either a cell count, an id variable or a variable direclty containing the information to be displayed in each set or set intersections);</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>set1var<br>set2var<br>set3var</td>
+<td class=rfctargumentvalue>the three set indicator variables;</td>
+<td class=rfctcomment>
+Each of these variables is binary, taking value 1 for values in corresponding set, 0 for values outside of the corresponding set.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>count<br>display<br>idvar</td>
+<td class=rfctargumentvalue>
+if data <i>dsSrc</i> already consists of cell counts to be displayed on the plot, then the variable where these cell counts can be found must be specified through the <b>count=</b> argument;<br><br>
+if data <i>dsSrc</i> consists of three set indicator variables and a variable (which could be a text variable) to be displayed on the plot, specify the corresponding variable name throught the <b>display=</b> argument;<br><br>
+if data <i>dsSrc</i> consists of a series of observations (patients) with an ID variable and three set indicator variables, then the ID variable should be specified through the <b>idvar=</b> argument;
+</td>
+<td class=rfctcomment>
+If values for <i>set1var</i> &times; <i>set2var</i> &times; <i>set3var</i>
+found in data <i>dsSrc</i> are not unique, the sum of variable defined in <b>count=</b> will be calculated for each set intersections and be displayed on the plot.<br><br>
+If <b>display=</b> option is used, it is assumed that each combination of <i>set1var</i> &times; <i>set2var</i> &times; <i>set3var</i> is either absent of data set <i>dsSrc</i>
+or present only once.<br><br>
+If neither the <b>count=</b> nor the <b>display=</b> option is used, default is to count the number of observations (patients) in each <i>set1var</i> &times; <i>set2var</i> &times; <i>set3var</i> cell. Default ID variable is <i>patkey</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>outfmt</td>
+<td class=rfctargumentvalue>SAS format in which values printed in each set should be displayed;
+</td>
+<td class=rfctcomment>Default is 8.0.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>OutName</td>
+<td class=rfctargumentvalue>Name of the .html output file to be saved;
+</td>
+<td class=rfctcomment>An image will also be saved with the same name, with file extension as defined by <i>imgFmt</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>OutDir</td>
+<td class=rfctargumentvalue>path of the directory where output .html file and image will be saved;
+</td>
+<td class=rfctcomment>
+<b>Important:</b> after copying the macro onto your system, change the default value for a directory that exists on your computer.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>title</td>
+<td class=rfctargumentvalue>title to be displayed on top of the plot;
+</td>
+<td class=rfctcomment>
+Default is <i>Venn Diagram</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>set1label<br>set2label<br>set3label</td>
+<td class=rfctargumentvalue>labels to be printed next to each set;
+</td>
+<td class=rfctcomment>
+Default is to use each set indicator variable name.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>
+set1HoverText<br>set2HoverText<br>set3HoverText<br>set12HoverText<br>set13HoverText<br>set23HoverText<br>set123HoverText
+</td>
+<td class=rfctargumentvalue>
+text to be displayed when hovering over each set or set intersections with the mouse;
+</td>
+<td class=rfctcomment>
+Default text is the concatenation of the corresponding set label(s).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>fontSize</td>
+<td class=rfctargumentvalue>
+font size for values to be displayed in each set or set intersections;
+</td>
+<td class=rfctcomment>
+Default: 4.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>setlabelFontSize</td>
+<td class=rfctargumentvalue>
+font size for set labels;
+</td>
+<td class=rfctcomment>
+Default: 4.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>imgFmt</td>
+<td class=rfctargumentvalue>
+image format;
+</td>
+<td class=rfctcomment>
+Default: gif; an alternative is png.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>valuesColor</td>
+<td class=rfctargumentvalue>
+color of values displayed in sets;
+</td>
+<td class=rfctcomment>
+Default: white.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>bgColor</td>
+<td class=rfctargumentvalue>
+background color;
+</td>
+<td class=rfctcomment>
+Default: white.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>undef</td>
+<td class=rfctargumentvalue>
+value to be displayed in empty cells;
+</td>
+<td class=rfctcomment>
+Default: 0.<br>
+Use <b>undef=</b> (without any value) to leave empty cells... empty!
+</td>
+</tr>
+</table>
+
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+We illustrate the use of <span class=sasmacroname>%VennDiagram</span> through two examples.<br><br>
+
+First, we reproduce the example presented on <a href="http://robslink.com/SAS/democd14/vennmap.sas">Rob's code</a>;
+we first define the data set with all information necessary for the plot, and then call <span class=sasmacroname>%VennDiagram</span>.
+
+<br><br>
+<div class=pgm>
+data Example;<br>
+&#160;&#160;&#160;&#160;input Scholars Students Athletes p;<br>
+cards;<br>
+1 0 0 0.07<br>
+0 1 0 0.23<br>
+0 0 1 0.12<br>
+1 1 0 0.03<br>
+0 1 1 0.08<br>
+1 0 1 0.04<br>
+1 1 1 0.02<br>
+;<br>
+run;<br>
+<br>
+%VennDiagram(Example, Scholars, Students, Athletes, display=p, outfmt=percent8.0);<br>
+</div>
+<br><br>
+
+Note the use of <i>outfmt</i> option to make sure that the values will be displayed as percentages.<br>
+Image produced is:<br><br>
+<img src="img/VennDiagram/Scholars-2.gif">
+<br clear=all>
+
+<br><br>
+In a second example, we use a data set consisting of cell counts, where value in variable <i>count</i> is the number of patients that tested positive to each of three diagnostic tests:
+
+<br><br>
+<div class=pgm>
+<br>
+data TestResults;<br>
+&#160;&#160;&#160;&#160;input Test1 Test2 Test3 Count;<br>
+cards;<br>
+1 0 0 721<br>
+0 1 0 820<br>
+0 0 1 390<br>
+1 1 0 239<br>
+1 0 1 372<br>
+0 1 1 200<br>
+1 1 1 24<br>
+;<br>
+run;<br>
+%VennDiagram(TestResults, Test1, Test2, Test3, count=Count, set1label=Test 1 Pos, set2label=Test 2 Pos, set3label=Test 3 Pos);<br>
+</div>
+<br><br>
+Image produced is:<br><br>
+<img src="img/VennDiagram/TestResults-2.gif">
+<br clear=all>
+<br><br>
+Note the text displayed when the mouse was hovering over the intersection of <i>Test 2 Pos</i> and <i>Test 3 Pos</i> sets.
+<br><br>
+
+
+<a name="sascode"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="SasMacros/VennDiagram-2.zip">One-click download</a>
+</div>
+<div class=pgm>
+%macro VennDiagram(dsSrc, set1var, set2var, set3var, idvar=patkey, display=, count=, outfmt=8.0, OutName=VennDiagram, OutDir=c:\users\patrick.belisle\My Documents\Home\tmp, title=Venn Diagram, <br>
+&#160;&#160;&#160;&#160;set1label=, set2label=, set3label=, set1HoverText=, set2HoverText=, set3HoverText=, set12HoverText=, set13HoverText=, set23HoverText=, set123HoverText=, <br>
+&#160;&#160;&#160;&#160;fontSize=4, setlabelFontSize=4, imgFmt=gif, valuesColor=white, bgColor=white, undef=0);<br>
+<br>
+&#160;&#160;&#160;&#160;%local dsCentroids dsColors dsMyData dsMyMap dsOutsideAnno dsSliceAnno dsTmp;<br>
+&#160;&#160;&#160;&#160;%local color1 color2 color3 color12 color13 color23 color123;<br>
+&#160;&#160;&#160;&#160;%local value1 value2 value3 value12 value13 value23 value123;<br>
+<br>
+&#160;&#160;&#160;&#160;filename odsout "&amp;OutDir";<br>
+&#160;&#160;&#160;&#160;goptions reset=global;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(display)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value13&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value23&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select &amp;display into :value123&#160;&#160;&#160;&#160;from &amp;dsSrc where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %if %length(%superq(count)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsTmp = %VennDiagramNewDatasetName(tmp);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select &amp;set1var, &amp;set2var, &amp;set3var, sum(&amp;count) as Count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group &amp;set1var, &amp;set2var, &amp;set3var;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value13&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value23&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value123&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsTmp; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsTmp = %VennDiagramNewDatasetName(tmp);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select &amp;set1var, &amp;set2var, &amp;set3var, N(&amp;idvar) as Count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsSrc<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group &amp;set1var, &amp;set2var, &amp;set3var;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 0; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value13&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value23&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 0&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint; select Count into :value123&#160;&#160;&#160;&#160;from &amp;dsTmp where &amp;set1var eq 1&#160;&#160;&#160;&#160;and &amp;set2var eq 1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and &amp;set3var eq 1; &#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsTmp; quit;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(&amp;undef) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value1) eq 0&#160;&#160;&#160;&#160;%then %let value1 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value2) eq 0&#160;&#160;&#160;&#160;%then %let value2 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value3) eq 0&#160;&#160;&#160;&#160;%then %let value3 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value12) eq 0&#160;&#160;&#160;&#160;%then %let value12 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value13) eq 0&#160;&#160;&#160;&#160;%then %let value13 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value23) eq 0&#160;&#160;&#160;&#160;%then %let value23 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value123) eq 0&#160;&#160;&#160;&#160;%then %let value123 = &amp;undef;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Sets colors definitions */<br>
+&#160;&#160;&#160;&#160;%let color1=cxD974C9;<br>
+&#160;&#160;&#160;&#160;%let color2=cx008000;<br>
+&#160;&#160;&#160;&#160;%let color3=cxFFD700;<br>
+&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;/* Original colors<br>
+&#160;&#160;&#160;&#160;%let color1=cx5A5AE7;<br>
+&#160;&#160;&#160;&#160;%let color2=cxE75A5A;<br>
+&#160;&#160;&#160;&#160;%let color3=cx5AE75A;<br>
+&#160;&#160;&#160;&#160;*/<br>
+<br>
+&#160;&#160;&#160;&#160;/* Calculate the 'overlapping' colors.  This isn't true color-blending, but rather taking the average of the rgb hex codes.  (using this<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;algorithm, if you mix blue &amp; yellow you do not get green like you would in true color mixing) Maybe someone who knows color <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mixing algorithms can replace this code with something better... */<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsColors = %VennDiagramNewDatasetName(colors);<br>
+&#160;&#160;&#160;&#160;data &amp;dsColors;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramMixedColors(color12, &amp;color1 &amp;color2);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* Calculate color for 1&amp;2 intersection */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramMixedColors(color13, &amp;color1 &amp;color3);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* Calculate color for 1&amp;3 intersection */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramMixedColors(color23, &amp;color2 &amp;color3);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* Calculate color for 2&amp;3 intersection */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramMixedColors(color123, &amp;color1 &amp;color2 &amp;color3);&#160;&#160;&#160;&#160;/* Calculate color for 1&amp;2&amp;3 intersection */<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;/* Store mixed colors codes in macro variables */<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select color12, color13, color23, color123 into :color12, :color13, :color23, :color123<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsColors;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsColors; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;/* ------------------------------------------------------------------<br>
+&#160;&#160;&#160;&#160;    Create the "response" data set                                   */<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(set1label)) eq 0 %then %let set1label=&amp;set1var;<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(set2label)) eq 0 %then %let set2label=&amp;set2var;<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(set3label)) eq 0 %then %let set3label=&amp;set3var;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsMyData = %VennDiagramNewDatasetName(mydata);<br>
+&#160;&#160;&#160;&#160;data &amp;dsMyData;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length AreaLabel $200;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value1) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value1, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set1HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set1label Only";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set1HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 2;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value2) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value2, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set2HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set2label Only";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set2HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 3;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value3) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value3, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set3HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set3label Only";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set3HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 12;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value12) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value12, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set12HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set1label &amp; &amp;set2label Intersect";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set12HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 23;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value23) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value23, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set23HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set2label &amp; &amp;set3label Intersect";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set23HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 13;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value13) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value13, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set13HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set1label &amp; &amp;set3label Intersect";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set13HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 123;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(&amp;value123) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = put(&amp;value123, &amp;outfmt);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value = "";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if %length(%superq(set123HoverText)) = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set1label &amp; &amp;set2label &amp; &amp;set3label Intersect";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaLabel = "&amp;set123HoverText";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsMyData; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsMyData;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length htmlvar $500;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;htmlvar='title='||quote(<br>
+&#160; 'AREA:   '|| strip(AreaLabel) ||'0D'x||<br>
+&#160; 'VALUE:   '|| strip(value));<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;/* -----------------------------------------------------------------<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Create the "map" geometry data set&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;*/<br>
+&#160;&#160;&#160;&#160;%let dsMyMap = %VennDiagramNewDatasetName(mymap);<br>
+&#160;&#160;&#160;&#160;data &amp;dsMyMap;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;radius = 25;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 1 (top-most, area 1 only) ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(0, 180, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* top arc of area 1 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(120, 60, -1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* bottom/left arc of area 1 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(120, 60, -1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* bottom/right arc of area 1 */&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 2 (Left-most, area 2 only) ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 2;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(300, 120, -1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* big/left arc of area 2 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(180, 240, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* little/right/top arc of area 2 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(180, 240, 1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* little/right/bottom arc of area 2 */<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 3 (Right-most, area 3 only) ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 3;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(60, -120, -1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* big/right arc of area 3 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(-60, 0, 1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* little/left lower arc of area 3 */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(-60, 0, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* little/left/top arc of area 3 */<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 1&amp;2 Intersection ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 12;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(180, 240, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* lower/left arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(180, 120, -1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* lower/right arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(60, 120, 1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* topmost arc */<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 2&amp;3 Intersection ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 23;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(180, 240, 1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* lower/left arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(-60, 0, 1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* lower/right arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(300, 240, -1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* topmost arc */<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 1&amp;3 Intersection ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 13;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(60, 120, 1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* topmost arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(60, 0, -1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* lower/left arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(300, 360, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* lower/right arc */<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* ----- Area 1&amp;2&amp;3 Intersection (center) ----- */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AreaID = 123;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(0, 60, 1, 50-(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* upper/right arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(120, 180, 1, 50+(50/4), 25+10);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* upper/left arc */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%VennDiagramDegreesLoop(240, 300, 1, 50, 25+10+21.650635);&#160;&#160;&#160;&#160;/* lower/bottom arc */<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsCentroids&#160;&#160;&#160;&#160;= %VennDiagramNewDatasetName(centroids);<br>
+&#160;&#160;&#160;&#160;%let dsTmp&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= %VennDiagramNewDatasetName(tmp);<br>
+&#160;&#160;&#160;&#160;/* Put the labels on the pieces of the circles */<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* Get the average x/y center coordinates of each piece */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsCentroids as <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; select unique AreaID, mean(x) as x, mean(y) as y<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; from &amp;dsMyMap<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; group by AreaID;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/* Merge the centers with the 'response' data */<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsTmp as <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; select unique d.*, c.x, c.y<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; from &amp;dsMyData as d left join &amp;dsCentroids as c<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; on d.AreaID = c.AreaID;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsMyData; change &amp;dsTmp=&amp;dsMyData; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsSliceAnno = %VennDiagramNewDatasetName(sliceanno);<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsSliceAnno as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select *,  '2' as xsys,'2' as ysys, '3' as hsys, 'A' as when, 'label' as function length=12, '5' as position, '"arial/bo"' as style length=12, &amp;fontSize as size, "&amp;valuesColor" as color length=12, strip(value) as text length=20<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsMyData;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsOutsideAnno = %VennDiagramNewDatasetName(outsideanno);<br>
+&#160;&#160;&#160;&#160;/* Put labels beside (outside) the circles */<br>
+&#160;&#160;&#160;&#160;/* Generate a version with labels instead of hatch-marks and 'legend' */<br>
+&#160;&#160;&#160;&#160;data &amp;dsOutsideAnno;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;length text $100 style $12 function $12 color $12;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xsys = '2'; ysys = '2'; hsys = '3'; when = 'A';<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;function = 'label'; style = '"arial/bo"'; size = &amp;setlabelFontSize; color = 'black'; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;text = "&amp;set1label";&#160;&#160;&#160;&#160;position='4'; x = 27; y = 73;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;text = "&amp;set2label";&#160;&#160;&#160;&#160;position='4'; x = 13; y = 25;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;text = "&amp;set3label";&#160;&#160;&#160;&#160;position='6'; x = 87; y = 25;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+ <br>
+&#160;&#160;&#160;&#160;ods listing close;<br>
+&#160;&#160;&#160;&#160;ods html path=odsout body="&amp;OutName..html" (title="SAS/Graph Venn Diagram") style=minimal;<br>
+&#160;&#160;&#160;&#160;goptions border;<br>
+<br>
+&#160;&#160;&#160;&#160;goptions htitle=6pct htext=4pct ftitle="arial/bo" ftext="arial";<br>
+&#160;&#160;&#160;&#160;goptions cback=&amp;bgColor;<br>
+<br>
+&#160;&#160;&#160;&#160;title "&amp;title";<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;/* Use the 'midpoints=' gmap option to guarantee the colors will <br>
+&#160;&#160;&#160;&#160;   be assigned in the desired order (otherwise they will be <br>
+&#160;&#160;&#160;&#160;   assigned alphabetically by &amp;labeln values. */<br>
+&#160;&#160;&#160;&#160;pattern1 v=s c=&amp;color1;<br>
+&#160;&#160;&#160;&#160;pattern2 v=s c=&amp;color2;<br>
+&#160;&#160;&#160;&#160;pattern3 v=s c=&amp;color3;<br>
+&#160;&#160;&#160;&#160;pattern4 v=s c=&amp;color12;<br>
+&#160;&#160;&#160;&#160;pattern5 v=s c=&amp;color23;<br>
+&#160;&#160;&#160;&#160;pattern6 v=s c=&amp;color13;<br>
+&#160;&#160;&#160;&#160;pattern7 v=s c=&amp;color123;<br>
+<br>
+&#160;&#160;&#160;&#160;legend1 position=(bottom) across=3 label=none shape=bar(3,1);<br>
+&#160;&#160;&#160;&#160;filename vdiagout "&amp;OutDir/&amp;OutName";<br>
+&#160;&#160;&#160;&#160;goptions device=&amp;imgFmt gsfname=vdiagout;<br>
+<br>
+&#160;&#160;&#160;&#160;proc gmap map=&amp;dsMyMap data=&amp;dsMyData anno=&amp;dsOutsideAnno all; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;id AreaID; <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;choro AreaID / <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nolegend midpoints=1 2 3 12 23 13 123<br>
+&#160;&#160;&#160;&#160;  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coutline=black woutline=2 anno=&amp;dsSliceAnno html=htmlvar des="" name="&amp;OutName"; <br>
+&#160;&#160;&#160;&#160;run; quit;<br>
+<br>
+&#160;&#160;&#160;&#160;ods html close;<br>
+&#160;&#160;&#160;&#160;ods listing;<br>
+<br>
+&#160;&#160;&#160;&#160;filename vdiagout clear;<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsCentroids &amp;dsMyData &amp;dsMyMap &amp;dsOutsideAnno &amp;dsSliceAnno; quit;<br>
+%mend;<br>
+<br>
+<br>
+%macro VennDiagramDegreesLoop(StartAngle, EndAngle, direction, CenterX, CenterY);<br>
+&#160;&#160;&#160;&#160;do degrees = &amp;StartAngle to &amp;EndAngle by &amp;direction;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;radians =degrees * (atan(1)/45);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; x = &amp;CenterX + (radius * cos(radians));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; y = &amp;CenterY + (radius * sin(radians));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; output;<br>
+&#160;&#160;&#160;&#160; end;<br>
+%mend;<br>
+<br>
+<br>
+%macro VennDiagramMixedColors(outcolor, incolors, darken=0.9);<br>
+&#160;&#160;&#160;&#160;%local nColors;<br>
+&#160;&#160;&#160;&#160;%local color0 color1 color2;<br>
+<br>
+&#160;&#160;&#160;&#160;%let nColors = %eval(1 + %length(%sysfunc(compbl(&amp;incolors))) - %length(%sysfunc(compress(&amp;incolors))));<br>
+&#160;&#160;&#160;&#160;%let color0 = %scan(&amp;incolors, 1);<br>
+&#160;&#160;&#160;&#160;%let color1 = %scan(&amp;incolors, 2);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;/* First get the rgb hex values of the colors to mix*/<br>
+&#160;&#160;&#160;&#160;red0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color0", 3, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;green0&#160;&#160;&#160;&#160;= input(substr("&amp;color0", 5, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;blue0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color0", 7, 2), hex2.);<br>
+<br>
+&#160;&#160;&#160;&#160;red1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color1", 3, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;green1&#160;&#160;&#160;&#160;= input(substr("&amp;color1", 5, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;blue1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color1", 7, 2), hex2.);<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;nColors eq 3 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let color2 = %scan(&amp;incolors, 3);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;red2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color2", 3, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;green2&#160;&#160;&#160;&#160;= input(substr("&amp;color2", 5, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;blue2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= input(substr("&amp;color2", 7, 2), hex2.);<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;red2 = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;green2 = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;blue2 = .;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;/* darken is a factor to 'darken' the combined area colors. values 0->1 (1=no darkening, 0=totally darkened) */<br>
+&#160;&#160;&#160;&#160;Dk&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= &amp;darken**(&amp;nColors-1);<br>
+&#160;&#160;&#160;&#160;red&#160;&#160;&#160;&#160;= mean(of red0 red1 red2) * Dk;<br>
+&#160;&#160;&#160;&#160;green&#160;&#160;&#160;&#160;= mean(of green0 green1 green2) * Dk;<br>
+&#160;&#160;&#160;&#160;blue&#160;&#160;&#160;&#160;= mean(of blue0 blue1 blue2) * Dk;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;outcolor&#160;&#160;&#160;&#160;= "cx"||put(red,hex2.)||put(green,hex2.)||put(blue,hex2.);<br>
+%mend;<br>
+<br>
+<br>
+%macro VennDiagramNewDatasetName(proposalname);<br>
+&#160;&#160;&#160;&#160;%*Finds the first unused dataset named  *datasetname*, adding a leading underscore and a numeric suffix as large as necessary to make it unique!;<br>
+&#160;&#160;&#160;&#160;%local i newdatasetname;<br>
+&#160;&#160;&#160;&#160;%let proposalname=%sysfunc(compress(&amp;proposalname));<br>
+&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname;<br>
+<br>
+&#160;&#160;&#160;&#160;%do %while(%sysfunc(exist(&amp;newdatasetname)));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let i = %eval(&amp;i+1);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;proposalname&amp;i;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;newdatasetname<br>
+%mend;<br>
+</div>
+<br>
+
+<a name="more"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>More Venn Diagrams</div>
+<br>
+If you'd rather plot proportional Venn diagrams, please refer to the SAS paper
+<a href="../../../../support.sas.com/resources/papers/proceedings/pdfs/sgf2008/073-2008.pdf">How To Generate 2, 3 and 4 Way Venn Diagrams with Drill Down Functionality within 4 minutes!</a>
+<br>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<a href="SasMacros/VennDiagram-2.zip">Download <span class=sasmacroname>%VennDiagram</span> 1.1 now</a>.
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/VennDiagram.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:44:16 GMT -->
+</html>

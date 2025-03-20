@@ -1,0 +1,170 @@
+3.3  CROSS-FACTORED WITH NESTING MODEL Y = C|B(A) + e
+
+Analysis of terms: C|A + C|B(A)
+
+Data:
+
+A	B	C	Y		A1	B1
+1	1	1	-3.8558		1	1
+1	1	1	 4.4076		1	1
+1	1	2	-4.1752		1	1
+1	1	2	 1.4913		1	1
+1	2	1	 5.9699		2	2
+1	2	1	 5.2141		2	2
+1	2	2	 9.1467		2	2
+1	2	2	 5.8209		2	2
+2	1	1	 9.4082		3	3
+2	1	1	 6.0296		3	3
+2	1	2	15.3014		3	3
+2	1	2	12.1900		3	3
+2	2	1	 6.9754		4	4
+2	2	1	14.3012		4	4
+2	2	2	10.4266		4	4
+2	2	2	 2.3707		4	4
+3	1	1	19.1834		5	5
+3	1	1	18.3855		5	5
+3	1	2	23.3385		5	5
+3	1	2	21.9134		5	5
+3	2	1	16.4482		6	6
+3	2	1	11.6765		6	6
+3	2	2	17.9727		6	6
+3	2	2	15.1760		6	6
+
+
+COMMENT: This example is balanced and therefore orthogonal, 
+so uses Type I (sequential) SS. In the event of non-orthogonality, 
+use Type III (adjusted) SS. 
+
+
+Model 3.3(i) A and C are fixed factors, B is a random factor:
+
+	 	 	          Restricted Unrestricted
+  Source    DF       SS      MS     F      P     F      P
+1 A          2   905.27  452.63  8.09  0.062  8.09  0.062
+2 B(A)       3   167.83   55.94  4.71  0.021  2.81  0.209
+3 C          1    11.80   11.80  0.59  0.497  0.59  0.497
+4 C*A        2    10.02    5.01  0.25  0.793  0.25  0.793
+5 C*B(A)     3    59.74   19.91  1.68  0.225  1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+
+Model 3.3(ii) A is a fixed factor, B and C are random factors:
+
+			           Restricted  Unrestricted
+  Source    DF       SS      MS      F      P      F      P
+1 A          2   905.27  452.63  11.03  0.137* 11.03  0.137*
+2 B(A)       3   167.83   55.94   2.81  0.209   2.81  0.209
+3 C          1    11.80   11.80   0.59  0.497   2.36  0.265
+4 C*A        2    10.02    5.01   0.25  0.793   0.25  0.793
+5 C*B(A)     3    59.74   19.91   1.68  0.225   1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+* Quasi F-ratio.
+
+
+Model 3.3(iii) A and B are random factors, C is a fixed factor:
+
+			          Restricted  Unrestricted
+  Source    DF       SS      MS     F      P      F      P
+1 A          2   905.27  452.63  8.09  0.062  11.03  0.137*
+2 B(A)       3   167.83   55.94  4.71  0.021   2.81  0.209
+3 C          1    11.80   11.80  2.36  0.265   2.36  0.265
+4 C*A        2    10.02    5.01  0.25  0.793   0.25  0.793
+5 C*B(A)     3    59.74   19.91  1.68  0.225   1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+* Quasi F-ratio.
+
+
+Model 3.3(iv) A, B and C are all random factors:
+ 
+  Source    DF       SS      MS      F      P
+1 A          2   905.27  452.63  11.03  0.137* 
+2 B(A)       3   167.83   55.94   2.81  0.209
+3 C          1    11.80   11.80   2.36  0.265
+4 C*A        2    10.02    5.01   0.25  0.793
+5 C*B(A)     3    59.74   19.91   1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+* Quasi F-ratio.
+
+
+Model 3.3(v) A is a fixed factor, B is a random factor, C is a covariate of the response:
+
+  Source    DF       SS      MS     F      P
+1 A          2   905.27  452.63  8.09  0.062
+2 B(A)       3   167.83   55.94  4.71  0.021
+3 C          1    11.80   11.80  0.59  0.497
+4 C*A        2    10.02    5.01  0.25  0.792
+5 C*B(A)     3    59.74   19.91  1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+
+Model 3.3(vi) A and B are random factors, C is a covariate of the response:
+
+  Source    DF       SS      MS     F      P
+1 A          2   905.27  452.63  8.09  0.062
+2 B(A)       3   167.83   55.94  4.71  0.021
+3 C          1    11.80   11.80  2.36  0.265
+4 C*A        2    10.02    5.01  0.25  0.792
+5 C*B(A)     3    59.74   19.91  1.68  0.225
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+
+Model 3.3(vii) C is a fixed factor, B is a random factor, A is a covariate of the response:
+
+Note: A = A1 and B = B1 in dataset above
+
+			           Restricted  Unrestricted
+  Source    DF       SS      MS      F      P      F      P
+1 A          1   816.63  816.63  12.74  0.023  12.74  0.023
+2 B(A)       4   256.47   64.12   5.40  0.010   3.89  0.109
+3 C          1    11.80   11.80   0.72  0.445   0.72  0.445
+4 C*A        1     3.76    3.76   0.23  0.658   0.23  0.658
+5 C*B(A)     4    66.00   16.50   1.39  0.295   1.39  0.295
+6 S(C*B(A)) 12   142.47   11.87
+  Total     23  1297.13
+
+
+Model 3.3(viii) B and C are random factors, A is a covariate of the response:
+
+Note: A = A1 and B = B1 in dataset above
+
+  Source    DF        SS      MS      F      P
+1 A          1   816.627  816.63  37.83  0.025*
+2 B(A)       4   256.474   64.12   3.89  0.109
+3 C          1    11.801   11.80   0.72  0.445 
+4 C*A        1     3.764    3.76   0.23  0.658 
+5 C*B(A)     4    65.996   16.50   1.39  0.295
+6 S(C*B(A)) 12   142.472   11.87
+  Total     23  1297.133
+
+* Quasi F-ratio.
+
+
+Model 3.3(ix) A and C are covariates of the response, B is a random factor:
+
+Note: A = A1 and B = B1 in dataset above
+
+  Source    DF        SS      MS      F      P
+1 A          1   816.627  816.63  12.74  0.023
+2 B(A)       4   256.474   64.12   5.40  0.010
+3 C          1    11.801   11.80   0.72  0.445 
+4 C*A        1     3.764    3.76   0.23  0.658 
+5 C*B(A)     4    65.996   16.50   1.39  0.295
+6 S(C*B(A)) 12   142.472   11.87
+  Total     23  1297.133
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

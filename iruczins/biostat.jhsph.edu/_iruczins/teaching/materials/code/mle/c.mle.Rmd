@@ -1,0 +1,124 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+## Maximum Likelihood Estimation
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+### Example from class: Binomial log likelihood
+
+Some Binomial probabilities.
+
+```{r}
+dbinom(22,100,prob=22/100)
+dbinom(22,100,prob=0.10)
+dbinom(22,100,prob=0.20)
+dbinom(22,100,prob=0.25)
+
+p <- seq(0,1,by=0.01)
+p
+plot(p,dbinom(22,100,prob=p))
+```
+
+Plot the likelihood function.
+
+```{r}
+p <- seq(0.1,0.4,length=501)
+plot(p,dbinom(22,100,prob=p),type="l",ylab="likelihood")
+abline(v=22/100,lwd=2,col="blue")     
+```
+
+The log likelihood function from class.
+
+```{r}
+ll <- function(x,n,p){
+  x*log(p)+(n-x)*log(1-p)+log(choose(n,x))
+}
+```
+
+The log likelihood for some values of p.
+
+```{r}
+p <- seq(0,1,length=51)
+p
+ll(x=22,n=100,p=p)
+ll(22,100,p)
+```
+
+The plot.
+
+```{r}
+p <- seq(0,1,length=501)
+plot(p,ll(22,100,p),type="l",xlab="p",ylab="log likelihood",main="n=100, x=22")
+p <- seq(0.1,0.4,length=501)
+plot(p,ll(22,100,p),type="l",xlab="p",ylab="log likelihood",main="n=100, x=22")
+abline(v=22/100,lwd=2,col="blue")
+```
+
+Note: you can also use the dbinom() function with argument log=TRUE.
+
+```{r}
+p <- seq(0.1,0.4,by=0.01)
+p
+ll(22,100,p)
+dbinom(22,100,p)
+dbinom(22,100,p,log=TRUE)
+
+plot(p,dbinom(22,100,prob=p,log=TRUE),type="l",ylab="log likelihood")
+abline(v=22/100,lwd=2,col="blue")     
+```
+
+Also note: you can also omit the constant in the log likelihood function (e.g., the last part that does not depend on p).
+
+```{r}
+ll2 <- function(x,n,p){
+  x*log(p)+(n-x)*log(1-p)
+}
+
+p <- seq(0.1,0.4,length=501)
+plot(p,ll2(22,100,p),type="l",xlab="p",ylab="log likelihood")
+abline(v=22/100,lwd=2,col="blue")
+```
+
+### Example from class: Poisson log likelihood
+
+The log likelihood function.
+
+```{r}
+ll <- function(x,lambda){
+  -length(x)*lambda+sum(x)*log(lambda)-sum(log(gamma(x+1)))
+}
+```
+
+The log likelihood for some values of lambda.
+
+```{r}
+x <- c(1,1,0,1,2,5,2,4,0,0,1,0,3,1,0,0,1,1,3,4)
+x
+table(x)
+length(x)
+mean(x)
+lambda <- seq(0.5,4.5,by=0.1)
+lambda
+ll(x,lambda)
+```
+
+The plot.
+
+```{r}
+lambda <- seq(0.5,4,length=501)
+plot(lambda,ll(x,lambda),type="l",xlab=expression(lambda),ylab="log likelihood",main="n=20, mean=1.5")
+abline(v=mean(x),lwd=2,col="blue")
+```
+
+Note: you can also use the dpois() function with argument log=TRUE.
+
+```{r}
+ll(x,lambda=1.5)
+dpois(x,lambda=1.5)
+dpois(x,lambda=1.5,log=TRUE)
+sum(dpois(x,lambda=1.5,log=TRUE))
+```
+
+

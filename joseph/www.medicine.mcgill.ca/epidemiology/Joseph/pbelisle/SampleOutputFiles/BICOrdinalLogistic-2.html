@@ -1,0 +1,1176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/SampleOutputFiles/BICOrdinalLogistic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 10:02:19 GMT -->
+<head>
+<meta name="Generator" content="SAS Software Version 9.2, see www.sas.com">
+<meta http-equiv="Content-type" content="text/html; charset=windows-1252">
+<title>SAS Output</title>
+<style type="text/css">
+<!--
+.AfterCaption
+{
+  padding: 0px;
+  border-spacing: 0px;
+}
+.batch
+{
+  padding: 0pt;
+  border-collapse: separate;
+  border-spacing: 0pt;
+  border: 0px solid #000000;
+}
+.BeforeCaption
+{
+  padding: 0px;
+  border-spacing: 0px;
+}
+.Body
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 0.25in;
+  margin-right: 0.25in;
+  margin-top: 0.25in;
+  margin-bottom: 0.25in;
+}
+.BodyDate
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 0px;
+  border-spacing: 0px;
+  text-align: right;
+  vertical-align: top;
+}
+.ByContentFolder
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 15%;
+  margin-right: 15%;
+  list-style-type: none;
+  text-align: left;
+}
+.Byline
+{
+  padding: 0px;
+  border-spacing: 0px;
+  border: 0px solid #000000;
+}
+.BylineContainer
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 1px;
+  border-spacing: 1px;
+  border: 0px solid #000000;
+  width: 100%;
+}
+.Caption
+{
+  padding: 0px;
+  border-spacing: 0px;
+}
+.cell
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Container
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ContentFolder
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 15%;
+  margin-right: 15%;
+  list-style-type: none;
+  text-align: left;
+}
+.ContentItem
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 15%;
+  margin-right: 15%;
+  list-style-type: none;
+  text-align: left;
+}
+.ContentProcLabel
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 15%;
+  margin-right: 15%;
+  list-style-type: decimal;
+  text-align: left;
+}
+.ContentProcName
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 15%;
+  margin-right: 15%;
+  list-style-type: decimal;
+  text-align: left;
+}
+.Contents
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 8px;
+  margin-right: 8px;
+  list-style-type: decimal;
+}
+.ContentsDate
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ContentTitle
+{
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 3ex;
+  margin-bottom: 4ex;
+  width: 100%;
+  text-align: center;
+}
+.Continued
+{
+  padding: 0px;
+  border-spacing: 0px;
+  width: 100%;
+  text-align: left;
+}
+.Data
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.DataEmpty
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Date
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Document
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ErrorBanner
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: bold;
+  font-style: normal;
+}
+.ErrorContent
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ExtendedPage
+{
+  padding: 2pt;
+  border: 1pt solid #000000;
+  text-align: center;
+}
+.FatalBanner
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: bold;
+  font-style: normal;
+}
+.FatalContent
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.FolderAction
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 6pt;
+  list-style-type: none;
+}
+.Footer
+{
+  background-color: #DAA520;
+}
+.FooterEmphasis
+{
+  background-color: #DAA520;
+}
+.FooterEmphasisFixed
+{
+  background-color: #DAA520;
+}
+.FooterEmpty
+{
+  background-color: #DAA520;
+}
+.FooterFixed
+{
+  background-color: #DAA520;
+}
+.FooterStrong
+{
+  background-color: #DAA520;
+}
+.FooterStrongFixed
+{
+  background-color: #DAA520;
+}
+.Frame
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Graph
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 0px;
+  border-collapse: separate;
+  border-spacing: 0.25pt;
+  border: 0.75pt solid #000000;
+}
+.Header
+{
+  background-color: #DAA520;
+}
+.HeaderEmphasis
+{
+  background-color: #DAA520;
+}
+.HeaderEmphasisFixed
+{
+  background-color: #DAA520;
+}
+.HeaderEmpty
+{
+  background-color: #DAA520;
+}
+.HeaderFixed
+{
+  background-color: #DAA520;
+}
+.HeadersAndFooters
+{
+  background-color: #DAA520;
+}
+.HeaderStrong
+{
+  background-color: #DAA520;
+}
+.HeaderStrongFixed
+{
+  background-color: #DAA520;
+}
+.Index
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.IndexAction
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 6pt;
+  list-style-type: none;
+}
+.IndexItem
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 6pt;
+  list-style-type: none;
+}
+.IndexProcName
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: decimal;
+}
+.LayoutContainer
+{
+  padding: 0px;
+  border-spacing: 30px;
+  border: 0px solid #000000;
+}
+.LayoutRegion
+{
+  padding: 0px;
+  border-spacing: 30px;
+  border: 0px solid #000000;
+}
+.List
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: disc;
+  width: 100%;
+  text-align: left;
+}
+.List10
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List2
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: circle;
+  width: 100%;
+  text-align: left;
+}
+.List3
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List4
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List5
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List6
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List7
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List8
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.List9
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: square;
+  width: 100%;
+  text-align: left;
+}
+.ListItem
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem10
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem2
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem3
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem4
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem5
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem6
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem7
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem8
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.ListItem9
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Note
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.NoteBanner
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: bold;
+  font-style: normal;
+}
+.NoteContent
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.Output
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 7px;
+  border-collapse: separate;
+  border-spacing: 1px;
+  border: 1px solid #000000;
+}
+.PageNo
+{
+  padding: 0px;
+  border-spacing: 0px;
+  text-align: right;
+  vertical-align: top;
+}
+.Pages
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 8px;
+  margin-right: 8px;
+  list-style-type: decimal;
+}
+.PagesDate
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.PagesItem
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 6pt;
+  list-style-type: none;
+}
+.PagesProcLabel
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: decimal;
+}
+.PagesProcName
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  list-style-type: decimal;
+}
+.Paragraph
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  width: 100%;
+  text-align: left;
+}
+.Parskip
+{
+  padding: 0px;
+  border-spacing: 0px;
+  border: 0px solid #000000;
+}
+.PrePage
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+}
+.RowFooter
+{
+  background-color: #DAA520;
+}
+.RowFooterEmphasis
+{
+  background-color: #DAA520;
+}
+.RowFooterEmphasisFixed
+{
+  background-color: #DAA520;
+}
+.RowFooterEmpty
+{
+  background-color: #DAA520;
+}
+.RowFooterFixed
+{
+  background-color: #DAA520;
+}
+.RowFooterStrong
+{
+  background-color: #DAA520;
+}
+.RowFooterStrongFixed
+{
+  background-color: #DAA520;
+}
+.RowHeader
+{
+  background-color: #DAA520;
+}
+.RowHeaderEmphasis
+{
+  background-color: #DAA520;
+}
+.RowHeaderEmphasisFixed
+{
+  background-color: #DAA520;
+}
+.RowHeaderEmpty
+{
+  background-color: #DAA520;
+}
+.RowHeaderFixed
+{
+  background-color: #DAA520;
+}
+.RowHeaderStrong
+{
+  background-color: #DAA520;
+}
+.RowHeaderStrongFixed
+{
+  background-color: #DAA520;
+}
+.SysTitleAndFooterContainer
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 1px;
+  border-spacing: 1px;
+  border: 0px solid #000000;
+  width: 100%;
+}
+.Table
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  border-collapse: separate;
+  border-spacing: 0pt;
+  border-top-width: 2pt;
+  border-right-width: 0px;
+  border-bottom-width: 2pt;
+  border-left-width: 0px;
+  border-color: #000000;
+  border-style: solid;
+}
+.top_stacked_value
+{
+  padding-bottom: 1px;
+}
+.middle_stacked_value
+{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.bottom_stacked_value
+{
+  padding-top: 1px;
+}
+.titleAndNoteContainer
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  padding: 1px;
+  border-spacing: 1px;
+  border: 0px solid #000000;
+}
+.UserText
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+}
+.WarnBanner
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: bold;
+  font-style: normal;
+}
+.WarnContent
+{
+  font-family: Arial;
+  font-size: 6pt;
+  font-weight: normal;
+  font-style: normal;
+}
+.l {text-align: left }
+.c {text-align: center }
+.r {text-align: right }
+.d {text-align: right }
+.j {text-align: justify }
+.t {vertical-align: top }
+.m {vertical-align: middle }
+.b {vertical-align: bottom }
+TD, TH {vertical-align: top }
+.stacked_cell{padding: 0 }
+-->
+</style>
+<script language="javascript" type="text/javascript">
+<!-- 
+function startup(){
+
+}
+function shutdown(){
+
+}
+
+//-->
+</script>
+
+</head>
+<body onload="startup()" onunload="shutdown()" class="Body">
+
+<script language="javascript" type="text/javascript">
+<!-- 
+var _info = navigator.userAgent
+var _ie = (_info.indexOf("MSIE") > 0
+          && _info.indexOf("Win") > 0
+          && _info.indexOf("Windows 3.1") < 0);
+
+//-->
+</script>
+
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<table class="Table" style=" margin-left: 0.2in; margin-right: 0.2in; border-spacing: 0px;" cellspacing="0" cellpadding="3" rules="none" frame="hsides" border="2" summary="Procedure Report: Detailed and/or summarized report">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c Header" colspan="3" scope="colgroup">&nbsp;</th>
+<th class="c Header" colspan="24" scope="colgroup">Variable</th>
+</tr>
+<tr>
+<th class="c Header" colspan="3" scope="colgroup">&nbsp;</th>
+<th class="c Header" colspan="6" scope="colgroup">alpha</th>
+<th class="c Header" colspan="6" scope="colgroup">beta</th>
+<th class="c Header" colspan="6" scope="colgroup">delta</th>
+<th class="c Header" colspan="6" scope="colgroup">gamma</th>
+</tr>
+<tr>
+<th class="c Header" scope="col">Rank</th>
+<th class="c Header" scope="col">model</th>
+<th class="c Header" scope="col">ModelProb</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">Estimate</th>
+<th class="c Header" scope="col">StdErr</th>
+<th class="c Header" scope="col">Odds Ratio</th>
+<th class="c Header" scope="col">95% Odds Ratio Lower CL</th>
+<th class="c Header" scope="col">95% Odds Ratio Upper CL</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">Estimate</th>
+<th class="c Header" scope="col">StdErr</th>
+<th class="c Header" scope="col">Odds Ratio</th>
+<th class="c Header" scope="col">95% Odds Ratio Lower CL</th>
+<th class="c Header" scope="col">95% Odds Ratio Upper CL</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">Estimate</th>
+<th class="c Header" scope="col">StdErr</th>
+<th class="c Header" scope="col">Odds Ratio</th>
+<th class="c Header" scope="col">95% Odds Ratio Lower CL</th>
+<th class="c Header" scope="col">95% Odds Ratio Upper CL</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">Estimate</th>
+<th class="c Header" scope="col">StdErr</th>
+<th class="c Header" scope="col">Odds Ratio</th>
+<th class="c Header" scope="col">95% Odds Ratio Lower CL</th>
+<th class="c Header" scope="col">95% Odds Ratio Upper CL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r Data">        1</td>
+<td class="l Data">beta,delta</td>
+<td class="r Data">  80.21% </td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.71</td>
+<td class="r Data"> 0.14</td>
+<td class="r Data"> 0.49</td>
+<td class="r Data"> 0.37</td>
+<td class="r Data"> 0.65</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data"> 0.04</td>
+<td class="r Data"> 0.01</td>
+<td class="r Data"> 1.04</td>
+<td class="r Data"> 1.03</td>
+<td class="r Data"> 1.05</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+</tr>
+<tr>
+<td class="r Data">        2</td>
+<td class="l Data">beta,gamma,delta</td>
+<td class="r Data">  16.18% </td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.67</td>
+<td class="r Data"> 0.14</td>
+<td class="r Data"> 0.51</td>
+<td class="r Data"> 0.39</td>
+<td class="r Data"> 0.68</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data"> 0.04</td>
+<td class="r Data"> 0.01</td>
+<td class="r Data"> 1.04</td>
+<td class="r Data"> 1.03</td>
+<td class="r Data"> 1.05</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.42</td>
+<td class="r Data"> 0.22</td>
+<td class="r Data"> 0.66</td>
+<td class="r Data"> 0.43</td>
+<td class="r Data"> 1.01</td>
+</tr>
+<tr>
+<td class="r Data">        3</td>
+<td class="l Data">alpha,beta,delta</td>
+<td class="r Data">   3.01% </td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.00</td>
+<td class="r Data"> 0.00</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data"> 0.99</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.71</td>
+<td class="r Data"> 0.14</td>
+<td class="r Data"> 0.49</td>
+<td class="r Data"> 0.37</td>
+<td class="r Data"> 0.65</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data"> 0.05</td>
+<td class="r Data"> 0.01</td>
+<td class="r Data"> 1.05</td>
+<td class="r Data"> 1.03</td>
+<td class="r Data"> 1.06</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+<td class="r Data">  .  </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<br>
+</div>
+<div class="branch">
+<a name="IDX1"></a>
+<table class="SysTitleAndFooterContainer" width="100%" cellspacing="1" cellpadding="1" rules="none" frame="void" border="0" summary="Page Layout">
+<tr>
+<td class="c SystemTitle">Posterior Probability, Mean, StdErr and Odds Ratio for each variable</td>
+</tr>
+</table><br>
+<div>
+<div align="center">
+<table class="Table" style=" margin-left: 0.2in; margin-right: 0.2in; border-spacing: 0px;" cellspacing="0" cellpadding="3" rules="none" frame="hsides" border="2" summary="Procedure Report: Detailed and/or summarized report">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c Header" colspan="5" scope="colgroup">&nbsp;</th>
+<th class="c Header" colspan="5" scope="colgroup">Posterior Parameters</th>
+<th class="c Header" scope="col">&nbsp;</th>
+<th class="c Header" colspan="5" scope="colgroup">Conditional [on being in the model] Posterior Parameters</th>
+</tr>
+<tr>
+<th class="c Header" scope="col">Variable</th>
+<th class="c Header" scope="col">Post Prob</th>
+<th class="c Header" scope="col">First Model In</th>
+<th class="c Header" scope="col">First Model Without</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">Post Mean</th>
+<th class="c Header" scope="col">Post StdErr</th>
+<th class="c Header" scope="col">Median Post Odds Ratio</th>
+<th class="c Header" scope="col">95% LCL for OddsRatio</th>
+<th class="c Header" scope="col">95% UCL for OddsRatio</th>
+<th class="c Header" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;" scope="col">i</th>
+<th class="c Header" scope="col">[cond] Post Mean</th>
+<th class="c Header" scope="col">[cond] Post StdErr</th>
+<th class="c Header" scope="col">[cond] Median Post Odds Ratio</th>
+<th class="c Header" scope="col">[cond] 95% LCL for OddsRatio</th>
+<th class="c Header" scope="col">[cond] 95% UCL for OddsRatio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="l Data">delta</td>
+<td class="r Data"> 100.00% </td>
+<td class="c Data">        1</td>
+<td class="c Data">        9</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data"> 0.04</td>
+<td class="r Data"> 0.01</td>
+<td class="r Data"> 1.04</td>
+<td class="r Data"> 1.03</td>
+<td class="r Data"> 1.05</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data"> 0.04</td>
+<td class="r Data"> 0.01</td>
+<td class="r Data"> 1.04</td>
+<td class="r Data"> 1.03</td>
+<td class="r Data"> 1.05</td>
+</tr>
+<tr>
+<td class="l Data">beta</td>
+<td class="r Data">  99.97% </td>
+<td class="c Data">        1</td>
+<td class="c Data">        5</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.71</td>
+<td class="r Data"> 0.14</td>
+<td class="r Data"> 0.49</td>
+<td class="r Data"> 0.37</td>
+<td class="r Data"> 0.66</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.71</td>
+<td class="r Data"> 0.14</td>
+<td class="r Data"> 0.49</td>
+<td class="r Data"> 0.37</td>
+<td class="r Data"> 0.66</td>
+</tr>
+<tr>
+<td class="l Data">gamma</td>
+<td class="r Data">  16.76% </td>
+<td class="c Data">        2</td>
+<td class="c Data">        1</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.07</td>
+<td class="r Data"> 0.18</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data"> 0.52</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.42</td>
+<td class="r Data"> 0.22</td>
+<td class="r Data"> 0.66</td>
+<td class="r Data"> 0.43</td>
+<td class="r Data"> 1.01</td>
+</tr>
+<tr>
+<td class="l Data">alpha</td>
+<td class="r Data">   3.57% </td>
+<td class="c Data">        3</td>
+<td class="c Data">        1</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.00</td>
+<td class="r Data"> 0.00</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data" style=" font-size: xx-small; color: #FFE666; background-color: #FFE666; width: 5pt;">        .</td>
+<td class="r Data" nowrap>-0.00</td>
+<td class="r Data"> 0.00</td>
+<td class="r Data"> 1.00</td>
+<td class="r Data"> 0.99</td>
+<td class="r Data"> 1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<br>
+</div>
+<div class="branch">
+<a name="IDX2"></a>
+<table class="SysTitleAndFooterContainer" width="100%" cellspacing="1" cellpadding="1" rules="none" frame="void" border="0" summary="Page Layout">
+<tr>
+<td class="c SystemTitle">Details</td>
+</tr>
+</table><br>
+<div>
+<div align="center">
+<table class="Table" cellspacing="0" cellpadding="3" rules="all" frame="hsides" border="2" summary="Procedure Print: Data Set WORK._DETAILS">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r Header" scope="col">Rank</th>
+<th class="l Header" scope="col">Model</th>
+<th class="l Header" scope="col">Converged</th>
+<th class="r Header" scope="col">ModelProb</th>
+<th class="r Header" scope="col">BIC</th>
+<th class="r Header" scope="col">-2 log Likelihood</th>
+<th class="r Header" scope="col">p (number<br>of parameters)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r Data">1</td>
+<td class="l Data">beta,delta</td>
+<td class="l Data">Yes</td>
+<td class="r Data"> 80.21%</td>
+<td class="r Data">3875.62</td>
+<td class="r Data">3832.57</td>
+<td class="r Data">6</td>
+</tr>
+<tr>
+<td class="r Data">2</td>
+<td class="l Data">beta,gamma,delta</td>
+<td class="l Data">Yes</td>
+<td class="r Data"> 16.18%</td>
+<td class="r Data">3878.82</td>
+<td class="r Data">3828.59</td>
+<td class="r Data">7</td>
+</tr>
+<tr>
+<td class="r Data">3</td>
+<td class="l Data">alpha,beta,delta</td>
+<td class="l Data">Yes</td>
+<td class="r Data">  3.01%</td>
+<td class="r Data">3882.19</td>
+<td class="r Data">3831.95</td>
+<td class="r Data">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<br>
+</div>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/SampleOutputFiles/BICOrdinalLogistic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 10:02:19 GMT -->
+</html>

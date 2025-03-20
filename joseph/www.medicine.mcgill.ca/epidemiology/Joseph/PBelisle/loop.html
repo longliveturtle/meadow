@@ -1,0 +1,1596 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/loop.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:41:28 GMT -->
+<head>
+<title>loop: Repeating code with slight modifications at each iteration</title>
+<meta name="description" content=" Loop is a Perl program that automates the writing of code wherein small changes are made to otherwise identical sections.">
+<meta name="keywords" content="change, code, combination, iterate, loop, modify, repeat, replace, script, text">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 4 jul 2012</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.4.1 (July 2015)</div>
+<div class=title0>loop</div>
+
+<div class=title>Repeating code with slight modifications at each iteration</div>
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>Loop</b> 
+is a Perl program that automates the writing of code wherein small changes are made to otherwise identical sections.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+<br><br>
+
+
+<a name="top"></a>
+The present document introduces the reader to the syntax of <b>loop</b> input files and gives a few examples that will hopefully 
+make its use straightforward.
+
+<ul>
+<li><a href="#syntax">Syntax</a>
+<li><a href="#details">Details</a>
+<li><a href="#examples">Examples</a>
+<li><a href="#download">Download <b>loop</b></a>
+<li><a href="#how2use">How to use <b>loop</b></a>
+</ul>
+<br>
+
+<a name="syntax"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Syntax</div>
+<br>
+The input files that <b>loop</b> will read are plain text files 
+consisting of the text/code to repeat preceded by a header and the list of variables to loop over, along with the values taken for each of them.
+The header first gives the output file location (surrounded by double quotes if it includes a space in its name) optionally followed by a series of parameters.
+Then follows the block of variables to loop over, embedded between opening and closing curly brackets,
+listing the variables (or pieces of code) to be replaced in the remaining code along with the values to replace each of them, one variable per line.
+<br><br><br>
+
+<div class=pgm>
+output_file.txt [options]<br>
+{<br>
+&nbsp;&nbsp;&nbsp; variable1 &nbsp;&nbsp;&nbsp; value1a value1b value1c<br>
+&nbsp;&nbsp;&nbsp; variable2 &nbsp;&nbsp;&nbsp; value2a value2b<br>
+&nbsp;&nbsp;&nbsp; variable3 &nbsp;&nbsp;&nbsp; value3a value3b value3c value3d<br>
+&nbsp;&nbsp;&nbsp; ...<br>
+&nbsp;&nbsp;&nbsp; variableJ &nbsp;&nbsp;&nbsp; valueJa valueJb<br>
+}<br>
+<br>
+Some code with &lt;variable1&gt;<br>
+&lt;variable2&gt;, &lt;variable3&gt;,<br>
+... &lt;variableJ&gt; appearing and to be replaced by their corresponding values<br>
+for each possible combination.<br>
+</div>
+<br><br>
+
+<a name="details"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Details</div>
+<br>
+The exhaustive list of <b>loop</b> options (to be used on top line of input files)
+is given below.
+<br><br><br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Option</td>
+<td class=tableheader>Signification</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-b <i>opening_and_closing_brackets</i></td>
+<td class=rfctargumentvalue>opening and closing brackets surrounding bits of code to be replaced;</td>
+<td class=rfctcomment>Default are &lt; and &gt;.<br><a href="#altbrackets">See example.</a></td>
+</tr>
+<tr>
+<td class=rfctargumentname>-c <i>comment_leading_character</i></td>
+<td class=rfctargumentvalue>leading character for comment split line;</td>
+<td class=rfctcomment>Default is #.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-w <i>width</i></td>
+<td class=rfctargumentvalue>total width of comment split line;</td>
+<td class=rfctcomment>Default is 120.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-nosep</td>
+<td class=rfctargumentvalue>use when no comment split line is to be printed in output script;</td>
+<td class=rfctcomment><a href="#nosep">See example.</a><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>-m</td>
+<td class=rfctargumentvalue>to write repeated/modified code to <b>m</b>ultilple output script files rather to a single output script;</td>
+<td class=rfctcomment>If output script file given on first line is <i>../myscript.txt</i>,
+<span class=argname>-m</span> option will send the modified script to output files 
+<i>../myscript-1.txt</i>, <i>../myscript-2.txt</i>, <i>../myscript-3.txt</i>, etc.<br><br>
+If there is only one variable to loop over, then output script file names will rather be suffixed by that variable values rather than 1, 2, 3, etc.;
+for example, if X takes values {alpha, beta, gamma}, then output script file names will be
+<i>../myscript-alpha.txt</i>, <i>../myscript-beta.txt</i> and <i>../myscript-gamma.txt</i>. 
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-m#</td>
+<td class=rfctargumentvalue>same as <span class=argname>-m</span>, but where suffix in output file names is forced to be consecutive integers 
+even though there is only one variable to loop over;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>-null <i>null_string</i></td>
+<td class=rfctargumentvalue>defines a keyword representing a blank;</td>
+<td class=rfctcomment>When a loop variable takes that value, it will not appear in the resulting text/code.
+<br><a href="#nullstring">See example.</a>
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-sl <i>skipLine_string</i></td>
+<td class=rfctargumentvalue>defines a keyword indicating to skip a line;</td>
+<td class=rfctcomment>When a loop variable takes that value, the line on which it appears will not be printed to the output.
+<br><a href="#skipline">See example.</a>
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>-klb|-plb<br>-ktb|-ptb</td>
+<td class=rfctargumentvalue>indicate to keep/preserve leading and trailing blanks, respectively;</td>
+<td class=rfctcomment>By default, leading/trailing blanks are not preserved.<br><a href="#preservingblanks">See example.</a>
+</tr>
+
+</table>
+
+
+<br><br><br>
+<a name="examples"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Examples</div>
+<br>
+
+<br>
+<div class=sub>Example 1</div>
+<br>
+
+First, a very simple example. The code below, when submitted to <b>loop</b>,                              
+
+<br><br>
+<div class=pgm>
+MyText.txt -w 60<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; rat mouse<br>
+&nbsp;&nbsp;&nbsp; L &nbsp;&nbsp;&nbsp; cow camel<br>
+}                         <br>
+                              <br>
+Biology lesson                    <br>
+A &lt;S&gt; is a small animal.              <br>
+A &lt;L&gt; is a large animal.                  <br>
+</div>
+<br>
+
+would write the text below to file <i>MyText.txt</i>.
+<br>
+
+<pre class=out>
+Biology lesson
+A rat is a small animal.
+A cow is a large animal.
+# ----------------------------------------------------------
+Biology lesson
+A rat is a small animal.
+A camel is a large animal.
+# ----------------------------------------------------------
+Biology lesson
+A mouse is a small animal.
+A cow is a large animal.
+# ----------------------------------------------------------
+Biology lesson
+A mouse is a small animal.
+A camel is a large animal.
+</pre>
+
+<a name="nosep"></a>
+<br>
+<div class=sub>Example 2 / Without seperation lines</div>
+<br>
+
+Under some circumstances, separation lines may not be suitable. 
+The use of <span class=argname>-nosep</span> option would prevent the writing of comment/separation lines, as illustrated by the following input file
+
+<br><br>
+<div class=pgm>
+MyText.txt -nosep<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; rat mouse<br>
+&nbsp;&nbsp;&nbsp; L &nbsp;&nbsp;&nbsp; cow camel<br>
+}                         <br>
+                              <br>
+Biology lesson                    <br>
+A &lt;S&gt; is a small animal.              <br>
+A &lt;L&gt; is a large animal.                  <br>
+</div>
+<br>
+
+
+which would write the code below to file <i>MyText.txt</i>.
+
+<pre class=out>
+Biology lesson
+A rat is a small animal.
+A cow is a large animal.
+Biology lesson
+A rat is a small animal.
+A camel is a large animal.
+Biology lesson
+A mouse is a small animal.
+A cow is a large animal.
+Biology lesson
+A mouse is a small animal.
+A camel is a large animal.
+</pre>
+
+<a name="blanksep"></a>
+<br>
+<div class=sub>Example 3</div>
+<br>
+
+In the above example, the absence of separation lines makes the output file less readable.
+An alternative would be to have blank lines as separation lines, which is what is obtained through the use
+of <span class=argname>-blanksep</span> option, or, equivalently, through a zero-length separation line, specified through option  <span class=argname>-w 0</span>.
+
+<br><br>
+<div class=pgm>
+MyText.txt -blanksep<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; rat mouse<br>
+&nbsp;&nbsp;&nbsp; L &nbsp;&nbsp;&nbsp; cow camel<br>
+}                         <br>
+                              <br>
+Biology lesson                    <br>
+A &lt;S&gt; is a small animal.              <br>
+A &lt;L&gt; is a large animal.                  <br>
+</div>
+<br>
+
+<pre class=out>
+Biology lesson
+A rat is a small animal.
+A cow is a large animal.
+
+Biology lesson
+A rat is a small animal.
+A camel is a large animal.
+
+Biology lesson
+A mouse is a small animal.
+A cow is a large animal.
+
+Biology lesson
+A mouse is a small animal.
+A camel is a large animal.
+</pre>
+
+
+<a name="preservingblanks"></a>
+<br>
+<div class=sub>Example 4</div>
+<br>
+
+Note that leading and trailing blanks in the script used in Example 1, highlighted in light purple and light pink below, were not preserved in output code; they are indeed
+not preserved by default. 
+
+<br><br>
+<div class=pgm>
+MyText.txt -w 60<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; rat mouse<br>
+&nbsp;&nbsp;&nbsp; L &nbsp;&nbsp;&nbsp; cow camel<br>
+}                         <br>
+<div class=leadingblanks>&nbsp;<br></div>
+Biology lesson                    <br>
+A &lt;S&gt; is a small animal.              <br>
+A &lt;L&gt; is a large animal.                  <br>
+<div class=trailingblanks>&nbsp;<br></div>
+<div class=trailingblanks>&nbsp;<br></div>
+</div>
+<br>
+
+
+The use of <span class=argname>-klb</span> or <span class=argname>-ktb</span> options would preserve leading blanks and trailing blanks respectively. Script below would preserver leading blanks,
+as following output shows.
+
+<br><br>
+<div class=pgm>
+MyText.txt -w 60 -klb<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; rat mouse<br>
+&nbsp;&nbsp;&nbsp; L &nbsp;&nbsp;&nbsp; cow camel<br>
+}                         <br>
+<div class=leadingblanks>&nbsp;<br></div>
+Biology lesson                    <br>
+A &lt;S&gt; is a small animal.              <br>
+A &lt;L&gt; is a large animal.                  <br>
+<div class=trailingblanks>&nbsp;<br></div>
+<div class=trailingblanks>&nbsp;<br></div>
+</div>
+<br>
+
+<pre class=out>
+
+Biology lesson
+A rat is a small animal.
+A cow is a large animal.
+# ----------------------------------------------------------
+
+Biology lesson
+A rat is a small animal.
+A camel is a large animal.
+# ----------------------------------------------------------
+
+Biology lesson
+A mouse is a small animal.
+A cow is a large animal.
+# ----------------------------------------------------------
+
+Biology lesson
+A mouse is a small animal.
+A camel is a large animal.
+</pre>
+
+
+
+<br><br>
+Next few examples will write some code to prepare scripts along the lines of input files to <a href="WriteWinBUGSScripts.html">WriteWinBUGSScript</a>.
+<br>
+
+<br>
+<div class=sub>Example 5</div>
+<br>
+
+An input file consisting in the following code
+
+<br><br>
+<div class=pgm>
+../prev.txt -w 60<br>
+{ <br>
+&nbsp;&nbsp;&nbsp; COUNTRY &nbsp;&nbsp;&nbsp; Canada Sweden <br> 
+&nbsp;&nbsp;&nbsp; SENS &nbsp;&nbsp;&nbsp; Pessimistic MostLikely Optimistic      <br>
+} <br>
+      <br>
+models/model.txt 5k/20k     <br>
+-d data/&lt;COUNTRY&gt;.txt   <br>
+-d data/parms/sens-&lt;SENS&gt;.txt  <br>
+-i inits/parms.txt    <br>
+-s scripts/&lt;COUNTRY&gt;-&lt;SENS&gt;.txt     <br>
+-o log/&lt;COUNTRY&gt;-&lt;SENS&gt;   <br>
+</div>
+<br>
+
+would repeat the code below the curly bracket 6 times &mdash; once for each combination of <i>COUNTRY</i> &times; <i>SENS</i> &mdash;
+and the resulting code would be saved to file <i>../prev.txt</i>, reproduced below.
+<br><br>
+Note that <span class=argname>-w</span> option was used to make the comment line shorther than the default length (120).
+<br>
+
+<pre class=out>
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Canada.txt
+-d data/parms/sens-Pessimistic.txt
+-i inits/parms.txt
+-s scripts/Canada-Pessimistic.txt
+-o log/Canada-Pessimistic
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Canada.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Canada-MostLikely.txt
+-o log/Canada-MostLikely
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Canada.txt
+-d data/parms/sens-Optimistic.txt
+-i inits/parms.txt
+-s scripts/Canada-Optimistic.txt
+-o log/Canada-Optimistic
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Sweden.txt
+-d data/parms/sens-Pessimistic.txt
+-i inits/parms.txt
+-s scripts/Sweden-Pessimistic.txt
+-o log/Sweden-Pessimistic
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Sweden.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Sweden-MostLikely.txt
+-o log/Sweden-MostLikely
+# ----------------------------------------------------------
+models/model.txt 5k/20k
+-d data/Sweden.txt
+-d data/parms/sens-Optimistic.txt
+-i inits/parms.txt
+-s scripts/Sweden-Optimistic.txt
+-o log/Sweden-Optimistic
+</pre>
+
+
+<a name="altbrackets"></a>
+<br>
+<div class=sub>Example 6 / Using alternative opening and closing brackets</div>
+<br>
+
+Following code, where brackets surrounding pieces of code to be replaced are changed to curly brackets, 
+leads to the same output file as in previous example.
+
+<br><br>
+<div class=pgm>
+../prev.txt -w 60 -b {&nbsp;}<br>
+{<br>
+&nbsp;&nbsp;&nbsp; COUNTRY &nbsp;&nbsp;&nbsp; Canada Sweden <br>
+&nbsp;&nbsp;&nbsp; M       &nbsp;&nbsp;&nbsp; 1 2<br>
+}                                             <br>
+                                                  <br>
+models/model-{M}.txt 5k/20k                     <br>
+-d data/{COUNTRY}.txt                               <br>
+-d data/parms/sens-MostLikely.txt                       <br>
+-i inits/parms.txt                                          <br>
+-s scripts/{COUNTRY}-MostLikely.txt                                        <br>
+-o log/{COUNTRY}-MostLikely                                         <br>
+</div>
+<br>
+
+<br>
+<div class=sub>Example 7 / Linking variables</div>
+<br>
+
+Each new line in the block of variables to loop over multiplies the number of resulting blocks of code, as it multiplies the number of variable values combinations.
+<br><br>
+That is not true when a variable is <b>linked</b> to another, like variable <i>T</i> in example below. In this example,
+variable <i>T</i> does not multiply by three the number of possible combinations, since it is linked to variable <i>COUNTRY</i>:
+<b>&lt;T&gt;</b> will be replaced by <b>cold</b> when <b>COUNTRY=Canada</b>, by <b>warm</b> when <b>COUNTRY=Mexico</b>
+and by <b>cold</b> when <b>COUNTRY=Sweden</b> 
+(values read for a linked variable &mdash; like <b>T</b> in example below &mdash; 
+are associated to values of the variable it is linked to &mdash; <b>COUNTRY</b>, in this example &mdash;
+in the same order as they are listed).
+
+<br><br>
+<div class=pgm>
+../prev.txt -w 60 -blanksep<br>
+{<br>
+&nbsp;&nbsp;&nbsp;    COUNTRY &nbsp;&nbsp;&nbsp;     Canada Mexico Sweden<br>
+&nbsp;&nbsp;&nbsp;    M &nbsp;&nbsp;&nbsp;     1 2<br>
+&nbsp;&nbsp;&nbsp;    T{COUNTRY} &nbsp;&nbsp;&nbsp;     cold warm cold<br>
+}<br>
+<br>
+models/model-&lt;M&gt;.txt 5k/20k<br>
+-d data/&lt;COUNTRY&gt;.txt<br>
+-d data/parms/prior-&lt;T&gt;.txt<br>
+-d data/parms/sens-MostLikely.txt<br>
+-i inits/parms.txt<br>
+-s scripts/&lt;COUNTRY&gt;-MostLikely-&lt;M>.txt<br>
+-o log/&lt;COUNTRY&gt;-MostLikely-&lt;M><br>
+</div>
+<br>
+
+The output to code above would be as reproduced below.
+
+<pre class=out>
+models/model-1.txt 5k/20k
+-d data/Canada.txt
+-d data/parms/prior-cold.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Canada-MostLikely-1.txt
+-o log/Canada-MostLikely-1
+
+models/model-2.txt 5k/20k
+-d data/Canada.txt
+-d data/parms/prior-cold.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Canada-MostLikely-2.txt
+-o log/Canada-MostLikely-2
+
+models/model-1.txt 5k/20k
+-d data/Mexico.txt
+-d data/parms/prior-warm.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Mexico-MostLikely-1.txt
+-o log/Mexico-MostLikely-1
+
+models/model-2.txt 5k/20k
+-d data/Mexico.txt
+-d data/parms/prior-warm.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Mexico-MostLikely-2.txt
+-o log/Mexico-MostLikely-2
+
+models/model-1.txt 5k/20k
+-d data/Sweden.txt
+-d data/parms/prior-cold.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Sweden-MostLikely-1.txt
+-o log/Sweden-MostLikely-1
+
+models/model-2.txt 5k/20k
+-d data/Sweden.txt
+-d data/parms/prior-cold.txt
+-d data/parms/sens-MostLikely.txt
+-i inits/parms.txt
+-s scripts/Sweden-MostLikely-2.txt
+-o log/Sweden-MostLikely-2
+</pre>
+
+<a name="nullstring"></a>
+<br>
+<div class=sub>Example 8 / Replacing a parameter with <i>nothing</i></div>
+<br>
+
+The previous example wrote script for models saved into two files, <i>models/model-1.txt</i> and <i>models/model-2.txt</i>.
+If you wanted to include a model saved in <i>models/model.txt</i> in the same code as above, you would need to indicate to <b>Loop</b>
+to drop <b>&lt;M&gt;</b> in one of the loops, that is, to replace it by <i>nothing</i>. This can be done via the definition of a <i>null string</i> through
+the <span class=argname>-null</span> option, as shown in code below.
+
+<br><br>
+<div class=pgm>
+../prev.txt -w 60 -blanksep -null NULL<br>
+{<br>
+&nbsp;&nbsp;&nbsp; COUNTRY &nbsp;&nbsp;&nbsp; Canada Sweden<br>
+&nbsp;&nbsp;&nbsp; M &nbsp;&nbsp;&nbsp; NULL -1 -2             <br>
+}                                    <br>
+                                         <br>
+models/model&lt;M&gt;.txt 5k/20k             <br>
+-d data/&lt;COUNTRY&gt;.txt                      <br>
+-i inits/parms.txt                                   <br>
+-s scripts/&lt;COUNTRY&gt;&lt;M&gt;.txt                  <br>
+-o log/&lt;COUNTRY&gt;&lt;M&gt;                              <br>
+</div>
+<br>
+
+The output to code above is as follows.
+
+<pre class=out>
+models/model.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada.txt
+-o log/Canada
+
+models/model-1.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-1.txt
+-o log/Canada-1
+
+models/model-2.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-2.txt
+-o log/Canada-2
+
+models/model.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden.txt
+-o log/Sweden
+
+models/model-1.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-1.txt
+-o log/Sweden-1
+
+models/model-2.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-2.txt
+-o log/Sweden-2
+</pre>
+
+<br>
+<div class=sub>Example 9 / Values with spaces</div>
+<br>
+
+In each example above, spaces are used as field delimiters. If a parameter is to take values with spaces, e.g. if example above involved
+<i>Puerto Rico</i>, one would need the space between its two parts not to be consided as a field delimiter. A work-around is to use an alternate
+field delimiter for the corresponding variable.<br><br>
+
+A field delimiter different from a blank is defined by following the line-leading parameter name by the field delimiter (which will apply for that parameter only).
+Code below uses comma (,) as a field delimiter on the <b>COUNTRY</b> values declaration line.
+
+
+<br><br>
+<div class=pgm>
+../prev.txt -w 60 -blanksep<br>
+{<br>
+&nbsp;&nbsp;&nbsp; COUNTRY,&nbsp;&nbsp;&nbsp;     Canada,Puerto Rico,Sweden<br>
+&nbsp;&nbsp;&nbsp; M &nbsp;&nbsp;&nbsp;    1 2<br>
+}<br>
+<br>
+models/model-&lt;M&gt;.txt 5k/20k<br>
+-d data/&lt;COUNTRY&gt;.txt<br>
+-i inits/parms.txt<br>
+-s scripts/&lt;COUNTRY&gt;-&lt;M&gt;.txt<br>
+-o log/&lt;COUNTRY&gt;-&lt;M&gt;<br>
+</div>
+<br>
+
+It would lead to the output below.
+
+<pre class=out>
+models/model-1.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-1.txt
+-o log/Canada-1
+
+models/model-2.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-2.txt
+-o log/Canada-2
+
+models/model-1.txt 5k/20k
+-d data/Puerto Rico.txt
+-i inits/parms.txt
+-s scripts/Puerto Rico-1.txt
+-o log/Puerto Rico-1
+
+models/model-2.txt 5k/20k
+-d data/Puerto Rico.txt
+-i inits/parms.txt
+-s scripts/Puerto Rico-2.txt
+-o log/Puerto Rico-2
+
+models/model-1.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-1.txt
+-o log/Sweden-1
+
+models/model-2.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-2.txt
+-o log/Sweden-2
+</pre>
+
+
+<br>
+<div class=sub>Example 10 / Output files modified by variable values</div>
+<br>
+
+<b>Loop</b> output files, specified on the first line of the script, can include parts that will vary with the variables included in the script.
+Code below, for example, would save output to two separate files, namely <i>../prev-Canada.txt</i> and <i>../prev-Sweden.txt</i>.
+
+
+<br><br>
+<div class=pgm>
+../prev-&lt;COUNTRY&gt;.txt -w 60 -blanksep<br>
+{<br>
+&nbsp;&nbsp;&nbsp; COUNTRY &nbsp;&nbsp;&nbsp;     Canada Sweden<br>
+&nbsp;&nbsp;&nbsp; M &nbsp;&nbsp;&nbsp;    1 2<br>
+}<br>
+<br>
+models/model-&lt;M&gt;.txt 5k/20k<br>
+-d data/&lt;COUNTRY&gt;.txt<br>
+-i inits/parms.txt<br>
+-s scripts/&lt;COUNTRY&gt;-&lt;M&gt;.txt<br>
+-o log/&lt;COUNTRY&gt;-&lt;M&gt;<br>
+</div>
+<br>
+
+The two output files will be <i>../prev-Canada.txt</i>
+
+<pre class=out>
+models/model-1.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-1.txt
+-o log/Canada-1
+
+models/model-2.txt 5k/20k
+-d data/Canada.txt
+-i inits/parms.txt
+-s scripts/Canada-2.txt
+-o log/Canada-2
+</pre>
+
+and <i>../prev-Sweden.txt</i>, below.
+
+<pre class=out>
+models/model-1.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-1.txt
+-o log/Sweden-1
+
+models/model-2.txt 5k/20k
+-d data/Sweden.txt
+-i inits/parms.txt
+-s scripts/Sweden-2.txt
+-o log/Sweden-2
+</pre>
+
+
+<a name="skipline"></a>
+<br>
+<div class=sub>Example 11 / Skipping lines / omitting text</div>
+<br>
+
+Sometimes, some lines of code/text are not be reproduced in output file for some iterations in the loop. The code below, when submitted to <b>loop</b>,                              
+
+<br><br>
+<div class=pgm>
+MyText.txt -w 60 -null NULL -sl SKIP<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; small large<br>
+&nbsp;&nbsp;&nbsp; X{S} &nbsp;&nbsp;&nbsp; SKIP NULL<br>
+}<br>
+<br>
+
+I like &lt;S&gt; animals.<br>
+I like elephants in particular.&lt;X&gt;<br>
+I visit zoos each summer.<br>
+</div>
+<br>
+
+would write the text below to file <i>MyText.txt</i>.
+<br>
+
+<pre class=out>
+I like small animals.
+I visit zoos each summer.
+# ----------------------------------------------------------
+I like large animals.
+I like elephants in particular.
+I visit zoos each summer.
+</pre>
+
+
+<br>
+<div class=sub>Example 12 / Adding comments to your script</div>
+<br>
+
+It is often useful to include comments to a <b>loop</b> source file (or script), e.g. to give indications on the context in which that script was written.<br>
+Comments are to be placed on top lines of the script and begin with a sharp symbol (#).<br><br>
+These comments will not appear in the <b>loop</b> output files.                        
+
+Code below, with one line of comment on top, would produce the same output as previous example.      
+
+<br><br>
+<div class=pgm>
+# Prepared for my son presentation at kindergarten.<br>
+<br>
+MyText.txt -w 60 -null NULL -sl SKIP<br>
+{             <br>
+&nbsp;&nbsp;&nbsp; S &nbsp;&nbsp;&nbsp; small large<br>
+&nbsp;&nbsp;&nbsp; X{S} &nbsp;&nbsp;&nbsp; SKIP NULL<br>
+}<br>
+<br>
+
+I like &lt;S&gt; animals.<br>
+I like elephants in particular.&lt;X&gt;<br>
+I visit zoos each summer.<br>
+</div>
+<br>
+
+would write the text below to file <i>MyText.txt</i>.
+<br>
+
+
+
+<br><br>
+<a name="download"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Download <b>loop</b></div>
+<br>
+
+<b>loop</b> is a free program: <a href="zip/loop.zip">version 1.4.1 is directly available from this page</a>. 
+Save and unzip it and read the section below.
+
+
+<br><br>
+<a name="how2use"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>How to use <b>loop</b></div>
+<br>
+
+<b>loop</b> is a program written in Perl. 
+Please refer to my generic page on <a href="Submitting-Perl-programs.html">running Perl programs</a> for instructions.
+<br><br>
+
+<br>
+<div class=sub>Log file</div>
+<br>
+Success or error messages are written to the log file <i>loop.log</i>, found in the directory where you saved <b>loop.pl</b>.
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/loop.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:41:32 GMT -->
+</html>

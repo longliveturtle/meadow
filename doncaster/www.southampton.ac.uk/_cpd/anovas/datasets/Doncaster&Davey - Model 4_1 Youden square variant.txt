@@ -1,0 +1,67 @@
+4.1 ONE FACTOR RANDOMISED BLOCK
+YOUDEN SQUARE VARIANT Y = C|B|A
+
+Analysis of terms: A + B + C
+
+Layout:
+
+     B1 B2 B3 B4
+----------------
+C1 | A1 A2 A3 A4
+C2 | A2 A4 A1 A3
+C3 | A3 A1 A4 A2
+
+
+
+Data:
+
+A	B	C	Y
+1	1	1	15
+2	2	1	 7
+3	3	1	14
+4	4	1	 8
+2	1	2	17
+3	2	2	 6
+4	3	2	 8
+1	4	2	 7
+3	1	3	22
+4	2	3	14
+1	3	3	11
+2	4	3	15
+
+
+Model 4.1(Youden square variant) 
+
+A and B are fixed factors, C is a random blocking factor:
+
+                                         Model_2
+  Source  DF  Seq SS  Adj SS Adj MS     F      P
+1 A        3   30.00   21.00   7.00  1.00  0.500
+2 B        3  141.00  141.00  47.00  6.71  0.076
+3 C        2   78.00   78.00  39.00  5.57  0.098
+4 Error    3   21.00   21.00   7.00
+  Total   11  270.00
+
+COMMENT: Uses an unrestricted model, and adjusted SS for tests.
+
+
+A is a fixed factor, B and C are random blocking factors:
+
+                                         Model_2
+  Source  DF  Seq SS  Adj SS Adj MS     F      P
+1 A        3   30.00   21.00   7.00  1.00  0.500
+2 B        3  141.00  141.00  47.00  6.71  0.076
+3 C        2   78.00   78.00  39.00  5.57  0.098
+4 Error    3   21.00   21.00   7.00
+  Total   11  270.00
+
+COMMENT: Uses an unrestricted model, and adjusted SS for tests.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/
+http://www.southampton.ac.uk/~cpd/anovas/datasets/Latin squares.htm

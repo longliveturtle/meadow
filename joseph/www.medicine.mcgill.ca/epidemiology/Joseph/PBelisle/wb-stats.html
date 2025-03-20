@@ -1,0 +1,1042 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/wb-stats.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:22 GMT -->
+<head>
+<title>wb.stats: [R] Scanning node statistics from WinBUGS output</title>
+<meta name="description" content=" wb.stats is an R function developped to read node statistics from a WinBUGS text output file.">
+<meta name="keywords" content="file, import, input, log, node, output, R, read, results, scan, statistics, stats, winbugs">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 12 oct 2016</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.5 (October 2016)</div>
+<div class=title0>wb.stats </div>
+<div class=title>[R] Scanning node statistics from WinBUGS output</div>
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>wb.stats</b> is an R function developped to read node statistics from a WinBUGS text output file.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><b>wb.stats</b> arguments</a><br>
+<a href="#code">Code</a><br>
+<a href="#example">Example</a><br>
+<a href="#download">Download</a><br>
+</div>
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="syntax"></a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+wb.stats(file, nodes=character(0), node.statistics=c("mean", "sd", "MC error", "2.5%", "median", "97.5%", "start", "sample"), return.as.list=length(node.statistics)>1)
+</div>
+
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="arguments"></a>
+<div class=main>wb.stats arguments</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>file</td>
+<td class=rfctargumentvalue>
+The full path to WinBUGS text output file from which you wish to scan node statistics.
+</td>
+<td class=rfctcomment>
+Note that wb.stats expects the WinBUGS output to be in txt; it will NOT work with an odc file.
+<br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>nodes</td>
+<td class=rfctargumentvalue>
+The list of nodes for which node statistics are to be returned.
+</td>
+<td class=rfctcomment>
+Argument is case sensitive.<br>
+Default is to return node statistics for each node found in <i>file</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>node.statistics</td>
+<td class=rfctargumentvalue>
+The list of node statistics to be returned.
+</td>
+<td class=rfctcomment>
+Argument is case insensitive.<br>
+Default is to return all node statistics.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>return.as.list</td>
+<td class=rfctargumentvalue>
+Whether the output should be returned as a list or a matrix.
+</td>
+<td class=rfctcomment>
+Logical.<br>
+Default is to return as a list when more than one node statistic is read.
+</td>
+</tr>
+</table>
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+The code below reproduces the input and output of an R session involving calls to <b>wb.stats</b>.
+
+<br><br>
+<div class=pgm>
+&gt; source('c:/users/pbelisle/My Documents/Home/bin/R/fcts/WBStats.R') # load file where wb.stats R function is defined<br>
+&gt; u <- wb.stats('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/log/mywinbugsoutput.txt', return.as.list=F) # read (all) the node statistics from the cited WinBUGS text output file<br>
+&gt; u<br>
+<br>
+<table class=rout>
+<tr><td align=right></td><td align=right>mean</td><td align=right>sd</td><td align=right>MC error</td><td align=right>2.5%</td><td align=right>median</td><td align=right>97.5%</td><td align=right>start</td><td align=right>sample</td> </tr>
+<tr><td>x.p.null[1]</td><td>6.5e-01</td><td>6.7e-02</td><td>1.1e-03</td><td>5.2e-01</td><td>6.6e-01</td><td>7.8e-01</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.p.null[2]</td><td>5.0e-02</td><td>2.7e-02</td><td>5.7e-04</td><td>6.9e-03</td><td>4.7e-02</td><td>1.1e-01</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.mu[1]</td><td>5.5e+00</td><td>2.8e-01</td><td>1.2e-02</td><td>5.0e+00</td><td>5.5e+00</td><td>6.1e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.mu[2]</td><td>8.2e+00</td><td>2.4e-01</td><td>3.3e-03</td><td>7.7e+00</td><td>8.2e+00</td><td>8.7e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.mudiff</td><td>2.7e+00</td><td>3.6e-01</td><td>1.1e-02</td><td>2.0e+00</td><td>2.7e+00</td><td>3.4e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.sd.between[1]</td><td>7.0e-01</td><td>3.8e-01</td><td>2.5e-02</td><td>5.2e-02</td><td>7.2e-01</td><td>1.4e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.sd.between[2]</td><td>1.7e+00</td><td>1.9e-01</td><td>2.1e-03</td><td>1.4e+00</td><td>1.7e+00</td><td>2.1e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.sd.within[1]</td><td>7.5e-01</td><td>3.3e-01</td><td>1.6e-02</td><td>1.2e-01</td><td>7.6e-01</td><td>1.4e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>x.sd.within[2]</td><td>9.3e-01</td><td>8.9e-02</td><td>1.3e-03</td><td>7.8e-01</td><td>9.3e-01</td><td>1.1e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>prev</td><td>8.2e-01</td><td>6.2e-02</td><td>1.5e-03</td><td>6.9e-01</td><td>8.3e-01</td><td>9.3e-01</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+</table>
+<br><br>
+# Read the same WinBUGS output file as above, but select only a subset of nodes found therein<br>
+u <- wb.stats('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/log/mywinbugsoutput.txt', nodes=c('x.mudiff', 'prev'), return.as.list=F)<br>
+&gt; u<br>
+<br>
+<table class=rout>
+<tr><td align=right></td><td align=right>mean</td><td align=right>sd</td><td align=right>MC error</td><td align=right>2.5%</td><td align=right>median</td><td align=right>97.5%</td><td align=right>start</td><td align=right>sample</td> </tr>
+<tr><td>x.mudiff</td><td>2.7e+00</td><td>3.6e-01</td><td>1.1e-02</td><td>2.0e+00</td><td>2.7e+00</td><td>3.4e+00</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+<tr><td>prev</td><td>8.2e-01</td><td>6.2e-02</td><td>1.5e-03</td><td>6.9e-01</td><td>8.3e-01</td><td>9.3e-01</td><td>5.0e+03</td><td>2.0e+04</td></tr>
+</table>
+<br><br>
+# Read the same WinBUGS output file as above, but select only a subset of nodes found therein and only a few node statistics AND RETURN OUTPUT AS A LIST<br>
+u <- wb.stats('c:/users/pbelisle/My Documents/Home/MyProject/WinBUGS/log/mywinbugsoutput.txt', nodes=c('prev', 'x.mu'), node.statistics=c('mean', 'median'))<br>
+&gt; u<br>
+<table class=rout>
+<tr><td>
+$prev<br>
+$prev$mean<br>
+[1] 0.82<br>
+<br>
+$prev$median<br>
+[1] 0.83<br>
+<br><br>
+$x.mu<br>
+$x.mu$mean<br>
+x.mu[1] x.mu[2]<br> 
+    5.5     8.2<br>
+<br>
+$x.mu$median<br>
+x.mu[1] x.mu[2]<br>
+    5.5     8.2<br>
+</td></tr></table>
+</div>
+<br>
+Note that the first line of code in the block above reads in the <b>wb.stats</b> function code, if it was previously saved to the file referenced by that command.
+Alternatively, you can cut and paste the function (see code in section below) directly into R.  
+Of course, if you save your session, this step needs to be done only the first time you use <b>wb.stats</b>.
+<br>
+
+<a name="code"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="R/WBStats.R">One-click download</a>
+</div>
+<div class=rcode>
+wb.stats <- function(file, nodes=character(0), node.statistics=c("mean", "sd", "MC error", "2.5%", "median", "97.5%", "start", "sample"), return.as.list=length(node.statistics)>1)<br>
+{<br>
+&#160;&#160;  wblog <- scan(file, sep='\n', what="", quiet=T)<br>
+&#160;&#160;  tab.found <- grep('\t', wblog)<br>
+&#160;&#160;  wblog <- wblog[tab.found]<br>
+  <br>
+&#160;&#160;  # Remove node stats header line(s) -- if found twice, ignore lines below second occurence<br>
+&#160;&#160;  median.found <- grep('\\smedian', wblog, perl=T)<br>
+&#160;&#160;  if (length(median.found) > 1) wblog <- wblog[seq(median.found[2]-1)]<br>
+&#160;&#160;  wblog <- wblog[-median.found[1]]<br>
+  <br>
+&#160;&#160;  # Exhaustive list of node stats returned by WinBUGS<br>
+&#160;&#160;  wb.node.statistics <- c("mean", "sd", "MC error", "2.5%", "median", "97.5%", "start", "sample")<br>
+  <br>
+&#160;&#160;  # remove lines with comments (possible if output was modified)<br>
+&#160;&#160;  found.comment <- grep('#', wblog)<br>
+&#160;&#160;  if (length(found.comment)) wblog <- wblog[-found.comment]<br>
+  <br>
+&#160;&#160;  wblog <- gsub('\\s+', ' ', wblog, perl=T)<br>
+&#160;&#160;  wblog <- sub('\\s', '', wblog, perl=T) # remove leading space<br>
+&#160;&#160;  wblog <- wblog[nchar(wblog)>0] # drop empty lines<br>
+&#160;&#160;&#160;&#160;    # drop lines with /odds ratio/<br>
+&#160;&#160;&#160;&#160;    slashes <- grep("/", wblog)<br>
+&#160;&#160;&#160;&#160;    if (length(slashes)) wblog <- wblog[-slashes]<br>
+&#160;&#160;  wblog <- matrix(unlist(strsplit(wblog, ' ')), byrow=T, nrow=length(wblog))<br>
+&#160;&#160;  nodes.names <- wblog[,1]<br>
+&#160;&#160;  wblog <- matrix(suppressWarnings(as.numeric(wblog[,-1])), nrow=nrow(wblog))<br>
+&#160;&#160;  colnames(wblog) <- wb.node.statistics<br>
+&#160;&#160;  rownames(wblog) <- nodes.names<br>
+  <br>
+&#160;&#160;  # Keep only required node statistics<br>
+&#160;&#160;  w <- match(tolower(node.statistics), tolower(wb.node.statistics))<br>
+&#160;&#160;  wblog <- wblog[,w,drop=F]<br>
+  <br>
+&#160;&#160;  if (length(nodes))<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    nodes.names0 <- sub('\\[.*', '', nodes.names, perl=T)<br>
+&#160;&#160;&#160;&#160;    w <- !is.na(match(nodes.names0, nodes)) | !is.na(match(nodes.names, nodes))<br>
+&#160;&#160;&#160;&#160;    wblog <- wblog[w,,drop=F]<br>
+&#160;&#160;  }<br>
+  <br>
+  <br>
+&#160;&#160;  if (return.as.list)<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    stats <- sort(colnames(wblog))<br>
+&#160;&#160;&#160;&#160;    n.stats <- length(stats)<br>
+<br>
+&#160;&#160;&#160;&#160;    dim <- rownames(wblog)<br>
+&#160;&#160;&#160;&#160;    dim <- sub("\\[.*", "", dim, perl=T)<br>
+&#160;&#160;&#160;&#160;    dimensions <- unique(sort(dim))<br>
+&#160;&#160;&#160;&#160;    n.dim <- length(dimensions)<br>
+  <br>
+&#160;&#160;&#160;&#160;    out <- list()<br>
+  <br>
+&#160;&#160;&#160;&#160;    for (i in seq(n.dim))<br>
+&#160;&#160;&#160;&#160;    {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      d <- dimensions[i]<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      w <- which(dim==d)<br>
+    <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      my.out <- list()<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      my.i <- 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      for (s in stats)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        my.i <- my.i + 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        my.out[[my.i]] <- wblog[w, s]<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      } <br>
+    <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      if (n.stats == 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        my.out <- unlist(my.out)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      }<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      else<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      {<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;        names(my.out) <- stats<br>
+&#160;&#160;&#160;&#160;&#160;&#160;      }<br>
+    <br>
+&#160;&#160;&#160;&#160;&#160;&#160;      out[[i]] <- my.out<br>
+&#160;&#160;&#160;&#160;    }<br>
+  <br>
+&#160;&#160;&#160;&#160;    names(out) <- dimensions<br>
+&#160;&#160;  }<br>
+&#160;&#160;  else<br>
+&#160;&#160;  {<br>
+&#160;&#160;&#160;&#160;    out <- wblog<br>
+&#160;&#160;  }<br>
+  <br>
+&#160;&#160;  out<br>
+} # end of wb.stats<br>
+</div>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<b>wb.stats</b> is a free R function. <a href="R/WBStats.R">Download version 1.5</a> now.
+
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/wb-stats.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:23 GMT -->
+</html>

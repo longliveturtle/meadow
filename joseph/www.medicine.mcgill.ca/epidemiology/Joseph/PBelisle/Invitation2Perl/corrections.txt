@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+@files = (<corrections/*.txt>);
+
+foreach $file (@files)
+{
+  @tmp = (); # re-initialize every time
+
+  # read the file and substitute 155 to 115
+ 
+  open(TMP, $file) || die "Cannot read file $file. Abort.\n";
+
+  while ($line = <TMP>)
+  {
+    $line =~ s/115/155/ if $line =~ /Test 2 sensitivity beta parameters/;
+    push(@tmp, $line); # store the lines in vector @tmp
+  }
+
+  close TMP;
+
+  # write the corrected file
+
+  open(TMP, "> $file") || die "Cannot write to file $file. Abort.\n";
+
+  foreach $line (@tmp)
+  {
+    print TMP $line;
+  }
+
+  close TMP;
+}

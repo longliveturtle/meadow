@@ -1,0 +1,220 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center", options(width=110))
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Sampling Distributions  
+
+### Example from class
+
+Suppose $X_1,X_2,\ldots,X_{10}$ are iid Normal ( $\mu$ = 10, $\sigma$ = 4 ). 
+
+It follows that the sample mean $\bar{X}$ has a Normal ( $\mu$ = 10, $\sigma \ /\sqrt{n}$ = 1.26 ) distribution. 
+
+The densities of $X \sim$ Normal ( $\mu$ = 10, $\sigma$ = 4 ) in blue and $\bar{X} \sim$ Normal ( $\mu$ = 10, $\sigma \ /\sqrt{n}$ = 1.26 ) in red.
+
+```{r, fig.width=8}
+curve(dnorm(x,mean=10,sd=4/sqrt(10)), from=-2, to=22, n=501, lwd=2, col="red", ylim=c(0,0.35), xlab="",ylab="")
+curve(dnorm(x,mean=10,sd=4), add=TRUE, lwd=2, col="blue")
+```
+
+Simulate $X_1,X_2,\ldots,X_{10}$ ( as ten independent draws from the blue density ) and calculate their sample mean ( which is the equivalent of one draw from the red density ).
+
+```{r}
+set.seed(2)
+x <- rnorm(10, mean=10, sd=4)
+x
+mean(x)
+```
+
+Simulate five instances of such data, and calculate the sample means.
+
+```{r}
+x <- matrix(rnorm(5*10,10,4), ncol=10)
+x
+dim(x)
+apply(x,1,mean)
+```
+
+Simulate 10,000 instances of such data, calculate the sample means, and make a histogram.
+
+```{r, fig.width=8}
+x <- matrix(rnorm(10000*10,10,4), ncol=10)
+dim(x)
+m <- apply(x,1,mean)
+length(m)
+hist(m, breaks=seq(-2,22,by=0.5))
+```
+
+Represent these 10,000 means as proportions, and add the $\bar{X} \sim$ Normal ( $\mu$ = 10, $\sigma \ /\sqrt{n}$ = 1.26 ) density to the plot.
+
+```{r, fig.width=8}
+hist(m, breaks=seq(-2,22,by=0.5), prob=TRUE, ylim=c(0,0.35), main="")
+curve(dnorm(x, 10, 4/sqrt(10)), add=TRUE, n=501, lwd=2, col="red")
+```
+
+We can also simulate 10,000 independent draws from a Normal ( $\mu$ = 10, $\sigma \ /\sqrt{n}$ = 1.26 ) distribution directly.
+
+```{r, fig.width=8}
+m <- rnorm(10000, mean=10, sd=4/sqrt(10))
+hist(m, breaks=seq(-2,22,by=0.5), prob=TRUE, ylim=c(0,0.35), main="")
+curve(dnorm(x, 10, 4/sqrt(10)), add=TRUE, n=501, lwd=2, col="red")
+```
+
+What is the probability the sample mean is bigger than 12?
+
+```{r, fig.width=8}
+curve(dnorm(x, mean=10, sd=4/sqrt(10)), from=-2, to=22, n=501, lwd=2, col="red")
+abline(h=0)
+abline(v=12,lty="dotted")
+```
+
+Using the CDF.
+
+```{r}
+pnorm(12, mean=10, sd=4/sqrt(10), lower=FALSE)
+pnorm((12-10) / (4/sqrt(10)), lower=FALSE)
+pnorm(-(12-10) / (4/sqrt(10)))
+round(pnorm((10-12) / (4/sqrt(10))), 3)
+```
+
+Estimation via simulation ( 100 random draws from $\bar{X}$ ).
+
+```{r}
+m <- rnorm(100, mean=10, sd=4/sqrt(10))
+m
+m>12
+sum(m>12)
+mean(m>12)
+```
+
+Estimation via simulation ( 100,000 random draws ).
+
+```{r}
+m <- rnorm(100000, mean=10, sd=4/sqrt(10))
+sum(m>12)
+mean(m>12)
+```
+
+What is the chance the sample mean falls between 9.5 and 10.5 ( i.e. within half a unit of the population mean ) ?
+
+```{r, fig.width=8}
+curve(dnorm(x, mean=10, sd=4/sqrt(10)), from=-2, to=22, n=501, lwd=2, col="red")
+abline(h=0)
+abline(v=c(9.5,10.5),lty="dotted")
+```
+
+Using the CDF.
+
+```{r}
+pnorm(10.5, mean=10, sd=4/sqrt(10))
+pnorm(9.5, mean=10, sd=4/sqrt(10))
+pnorm(10.5, 10, 4/sqrt(10)) - pnorm(9.5, 10, 4/sqrt(10))
+round(pnorm(10.5, 10, 4/sqrt(10)) - pnorm(9.5, 10, 4/sqrt(10)), 3)
+```
+
+Estimation via simulation ( 100 random draws ).
+
+```{r}
+m <- rnorm(100, mean=10, sd=4/sqrt(10))
+m
+m<10.5
+m<9.5
+mean(m<10.5)
+mean(m<9.5)
+mean(m<10.5) - mean(m<9.5)
+m>9.5 & m<10.5 
+mean(m>9.5 & m<10.5) 
+```
+
+Estimation via simulation ( 100,000 random draws ).
+
+```{r}
+m <- rnorm(100000, mean=10, sd=4/sqrt(10))
+mean(m<10.5)
+mean(m<9.5)
+mean(m<10.5) - mean(m<9.5)
+mean(m>9.5 & m<10.5) 
+```
+
+What is the chance the sample mean is less than 9 or larger than 11 ( i.e. more than one unit away from the population mean ) ?
+
+```{r, fig.width=8}
+curve(dnorm(x, mean=10, sd=4/sqrt(10)), from=-2, to=22, n=501, lwd=2, col="red")
+abline(h=0)
+abline(v=c(9,11),lty="dotted")
+```
+
+Using the CDF.
+
+```{r}
+pnorm(9, mean=10, sd=4/sqrt(10))
+pnorm(11,mean=10, sd=4/sqrt(10), lower=FALSE)
+pnorm(9, 10, 4/sqrt(10)) + pnorm(11, 10, 4/sqrt(10), lower=FALSE)
+round(pnorm(9, 10, 4/sqrt(10)) + pnorm(11, 10, 4/sqrt(10), lower=FALSE), 3)
+```
+
+Estimation via simulation ( 100 random draws ).
+
+```{r}
+m <- rnorm(100, mean=10, sd=4/sqrt(10))
+m
+m<9
+m>11
+mean(m<9)
+mean(m>11)
+mean(m<9) + mean(m>11)
+m<9 | m>11
+mean(m<9 | m>11)
+```
+
+Estimation via simulation ( 100,000 random draws ).
+
+```{r}
+m <- rnorm(100000, mean=10, sd=4/sqrt(10))
+mean(m<9)
+mean(m>11)
+mean(m<9) + mean(m>11)
+mean(m<9 | m>11)
+```
+
+### Another example
+
+Simulate n=10 random samples from a Uniform(0,1) distribution, and take their mean. Repeat 10,000 times. Do the same using the median instead of the mean. Describe and compare the distribution of the means and the distribution of the medians. Repeat the same for n=100. What do you conclude?
+
+```{r}
+set.seed(51)
+nit <- 10000
+
+n <- 10
+x <- matrix(runif(n*nit),ncol=n)
+xA <- apply(x,1,mean)
+x <- matrix(runif(n*nit),ncol=n)
+xB <- apply(x,1,median)
+
+n <- 100
+x <- matrix(runif(n*nit),ncol=n)
+xC <- apply(x,1,mean)
+x <- matrix(runif(n*nit),ncol=n)
+xD <- apply(x,1,median)
+
+par(mfcol=c(2,2),las=1)
+hist(xA,breaks=seq(0,1,length=41),col="lightgrey",main="A:  Mean n=10",xlab="",ylim=c(0,1200),cex.main=1.2)
+hist(xB,breaks=seq(0,1,length=41),col="lightgrey",main="B:  Median  n=10",xlab="",ylim=c(0,1200),cex.main=1.2)
+hist(xC,breaks=seq(0,1,length=41),col="lightgrey",main="C:  Mean  n=100",xlab="",ylim=c(0,3000),cex.main=1.2)
+hist(xD,breaks=seq(0,1,length=41),col="lightgrey",main="D:  Median  n=100",xlab="",ylim=c(0,3000),cex.main=1.2)
+
+round(mean(xA),3)
+round(mean(xB),3)
+round(mean(xC),3)
+round(mean(xD),3)
+
+round(sd(xA),2)
+round(sd(xB),2)
+round(sd(xC),2)
+round(sd(xD),2)
+```
+
+Both the population mean and population median for a Uniform(0,1) distribution are 0.5, and all of the distributions above are centered around this value (the sample mean and the sample median are unbiased estimators). However, for a fixed n, the deviations of the sample means are a lot smaller than the deviations for the sample medians. In this setting, the sample mean is a more efficient estimator for the population mean (or population median) than the sample median. Obviously, using the same estimator, the deviation becomes smaller as n gets larger.
+

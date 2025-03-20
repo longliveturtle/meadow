@@ -1,0 +1,38 @@
+* reaction.time.sas, reaction time experiment, Table 4.4, p101;
+;
+* Data as arranged in Table 4.4;
+data react;
+  do rep=1 to 3;
+    do trtmt=1 to 6;
+      input RTime order @@;
+      output;
+  end; end;
+  lines;
+  0.204  9  0.167  3  0.202 13  0.257  7  0.283  6  0.256  1
+  0.170 10  0.182  5  0.198 16  0.279 14  0.235  8  0.281  2
+  0.181 18  0.187 12  0.236 17  0.269 15  0.260 11  0.258  4
+;
+* Data by observation, by column of Table 4.4;
+data react;
+  input trtmt order RTime;
+  lines;
+          1      9  0.204
+          1     10  0.170
+          1     18  0.181
+          2      3  0.167
+          2      5  0.182
+          2     12  0.187
+          3     13  0.202
+          3     16  0.198
+          3     17  0.236
+          4      7  0.257
+          4     14  0.279
+          4     15  0.269
+          5      6  0.283
+          5      8  0.235
+          5     11  0.260
+          6      1  0.256
+          6      2  0.281
+          6      4  0.258
+;
+run;

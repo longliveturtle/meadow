@@ -1,0 +1,103 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Multiple Comparisons - Advanced
+
+For this part, you need to install the 'qvalue' package from Bioconductor. Uncomment the first two lines for the installation. Note this can take a wee bit.
+
+```{r}
+# install.packages("BiocManager")
+# BiocManager::install("qvalue")
+library(qvalue)
+```
+
+#### Null results
+
+```{r}
+# 100,000 independent p-values under the null
+set.seed(1)
+n <- 1e5
+p <- runif(n)
+hist(p,breaks=101,col="lightgrey")
+hist(p,breaks=101,col="lightgrey",prob=T)
+abline(h=1,lwd=2,col="red")
+```
+
+#### Example 1: enrichment for low p-values
+
+```{r}
+# 100,000 independent p-values under the null
+set.seed(1)
+p <- runif(n)
+# 5,000 p-values under some alternatives
+ns <- 5000
+psmall <- rbeta(ns,1,10)
+hist(psmall,breaks=101,col="lightgrey",xlim=c(0,1))
+# replace 5,000 null p-values at random entries
+wh <- sample(1:n,size=ns)
+p[wh] <- psmall
+hist(p,breaks=101,col="lightgrey",prob=T)
+abline(h=1,lwd=2,col="red")
+
+# bonferroni cut-off
+cut.b <- 0.05/n 
+cut.b
+min(p)
+min(p)*n
+which(p<cut.b)
+p.b <- p.adjust(p,method="bonferroni")
+min(p.b)
+
+# q-values
+q <- qvalue(p)
+q$pi0
+wh <- order(q$pvalues)
+cbind(q$pvalues,q$qvalues)[wh,][1:20,]
+```
+
+#### Example 2: enrichment for low p-values
+
+```{r}
+# 100,000 independent p-values under the null
+set.seed(1)
+p <- runif(n)
+# 10 p-values under some alternatives
+ns <- 10
+psmall <- runif(10,0,1e-6)
+# replace 10 null p-values at random entries
+wh <- sample(1:n,size=ns)
+p[wh] <- psmall
+hist(p,breaks=101,col="lightgrey",prob=T)
+abline(h=1,lwd=2,col="red")
+
+# bonferroni cut-off
+cut.b <- 0.05/n 
+cut.b
+min(p)
+min(p)*n
+which(p<cut.b)
+p[which(p<cut.b)]
+p.b <- p.adjust(p,method="bonferroni")
+min(p.b)
+which(p.b<0.05)
+p.b[which(p.b<0.05)]
+
+# q-values
+q <- qvalue(p)
+wh <- order(q$pvalues)
+cbind(q$pvalues,q$qvalues)[wh,][1:20,]
+
+# benjamini-hochberg
+psort <- sort(p)
+table(psort < (1:n)/n*0.05)
+max(which(psort < (1:n)/n*0.05))
+psort[1:11]
+p.bh <- p.adjust(p,method="BH")
+which(p.bh<0.05)
+```
+
+### End of code
+

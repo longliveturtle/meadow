@@ -1,0 +1,45 @@
+2.1 TWO FACTOR NESTED MODEL Y = B(A) + e
+
+Analysis of yield response Y to Farm factor B nested in 
+irrigation treatment A, declaring terms: A + B(A)
+
+Example data for Figure 4:
+
+A	B	Y
+Control	1	 6.0000
+Control	1	 9.2085
+Control	2	13.1147
+Control	2	15.2654
+Control	3	12.4188
+Control	3	14.3951
+Control	4	 8.5986
+Control	4	 3.4945
+Water	1	21.3220
+Water	1	26.0000
+Water	2	22.6600
+Water	2	24.1283
+Water	3	18.0000
+Water	3	14.0000
+Water	4	15.0000
+Water	4	17.0000
+
+
+Model 2.1(i) A is a fixed, B is a random factor:
+
+  Source   DF      SS      MS      F      P
+1 A         1  357.35  357.35  10.03  0.019
+2 B(A)      6  213.69   35.62   6.41  0.010
+3 S(B(A))   8   44.46    5.56
+  Total    15  615.50
+
+COMMENT: With this model, the coding of Farm factor B
+describes four farms nested in the Control treatment and 
+four (different) farms nested in the Water treatment.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

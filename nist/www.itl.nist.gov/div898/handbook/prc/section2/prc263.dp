@@ -1,0 +1,107 @@
+Dataplot commands and output:
+
+
+. Calculate the k factor for a two-sided tolerance interval.
+
+let n = 43
+let nu = n - 1
+let p = .90
+let g = .99
+let g1=1-g
+let p1=(1+p)/2
+let cg=chsppf(g1,nu)
+let np=norppf(p1)
+let k = nu*(1+1/n)*np**2
+let k2 = (k/cg)**.5
+
+> THE COMPUTED VALUE OF THE CONSTANT K2 = 0.2217316E+01
+
+. "Direct" calculation of a tolerance interval.
+
+set write decimals 5
+skip 25
+read 100ohm.dat cr wafer mo day h min op hum probe temp y sw df
+normal tolerance limits y
+
+
+>              Two-Sided Normal Tolerance Limits:
+>                        (XBAR +/- K*S)
+>   
+>  Howe Method
+>  Response Variable: Y
+>   
+>  Summary Statistics:
+>   
+>  Number of Observations:                  25
+>  Degrees of Freedom:                      24
+>  Sample Mean:                             97.06984
+>  Sample Standard Deviation:               0.02680
+>   
+>   
+>   
+>  Coverage = 90%
+>  ---------------------------------------------------------
+>    Confidence              k          Lower          Upper
+>     Value (%)         Factor          Limit          Limit
+>  ---------------------------------------------------------
+>          50.0        1.70110       97.02425       97.11543
+>          75.0        1.88342       97.01937       97.12031
+>          90.0        2.07669       97.01419       97.12549
+>          95.0        2.20826       97.01066       97.12902
+>          99.0        2.49406       97.00300       97.13668
+>          99.9        2.89010       96.99239       97.14729
+>   
+>   
+>  Coverage = 95%
+>  ---------------------------------------------------------
+>    Confidence              k          Lower          Upper
+>     Value (%)         Factor          Limit          Limit
+>  ---------------------------------------------------------
+>          50.0        2.02698       97.01552       97.12416
+>          75.0        2.24423       97.00970       97.12998
+>          90.0        2.47453       97.00353       97.13615
+>          95.0        2.63130       96.99933       97.14035
+>          99.0        2.97186       96.99020       97.14948
+>          99.9        3.44377       96.97755       97.16213
+>   
+>   
+>  Coverage = 99%
+>  ---------------------------------------------------------
+>    Confidence              k          Lower          Upper
+>     Value (%)         Factor          Limit          Limit
+>  ---------------------------------------------------------
+>          50.0        2.66391       96.99845       97.14123
+>          75.0        2.94942       96.99080       97.14888
+>          90.0        3.25208       96.98269       97.15699
+>          95.0        3.45811       96.97717       97.16251
+>          99.0        3.90569       96.96517       97.17451
+>          99.9        4.52587       96.94855       97.19113
+
+
+. Calculate the k factor for a one-sided tolerance interval.
+
+let n = 43
+let p = .90
+let g = .99
+let nu = n-1
+let zp = norppf(p)
+let zg=norppf(g)
+let a = 1 - ((zg**2)/(2*nu))
+let b = zp**2 - (zg**2)/n
+let k1 = (zp + (zp**2 - a*b)**.5)/a
+
+> THE COMPUTED VALUE OF THE CONSTANT A  =  0.9355727E+00
+> THE COMPUTED VALUE OF THE CONSTANT B  =  0.1516516E+01
+> THE COMPUTED VALUE OF THE CONSTANT K1 =  0.1875189E+01
+
+
+. Tolerance factor based on the non-central t distribution.
+
+let n = 43
+let p = .90
+let g = .99
+let f = n - 1
+let delta = norppf(P)*sqrt(n)
+let k = nctppf(g,f,delta)/sqrt(n)
+
+>THE COMPUTED VALUE OF THE CONSTANT K1       =   0.1873962E+01

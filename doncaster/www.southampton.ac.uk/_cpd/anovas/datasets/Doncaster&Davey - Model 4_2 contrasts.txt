@@ -1,0 +1,105 @@
+4.2 TWO FACTOR RANDOMISED BLOCK MODEL Y = S'|A|B with orthogonal contrasts on A
+
+Three-level factor A crossed with two-level factor B and four-level block S. 
+Model-1 analysis by GLM of terms: S|B|C + S|B|D(C) - S*B*D(C);
+Model-2 analysis by GLM of terms: S + B + C + D(C) + B*C + B*D(C).
+
+
+Data:
+
+S	A	 C	 D	B	  Y
+1	1	 2	 0	1	  4.5924
+2	1	 2	 0	1	 -0.5488
+3	1	 2	 0	1	  6.1605
+4	1	 2	 0	1	  2.3374
+1	1	 2	 0	2	  5.1873
+2	1	 2	 0	2	  3.3579
+3	1	 2	 0	2	  6.3092
+4	1	 2	 0	2	  3.2831
+1	2	-1	 1	1	  7.3809
+2	2	-1	 1	1	  9.2085
+3	2	-1	 1	1	 13.1147
+4	2	-1	 1	1	 15.2654
+1	2	-1	 1	2	 12.4188
+2	2	-1	 1	2	 14.3951
+3	2	-1	 1	2	  8.5986
+4	2	-1	 1	2	  3.4945
+1	3	-1	-1	1	 21.3220
+2	3	-1	-1	1	 25.0426
+3	3	-1	-1	1	 22.6600
+4	3	-1	-1	1	 24.1283
+1	3	-1	-1	2	 16.5927
+2	3	-1	-1	2	 10.2129
+3	3	-1	-1	2	  9.8934
+4	3	-1	-1	2	 10.0203
+
+
+COMMENT: If A[1] is a control, and A[2], A[3] are treatment levels, contrasts C
+and D test for a control-versus-treatment effect, and a between-treatments effect.
+SS[C] + SS[D(C)] = SS[A]; likewise DF[C] + DF[D(C)] = DF[A].
+Model-1 analysis declines to assume equal block-by-contrast interactions, so tests
+each treatment contrast against its interaction with block.
+Model-2 analysis assumes equal or negligible block-by-contrast interactions, so
+tests each treatment contrast against the pooled error MS[S*A + S*B + S*B*A]:
+SS[S*C] + SS[S*D(C)] = SS[S*A]; DF[S*C] + DF[S*D(C)] = DF[S*A].
+SS[S*B*C] + SS[S*B*D(C)] = SS[S*B*A]; DF[S*B*C] + DF[S*B*D(C)] = DF[S*B*A].
+		
+
+Model 4.2(i) A and B are fixed factors, S is a random blocking factor:
+
+                                           Restricted
+                                     Model_1       Model_2  
+  Source   DF       SS      MS      F      P      F      P
+1 S         3     9.07    3.02      -      -   0.27  0.850
+2 A         2   745.36  372.68  67.58 <0.001  32.67 <0.001
+3 B         1    91.65   91.65   4.13  0.135   8.03  0.013
+4 B*A       2   186.37   93.18   7.82  0.021   8.17  0.004
+5 S*A       6    33.09    5.51      -      -      -      -
+6 S*B       3    66.51   22.17      -      -      -      -
+7 S*B*A     6    71.51   11.92      -      -      -      -
+8 P(S*B*A)  0        -       - 
+  Total    23  1203.56
+
+
+
+Model-1 analysis of orthogonal contrasts, with fixed factors C and D:
+
+   Source    DF   Seq SS  Adj SS  Seq MS      F      P
+ 1 S          3     9.07   16.32    3.02      -      -
+ 2 C          1   549.39  549.39  549.39  67.28  0.004 = A[1] versus average{A[2],A[3]}
+ 3 D(C)       1   195.97  195.97  195.97  68.44  0.004 = A[2] versus A[3]
+ 4 B          1    91.65   35.54   91.65   4.13  0.135
+ 5 B*C        1    84.50   84.50   84.50   8.18  0.065 = B*(A[1] versus average{A[2],A[3]})
+ 6 B*D(C)     1   101.86  101.86  101.86   7.54  0.071 = B*(A[2] versus A[3])
+ 7 S*C        3    24.50   24.50    8.17      -      -
+ 8 S*D(C)     3     8.59    8.59    2.86      -      -
+ 9 S*B        3    66.51   36.92   22.17      -      -
+10 S*B*C      3    30.98   30.98   10.33      -      -
+11 S*B*D(C)   3    40.53   40.53   13.51
+12 P(S*B*A)   0        -       -
+   Total     23  1203.56
+
+
+Model-2 analysis of orthogonal contrasts, with fixed factors C and D:
+
+   Source    DF   Seq SS  Adj SS  Seq MS      F      P
+ 1 S          3     9.07   16.32    3.02      -      -
+ 2 C          1   549.39  549.39  549.39  48.16 <0.001 = A[1] versus average{A[2],A[3]}
+ 3 D(C)       1   195.97  195.97  195.97  17.18  0.001 = A[2] versus A[3]
+ 4 B          1    91.65   35.54   91.65   8.03  0.013
+ 5 B*C        1    84.50   84.50   84.50   7.41  0.016 = B*(A[1] versus average{A[2],A[3]})
+ 6 B*D(C)     1   101.86  101.86  101.86   8.93  0.009 = B*(A[2] versus A[3])
+ 7 S*A        6    33.09    5.51      -      -      -
+ 8 S*B        3    66.51   22.17      -      -      -
+ 9 S*B*A      6    71.51   11.92      -      -      -
+10 P(S*B*A)   0        -       -
+   Total     23  1203.56
+
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

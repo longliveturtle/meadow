@@ -1,0 +1,1361 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/Aickin-Alpha-Agreement.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:36 GMT -->
+<head>
+<title>SAS macro %AickinAlpha: Aickin's Alpha agreement coefficient</title>
+<meta name="description" content=" %AickinAlpha is a SAS macro to compute Aickin's Alpha agreement coefficient.">
+<meta name="keywords" content="agreement, Aickin, alpha, diagnostic, kappa, measure, observers, raters, tools">
+<link rel="icon" type="image/png" href="img/favicon.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-3.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl.html">Invitation to Perl</a></li>
+      <li><a href="bic-process.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 24 sep 2015</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+
+<div class=version>Version 1.3.1 (March 2013)</div>
+<div class=title0>SAS macro %AickinAlpha</div>
+<div class=title>Aickin's Alpha agreement coefficient</div>
+
+The macro presented below computes the agreement coefficient &alpha; defined in<br>
+<b>Maximum Likelihood Estimation of Agreement in the Constant Predictive Probability Model, and Its Relation to Cohen's Kappa</b><br>
+Mikel Aickin<br>
+<i>Biometrics 46, 293-302, June 1990.</i>
+<br><br>
+
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnend>[</td>
+<td class=defn>
+<span class=sasmacroname>%AickinAlpha</span> is a SAS macro to compute Aickin's Alpha agreement coefficient.
+</td>
+<td class=defnend>]</td>
+</tr>
+</table>
+
+<br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#argslist">Arguments list</a><br>
+<a href="#example">Example</a><br>
+<a href="#sascode">SAS code</a><br>
+<a href="#download">Download</a><br>
+<a href="#R">Also available as an R function</a>
+</div>
+
+<a name="syntax"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+%AickinAlpha(data, var1, var2, wt=1, values=, agree=&var1=&var2, outdata=, printalphanow=1, epsilon=1e-8, maxniter=5000, printfmt=8.6, title=, pseudocount=1, printtable=1, level=0.95);
+</div>
+
+<a name="argslist"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main><span class=sasmacroname>%AickinAlpha</span> arguments list</div>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>data</td>
+<td class=rfctargumentvalue>the name of the sas data set containing the two variables between which agreement is to be estimated;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>var1<br>var2</td>
+<td class=rfctargumentvalue>the two variables names between which agreement is to be estimated;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>wt</td>
+<td class=rfctargumentvalue>the weight or the name of the variable (included in data set <i>data</i>) to be used as a weight for each data line in <i>data</i>;</td>
+<td class=rfctcomment>Default is to assign unit weight to each data line.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>values</td>
+<td class=rfctargumentvalue>the complete list of (unformatted) possible values for each of <i>var1</i> and <i>var2</i>;
+</td>
+<td class=rfctcomment>
+The observed list of values for either <i>var1</i> or <i>var2</i> is used by default: 
+if not all possible values were observed 
+(that is, if some values for either <i>var1</i> or <i>var2</i> do not show in <i>data</i>), 
+the cross tabulation of <i>var1</i> &times; <i>var2</i> will lack the corresponding row(s)/column(s).
+As the algorithm used adds a pseudo-count of one
+(by default &#150; see argument <i>pseudocount</i> below) to the cross tabulation, missing columns/rows, by their impact on the reduced crosstab's dimension, 
+impact on the pseudo-count added to each cell and may, to some extent (especially when sample size is small), also 
+have a (small) impact on the returned value for &alpha;.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>agree</td>
+<td class=rfctargumentvalue>agreement cells definition;</td>
+<td class=rfctcomment>Default is to consider that <i>var1</i> and <i>var2</i> agree iff <i>var1=var2</i>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>outdata</td>
+<td class=rfctargumentvalue>if you would like to store the final value for &alpha; for future use (e.g. to compulse a series of &alpha;'s), you can store the results to an output data set, defined through this option;</td>
+<td class=rfctcomment>Default is not to store results.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>printalphanow</td>
+<td class=rfctargumentvalue>if you are storing <span class=sasmacroname>%AickinAlpha</span>'s results (see option <i>outdata</i>, above),
+you may not want to see the result displayed to SAS output window at this time: you would do so by calling <span class=sasmacroname>%AickinAlpha</span>
+with the option <b>printalphanow=0</b>;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>epsilon</td>
+<td class=rfctargumentvalue>convergence criterion;</td>
+<td class=rfctcomment>Algorithm stops when two consecutive &alpha; estimates differ by less than <i>epsilon</i>;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>maxniter</td>
+<td class=rfctargumentvalue>maximum number of iterations</td>
+<td class=rfctcomment>If algorithm has not converged at iteration number <i>maxniter</i>, an error message will be sent to the SAS log window;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>printfmt</td>
+<td class=rfctargumentvalue>output format used for the value of &alpha;;</td>
+<td class=rfctcomment><br></td>
+</tr>
+<tr>
+<td class=rfctargumentname>title</td>
+<td class=rfctargumentvalue>(optional) title to be displayed on top of both crosstab and Aickin alpha's printout pages;</td>
+<td class=rfctcomment>Do not forget to enclose title by double quotes ("), when used.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>pseudocount</td>
+<td class=rfctargumentvalue>pseudo-count added to the crosstab;</td>
+<td class=rfctcomment>In Aickin's paper, it is highly recommended that a pseudo-count of 1 (the default)
+is added to the table to ensure  the computational convergence of estimates.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>printtable</td>
+<td class=rfctargumentvalue>wheter or not cross tabulation should be included in the output;</td>
+<td class=rfctcomment>Default (1) is to include the table in the output. Use <i>printtable=0</i> if you want to omit it.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>level</td>
+<td class=rfctargumentvalue>confidence interval level;</td>
+<td class=rfctcomment>
+Default is 95%.<br>
+Coverage probability may be less than coverage requested for small sample sizes (see Aickin, 1990 for details).
+</td>
+</tr>
+</table>
+
+
+<a name="example"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Example</div>
+<br>
+
+We illustrate the use of <span class=sasmacroname>%AickinAlpha</span> through the <i>Alcohol consumption classification</i> example presented
+in Aickin's paper (cited above), Table 4. <br><br>
+
+The SAS code below first defines the data set and then calls <span class=sasmacroname>%AickinAlpha</span>.
+Note that in that example, the variables <i>registry</i> and <i>interview</i> are considered as agreeing
+if <i>registry=interview</i> OR (<i>interview=3</i> AND <i>registry</i> &isin; {2,4}).
+
+<br><br>
+<div class=pgm>
+data alcohol;<br>
+&#160;&#160;&#160;&#160;input registry interview m;<br>
+&#160;&#160;&#160;&#160;cards;<br>
+1 1 88<br>
+1 2 61<br>
+1 3 10<br>
+1 4 4<br>
+2 1 2<br>
+2 2 50<br>
+2 3 14<br>
+2 4 2<br>
+3 1 0<br>
+3 2 9<br>
+3 3 15<br>
+3 4 0<br>
+4 1 0<br>
+4 2 2<br>
+4 3 6<br>
+4 4 2<br>
+;<br>
+run;<br>
+<br>
+%AickinAlpha(alcohol, registry, interview, wt=m, agree=registry eq interview or (interview eq 3 and (registry in (2,4))), title="Alcohol consumption classification");<br>
+</div>
+
+<br><br>
+The SAS code above produces the output below, where the first part (the crosstab) could have been omitted
+from output by using option <b>printtable=0</b>.
+
+<br><br>
+<p align=center>
+<img src="img/AickinAlpha/AlcoholConsumption.gif">
+</p>
+<br>
+
+<a name="sascode"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Code</div>
+
+<div class=download0>
+<a href="SasMacros/AickinAlpha.zip">One-click download</a>
+</div>
+<div class=pgm>
+%macro AickinAlpha(data, var1, var2, wt=1, values=, agree=&amp;var1=&amp;var2, outdata=, printalphanow=1, epsilon=1e-8, maxniter=5000, printfmt=8.6, title=, pseudocount=1, printtable=1, level=0.95);<br>
+&#160;&#160;&#160;&#160;%local converged  i lastchange lcount level100 m ncells niter nnonemptycells  unlistedvalue unlistedvalues uservalue z;<br>
+&#160;&#160;&#160;&#160;%local dsagree dscountsTable dscountsX dscountsXComplete dsdatavaluesNotInValues dsfComplete dsout dsuserlast dsuservalues dsvalues dsvaluesX;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsuserlast = &amp;syslast;<br>
+<br>
+&#160;&#160;&#160;&#160;%let z = probit((1+&amp;level)/2);<br>
+&#160;&#160;&#160;&#160;%let level100 = %sysevalf(100*&amp;level);<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsout = %NewDatasetName(tmpout);<br>
+<br>
+&#160;&#160;&#160;&#160;/*<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;This macro computes the alpha coefficient described in:<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Maximum Likelihood Estimation of Agreement in the Constant Predictive Probability Model, and Its Relation to Cohen-s Kappa<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Mikel Aickin<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Biometrics 46, 293-302, June 1990.<br>
+&#160;&#160;&#160;&#160;*/;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsvalues = %NewDatasetName(values);<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsvalues as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select distinct(x.__myxvar) as __myxvar<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(select distinct(&amp;var1) as __myxvar from &amp;data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;outer union corresponding<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select distinct(&amp;var2) as __myxvar from &amp;data) as x;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(values)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* user called this macro with values defined in values=: why not use them!?!?;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let nvalues = %eval(1 + %length(%sysfunc(compbl(&amp;values))) - %length(%sysfunc(compress(&amp;values))));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsuservalues = %NewDatasetName(uservalues);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;dsuservalues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%do i = 1 %to &amp;nvalues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let uservalue = %scan(&amp;values, &amp;i, %str( ));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;__myxvar = &amp;uservalue;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sort data=&amp;dsuservalues; by __myxvar; run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sort data=&amp;dsvalues; by __myxvar; run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsdatavaluesNotInValues = %NewDatasetName(datavaluesNotInValues);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;dsdatavaluesNotInValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;merge &amp;dsvalues (in=in1) &amp;dsuservalues (in=in2);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by __myxvar;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if in1 and not in2;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select N(__myxvar) into: unlistedvalue<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsdatavaluesNotInValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;unlistedvalue %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select __myxvar into: unlistedvalues separated by ', '<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsdatavaluesNotInValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [macro AickinAlpha] values found in data &amp;data for variable &amp;var1 (or &amp;var2) [=&amp;unlistedvalues] not listed in values given through AickinAlpha values= argument;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsdatavaluesNotInValues &amp;dsuservalues; run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto skip;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;delete &amp;dsvalues &amp;dsdatavaluesNotInValues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;change &amp;dsuservalues = &amp;dsvalues;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsvaluesX = %NewDatasetName(valuesX);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsvaluesX as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select a.__myxvar as &amp;var1, b.__myxvar as &amp;var2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsvalues as a, &amp;dsvalues as b<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where not missing(a.__myxvar) and not missing(b.__myxvar);<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dscountsX = %NewDatasetName(countsX);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dscountsX as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select &amp;var1, &amp;var2, sum(&amp;wt) as __count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;where not missing(&amp;var1) and not missing(&amp;var2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;group &amp;var1, &amp;var2;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dscountsXComplete = %NewDatasetName(countsXComplete);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dscountsXComplete as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select coalesce(k.&amp;var1, u.&amp;var1) as &amp;var1, coalesce(k.&amp;var2, u.&amp;var2) as &amp;var2, coalesce(k.__count, 0) as __count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dscountsX as k<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;full join &amp;dsvaluesX as u<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;on k.&amp;var1 eq u.&amp;var1 and k.&amp;var2 eq u.&amp;var2;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dscountsXComplete;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dscountsXComplete;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;__agree = &amp;agree;<br>
+&#160;&#160;&#160;&#160;run; <br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;printtable %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let dsfComplete = %NewDatasetName(fComplete);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select ceil(log10(2+max(__count))) into :lcount from &amp;dscountsXComplete;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create table &amp;dsfComplete as<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select &amp;var1, &amp;var2, __count, __count/sum(__count) as __p, . as __i<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dscountsXComplete;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc report data=&amp;dsfComplete  nofs style={rules=none cellspacing=0}  nowd headskip headline missing;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column &amp;var1 &amp;var2,(__i __count __p);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;var1 / group;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define &amp;var2 / group across;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define __i / display style={foreground=GWH background=GWH cellwidth=1pt font_size=1};<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define __count / analysis sum 'N' f=&amp;lcount..0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define __p / analysis sum '%' f=percent8.2 style={font_style=italic foreground=GRB};<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsfComplete; run;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Treat special case where the two variables compared present only one value (how can there be disagreement in that case?!??!);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select N(__count), sum(__count>0), sum(__count) into :ncells, :nnonemptycells, :m<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dscountsXComplete;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;m = 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let converged = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;dsout;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sd_alpha = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;n = &amp;m;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;niter = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;lastchange = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;converged = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto report;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%else %if &amp;ncells = 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let converged = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;data &amp;dsout;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sd_alpha = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;n = &amp;m;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;niter = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;lastchange = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;converged = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto report;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%let dscountsTable = %NewDatasetName(countsTable);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;proc transpose data=&amp;dscountsXComplete out=&amp;dscountsTable (drop=&amp;var1 _NAME_) prefix=__z;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var __count;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by &amp;var1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;id &amp;var2;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;%let dsagree = %NewDatasetName(agree);&#160;&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;&#160;proc transpose data=&amp;dscountsXComplete out=&amp;dsagree (drop=&amp;var1 _NAME_) prefix=__d;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var __agree;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;by &amp;var1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;id &amp;var2;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%if &amp;nnonemptycells = 1 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* return alpha = 0|1 depending on the agreement as defined by the rule in agree=;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc iml;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;use &amp;dscountsTable;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;read all into k;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;use &amp;dsagree;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;read all into d;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ssize = sum(k);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;P0 = sum(d # k) / ssize;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sd_alpha = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;niter = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;change = .;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;converged = 1;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;outres = P0 || sd_alpha || ssize || niter || change || converged;<br>
+&#160;&#160;  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create &amp;dsout from outres [colname={"alpha" "sd_alpha" "n" "niter" "lastchange"  "converged"}];<br>
+&#160; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;append from outres;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;quit;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dscountsTable &amp;dsagree; run;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto report;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%end;<br>
+<br>
+<br>
+&#160;&#160;&#160;&#160;proc iml;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;use &amp;dscountsTable;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;read all into k;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;use &amp;dsagree;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;read all into d;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;m = nrow(k);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ssize = sum(k);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;k = k + &amp;pseudocount/m/m; * Aickin-s suggestion to ensure computational convergence;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;n = ssize + &amp;pseudocount;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;J = J(m,1,1);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r = J` * k`;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;c = k` * J;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;A = sum(d # k);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;P0 = A / n;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Initial values;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pr = r/n;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pc = c/n;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;s = pr * d * pc;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha = (P0 - s) / (1 - s);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;niter = 0;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;do until(change < &amp;epsilon | niter = &amp;maxniter);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oldalpha = alpha;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;niter = niter + 1;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pr = r / n / (1 - alpha + alpha/s*(d * pc)`);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pr(|1|) = 1 - sum(pr(|2:m|));<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pc = c / n / (1 - alpha + alpha/s*(pr * d)`);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pc(|1|) = 1 - sum(pc(|2:m|));<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;s = pr * d * pc;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha = (P0 - s) / (1 - s);<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;change = abs(alpha-oldalpha);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if change < &amp;epsilon then converged = 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else converged = 0;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* estimate variance of alpha MLE;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Lda2 = - n * (1-s) / (1-alpha) / ((1-alpha)*s + alpha); * scalar;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;T = (1-alpha) / alpha; * scalar;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;V = alpha / s / ((1-alpha)*s + alpha); * scalar;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pcdiff = pc(|2:m|) - pc(|1|); * m-1 x 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;prdiff = pr(|2:m|) - pr(|1|); * m-1 x 1;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Ldadpri&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= - A * pcdiff / P0 / P0; * m-1 x 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Ldadpcj&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= - A * prdiff / P0 / P0; * m-1 x 1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Ldpridprj&#160;&#160;&#160;&#160;= diag(- r(|2:m|) / (pr(|2:m|) # pr(|2:m|)))  - r(|1|) / pr(|1|) / pr(|1|) + A * (2*s*T + 1) * V * V * (pcdiff * pcdiff`); * m-1 x m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Ldpcidpcj&#160;&#160;&#160;&#160;= diag(- c(|2:m|) / (pc(|2:m|) # pc(|2:m|)))  - c(|1|) / pc(|1|) / pc(|1|) + A * (2*s*T + 1) * V * V * (prdiff * prdiff`); * m-1 x m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d2Ldpridpcj&#160;&#160;&#160;&#160;= - A * V * (J(m-1,m-1,1)+I(m-1)) + A * (2*s*T + 1) * V * V * (pcdiff * prdiff`); * m-1 x m-1;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/*<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The matrix of second derivatives is composed of vectors and matrices<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;computed above.  The variance of alpha-s estimator is the top-left component of its inverse.<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;The matrix is symetric and constructed as follows:<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pr1  Pr2 ... Prq&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pc1  Pc2 ... Pcq<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;------------&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;--------------------    &#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;alpha   &#160;&#160;&#160;&#160;- d2Lda2  -   &#160;&#160;&#160;&#160;-   t(d2Ldadpri)   -    &#160;&#160;&#160;&#160;-  t(d2Ldadpcj)  -<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;------------   &#160;&#160;&#160;&#160;--------------------    &#160;&#160;&#160;&#160;-------------------<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pr1                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;--------------------    &#160;&#160;&#160;&#160;-------------------  <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pr2                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-   d2Ldpridprj   -    &#160;&#160;&#160;&#160;-  d2Ldpridpcj   -         <br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;...                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-                      -    &#160;&#160;&#160;&#160;-                     -<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Prq                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;--------------------    &#160;&#160;&#160;&#160;-------------------<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pc1                                           &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pc2                                           &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-  d2Ldpcidpcj   -<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;...                                           &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-                     -<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Pcq                                           &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-------------------<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;*/;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var1 = d2Lda2 || d2Ldadpri` || d2Ldadpcj`; * 1 x 2m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var2 = d2Ldadpri || d2Ldpridprj ||  d2Ldpridpcj; * m-1 x 2m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var3 = d2Ldadpcj || d2Ldpridpcj` || d2Ldpcidpcj; * m-1 x 2m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var = var1` || var2` || var3`; * 2m-1 x 2m-1;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;var = INV(var);<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sd_alpha = sqrt(- var(|1,1|));<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;outres = alpha || sd_alpha || ssize || niter || change || converged;<br>
+&#160;&#160;  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;create &amp;dsout from outres [colname={"alpha" "sd_alpha" "n" "niter" "lastchange"  "converged"}];<br>
+&#160; &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;append from outres;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsagree &amp;dscountsTable; run;<br>
+<br>
+&#160;&#160;&#160;&#160;proc sql noprint;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;select niter, lastchange, converged into :niter, :lastchange, :converged<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;from &amp;dsout;<br>
+&#160;&#160;&#160;&#160;quit;<br>
+<br>
+&#160;&#160;&#160;&#160;%report:<br>
+<br>
+&#160;&#160;&#160;&#160;data &amp;dsout;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;set &amp;dsout;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;lcl = alpha - &amp;z * sd_alpha;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ucl = alpha + &amp;z * sd_alpha;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if lcl < 0 and not missing(lcl) then lcl = 0;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if ucl > 1 then ucl = 1;<br>
+&#160;&#160;&#160;&#160;run;<br>
+<br>
+&#160;&#160;&#160;&#160;%if &amp;converged eq 0 %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%put ERROR: [macro AickinAlpha] algorithm did not converge (last change = &amp;lastchange > epsilon=&amp;epsilon) after &amp;maxniter iterations;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%goto skip;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %if &amp;printalphanow %then %do;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc report data=&amp;dsout  nofs style={rules=none cellspacing=0} nowd headskip headline missing;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column alpha sd_alpha n lcl ucl;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define alpha / analysis "Aickin's alpha" f=&amp;printfmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define sd_alpha / analysis "(sd)" f=&amp;printfmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define n / display "n";<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define lcl /display "&amp;level100% Lower Conf Limit" f=&amp;printfmt;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;define ucl / display "&amp;level100% Upper Conf Limit" f=&amp;printfmt;<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;title1 '---- Agreement -----------------------------------------------';<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;title2 &amp;title;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;run;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;%skip:<br>
+&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dscountsX &amp;dscountsXComplete &amp;dsvalues &amp;dsvaluesX; run;<br>
+<br>
+&#160;&#160;&#160;&#160;%if %length(%superq(outdata)) %then %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; change &amp;dsout=&amp;outdata; run;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+&#160;&#160;&#160;&#160;%else %do;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;proc datasets nolist; delete &amp;dsout; run;<br>
+&#160;&#160;&#160;&#160;%end;;<br>
+<br>
+&#160;&#160;&#160;&#160;%let syslast = &amp;dsuserlast;<br>
+%mend AickinAlpha;<br>
+<br>
+<br>
+%macro NewDatasetName(datasetname);<br>
+&#160;&#160;&#160;&#160;%*Finds the first unused dataset named  *datasetname*, adding as many underscores as necessary at its beginning to make it unique!;<br>
+&#160;&#160;&#160;&#160;%local newdatasetname;<br>
+&#160;&#160;&#160;&#160;%let newdatasetname = %sysfunc(compress(&amp;datasetname));<br>
+<br>
+&#160;&#160;&#160;&#160;%do %while(%sysfunc(exist(&amp;newdatasetname)));<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;%let newdatasetname=_&amp;newdatasetname;<br>
+&#160;&#160;&#160;&#160;%end;<br>
+<br>
+&#160;&#160;&#160;&#160;&amp;newdatasetname<br>
+%mend NewDatasetName;<br>
+</div>
+<br>
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<a href="SasMacros/AickinAlpha.zip">Download <span class=sasmacroname>%AickinAlpha</span> 1.3.1 now</a>.
+<br>
+
+<a name="R"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>R version</div>
+<br>
+<span class=sasmacroname>%AickinAlpha</span> is also available as an R function (<a href="Aickin-Alpha-Agreement-R.html">see aickin.alpha page</a>).
+<br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/PBelisle/Aickin-Alpha-Agreement.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:40:38 GMT -->
+</html>

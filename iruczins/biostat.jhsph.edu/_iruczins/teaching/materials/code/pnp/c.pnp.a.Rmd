@@ -1,0 +1,229 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Permutation and Non-Parametric Tests - Advanced
+
+#### Example 1 from class, permutation test
+
+First some utility functions.
+
+```{r}
+# returns binary representation of 1:(2^n)
+binary.v <- function(n){
+  x <- 1:(2^n)
+  mx <- max(x)
+  digits <- floor(log2(mx))
+  ans <- 0:(digits-1); lx <- length(x)
+  x <- matrix(rep(x,rep(digits, lx)),ncol=lx)
+  x <- (x %/% 2^ans) %% 2
+}
+
+# function to perform a paired permutation test.
+paired.perm.test <- function(d,n.perm=1000){
+  n <- length(d)
+  if(is.null(n.perm)) { # do exact test
+    ind <- binary.v(n)
+    allt <- apply(ind,2,function(x,y)
+                  t.test((2*x-1)*y)$statistic,d)
+  }
+  else { # do n.perm samples
+    allt <- 1:n.perm
+    for(i in 1:n.perm) 
+      allt[i] <- t.test(d*sample(c(-1,1),n,repl=TRUE))$statistic
+  }
+  allt
+}
+```
+
+The paired data.
+
+```{r}
+x <- c(117.3, 100.1,  94.5, 135.5,  92.9, 118.9, 144.8, 103.9, 103.8, 153.6, 163.1)
+y <- c(145.9,  94.8, 108.0, 122.6, 130.2, 143.9, 149.9, 138.5,  91.7, 162.6, 202.5)
+d <- y-x
+d
+```
+
+Permutation test, all possible permutations.
+
+```{r}
+set.seed(1)
+tall <- paired.perm.test(d,n.perm=NULL)
+# p-value
+tobs <- t.test(d)$statistic
+mean(abs(tall) >= abs(tobs))
+```
+
+Permutation test, 1000 permutations.
+
+```{r}
+set.seed(2)
+tsamp <- paired.perm.test(d,n.perm=1000)
+# p-value
+mean(abs(tsamp) >= abs(tobs))
+```
+
+#### Example 2 from class, permutation test
+
+A utility function.
+
+```{r}
+# function to perform permutation test
+
+perm.test <- function(x, y, n.perm=1000, var.equal=TRUE){
+  # number of data points
+  kx <- length(x)
+  ky <- length(y)
+  n <- kx + ky
+
+  # Data re-compiled
+  X <- c(x,y)
+  z <- rep(1:0,c(kx,ky))
+
+  if(is.null(n.perm)) { # do exact permutation test
+    o <- binary.v(n)  # indicator of all possible samples
+    o <- o[,apply(o,2,sum)==kx]  
+    nc <- choose(n,kx)
+    allt <- 1:nc
+    for(i in 1:nc) {
+      xn <- X[o[,i]==1]
+      yn <- X[o[,i]==0]
+      allt[i] <- t.test(xn,yn,var.equal=var.equal)$statistic
+    }
+  }
+  else { # do 1000 permutations of the data
+    allt <- 1:n.perm
+    for(i in 1:n.perm) {
+      z <- sample(z)
+      xn <- X[z==1]
+      yn <- X[z==0]
+      allt[i] <- t.test(xn,yn,var.equal=var.equal)$statistic
+    }
+  }
+  allt
+}
+```
+
+The two-sample data.
+
+```{r}
+x <- c(43.3, 57.1, 35.0, 50.0, 38.2, 61.2)
+y <- c(51.9, 95.1, 90.0, 49.7, 101.5, 74.1, 84.5, 46.8, 75.1)
+```
+
+Permutation test, all possible permutations.
+
+```{r}
+set.seed(3)
+tall <- perm.test(x,y,n.perm=NULL)
+# p-value
+tobs <- t.test(x,y,var.equal=TRUE)$statistic
+mean(abs(tall) >= abs(tobs))
+```
+
+Permutation test, 1000 permutations.
+
+```{r}
+set.seed(4)
+tsamp <- perm.test(x,y,n.perm=1000)
+# p-value
+mean(abs(tsamp) >= abs(tobs))
+```
+
+#### Example 3, permutation test
+
+```{r,fig.width=4}
+xA <- c(27.0,54.6,33.5,27.6,46.0,22.2,44.2,17.3,15.9,32.8)
+xB <- c(17.4,20.5,13.9,14.8,27.9,10.6,33.7,15.4,25.0,24.1)
+
+stripchart(list(xA,xB),vertical=T,pch=21,xlim=c(0.5,2.5))
+segments(0.9,mean(xA),1.1,mean(xA),lwd=2,col="red")
+segments(1.9,mean(xB),2.1,mean(xB),lwd=2,col="blue")
+abline(h=mean(c(xA,xB)),lty=2)
+
+xAnew <- xA
+xAnew[2] <- 99.9
+
+stripchart(list(xAnew,xB),vertical=T,pch=21,xlim=c(0.5,2.5))
+segments(0.9,mean(xAnew),1.1,mean(xAnew),lwd=2,col="red")
+segments(1.9,mean(xB),2.1,mean(xB),lwd=2,col="blue")
+abline(h=mean(c(xAnew,xB)),lty=2)
+```
+
+For the permutation test, we use the test statistic from the two sample t-test, but we do not use the parametric null distribution. 
+
+```{r}
+t.test(xA,xB)$statistic
+```
+
+Let's write a function first, to make things easier. Note that the input are two vectors, generically called xa and xb.
+
+```{r}
+my.perm <- function(xa,xb){
+  # combine the two vectors
+  x <- c(xa,xb)
+  # calculate the total length of observations
+  n <- length(x)
+  # calculate the length of the first vector
+  na <- length(xa)
+  # shuffle the order of the observations across groups
+  z <- x[sample(1:n)]
+  # return the t test statistic from the shuffled data
+  return(t.test(z[1:na],z[-(1:na)])$stat)
+}
+```
+
+Example:
+
+```{r}
+set.seed(1)
+# let's try one with our xA and xB
+my.perm(xA,xB)
+# and onther one
+my.perm(xA,xB)
+# and onther one
+my.perm(xA,xB)
+```
+
+The permutation test.
+
+```{r}
+# let's do 10000 shuffles
+nit <- 10000
+# create a vector of length nit (10000)
+myres <- rep(NA,nit)
+# fill in the slots of that vector with the permutation test t statistics
+for(j in 1:nit) myres[j] <- my.perm(xA,xB)
+```
+
+Let's plot the distribution of the t statistics, add the parametric t, and show the observed test statistic.
+
+```{r}
+hist(myres,breaks=51,col="lightgrey",probability=TRUE)
+tstat <- t.test(xA,xB)$stat 
+tstat
+df <- t.test(xA,xB)$parameter
+df
+curve(dt(x,df),lwd=2,col="blue",add=TRUE)
+abline(v=tstat,col="red")
+```
+
+Calculate the permutation p-value.
+
+```{r}
+mean(abs(myres)>abs(tstat))
+```
+
+Let's do the same for the data with the outlier.
+
+```{r}
+myres <- rep(NA,nit)
+for(j in 1:nit) myres[j] <- my.perm(xAnew,xB)
+hist(myres,breaks=51,col="lightgrey",probability=TRUE)
+curve(dt(x,df),lwd=2,col="blue",add=TRUE)
+abline(v=tstat,col="red")
+mean(abs(myres)>abs(tstat))
+```

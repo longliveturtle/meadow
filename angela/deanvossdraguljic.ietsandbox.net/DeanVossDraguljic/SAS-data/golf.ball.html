@@ -1,0 +1,59 @@
+* golf.ball.sas, golf ball experiment, Table 17.22, p668;
+;
+* Data as arranged in Table 17.22;
+data golfball;
+  input golfer brand @@;
+  do rep=1 to 6; drop rep;
+    input distance @@;
+	output;
+  end;
+  lines;
+  1 1  209 204 179 230 233 245
+  1 2  188 211 242 222 187 233
+  1 3  219 204 247 215 197 161
+  2 1  240 207 192 190 226 188
+  2 2  216 195 240 215 219 238
+  2 3  195 221 205 192 183 230
+;
+* Data by observation;
+data golfball;
+  input golfer brand distance;
+  lines;
+          1      1     209
+          1      1     204
+          1      1     179
+          1      1     230
+          1      1     233
+          1      1     245
+          1      2     188
+          1      2     211
+          1      2     242
+          1      2     222
+          1      2     187
+          1      2     233
+          1      3     219
+          1      3     204
+          1      3     247
+          1      3     215
+          1      3     197
+          1      3     161
+          2      1     240
+          2      1     207
+          2      1     192
+          2      1     190
+          2      1     226
+          2      1     188
+          2      2     216
+          2      2     195
+          2      2     240
+          2      2     215
+          2      2     219
+          2      2     238
+          2      3     195
+          2      3     221
+          2      3     205
+          2      3     192
+          2      3     183
+          2      3     230
+;
+run;

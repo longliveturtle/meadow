@@ -1,0 +1,158 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Non-linear Regression
+
+#### Example from class: Michaelis-Menten equations
+
+The data.
+
+```{r}
+library(SPH.140.615)
+puro
+```
+
+Plot the data, just for the untreated cells.
+
+```{r}
+plot(vel ~ conc, data=puro, subset=(state=="untreated"), xlab="concentration", ylab="initial velocity", lwd=2)
+```
+
+The non-linear least squres fit.
+
+```{r}
+nls.out <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, subset=(state=="untreated"), start = c(Vm=143,K=0.031))
+summary(nls.out)$param
+```
+
+Plot the data with the fitted curve.
+
+```{r}
+plot(vel ~ conc, data=puro, subset=(state=="untreated"), xlab="concentration", ylab="initial velocity", lwd=2)
+u <- par("usr")
+x <- seq(u[1],u[2],length=250)
+y <- predict(nls.out, data.frame(conc=x))
+lines(x, y, lwd=2)
+```
+
+Non-linear regression estimation for just the treated cells.
+
+```{r}
+nls.outB <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, subset=(puro$state=="treated"), start=c(Vm=160,K=0.048))
+summary(nls.outB)$param
+```
+
+Fit both regressions all in one.
+
+```{r}
+puro$x <- ifelse(puro$state=="treated",1,0)
+nls.outC <- nls(vel ~ ((Vm+dV*x)*conc)/(K+dK*x+conc), data=puro, start=c(Vm=160,K=0.048,dV=0,dK=0))
+summary(nls.outC)$param
+```
+
+Maximum velocity for the untreated cells.
+
+```{r}
+summary(nls.outC)$param[1]
+```
+
+Maximum velocity for the treated cells.
+
+```{r}
+summary(nls.outC)$param[1]+summary(nls.outC)$param[3]
+```
+
+Rate constant for the untreated cells.
+
+```{r}
+summary(nls.outC)$param[2]
+```
+
+Rate constant for the treated cells.
+
+```{r}
+summary(nls.outC)$param[2]+summary(nls.outC)$param[4]
+```
+
+Plot data and the fits.
+
+```{r}
+plot(vel ~ conc, data=puro, xlab="concentration", ylab="initial velocity", lwd=2,
+     pch=as.numeric(puro$state)-1, col=ifelse(puro$state=="treated","blue","red"))
+u <- par("usr")
+x <- seq(u[1],u[2],len=250)
+y1 <- predict(nls.out, data.frame(conc=x))
+y2 <- predict(nls.outB, data.frame(conc=x))
+lines(x, y1, lwd=2, col="red", lty=2)
+lines(x, y2, lwd=2, col="blue", lty=2)
+```
+
+Fit with the K's constrained to be equal.
+
+```{r}
+nls.outD <- nls(vel ~ ((Vm+dV*x)*conc)/(K+conc), data=puro, start=c(Vm=160,K=0.048,dV=0))
+summary(nls.outD)$param
+```
+
+Test if the lines are identical.
+
+```{r}
+nls.outE <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, start=c(Vm=160,K=0.048))
+summary(nls.outE)$param
+anova(nls.outE,nls.outC)
+```
+
+#### Example from class: the mud snails
+
+The data.
+
+```{r}
+sediment
+```
+
+Fit a "linear spline" model.
+
+```{r}
+f <- function(x,b0,b1,x0) ifelse(x<x0, b0+b1*x, b0+b1*x0)
+nls.out <- nls(pellets ~ f(time,b0,b1,x0), data=sediment, start=c(b0=0,b1=50,x0=30))
+summary(nls.out)$param
+```
+
+Plot the data and the fitted curve.
+
+```{r}
+plot(pellets ~ time, data=sediment)
+u <- par("usr") 
+x <- seq(u[1],u[2],length=250)
+y <- predict(nls.out, data.frame(time=x))
+lines(x, y, col="red", lwd=2)
+```
+
+#### Example from class: exponential decay
+
+The data.
+ 
+```{r}
+head(chlorine)
+```
+
+Fit the model.
+
+```{r}
+nls.out <- nls(chlorine ~ a+b*exp(-c*time), data=chlorine, start=c(a=0.05,b=0.49,c=0.1))
+summary(nls.out)$param
+```
+
+Plot the data and the fitted curve.
+
+```{r}
+plot(chlorine ~ time, data=chlorine, lwd=2)
+u <- par("usr")
+x <- seq(u[1],u[2],len=250)
+y <- predict(nls.out, data.frame(time=x))
+lines(x, y, lwd=2, col="blue")
+```
+

@@ -1,0 +1,347 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+options(width=110)
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Confidence Intervals
+
+### Working with the Normal distribution
+
+Plot the standard Gaussian N(0,1), and look at some normal quantiles.
+
+```{r}
+curve(dnorm,-3.5,3.5)
+abline(h=0)
+qnorm(0.025)
+abline(v=qnorm(0.025),col="red")
+qnorm(0.975)
+abline(v=qnorm(0.975),col="red")
+qnorm(0.005)
+abline(v=qnorm(0.005),col="blue")
+qnorm(0.995)
+abline(v=qnorm(0.995),col="blue")
+```
+
+### Confidence interval for the population mean, population SD known
+
+Take ten random samples from a Normal distribution with population mean 5 and population standard deviation 2. Calculate a 95% confidence interval for the population mean from the sample, under the assumption that the standard deviation is known. Repeat once more, and compare the two confidence intervals.
+
+First confidence interval:
+
+```{r}
+set.seed(1)
+x <- rnorm(10,mean=5,sd=2)
+x
+mean(x)
+qnorm(0.975)
+mean(x) - qnorm(0.975) * 2/sqrt(10)
+mean(x) + qnorm(0.975) * 2/sqrt(10)
+ci1 <- c(mean(x) - qnorm(0.975) * 2/sqrt(10), mean(x) + qnorm(0.975) * 2/sqrt(10))
+ci1
+```
+
+Second confidence interval:
+
+```{r}
+y <- rnorm(10,mean=5,sd=2)
+y
+mean(y)
+ci2 <- c(mean(y) - qnorm(0.975) * 2/sqrt(10), mean(y) + qnorm(0.975) * 2/sqrt(10))
+ci2
+```
+
+Compare:
+
+```{r}
+ci1
+ci2
+mean(ci1)
+mean(ci2)
+diff(ci1)
+diff(ci2)
+2*qnorm(0.975)*2/sqrt(10)
+```
+
+The intervals had a 95% a priori probability of covering the population mean 5 (in this simulation, both did). Both have the same length, as the only random quantity in the confidence interval is the sample mean.
+
+### Working with the t distribution
+
+Some t quantiles.
+
+```{r}
+qt(0.975,9)
+qt(0.975,19)
+qt(0.975,29)
+qt(0.975,2:50)
+```
+
+A t distribution with nine degrees of freedom.
+
+```{r}
+curve(dt(x,9),-3.5,3.5)
+abline(h=0)
+curve(dnorm,-3.5,3.5,add=TRUE,lty="dotted")
+qt(0.025,9)
+abline(v=qt(0.025,9),col="red")
+qt(0.975,9)
+abline(v=qt(0.975,9),col="red")
+```
+
+### Confidence interval for the population mean, population SD unknown
+
+##### First example from class
+
+```{r}
+x <- c(0.2, 1.3, 1.4, 2.3, 4.2, 4.7, 4.7, 5.1, 5.9, 7.0)
+x
+stripchart(x,method="stack",pch=1,ylim=c(0,2))
+abline(h=1,lty=2,col="gray40")
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=2)
+```
+
+Calculating the 95% confidence interval.
+
+```{r}
+length(x)
+mean(x)
+sd(x)
+sd(x)/sqrt(length(x))
+qt(0.975,length(x)-1)
+mean(x) - qt(0.975,length(x)-1) * sd(x)/sqrt(length(x))
+mean(x) + qt(0.975,length(x)-1) * sd(x)/sqrt(length(x))
+mean(x) + c(-1,1) * qt(0.975,length(x)-1) * sd(x)/sqrt(length(x))
+round(mean(x) + c(-1,1) * qt(0.975,length(x)-1) * sd(x)/sqrt(length(x)), 2)
+```
+
+Using the function t.test().
+
+```{r}
+t.test(x)
+attributes(t.test(x))
+t.test(x)$conf.int
+round(t.test(x)$conf.int,2)
+```
+
+Plotting the confidence interval.
+
+```{r}
+ci <- t.test(x)$conf.int
+stripchart(x,method="stack",pch=1,ylim=c(0,2))
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=3)
+segments(ci[1],1,ci[2],1, col="blue",lwd=3)
+```
+
+Calculating a 99% confidence interval.
+
+```{r}
+qt(0.975,length(x)-1)
+qt(0.995,length(x)-1)
+mean(x) + c(-1,1) * qt(0.995,length(x)-1) * sd(x)/sqrt(length(x))
+t.test(x,conf.level=0.99)
+t.test(x,conf.level=0.99)$conf.int
+```
+
+##### Second example from class
+
+```{r}
+x <- c(1.17, 6.35, 7.76)
+x
+stripchart(x,pch=1,xlim=c(-5,15),ylim=c(0,2))
+abline(h=1,lty=2,col="gray40")
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=2)
+```
+
+Calculating the 95% confidence interval.
+
+```{r}
+length(x)
+mean(x)
+sd(x)
+sd(x)/sqrt(length(x))
+qt(0.975,length(x)-1)
+mean(x) + c(-1,1) * qt(0.975,length(x)-1) * sd(x)/sqrt(length(x))
+t.test(x)$conf.int
+```
+
+Plotting the confidence interval.
+
+```{r}
+ci <- t.test(x)$conf.int
+stripchart(x,pch=1,xlim=c(-5,15),ylim=c(0,2))
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=3)
+segments(ci[1],1,ci[2],1, col="blue",lwd=3)
+```
+
+##### Third example from class
+
+```{r}
+x <- c(34.9, 28.5, 34.3, 38.4, 29.6,
+       29.6, 38.7, 22.4, 30.1, 23.1,
+       29.6, 33.4, 20.6, 33.6, 42.4,
+       28.2, 25.3, 22.1, 37.3, 32.1)
+x
+stripchart(x,method="stack",pch=1,ylim=c(0,2))
+abline(h=1,lty=2,col="gray40")
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=2)
+```
+
+Calculating the 95% confidence interval.
+
+```{r}
+length(x)
+mean(x)
+sd(x)
+sd(x)/sqrt(length(x))
+qt(0.975,length(x)-1)
+mean(x) + c(-1,1) * qt(0.975,length(x)-1) * sd(x)/sqrt(length(x))
+t.test(x)$conf.int
+```
+
+Plotting the confidence interval.
+
+```{r}
+ci <- t.test(x)$conf.int
+stripchart(x,method="stack",pch=1,ylim=c(0,2))
+segments(mean(x),0.9,mean(x),1.1, col="blue",lwd=3)
+segments(ci[1],1,ci[2],1, col="blue",lwd=3)
+```
+
+### Confidence intervals for the difference in means 
+
+##### Example from class
+
+```{r}
+x <- c(59.2, 54.6, 58.1, 41.8, 64.7, 50.8, 51.6, 47.0, 66.3, 58.1)
+y <- c(73.3, 91.4, 69.1, 104.2, 64.6, 78.4, 56.4, 55.6, 61.1, 39.8, 43.9, 63.6, 78.6, 76.5, 45.1, 90.2)
+list(x,y)
+par(las=1)
+stripchart(list(x,y),method="stack",pch=1,group.names=c("A","B"),ylim=c(0,3))
+stripchart(list(x,y),method="jitter",jitter=0.05,pch=1,group.names=c("A","B"),ylim=c(0,3))
+```
+
+Calculating the confidence interval.
+
+```{r}
+mean(x)
+mean(y)
+mean(x) - mean(y)
+sd(x)
+sd(y)
+var(x)
+var(y)
+nx <- length(x)
+nx
+ny <- length(y)
+ny
+spooled <- sqrt( (var(x)*(nx-1)+var(y)*(ny-1)) / (nx+ny-2))
+spooled
+spooled * sqrt(1/nx+1/ny)
+qt(0.975,nx+ny-2) 
+mean(x)-mean(y) - qt(0.975,nx+ny-2) * spooled * sqrt(1/nx+1/ny) 
+mean(x)-mean(y) + qt(0.975,nx+ny-2) * spooled * sqrt(1/nx+1/ny) 
+mean(x)-mean(y) + c(-1,1) * qt(0.975,nx+ny-2) * spooled * sqrt(1/nx+1/ny) 
+```
+
+95\% CI for the population mean of the first population using the function t.test().
+ 
+```{r}
+t.test(x)$conf
+```
+
+95\% CI for the population mean of the second population.
+
+```{r}
+t.test(y)$conf
+```
+
+95% CI for difference in population means assuming the population SDs are equal.
+
+```{r}
+t.test(x,y,var.equal=TRUE)$conf
+```
+
+95\% CI for difference in population means not assuming the population SDs are equal.
+
+```{r}
+t.test(x,y)$conf
+```
+
+### Confidence intervals for the population standard deviations
+
+##### Example from class
+
+First population.
+
+```{r}
+x
+length(x)
+sd(x)
+```
+
+The chi-square distribution.
+
+```{r}
+curve(dchisq(x,df=nx-1),from=0,to=30)
+abline(h=0)
+qchisq(0.025,nx-1)
+abline(v=qchisq(0.025,nx-1),lty="dotted",col="blue")
+qchisq(0.975,nx-1)
+abline(v=qchisq(0.975,nx-1),lty="dotted",col="blue")
+```
+
+95\% CI for the **population standard deviation** of the first population.
+
+```{r}
+L <- qchisq(0.025,nx-1)
+U <- qchisq(0.975,nx-1)
+sd(x) * sqrt((nx-1)/U)
+sd(x) * sqrt((nx-1)/L)
+sd(x) * sqrt((nx-1)/c(U,L))
+```
+
+95\% CI for the **population variance** of the first population.
+
+```{r}
+var(x)
+( sd(x)*sqrt((nx-1)/c(U,L)) )^2
+var(x) * (nx-1) / c(U,L)
+```
+
+We can write a function to make this more convenient!
+
+```{r}
+sdci <- function(x,conf.level=0.95){
+  nx <- length(x)
+  alpha <- 1-conf.level
+  ci <- sd(x)*sqrt((nx-1)/qchisq(c(1-alpha/2,alpha/2),nx-1))
+  return(ci)
+}
+```
+
+95\% CI for the population standard deviation of the first population.
+
+```{r}
+sdci(x)
+```
+
+99\% CI for the population standard deviation of the first population.
+
+```{r}
+sdci(x,conf.level=0.99)
+```
+
+95\% CI for the population variance of the first population.
+
+```{r}
+sdci(x)^2
+```
+
+95\% CI for the population standard deviation of the **second** population.
+
+```{r}
+sdci(y)
+```
+
+

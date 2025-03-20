@@ -1,0 +1,17 @@
+A	Y
+Control	 6.0000
+Control	 9.2085
+Control	13.1147
+Control	15.2654
+Control	12.4188
+Control	14.3951
+Control	 8.5986
+Control	 3.4945
+Water	21.3220
+Water	26.0000
+Water	22.6600
+Water	24.1283
+Water	18.0000
+Water	14.0000
+Water	15.0000
+Water	17.0000

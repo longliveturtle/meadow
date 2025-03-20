@@ -1,0 +1,1422 @@
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/forest-plot.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:30 GMT -->
+<head>
+<title>forest.plot.or: [R] Drawing a forest plot</title>
+<meta name="description" content=" forest.plot.or is an R function developped to produce a forest plot .">
+<meta name="keywords" content="Bayesian, combine, confidence, credible, distribution, draw, forest, intervals, list, literature, merge, meta-analysis, metaanalysis, odds, OR, papers, plot, posterior, publications, ratio, ratios, review, series, studies, summarize, summary">
+<link rel="icon" type="image/png" href="img/favicon-2.html" />
+<style type="text/css">
+a.commentlink:link
+{
+  color: dimgray; text-decoration: underline;
+}
+a.commentlink:visited
+{
+  color: gray; text-decoration: underline;
+}
+a.none
+{
+  color: #FFEBCD;
+  text-decoration: none;
+}
+a.none:hover
+{
+  text-decoration: underline;
+}
+a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+a.section:hover
+{
+  text-decoration: underline;
+}
+a.section:visited
+{
+  color: darkgoldenrod;
+}
+body.body
+{
+  background-color: #E5E5CC;
+}
+div.changelogversion
+{
+  color: navy; font-size:14px;
+}
+div.click
+{
+  text-align: left; font-size: 8pt; padding-bottom: 5px;
+}
+div.comebacksoon
+{
+  font-family: arial black; font-size: 12pt;
+  color: #333399;
+}
+div.date
+{
+  border-style: solid; border-color: brown; border-width: 1px 0 0 0; padding-bottom: 50px;
+  vertical-align: top;
+  color: brown; font-size: 8pt;
+}
+div.download0
+{
+  text-align: right; font-size: 8pt; padding-bottom: 5px;
+}
+div.download0 a
+{
+  text-decoration: none;
+}
+div.download0 a:hover
+{
+  text-decoration: underline;
+}
+div.download1
+{
+  text-align: left;  font-size: 8pt; padding-bottom: 5px;
+}
+div.download1 a
+{
+  text-decoration: none;
+}
+div.download1 a:hover
+{
+  text-decoration: underline;
+}
+div.leadingblanks
+{
+  background-color: #EEAEEE;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.main
+{
+  font-style: bookman old style; font-weight: bold; font-size: 15pt;
+  color: #333399;
+}
+div.main a:hover
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  text-decoration: underline;
+  color: #333399;
+}
+div.main a:link
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.main a:visited
+{
+  font-style: bookman old style;
+  font-weight: bold; font-size: 15pt;
+  color: #333399;
+  text-decoration: none;
+}
+div.pgm
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.pgm a
+{
+  text-decoration: none;
+  color: darkolivegreen;
+}
+div.pgm a:hover
+{
+  text-decoration: underline;
+}
+div.pgm a:visited
+{
+  color: darkolivegreen;
+}
+div.rcode
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: darkolivegreen;
+  font-family: comic sans ms; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 15px;
+}
+div.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+}
+div.sub
+{
+  font-style: bookman old style; font-size: 13pt;
+  color: #333399;
+}
+div.subsection
+{
+  font-weight: bold; font-size: 12pt; font-style: italic;
+  color: darkgoldenrod;
+}
+div.tip
+{
+  font-style: bookman old style; font-style: italic; font-size: 13pt;
+  color: #333399;
+}
+div.title
+{
+  font-style: bookman old style; font-weight: bold; font-size: 25pt;
+  color: #333399;
+  padding-bottom: 50px;
+}
+div.title0
+{
+  font-family: haettenschweiler; font-size: 15pt;
+  color: #333399;
+}
+div.title2
+{
+  font-weight: bold; font-size: 12pt;
+  color: #C4B18F;
+}
+div.trailingblanks
+{
+  background-color: lightpink;
+  border-style: solid; border-width: 0px 0px 2px 0px; border-color: #E5E5CC;
+}
+div.underconstruction
+{
+  font-family: impact; font-size: 15pt;
+  color: #333399;
+}
+div.version
+{
+  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: left; color: #333399; font-size: 10pt;
+}
+div.wberrormsg
+{
+  border-style: solid; border-color: DarkRed; border-width: 1px 1px 1px 1px;
+  color: FireBrick;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+hr.example
+{
+  color: brown;
+}
+hr.section
+{
+  color: darkgoldenrod; size: 20px;
+}
+pre.ascii
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.example
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt;
+  padding: 10px 10px 15px 10px;
+  vertical-align: top;
+}
+pre.out
+{
+  border-style: dashed; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 20px;
+}
+pre.sasoutput
+{
+  border-style: solid; border-color: #C4B18F; border-width: 1px 1px 1px 1px;
+  color: black;
+  background-color: #EDEDDE;
+  font-family: courier; font-size: 9pt; font-weight: bold;
+  padding: 10px 0 15px 0;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+}
+span.argname
+{
+  color: darkgoldenrod;
+}
+span.sascode
+{
+  font-family:"Courier New", Courier, monospace;
+}
+span.sasmacroname
+{
+  font-weight: bold;
+}
+table.back2top
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 1px 0 0 0; border-color: darkgoldenrod;
+}
+table.inbody
+{
+  vertical-align: top;
+  padding: 10px 20px 20px 10px;
+  color: gray; font-size: 12pt;
+}
+table.maindivision
+{
+  width: 100%;
+  padding-top: 20px;
+  cellpadding: 0; cellspacing: 0;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+}
+table.rout
+{
+  color: black;
+  font-family: comic sans ms; font-size: 9pt;
+  padding: 10px 0 15px 15px;
+}
+table.wblog
+{
+  border-style: solid; border-color: #333399; border-width: 1px 1px 1px 1px;
+  background-color: #EDEDDE;
+  padding: 10px 10px 15px 10px;
+}
+table.wwbskeyword
+{
+  font-size: 12pt;
+  color: black; text-align: left;
+  border-spacing: 0; border-padding: 0;
+}
+td.address
+{
+  vertical-align: top;
+  padding-top: 50px;
+  color: brown; font-size: 8pt;
+}
+td.address a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.address a:hover
+{
+  text-decoration: underline;
+}
+td.address a:visited
+{
+  color: brown;
+}
+td.arg_illustration
+{
+  border-style: solid; border-width: 0 1px 0 0; border-color: navy;
+  text-align: center; vertical-align: top; padding-right: 40px;
+}
+td.arg_illustration1
+{
+  text-align: center; vertical-align: top; padding-left: 40px;
+}
+td.back2top
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.back2top a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.back2top a: hover
+{
+  text-decoration: underline;
+}
+td.back2top a:visited
+{
+  color: darkgoldenrod;
+}
+td.body
+{
+  vertical-align: top;
+  padding: 0 100px 0 50px;
+  color: black; font-size: 12pt;
+}
+td.body a
+{
+  color: black;
+}
+td.body a.section
+{
+  font-weight: bold; font-size: 12pt;
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.body a.section:hover
+{
+  text-decoration: underline;
+}
+td.body a.section:visited
+{
+  color: darkgoldenrod;
+}
+td.body a.top
+{
+  width: 100%;
+  border-style: solid; border-width: 2px 0 0 0; border-color: #333399;
+  color: #333399;
+  text-align: right;
+  text-decoration: none;
+}
+td.body a.top:hover
+{
+  text-decoration: underline;
+}
+td.body a.top:visited
+{
+  color: #333399;
+}
+td.body a:visited;
+{
+  color: black;
+}
+td.body div.menu a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.body div.menu a:hover
+{
+  text-decoration: underline;
+}
+td.body div.menu a:visited
+{
+  color: #333399;
+}
+td.clinicianscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: darkslategray; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+  width: 200px;
+  outline: white solid thin;
+}
+td.clinicianslist
+{
+  color: darkslategray; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: darkslategray;
+  padding: 20px 30px 30px 20px;
+}
+td.clinicianslist a
+{
+  text-decoration: none; color: darkslategray;
+}
+td.clinicianslist a:hover
+{
+  text-decoration: underline;
+}
+td.deco
+{
+  background-image: url(img/cloth-wbugs-2.jpg);
+}
+td.defn
+{
+  text-align: center; vertical-align: center;
+  color: #CC3300; font-size: 12pt;
+}
+td.defn a
+{
+  color: #CC3300; text-decoration: underline;
+}
+td.defn a:hover
+{
+  text-decoration: underline;
+}
+td.defn a:visited
+{
+  color: #CC3300;
+}
+td.defnend
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 70pt;
+}
+td.defnendL
+{
+  vertical-align: center;
+  color: #CC9933;
+  font-size: 100pt;
+}
+td.leftcell
+{
+  font-size: 12pt; vertical-align: top; padding-right: 50px;
+}
+td.maindivision
+{
+  text-align: right;
+  font-size: 9pt;
+}
+td.maindivision a
+{
+  color: #333399;
+  text-decoration: none;
+}
+td.maindivision a: hover
+{
+  text-decoration: underline;
+}
+td.maindivision a:visited
+{
+  color: #333399;
+}
+td.middle
+{
+  font-size: 10pt;
+  text-align: center;
+}
+td.middle a
+{
+  text-decoration: none;
+  color: brown;
+}
+td.middle a:hover
+{
+  text-decoration: underline;
+}
+td.middle a:visited;
+{
+  color: brown;
+}
+td.note
+{
+  text-align: left; vertical-align: center;
+  color: black; font-size: 12pt; padding-left: 20px;
+}
+td.noteendL
+{
+  vertical-align: center;
+  color: brown;
+  font-size: 120pt;
+}
+td.programmerscorner
+{
+  color: #E5E5CC; font-size: 18pt; font-family: bookman old style; background-color: brown; font-weight: bold;
+  padding: 20px 30px 0 20px;
+  vertical-align: top; height: 120px;
+}
+td.programmerslist
+{
+  color: brown; font-size: 10pt; font-family: arial;
+  border-style: solid; border-width: 1px 1px 1px 1px; border-color: brown;
+  padding: 20px 30px 30px 20px;
+  outline-color; lime; outline-style: solid; outline-width: 5px;
+}
+td.programmerslist a
+{
+  text-decoration: none; color: brown;
+}
+td.programmerslist a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.rfctargumentname a:hover
+{
+  text-decoration: underline;
+}
+td.rfctargumentname a:visited
+{
+  color: darkgoldenrod;
+}
+td.rfctargumentvalue
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctargumentvalue a
+{
+  text-decoration: none;
+}
+td.rfctargumentvalue a.link
+{
+  text-decoration: underline;
+}
+td.rfctargumentvalue a.link:visited
+{
+  color: grey;
+}
+td.rfctargumentvalue a:hover
+{
+  text-decoration: underline;
+}
+td.rfctcomment
+{
+  font-size: 10pt; color: dimgray;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.rfctcomment a
+{
+  color: dimgray;
+}
+td.rfctDivision
+{
+  font-size: 9pt; font-style: italic; font-family: Arial; color: navy; background-color: whitesmoke;
+  padding: 20px 40px 30px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroname
+{
+  font-size: 10pt; color: darkgoldenrod;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+  white-space: nowrap;
+}
+td.sasmacroname a
+{
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+td.sasmacroname a:hover
+{
+  text-decoration: underline;
+}
+td.sasmacroname a:visited
+{
+  color: darkgoldenrod;
+}
+td.sasmacroshortdesc
+{
+  font-size: 10pt;
+  padding: 5px 20px 10px 10px;
+  border-style: solid; border-width: 0 0 1px 0; border-color: green;
+  vertical-align: top;
+}
+td.sasmacroshortdesc a
+{
+  text-decoration: none;
+}
+td.sasmacroshortdesc a.link
+{
+  text-decoration: underline;
+}
+td.sasmacroshortdesc a.link:visited
+{
+  color: grey;
+}
+td.sasmacroshortdesc a:hover
+{
+  text-decoration: underline;
+}
+td.tableheader
+{
+  font-size: 12pt; color: #333399;
+  padding: 0 5px 0 10px;
+  border-style: solid; border-width: 2px 0 1px 0; border-color: #333399;
+}
+td.text
+{
+  vertical-align: top;
+  color: black; font-size: 12pt;
+  padding-right: 20px;
+}
+td.wblog
+{
+  color: black;
+  font-family: courier; font-size: 8pt;
+  padding-right: 10px;
+  text-align: left;
+}
+td.wwbskeyword
+{
+  color: darkolivegreen; text-align: right;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbskeyword a
+{
+  color: darkolivegreen; text-decoration: none;
+}
+td.wwbskeyword a:hover
+{
+  text-decoration: underline;
+}
+td.wwbskeyword a:visited
+{
+  color: darkolivegreen;
+}
+td.wwbskeyword0
+{
+  color: black; text-align: right;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbsleftmargin
+{
+  padding-left: 50px;
+}
+td.wwbssignification
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 0 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+td.wwbssignification0
+{
+  color: black; text-align: left;
+  padding-left: 20px;
+  border-width: 2px 0 1px 0; border-color: goldenrod; border-style: solid;
+}
+</style>
+</head>
+<body class=body>
+<br>
+<table>
+  <tr>
+  <td valign=top>
+    <table>
+      <tr>
+      <td class=clinicianscorner>
+         Clinician's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=clinicianslist>
+        <ul>
+        <li><a href="CodebookCookbook-2.html">How to enter and document your data</a></li>
+        <li><a href="ExcelCodebook2SasCode-2.html">Convert Excel codebooks to SAS code</a></li>
+        </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=middle>
+        <br>
+        <a href="index-2.html">Back to main page</a>
+        <br><br>
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerscorner>
+        Programmer's<br>corner
+      </td>
+      </tr>
+      <tr>
+      <td class=programmerslist>
+      <ul>
+      <li><a href="sas-macros-2.html">SAS macros</a></li>
+      <li><a href="Invitation2Perl-2.html">Invitation to Perl</a></li>
+      <li><a href="bic-process-2.html">Processing BIC outputs</a></li>
+      <li><a href="BIC-Summary-2.html">BIC-Summary</a></li>
+      </ul>
+      So, you use WinBUGS a lot?
+      <ul>
+      <li><a href="WriteWinBUGSScript-2.html">WriteWinBUGSScript</a></li>
+      <li><a href="RunWinBUGSScript-2.html">RunWinBUGSScript</a></li>
+      <li><a href="mds2wb-2.html">Exporting multi-dimensional structures (SAS macro %mds2wb)</a></li>
+      <li><a href="WinBUGSlogs2HtmlSummary-2.html">Summarizing WinBUGS output files</a></li>
+      </ul>
+      Want more?
+      <ul>
+      <li><a href="Bayesian-software-2.html">Cool Bayesian stuff</a></li>
+      </ul>
+      </td>
+      </tr>
+      <tr>
+      <td class=address>
+        Patrick Blisle<br>
+        Division of Clinical Epidemiology<br>
+        McGill University Health Center<br>
+        Montreal, Quebec CANADA <br>
+        <a href="mailto:patrick.belisle@rimuhc.ca">patrick.belisle@rimuhc.ca</a><br>
+        <br>
+        <div class=date>Last modification: 14 jun 2017</div>
+      </td>
+      </tr>
+      <tr>
+      <td class=deco>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+      </td>
+      </tr>
+    </table>
+  </td>
+  <td class=body>
+
+                                                                                
+
+<div class=version>Version 1.10 (November 2014)</div>
+<div class=title0>forest.plot.or</div>
+<div class=title>[R] Drawing a forest plot</div>
+
+<table border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+<td class=defnendL>[</td>
+<td class=defn>
+<b>forest.plot.or</b> is an R function developped to produce a <a href="http://en.wikipedia.org/wiki/Forest_plot">forest plot</a>.
+</td>
+<td class=defnendL>]</td>
+</tr>
+</table>
+
+<br><br>
+<div class=section>Menu</div>
+<br>
+<div class=menu>
+<a href="#syntax">Syntax</a><br>
+<a href="#arguments"><b>forest.plot.or</b> arguments</a><br>
+<a href="#outputexample">Output example</a><br>
+<a href="#illustrations">A few arguments illustrated</a><br>
+<a href="#samplecode">Sample code</a><br>
+<a href="#download">Download</a><br>
+</div>
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="syntax"></a>
+<div class=main>Syntax</div>
+<br>
+<div class=pgm>
+forest.plot.or(m0 = NULL,<br>
+&#160;&#160;&#160;&#160;&#160; n0 = NULL,<br> 
+&#160;&#160;&#160;&#160;&#160; m1 = NULL,<br> 
+&#160;&#160;&#160;&#160;&#160; n1 = NULL,<br> 
+&#160;&#160;&#160;&#160;&#160; authors,<br>
+&#160;&#160;&#160;&#160;&#160; log.scale = standard.or.plot,<br>
+&#160;&#160;&#160;&#160;&#160; group.labels = c('Group 0', 'Group 1'),<br>
+&#160;&#160;&#160;&#160;&#160; meta.ci = rep(NA,3),<br>
+&#160;&#160;&#160;&#160;&#160; study.categories = numeric(0),<br>
+&#160;&#160;&#160;&#160;&#160; category.labels = character(0),<br>
+&#160;&#160;&#160;&#160;&#160; categories.ci = matrix(NA,length(category.labels),3),<br>
+&#160;&#160;&#160;&#160;&#160; studies.ci = matrix(NA,length(authors),3),<br>
+&#160;&#160;&#160;&#160;&#160; plot.categories.ci = rep(T,length(category.labels)),<br>
+&#160;&#160;&#160;&#160;&#160; categories.indent = T,<br>
+&#160;&#160;&#160;&#160;&#160; plot.lim = matrix(c(0,10,.2,5),ncol=2,byrow=T)[1+log.scale,],<br>
+&#160;&#160;&#160;&#160;&#160; xlim = c(0,100),<br>
+&#160;&#160;&#160;&#160;&#160; ylim = c(0,diff(xlim)*par()$fin[2]/par()$fin[1]),<br>
+&#160;&#160;&#160;&#160;&#160; authors.spaces = 20,<br>
+&#160;&#160;&#160;&#160;&#160; nN.spaces = 20,<br>
+&#160;&#160;&#160;&#160;&#160; OR.plot.spaces = 20,<br>
+&#160;&#160;&#160;&#160;&#160; OR.num.spaces = 20,<br>
+&#160;&#160;&#160;&#160;&#160; ci.spaces = c(5,5),<br> 
+&#160;&#160;&#160;&#160;&#160; J = 0.5,<br> 
+&#160;&#160;&#160;&#160;&#160; test = F,<br> 
+&#160;&#160;&#160;&#160;&#160; na.rm = F,<br>
+&#160;&#160;&#160;&#160;&#160; na.string = "n/a",<br>
+&#160;&#160;&#160;&#160;&#160; tick.lim = T,<br>
+&#160;&#160;&#160;&#160;&#160; ref.vline.at = 1,<br>
+&#160;&#160;&#160;&#160;&#160; add.ticks.at = ref.vline.at,<br>
+&#160;&#160;&#160;&#160;&#160; tick.pch = 17,<br>
+&#160;&#160;&#160;&#160;&#160; dots.prop2n = F,<br> 
+&#160;&#160;&#160;&#160;&#160; f.radius = 0.5,<br>
+&#160;&#160;&#160;&#160;&#160; cex = 1-0.3*length(grep("^win\\.metafile\\:", names(dev.cur()))),<br> 
+&#160;&#160;&#160;&#160;&#160; circles.cex = cex,<br>
+&#160;&#160;&#160;&#160;&#160; or.side.labels = character(0),<br> 
+&#160;&#160;&#160;&#160;&#160; or.side.labels.cex = cex,<br>
+&#160;&#160;&#160;&#160;&#160; blank.after.category.label = F,<br>
+&#160;&#160;&#160;&#160;&#160; blank.between.categories = T,<br>
+&#160;&#160;&#160;&#160;&#160; blank.before.category.subtotal = F,<br>
+&#160;&#160;&#160;&#160;&#160; blank.after.total = plot.xaxis,<br>
+&#160;&#160;&#160;&#160;&#160; meta.ci.pch = 15,<br>
+&#160;&#160;&#160;&#160;&#160; category.subtotal.pch = meta.ci.pch,<br>
+&#160;&#160;&#160;&#160;&#160; ci.txt = "Odds Ratio (95% CrI)",<br>
+&#160;&#160;&#160;&#160;&#160; study.txt = "Trial",<br>
+&#160;&#160;&#160;&#160;&#160; ratios.gr1.over.gr0 = T,<br>
+&#160;&#160;&#160;&#160;&#160; or.ncharacters = 4,<br>
+&#160;&#160;&#160;&#160;&#160; or.min.ndecimals = 0,<br>
+&#160;&#160;&#160;&#160;&#160; standard.or.plot = T,<br>
+&#160;&#160;&#160;&#160;&#160; show.nN.indiv = standard.or.plot,<br> 
+&#160;&#160;&#160;&#160;&#160; show.nN.tot = F,<br>
+&#160;&#160;&#160;&#160;&#160; print.or.ci = T,<br>
+&#160;&#160;&#160;&#160;&#160; report.meta.ci = standard.or.plot,<br>
+&#160;&#160;&#160;&#160;&#160; sort.by.desc.samplesize = F,<br>
+&#160;&#160;&#160;&#160;&#160; placebo.index = seq(along=m1),<br>
+&#160;&#160;&#160;&#160;&#160; plot.xaxis = F,<br>
+&#160;&#160;&#160;&#160;&#160; reverse.printed.columns.order = F,<br>
+&#160;&#160;&#160;&#160;&#160; nN.txt = "n/N"
+)
+</div>
+
+
+<br><br>
+<a href="#top" class=top>Top</a>
+<a name="arguments"></a>
+<div class=main><span class=argname>forest.plot.or</span> arguments</div>
+<br><br>
+Table below presents the complete list of <span class=argname>forest.plot.or</span> arguments along with their signification and, for some of them,
+a link to an illustrative example.<br>
+In most applications, only the arguments in the upper part of the table need be defined, while default values for the remaining will do.
+<br><br><br>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td class=tableheader>Argument</td>
+<td class=tableheader>Value</td>
+<td class=tableheader>Comment</td>
+</tr>
+<tr>
+<td class=rfctargumentname>m0</td>
+<td class=rfctargumentvalue>Number of events in unexposed (or control, or placebo) group.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>m1</td>
+<td class=rfctargumentvalue>Number of events in exposed (or treatment) group.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>n0</td>
+<td class=rfctargumentvalue>Total number of subjects in unexposed (or control, or placebo) group.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>n1</td>
+<td class=rfctargumentvalue>Total number of subjects in exposed (or treatment) group.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>authors</td>
+<td class=rfctargumentvalue>Publications short reference label (typically, authors and year of publication).<br>
+&loz; Character vector of same length as <span class=argname>m0</span> and <span class=argname>n0</span>.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>group.labels</td>
+<td class=rfctargumentvalue>Group labels.</td>
+<td class=rfctcomment>See <a href="#outputexample">example below</a>, where <i>group.labels = c('Thrombectomy', 'No Thrombectomy')</i>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>meta.ci</td>
+<td class=rfctargumentvalue>
+Credible interval as calculated (outside of this program) from the meta analysis of all papers included in the forest plot.
+<br>&loz; Vector of length 3, where first component is the median and the next two the lower and upper credible interval limits, respectively.
+</td>
+<td class=rfctcomment>
+<b>IMPORTANT</b><br>
+<span class=argname>forest.plot.or</span> WILL NOT run a meta-analysis to get an overall credible interval for the Odds Ratio.
+A meta-analysis must be run beforehand, e.g. through the use of WinBUGS or other software. See for example the <a href="http://mathstat.helsinki.fi/openbugs/Examples/Blockers.html">Blocker WinBUGS example</a>.
+</td>
+</tr>
+<tr>
+<td class=rfctDivision colspan=3>In most applications, default values for each option below will do.<br>
+However, they can add considerable flexibility to the plot if necessary.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>log.scale</td>
+<td class=rfctargumentvalue>Whether or not forest plot should be drawn on the log scale.<br>
+&loz; <i>Logical.</i> Default is T when <span class=argname>standard.or.plot</span> is T.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>study.categories</td>
+<td class=rfctargumentvalue>When studies are divided into different categories, category index for each study.<br>
+&loz; Numeric vector of same length as <span class=argname>authors</span>.</td>
+<td class=rfctcomment>See <a href="#illustration:study.categories+category.labels">example below</a> where papers are divided in 
+<i>Observational studies</i> and <i>Randomized controlled trials</i>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>category.labels</td>
+<td class=rfctargumentvalue>When studies are divided into different categories, labels for each category presented.<br>
+Must be used along with <span class=argname>study.categories</span>.</td>
+<td class=rfctcomment>See <a href="#illustration:study.categories+category.labels">example below</a>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>categories.ci</td>
+<td class=rfctargumentvalue>When studies are divided into different categories and meta-analysis results for each category (taken separately) are to be presented
+in the forest plot, enter credible intervals for each category through <span class=argname>categories.ci</span>.
+&loz; Matrix of <i>m</i> rows and 3 columns, where <i>m</i> is equal to the length of <span class=argname>category.labels</span>.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>studies.ci</td>
+<td class=rfctargumentvalue>Credible intervals for the Odds Ratio for each study.<br>
+&loz; A matrix of <i>m</i> rows x 3 columns, where <i>m</i> is equal to the length of
+<span class=argname>m0</span>, <span class=argname>n0</span> or <span class=argname>authors</span>.<br>
+Default is empty, in which case <span class=argname>forest.plot.or</span>
+will estimate it by a sampling method, sketched in comments (right). &rarr; 
+</td>
+<td class=rfctcomment>
+If <span class=argname>studies.ci</span> is not provided by user, it is computed for each study <i>i</i> by sampling 100,000 values for outcome probability 
+<i>p<sub>ik</sub>, k=0,1</i>,
+with <i>p<sub>ik</sub> ~ Beta(<span class=argname></i>m<i>k</i></span><i>[i]</i> + <span class=argname>J</span>,  <span class=argname>n<i>k</i></span><i>[i]</i> - <span class=argname>m<i>k</i></span><i>[i]</i> + <span class=argname>J</span><i>)</i>,
+and taking the 2.5%, 50% and 97.5% quantiles of the odds ratio values obtained from the calculation <i>p<sub>i1</sub>/(1-p<sub>i1</sub>) / p<sub>i0</sub>/(1-p<sub>i0</sub>)</i>.
+<br>
+Computed values will be returned in the output and will therefore be reusable, shall you like 
+to reproduce the plot with exactly the same confidence intervals later on (by using it as input to <span class=argname>studies.ci</span>).<br>
+See below for a description for <span class=argname>J</span>.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>plot.categories.ci</td>
+<td class=rfctargumentvalue>A vector indicating whether or not each corresponding row of <span class=argname>categories.ci</span> is to be plotted in the forest plot.<br>
+&loz; Logical vector of same length as <span class=argname>category.labels</span>.
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>categories.indent</td>
+<td class=rfctargumentvalue>Whether or not authors list should be indented, relatively to categories labels.</td>
+<td class=rfctcomment>Irrelevant unless <span class=argname>category.labels</span> and <span class=argname>study.categories</span> are defined.<br>
+See <a href="#illustration:categories.indent">illustration below</a>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>plot.lim</td>
+<td class=rfctargumentvalue>Lower and upper limits of the plotted area.<br>
+&loz; Vector of length 2.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>xlim</td>
+<td class=rfctargumentvalue>Lower and upper limits of the x-axis of the produced figure (as a whole, that is, taking into account surrounding text).<br>
+&loz; Vector of length 2.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>ylim</td>
+<td class=rfctargumentvalue>Lower and upper limits of the y-axis of the produced figure.<br>
+&loz; Vector of length 2.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>authors.spaces<br>nN.spaces<br>OR.plot.spaces<br>OR.num.spaces<br>ci.spaces</td>
+<td class=rfctargumentvalue>Horizontal space allowed to each part of the forest plot.<br>Each of these arguments are single numeric values, except for <span class=argname>ci.spaces</span>, which is a numeric vector of length 2.</td>
+<td class=rfctcomment>Horizontal spacing between the two n/N columns serves as the unit of reference.<br>See <a href="#illustration:spacing">illustration below</a> for details.</td>
+</tr>
+<tr>
+<tr>
+<td class=rfctargumentname>J</td>
+<td class=rfctargumentvalue>Weight added to each cell count in the computation of individual studies' odds ratio median and credible interval estimates, to prevent against <i>division by zero</i>'s.
+<br>&loz; Default is 0.5.
+</td>
+<td class=rfctcomment>Irrelevant if <span class=argname>studies.ci</span> is fully provided.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>test</td>
+<td class=rfctargumentvalue>
+Whether function is called as a <i>test</i> to see what the plot would look like (it terms of spacing, character expansion, etc.), 
+without actually computing values for <span class=argname>studies.ci</span> (if it was left empty in function call), which may take some time.<br>
+&loz; <i>Logical.</i> Default is F</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>na.rm</td>
+<td class=rfctargumentvalue>Whether or not studies with a missing value in any of <span class=argname>m0</span>, <span class=argname>n0</span>, <span class=argname>m1</span> or <span class=argname>n1</span> should be dropped from forest plot.<br>
+&loz; <i>Logical.</i> Default is F.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>na.string</td>
+<td class=rfctargumentvalue>Text to display when some of the m/n values are missing.<br>
+&loz; Default is "<i>n/a</i>".
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<td class=rfctargumentname>tick.lim</td>
+<td class=rfctargumentvalue>Whether or not ticks should be plotted at the lower and upper limits of the plot region.<br>
+&loz; <i>Logical.</i> Default is T.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>ref.vline.at</td>
+<td class=rfctargumentvalue>At which x-value to draw a reference vertical line.<br>
+&loz; <i>Numeric.</i> Default reference vertical line location at 1.</td>
+<td class=rfctcomment>To draw a forest plot without a reference vertical line, call with <span class=argname>ref.vline.at</span> = numeric(0).</td>
+</tr>
+<tr>
+<td class=rfctargumentname>add.ticks.at</td>
+<td class=rfctargumentvalue>Where to add ticks on the x-axis.<br>
+&loz; <i>Numeric.</i> Default is to add a tick under the vertical line, at <span class=argname>ref.vline.at</span>.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>tick.pch</td>
+<td class=rfctargumentvalue>Plotting character to use in x-axis ticks.<br>
+&loz; Default is 17, the code for a solid triangle.
+</td>
+<td class=rfctcomment>Type <i>show.pch()</i> to see the complete list of available plotting characters.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>dots.prop2n</td>
+<td class=rfctargumentvalue>Whether or not dots sizes (around point estimates) should be proportional to total sample size (<span class=argname>n0+n1</span>) of corresponding study.<br>
+&loz; <i>Logical.</i> Default is F.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>f.radius</td>
+<td class=rfctargumentvalue>Size of larger dot (around point estimates), in fraction of vertical spacing allowed to each study.</td>
+<td class=rfctcomment>Irrelevant when <span class=argname>dots.prop2n</span> is F.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>cex</td>
+<td class=rfctargumentvalue>A numerical value giving the amount by which plotting text should be magnified relative to the default.<br>
+&loz; Default is 0.7 in Windows Metafiles (.wmf), 1 in other figure formats.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>circles.cex</td>
+<td class=rfctargumentvalue>A numerical value giving the amount by which plotting symbols (i.e., the circles around studies OR point estimates) should be magnified relative to the default.<br>
+&loz; Default is equal to <span class=argname>cex</span>.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>or.side.labels</td>
+<td class=rfctargumentvalue>Text to be displayed on each side of the plot region.<br>
+&loz; Character vector of length 2.
+</td>
+<td class=rfctcomment>See <a href="#illustration:or.side.labels">illustration below</a>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>or.side.labels.cex</td>
+<td class=rfctargumentvalue>A numerical value giving the amount by which the side OR side labels (see <span class=argname>or.side.labels</span> above) should be magnified relative to the default.</td>
+<td class=rfctcomment>Irrelevant when <span class=argname>or.side.labels</span> is not specified.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>blank.after.category.label<br>blank.between.categories<br>blank.before.category.subtotal<br>blank.after.total</td>
+<td class=rfctargumentvalue>Whether or not each line/section described should be preceded or followed by a blank line.<br>
+&loz; <i>Logical.</i> Default are F, T, F and <span class=argname>plot.xaxis</span>, in order.</td>
+<td class=rfctcomment>Irrelevant unless <span class=argname>category.labels</span> is specified.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>meta.ci.pch</td>
+<td class=rfctargumentvalue>Plotting character drawn at OR's point estimate (read or obtained from <span class=argname>meta.ci</span>).<br>
+&loz; <i>Numeric</i>. Default is 15, the code for a dark square.</td>
+<td class=rfctcomment>Type <i>show.pch()</i> in R to see the complete list of available plotting characters.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>category.subtotal.pch</td>
+<td class=rfctargumentvalue>Plotting character drawn at OR's point estimate in each category (read from <span class=argname>categories.ci</span>).</td>
+<td class=rfctcomment>Irrelevant unless <span class=argname>categories.ci</span> is specified and <span class=argname>plot.categories.ci</span> is T for at least one studies category.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>ci.txt</td>
+<td class=rfctargumentvalue>Text to be displayed on top of both credible interval numeric description and graphical representation.<br>
+&loz; <i>Character value</i>. Default is <i>Odds Ratio (95% CrI)</i>.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>study.txt</td>
+<td class=rfctargumentvalue>Text to be displayed on top of authors list.<br>
+&loz; Default is "Trial".
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>ratios.gr1.over.gr0</td>
+<td class=rfctargumentvalue>Whether or not ORs should be calculated in terms og <i>group 1</i> vs <i>group 0</i> (T), or the inverse (F).<br>
+&loz; <i>Logical.</i> Default is T.
+</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>or.ncharacters</td>
+<td class=rfctargumentvalue>Length of ORs to be displayed (in number of characters).</td>
+<td class=rfctcomment>Zeros will be added to the right of numbers that are shorter than specified value. For example, 1.2 will display as 1.20 if <span class=argname>or.ncharacters</span>=4.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>or.min.ndecimals</td>
+<td class=rfctargumentvalue>Minimum number of decimal places to display (even though the length of displayed number thus exceeds <span class=argname>or.ncharacters</span>).</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>standard.or.plot</td>
+<td class=rfctargumentvalue>Whether or not <span class=argname>forest.plot.or</span> is used to draw a forest plot for a meta-analysis on odds ratios.<br>
+&loz; <i>Logical</i>. Default is T.</td>
+<td class=rfctcomment>See <a href="#illustration:standard.or.plot">illustration below</a> for an example with <span class=argname>standard.or.plot</span> = F, in which case <b>n/N</b> columns are not displayed.<br>
+<span class=argname>forest.plot.or</span> can thus be used for general meta-analyses reports and/or graphical comparisons of results obtained in different studies.
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>show.nN.indiv<br>show.nN.tot</td>
+<td class=rfctargumentvalue>Whether or not you want the fractions <span class=argname>m0</span>/<span class=argname>n0</span> and <span class=argname>m1</span>/<span class=argname>n1</span>
+ for individual studies and in total to be displayed or not.<br>
+ &loz; <i>Logical.</i> Default is T for <span class=argname>show.nN.indiv</span> if <span class=argname>standard.or.plot</span> is T, F for <span class=argname>show.nN.tot</span>.
+</td>
+<td class=rfctcomment>See <a href="#illustration:show.nN.tot">illustration below</a>.</td>
+</tr>
+<td class=rfctargumentname>print.or.ci</td>
+<td class=rfctargumentvalue>Whether or not the numeric values for OR point estimates and credible interval endpoints should be reported.<br>
+&loz; <i>Logical</i>. Default is T.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>report.meta.ci</td>
+<td class=rfctargumentvalue>Whether or not the <i>Total</i> line at the bottom of the forest plot, including the total numbers n/N, the graphical representation of the posterior credible interval for OR and the OR numeric point estimate and credible interval endpoints should be reported.<br>
+&loz; <i>Logical</i>. Default is T if <span class=argname>standard.or.plot</span> is T.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>sort.by.desc.samplesize</td>
+<td class=rfctargumentvalue>Whether or not study entries should be listed in descending order of total sample size (<span class=argname>n0+n1</span>).<br>
+&loz; <i>Logical</i>. Default is F.</td>
+<td class=rfctcomment>&nbsp;</td>
+</tr>
+<tr>
+<td class=rfctargumentname>placebo.index</td>
+<td class=rfctargumentvalue>A (numeric) vector of indices, of same length as <span class=argname>m1</span> and <span class=argname>n1</span>, 
+indicating to which component of <i>group 0</i> numbers (<span class=argname>m0</span> and <span class=argname>n0</span>)
+each component of <span class=argname>m1</span> and <span class=argname>n1</span> do correspond.<br>
+&loz; Default is a componentwise correspondance.
+</td>
+<td class=rfctcomment>
+Sometimes, studies consider the effect of a treatment in different arms, thus reporting different numbers for each study arm
+plus numbers for ONE placebo group. If you repeat the placebo group numbers in <span class=argname>m0</span> and <span class=argname>n0</span> as many times as there are study arms,
+they will be accounted for in placebo group total numbers as many times as they are repeated, which is obviously wrong.
+The work-around is thus to have each placebo group to appear only once in vectors <span class=argname>m0</span> and <span class=argname>n0</span>
+and each study arm appear once as well in <span class=argname>m1</span> and <span class=argname>n1</span>, leading to the latter two being of different lengths from the former two.
+The <span class=argname>placebo.index</span>, of same length as <span class=argname>m1</span> and <span class=argname>n1</span>, will then be used to match (<span class=argname>m1</span>, <span class=argname>n1</span>) elements to those in  (<span class=argname>m0</span>, <span class=argname>n0</span>).
+<br>
+For example, suppose you have 5 studies, of which study 2 has involved 3 study arms and study 5 has involved 2, while the other three
+studies have involved only one arm: in this case, <span class=argname>m0</span> and <span class=argname>n0</span> will be of length 5, and <span class=argname>placebo.index</span> = c(1, 2, 2, 2, 3, 4, 5, 5).
+</td>
+</tr>
+<tr>
+<td class=rfctargumentname>plot.xaxis</td>
+<td class=rfctargumentvalue>Whether or not an x-axis should be plotted at the bottom of plot region.<br>
+&loz; <i>Logical</i>. Default is F.</td>
+<td class=rfctcomment>See <a href="#illustration:plot.xaxis">illustration below</a>.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>reverse.printed.columns.order</td>
+<td class=rfctargumentvalue>
+Whether or not the order in which group results are printed should be reversed. &loz; <i>Logical</i>. Default is F, that is, group 0 results are printed in the left column, followed by group 1 results in the right column.</td>
+<td class=rfctcomment>Irrelevant when <span class=argname>standard.or.plot</span> is F.</td>
+</tr>
+<tr>
+<td class=rfctargumentname>nN.txt</td>
+<td class=rfctargumentvalue>
+Text to be displayed below group labels.<br>
+&loz; <i>Character</i>. Default is "n/N"</td>
+<td class=rfctcomment>
+Call with <span class=argname>nN.txt</span>=character(0) if you'd rather not have any text displayed below group labels.
+</td>
+</tr>
+</table>
+
+<br><br>
+<a name="outputexample"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>Output example</b></div>
+<br>
+Typically, forest plots drawn with <span class=argname>forest.plot.or</span> will look like the forest plot illustrated below.
+<br><br>
+<img src="img/ForestPlot/ForestPlot-2.jpg">
+<br clear=all>
+
+
+<br><br>
+<a name="illustrations"></a>
+<table class=maindivision>
+  <tr><td class=maindivision><a href="#top">Top</a></td></tr>
+</table>
+<div class=main>A few arguments illustrated</b></div>
+<br><br>
+
+
+<br><br>
+<a name="illustration:spacing"></a>
+<div class=section>Horizontal spacing</div>
+<br><br>
+<img src="img/ForestPlot/HorizontalSpacing-2.gif"><br clear=all>
+
+
+<a name="illustration:study.categories+category.labels"></a>
+<br><br>
+<div class=section>category.labels and study.categories</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>category.labels = c("Observational studies", "Randomized controlled trials"), study.categories = rep(seq(2), c(21, 3)) <br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/studies%2bcategoriesLabels-2.html"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="#illustration:categories.indent"></a>
+<br><br>
+<div class=section>categories.indent</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration>categories.indent=F<br><br><br></td></tr>
+  <tr><td class=arg_illustration><img src="img/ForestPlot/ForestPlotWithCategories-NotIndented-2.gif"></td></tr>
+  </table>
+</td>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>categories.indent=T<br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/ForestPlotWithCategories-Indented-2.gif"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="illustration:or.side.labels"></a>
+<br><br>
+<div class=section>or.side.labels</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration>or.side.labels=character(0)<br><br><br></td></tr>
+  <tr><td class=arg_illustration><img src="img/ForestPlot/orSideLabelsEmpty-2.gif"></td></tr>
+  </table>
+</td>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>or.side.labels=c('Thrombectomy better', 'Thrombectomy worse')<br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/orSideLabelsThrombectomyBetterWorse-2.gif"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="illustration:plot.xaxis"></a>
+<br><br>
+<div class=section>plot.xaxis</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration>plot.xaxis = F<br><br><br></td></tr>
+  <tr><td class=arg_illustration><img src="img/ForestPlot/WithoutXAxis-2.gif"></td></tr>
+  </table>
+</td>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>plot.xaxis = T<br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/WithXAxis-2.gif"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="illustration:show.nN.tot"></a>
+<br><br>
+<div class=section>show.nN.tot</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration>show.nN.tot = F<br><br><br></td></tr>
+  <tr><td class=arg_illustration><img src="img/ForestPlot/WithoutnNtot-2.gif"></td></tr>
+  </table>
+</td>
+<td valign=top>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>show.nN.tot = T<br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/WithnNtot-2.gif"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="illustration:standard.or.plot"></a>
+<br><br>
+<div class=section>standard.or.plot = F</div>
+<br><br>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td>
+  <table border=0 cellpadding=0 cellspacing=0>
+  <tr><td class=arg_illustration1>forest.plot.or(authors=c('Paper 1', 'Paper 2', 'Paper 3', 'Paper 4', 'Paper 5'), studies.ci=studies.ci, ci.txt="95% CI for mean", plot.lim=c(-5, 5), <b>ref.vline.at=0, standard.or.plot=F</b>)<br><br><br></td></tr>
+  <tr><td class=arg_illustration1><img src="img/ForestPlot/NonStandard-2.gif"></td></tr>
+  </table>
+</td>
+</tr></table>
+
+
+<a name="samplecode"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Sample code</div>
+<br>
+Shall you want to give a quick try to <b>forest.plot.or</b>, you might want to use the code below.
+<br><br>
+<div class=pgm>
+source('your-path/forest-plot.R')<br>
+group.labels <- c('Thrombectomy', 'No Thrombectomy')<br>
+side.labels <- c('Thrombectomy worse', 'Thrombectomy better')<br>
+<br>
+studies.ci <- c( 1.1663, 0.4136, 4.2673, 1.0398, 0.4235, 2.5669, 1.1868, 0.3871, 5.7488, 1.0496, 0.3552, 3.2706, 1.0351, 0.4493, 2.4721,<br>
+&#160;&#160;&#160;&#160;&#160; 1.0252, 0.4676, 2.3361, 1.9648, 0.8545, 5.9002, 1.0448, 0.3556, 3.1771, 1.0250, 0.2536, 4.1454, 0.93792, 0.3260, 2.3974,<br>
+&#160;&#160;&#160;&#160;&#160; 1.1643, 0.4098, 4.3059, 1.1414, 0.5254, 2.8010, 0.93734, 0.2671, 2.7538, 0.60781, 0.3176, 1.0824)<br>
+studies.ci <- matrix(studies.ci, ncol=3, byrow=T)<br>
+<br>
+authors <- c("Beran G 2002", "Napodano M 2003", "Antoniucci D 2004", "Kunii H 2004", "Burzotta F 2005", "Lefèvre T 2005",<br>
+&#160;&#160;&#160;&#160;&#160;  "Ali A 2006", "Kaltoft A 2006", "Silva-Orrego P 2006", "Dudek D 2007", "Sardella G 2007", "Chevalier B 2008",<br>
+&#160;&#160;&#160;&#160;&#160;  "Ikari Y 2008", "Svilaas T 2008")<br>
+<br>
+meta.ci <- c(1.0690, 0.6298, 1.9214)<br>
+<br>
+data <- structure(list(N = 14,<br>
+&#160;&#160;&#160;&#160;&#160; m.placebo = c(1, 5, 0, 2, 6, 7, 4, 2,0, 1, 4, 6, 31, 2),<br>
+&#160;&#160;&#160;&#160;&#160; n.placebo = c(33, 46, 50, 129, 48, 101, 240,107, 74, 87, 94, 129, 531, 171),<br>
+&#160;&#160;&#160;&#160;&#160; m.treatment = c(2, 5, 1, 2,6, 7, 15, 2, 0, 2, 3, 7, 15, 1),<br>
+&#160;&#160;&#160;&#160;&#160; n.treatment = c(33, 46, 50,129, 48, 100, 240, 108, 74, 88, 102, 120, 529, 178)),<br>
+&#160;&#160;&#160;&#160;&#160; .Names = c("N", "m.placebo", "n.placebo", "m.treatment", "n.treatment"))<br>
+<br>
+forest.plot.or(m0=data$m.treatment, n0=data$n.treatment, m1=data$m.placebo, n1=data$n.placebo, authors=authors, or.side.labels=rev(side.labels), plot.lim=c(.1, 5),<br>  
+&#160;&#160;&#160;&#160;&#160; group.labels=group.labels, studies.ci=studies.ci, meta.ci=meta.ci, show.nN.tot=T)<br>
+title('Death, myocardial infarction or stroke\nAll Thrombectomy Devices')<br>
+</div>
+
+
+
+<a name="download"></a>
+<br><br>
+<a href="#top" class=top>Top</a>
+<div class=main>Download</div>
+<br>
+<b>forest.plot.or</b> is a free R function. <a href="R/forest-plot-2.R">Download version 1.10 now</a>.
+
+
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+  </td><!--end of main cell-->
+  </tr>
+</table>
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/pbelisle/forest-plot.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:43:43 GMT -->
+</html>

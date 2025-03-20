@@ -1,0 +1,100 @@
+Example data for Figure 7(a) on Irrigation treatment A with levels 
+randomly allocated to plots in blocks (S), and cross factored with 
+sowing density treatment B with levels randomly allocated to sub-plots 
+in plots, in a split plot design:
+
+S	A	B	Y
+1	Control	Low	 2.046
+2	Control	Low	 1.780
+3	Control	Low	 4.020
+4	Control	Low	 8.150
+1	Control	High	16.778
+2	Control	High	21.105
+3	Control	High	23.142
+4	Control	High	22.871
+1	Water	Low	13.651
+2	Water	Low	19.100
+3	Water	Low	12.300
+4	Water	Low	14.991
+1	Water	High	11.953
+2	Water	High	14.240
+3	Water	High	 7.900
+4	Water	High	14.043
+
+
+5.1 TWO FACTOR SPLIT PLOT MODEL (I) Y = B|P'(S'|A)
+
+Analysis of terms: B|A + S|A
+
+
+Model 5.1(i) A in plots and B in sub-plots are fixed factors, 
+S is a random blocking factor:
+
+                                     Restricted   Unrestricted
+   Source     DF      SS      MS       F      P       F      P
+ 1 S           3   40.39   13.46       -      -    0.85  0.552
+ 2 A           1    4.29    4.29    0.27  0.6391   0.27  0.639
+ 3 S*A         3   47.63   15.88       -      -       -      -
+ 4 B           1  195.96  195.96   74.49 <0.001   74.49 <0.001
+ 5 B*A         1  398.06  398.06  151.32 <0.001  151.32 <0.001
+ 6 Residual    6   15.78    2.63       -      -       -      -
+   Total      15  702.12
+
+COMMENT: With this model, the coding of Block S describes 4 blocks each containing
+all four combinations of levels of irrigation and sowing density. 
+
+
+Example data for Figure 7(b) on Irrigation treatment A with levels
+randomly allocated to blocks (S), cross factored with sowing density 
+treatment B with levels randomly allocated to plots in blocks, in a 
+split plot design:
+
+S	A	B	Y
+1	Control	Low	 2.046
+2	Control	Low	 1.780
+3	Control	Low	 4.020
+4	Control	Low	 8.150
+1	Control	High	16.778
+2	Control	High	21.105
+3	Control	High	23.142
+4	Control	High	22.871
+1	Water	Low	13.651
+2	Water	Low	19.100
+3	Water	Low	12.300
+4	Water	Low	14.991
+1	Water	High	11.953
+2	Water	High	14.240
+3	Water	High	 7.900
+4	Water	High	14.043
+
+
+5.6 TWO FACTOR SPLIT PLOT MODEL (II) Y = B|S'(A)
+
+Analysis of terms: B|A + B|S(A) - B*S(A)
+
+
+Model 5.6(i) A in plots and B in blocks are fixed factors, 
+S is the random blocking factor:
+
+                                  Restricted   Unrestricted
+  Source   DF      SS      MS       F      P       F      P
+1 A         1    4.29    4.29    0.29  0.608    0.29  0.608
+2 S(A)      6   88.03   14.67      -      -     5.58  0.028
+3 B         1  195.96  195.96   74.49 <0.001   74.49 <0.001
+4 B*A       1  398.06  398.06  151.32 <0.001  151.32 <0.001
+5 B*S(A)    6   15.78    2.63      -      -      -      -
+  Total    15  702.12
+
+COMMENT: With this model, the coding of Block S describes 4 blocks nested 
+in the Control treatment and four (different) blocks nested in the Water 
+treatment, and each block measured once at high and once at low sowing density. 
+This design has more power to test the effect of treatment A than the design 
+for model 5.1 (Figure 7a).
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

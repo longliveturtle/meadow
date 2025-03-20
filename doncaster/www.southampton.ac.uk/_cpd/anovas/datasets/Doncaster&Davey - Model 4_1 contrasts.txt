@@ -1,0 +1,72 @@
+4.1 ONE FACTOR RANDOMISED BLOCK MODEL Y = S'|A with orthogonal contrasts on A
+
+Three-level factor A and four-level block S. 
+Model-1 analysis by GLM of terms: S + B + C(B) + S*B + S*C(B);
+Model-2 analysis by GLM of terms: S + B + C(B)
+
+
+Data:
+
+S	A	 B	 C	 Y
+1	1	 2	 0	-4.4297
+2	1	 2	 0	 4.7513
+3	1	 2	 0	 3.2971
+4	1	 2	 0	-1.4606
+1	2	-1	 1	 4.8458
+2	2	-1	 1	 5.1163
+3	2	-1	 1	 6.0739
+4	2	-1	 1	-1.9225
+1	3	-1	-1	 6.1542
+2	3	-1	-1	10.4794
+3	3	-1	-1	12.4438
+4	3	-1	-1	 9.2150
+
+COMMENT: If A[1] is a control, and A[2], A[3] are treatment levels, contrasts B and
+C test for a control-versus-treatment effect, and a between-treatments effect.
+SS[B] + SS[C(B)] = SS[A]; likewise DF[B] + DF[C(B)] = DF[A].
+Model-1 analysis declines to assume equal block-by-contrast interactions, so tests
+each treatment contrast against its interaction with block.
+Model-2 analysis assumes equal or negligible block-by-contrast interactions, so
+tests each treatment contrast against the pooled error MS[S*A]:
+SS[S*B] + SS[S*C(B)] = SS[S*A]; likewise DF[S*B] + DF[S*C(B)] = DF[S*A].
+		
+
+Model 4.1(i) A is a fixed factor, S is a random blocking factor:
+ 
+  Source  DF      SS     MS      F      P
+1 S        3   74.25  24.75      -      -
+2 A        2  169.44  84.72  12.36  0.007
+3 S*A      6   41.11   6.85      -      -
+4 P(S*A)   0       -      -
+  Total   11  284.80
+
+
+Model-1 analysis of orthogonal contrasts, with fixed factors B and C:
+
+  Source  DF  Seq SS  Adj SS  Seq MS      F      P
+1 S        3   74.25   79.98   24.75      -      -
+2 B        1   96.36   96.36   96.36  17.37  0.025  = A[1] versus average{A[2],A[3]}
+3 C(B)     1   73.08   73.08   73.08   8.96  0.058  = A[2] versus A[3]
+4 S*B      3   16.64   16.64    5.55      -      -
+5 S*C(B)   3   24.47   24.47    8.16      -      -
+6 P(S*A)   0       -       -       -
+  Total   11  284.80
+
+
+Model-2 analysis of orthogonal contrasts, with fixed factors B and C:
+
+  Source  DF  Seq SS  Adj SS  Seq MS      F      P
+1 S        3   74.25   74.25   24.75      -      -
+2 B        1   96.36   96.36   96.36  14.06  0.010  = A[1] versus average{A[2],A[3]}
+3 C(B)     1   73.08   73.08   73.08  10.66  0.017  = A[2] versus A[3]
+4 S*A      6   41.11   41.11    6.85      -      -
+5 P(S*A)   0       -       -       -
+  Total   11  284.80
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

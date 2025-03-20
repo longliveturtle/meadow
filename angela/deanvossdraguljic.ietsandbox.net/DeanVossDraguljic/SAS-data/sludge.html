@@ -1,0 +1,17 @@
+* sludge.sas, sludge experiment, Table 15.7, p503;
+* (Same as data of Table 15.41, p540);
+;
+data sludge;
+  input A B C D E   y;
+  TC = 10000*A + 1000*B + 100*C + 10*D + E;
+  lines;
+        0 0 0 1 0  195
+        0 0 1 1 1  496
+        0 1 0 0 1   87
+        0 1 1 0 0 1371
+        1 0 0 0 1  102
+        1 0 1 0 0 1001
+        1 1 0 1 0  354
+        1 1 1 1 1  775
+;
+run;

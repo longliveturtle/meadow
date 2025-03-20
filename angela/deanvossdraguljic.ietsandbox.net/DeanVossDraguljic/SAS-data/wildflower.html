@@ -1,0 +1,69 @@
+* wildflower.sas, wildflower experiment, Table 5.21, p137;
+;
+* Data as arranged in Table 5.21;
+data wildflower;
+  input trtmt @@;
+  if trtmt=1 then do; temp=1; storage=1; end;
+    else if trtmt=2 then do; temp=1; storage=2; end;
+      else if trtmt=3 then do; temp=2; storage=1; end;
+	    else if trtmt=4 then do; temp=2; storage=2; end;
+  do rep=1 to 10; drop rep;
+    input y @@;
+    output;
+  end;
+  lines;
+  1  12 13  2  7 19 
+      0  0  3 17 11
+  2   6  2  0  2  4
+      1  0 10  0  0
+  3   6  4  5  7  6
+      5  7  5  2  3
+  4   0  6  2  5  1
+      5  2  3  6  6
+;
+* Data by observation;
+data wildflower;
+  input trtmt temp storage  y;
+  lines;
+          1     1     1    12
+          1     1     1    13
+          1     1     1     2
+          1     1     1     7
+          1     1     1    19
+          1     1     1     0
+          1     1     1     0
+          1     1     1     3
+          1     1     1    17
+          1     1     1    11
+          2     1     2     6
+          2     1     2     2
+          2     1     2     0
+          2     1     2     2
+          2     1     2     4
+          2     1     2     1
+          2     1     2     0
+          2     1     2    10
+          2     1     2     0
+          2     1     2     0
+          3     2     1     6
+          3     2     1     4
+          3     2     1     5
+          3     2     1     7
+          3     2     1     6
+          3     2     1     5
+          3     2     1     7
+          3     2     1     5
+          3     2     1     2
+          3     2     1     3
+          4     2     2     0
+          4     2     2     6
+          4     2     2     2
+          4     2     2     5
+          4     2     2     1
+          4     2     2     5
+          4     2     2     2
+          4     2     2     3
+          4     2     2     6
+          4     2     2     6
+;
+run;

@@ -1,0 +1,54 @@
+3.1  TWO FACTOR FULLY CROSS-FACTORED MODEL Y = B|A + e
+
+Analysis of response Y to terms: X|A
+
+Data for Figure 8:
+
+X	A	Y
+ 5.27	1	57.55
+ 5.47	1	55.36
+ 6.70	1	48.49
+ 9.19	1	43.48
+10.23	1	38.84
+11.25	1	38.04
+17.29	1	12.86
+14.97	1	15.61
+14.58	1	22.10
+13.98	1	26.50
+11.83	1	24.99
+ 9.65	1	33.47
+ 9.51	2	40.70
+ 9.29	2	35.59
+ 7.93	2	35.90
+ 5.19	2	37.99
+ 7.62	2	37.31
+ 4.79	2	30.99
+12.64	2	32.98
+11.03	2	34.60
+12.81	2	33.21
+16.40	2	29.94
+15.62	2	32.40
+17.17	2	29.15
+
+
+Model 3.1(iv) A is a fixed factor, X is a covariate of the response:
+
+  Source    DF   Seq SS   Seq MS       F      P
+1 X          1  1400.59  1400.59  124.50 <0.001
+2 A          1     2.25     2.25    0.20  0.660
+3 X*A        1   912.99   912.99   81.16 <0.001
+4 Residual  20   224.99    11.25
+  Total     23  2540.35
+
+COMMENT: This example is balanced and therefore orthogonal, 
+so uses Type I (sequential) SS. Use of Type II adjusted SS
+would give the same result, but eroneous use of Type III 
+adusted SS would give a different result for main effects.
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

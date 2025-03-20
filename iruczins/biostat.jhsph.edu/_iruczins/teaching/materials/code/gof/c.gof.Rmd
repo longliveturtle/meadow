@@ -1,0 +1,75 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Goodness of Fit
+
+### Example from class
+
+```{r}
+o <- c(35,43,22)
+p <- c(0.25,0.50,0.25)
+e <- sum(o)*p
+e
+```
+
+The likelihood ratio test.
+
+```{r}
+o/e
+log(o/e)
+o*log(o/e)
+lrt <- 2*sum(o*log(o/e)) 
+lrt
+pchisq(lrt,3-1,lower.tail=FALSE)
+```
+
+The chi-square test.
+
+```{r}
+xsq <- sum((o-e)^2/e)
+xsq
+pchisq(xsq,3-1,lower.tail=FALSE)
+chisq.test(o,p=c(1/4,1/2,1/4))
+```
+
+Or write your own functions to calculate the test statistics.
+
+```{r}
+f.xsq <- function(o,p){
+  e <- (p*sum(o))
+  sum((o-e)^2/e)
+}
+
+f.lrt <- function(o,p){
+  e <- (p*sum(o))
+  2*sum(o*log(o/e),na.rm=TRUE)
+}
+
+f.xsq(o,p)
+f.lrt(o,p)
+```
+
+### Example from class: a composite hypothesis test
+
+```{r}
+x <- c(5,20,75)
+fhat <- (x[1]+x[2]/2)/sum(x)
+fhat
+p <- c(fhat^2,2*fhat*(1-fhat),(1-fhat)^2)
+p
+x
+sum(x)*p
+
+lrt <- f.lrt(x,p)
+lrt
+pchisq(lrt,1,lower.tail=FALSE)
+
+xsq <- f.xsq(x,p)
+xsq
+pchisq(xsq,1,lower.tail=FALSE)
+```
+
+

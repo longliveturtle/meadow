@@ -1,0 +1,21 @@
+. Step 1: Read the data
+skip 25
+read calibrationline.dat x y
+skip 0
+set write decimals 5
+.
+. Step 2: Perform the fit
+.
+fit y x
+.
+. Step 3: Extract relevant quantitites
+.
+let resvar = ressd**2
+.
+let y0 = sequence 0 .25 12
+feedback off
+capture screen on
+capture mpc3673.out
+linear calibration y x y0
+end of capture
+.

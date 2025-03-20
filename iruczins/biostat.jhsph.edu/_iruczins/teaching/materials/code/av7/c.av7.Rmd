@@ -1,0 +1,218 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Analysis of Variance - Two-Way Models
+
+#### Example 1 from class: rats and lard
+
+The data.
+
+```{r}
+lard.dat <- data.frame(rsp = c(709,592,679,538,699,476,657,508,594,505,677,539),
+                       sex = factor(rep(c("M","F"), rep(6,2))),
+                       lard = factor(rep(c("fresh","rancid"), 6)))
+lard.dat
+str(lard.dat)
+summary(lard.dat)
+```
+
+Plot the data, one factor at a time.
+
+```{r,fig.width=4}
+set.seed(1)
+par(las=1)
+stripchart(jitter(rsp,factor=2) ~ sex, data=lard.dat, ylab="response", pch=1, vertical=TRUE, xlim=c(0.5,2.5))
+stripchart(jitter(rsp,factor=2) ~ lard, data=lard.dat, ylab="response", pch=1, vertical=TRUE, xlim=c(0.5,2.5))
+```
+
+Plot the data, both factors.
+
+```{r,fig.width=6}
+stripchart(split(jitter(lard.dat$rsp,factor=2), list(lard.dat$sex, lard.dat$lard)), ylab="response", pch=1, 
+           vertical=TRUE, xlim=c(0.5,4.5))
+```
+
+The one-way ANOVA. The ":" symbol pastes the two factors together.
+
+```{r}
+summary(aov(rsp ~ sex:lard, data=lard.dat))
+```
+
+The two-way ANOVA. The "*" symbol includes the interaction.
+
+```{r}
+summary(aov(rsp ~ sex * lard, data=lard.dat))
+```
+
+The model with interaction can also be written this way.
+
+```{r}
+summary(aov(rsp ~ sex + lard + sex:lard, data=lard.dat))
+```
+
+A two-way ANOVA with an additive model. The interaction SS are then included in the "residual" SS.
+
+```{r}
+summary(aov(rsp ~ sex + lard, data=lard.dat))
+```
+
+ANOVA using only the factor lard.
+
+```{r}
+summary(aov(rsp ~ lard, data=lard.dat))
+```
+
+The same inference using a 2-sample t-test.
+
+```{r}
+subset(lard.dat, lard=="fresh")
+subset(lard.dat, lard=="rancid")
+x <- subset(lard.dat, lard=="fresh")$rsp
+x
+y <- subset(lard.dat, lard=="rancid")$rsp
+y
+t.test(x, y, var.equal=TRUE)
+t.test(x, y, var.equal=TRUE)$p.val
+t.test(x, y, var.equal=TRUE)$stat
+t.test(x, y, var.equal=TRUE)$stat^2
+```
+
+Within-group means.
+
+```{r}
+means <- tapply(lard.dat$rsp, list(lard.dat$sex,lard.dat$lard), mean)
+means
+```
+
+Means by sex.
+
+```{r}
+sex.means <- tapply(lard.dat$rsp, lard.dat$sex, mean)
+sex.means
+```
+
+Means by treatment.
+
+```{r}
+lard.means <- tapply(lard.dat$rsp, lard.dat$lard, mean)
+lard.means
+```
+
+An interaction plot.
+
+```{r}
+interaction.plot(lard.dat$sex, lard.dat$lard, lard.dat$rsp, lty=1, col=c("blue","red"), lwd=2)
+```
+
+The same plot, but reversing the role of "sex" and "lard".
+
+```{r}
+interaction.plot(lard.dat$lard, lard.dat$sex, lard.dat$rsp, lty=1, col=c("blue","red"), lwd=2)
+```
+
+#### Example 2 from class: mouse, food and temperature
+
+The data.
+
+```{r}
+library(SPH.140.615)
+example(mouse)
+```
+
+Plot the data.
+
+```{r,fig.width=8}
+set.seed(1)
+par(las=1)
+stripchart(split(jitter(mouse$rsp,amount=3),list(mouse$food, mouse$temp)), 
+           ylab="", pch=1, vertical=TRUE, xlim=c(0.5,4.5))
+stripchart(split(jitter(mouse$rsp,amount=3),list(mouse$food, mouse$temp)), 
+           ylab="", pch=1, vertical=TRUE, xlim=c(0.5,4.5), log="y")
+stripchart(split(jitter(mouse$rsp,amount=3),list(mouse$temp, mouse$food)), 
+           ylab="", pch=1, vertical=TRUE, xlim=c(0.5,4.5), log="y")
+```
+
+Numbers of individuals per condition,
+
+```{r}
+tapply(mouse$rsp, list(mouse$food, mouse$temp), length)
+```
+
+The two-way ANOVA, with log-transformed response.
+
+```{r}
+aov.out <- aov(log(rsp) ~ food * temp, data=mouse)
+summary(aov.out)
+```
+
+The interaction plot
+
+```{r}
+interaction.plot(mouse$food, mouse$temp, log(mouse$rsp), lwd=2, col=c("blue","red"), lty=1)
+```
+
+Reverse role of food and temperature.
+
+```{r}
+interaction.plot(mouse$temp, mouse$food, log(mouse$rsp), lwd=2, col=c("blue","red"), lty=1)
+```
+
+Two-way ANOVA without interaction.
+
+```{r}
+aov.out <- aov(log(rsp) ~ food + temp, data=mouse)
+summary(aov.out)
+```
+
+ANOVA only using the factor food.
+
+```{r}
+aov.out <- aov(log(rsp) ~ food, data=mouse)
+anova(aov.out)
+```
+
+#### Example 3 from class: flies, density, strain, no replicates
+
+The data.
+
+```{r}
+flies <- data.frame(rsp = c( 9.6, 9.3, 9.3,
+                            10.6, 9.1, 9.2,
+                             9.8, 9.3, 9.5,
+                            10.7, 9.1,10.0,
+                            11.1,11.1,10.4,
+                            10.9,11.8,10.8,
+                            12.8,10.6,10.7),
+                   strain = factor(rep(c("OL","BELL","bwb"),7)),
+                   density = factor(rep(c(60,80,160,320,640,1280,2560),rep(3,7))))
+summary(flies)
+```
+
+Plot the data.
+
+```{r}
+par(las=1)
+interaction.plot(flies$density, flies$strain, flies$rsp, lwd=2, col=c("blue","red","green3"), lty=1, type="b", 
+                 xlab="density", ylab="response")
+```
+
+Note: we can't fit an interaction. If we try, we have no ability to get an error SS, so we don't get p-values either.
+
+```{r}
+flies.aovA <- aov(rsp ~ strain * density, data=flies)
+summary(flies.aovA) 
+```
+
+Assume an additive model.
+
+```{r}
+flies.aovB = aov(rsp ~ strain + density, data=flies)
+summary(flies.aovB) 
+```
+
+
+
+

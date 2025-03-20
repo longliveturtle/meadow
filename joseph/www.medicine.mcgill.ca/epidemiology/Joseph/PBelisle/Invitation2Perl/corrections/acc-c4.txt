@@ -1,0 +1,25 @@
+================================================================================
+Sample size calculation for prevalence
+--------------------------------------------------------------------------------
+Number of tests used: 2
+Disease name: Chlamydia trachomatis
+Prevalence prior beta parameters: 1 1
+Criterion: ACC
+HPD length: 0.4
+HPD coverage: 0.95
+Main parameter of interest: test 1 specificity
+Initial sample size: 1000
+Maximum feasible sample size: 100000
+Number of Gibbs iterations to monitor: 5000
+Maximum number of Gibbs iterations per WinBugs run: 20000
+Number of burn-in iterations: 4000
+Number of values sampled from preposterior: 1000
+Initial step: 500
+Search algorithm: log-log
+Test 1 sensitivity beta parameters: 1 1
+Test 1 specificity beta parameters: 1 1
+Test 1 label: new test
+Test 2 sensitivity beta parameters: 115.63 66.15
+Test 2 specificity beta parameters: 906.68 3.63
+Test 2 label: culture
+--------------------------------------------------------------------------------

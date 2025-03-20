@@ -1,0 +1,116 @@
+avgcov <-
+function(n, l, size, sens.alpha, sens.beta, spec.alpha, spec.beta, prev.alpha,
+        prev.beta)
+{
+####################################################################
+#                                                                  #
+#       Instructions                                               #
+#                                                                  #
+####################################################################
+# COPYRIGHT                                                        #
+#                                                                  #
+# (c) Copyright Elham Rahme and Lawrence Joseph, 1997.             #
+#                                                                  #
+# avgcov is a program written by Elham Rahme and Lawrence Joseph,  #
+# at the Division of Clinical Epidemiology, Department of Medicine,#
+# Montreal General Hospital.  This program is an implementation    #
+# of the manuscript referenced below.                              #
+#                                                                  #
+# You are free to use these programs, for non-commercial purposes  #
+#  only, under two conditions:                                     #
+#                                                                  #
+# (1) This note is not to be removed;                              #
+# (2) Publications using avgcov results should reference           #
+#     the manuscript mentioned below.                              #
+#                                                                  #
+####################################################################
+#                                                                  #
+# This S-PLUS function computes the average coverage probabilities #
+# of posterior credible sets of length l given prior information   #
+# on the sensitivity and specificity of a diagnostic test as well  #
+# as on the prevalence of the disease of the population.  This     #
+# function accompanies the article titled:                         #
+#                                                                  #
+#  Rahme E, Joseph L, and Gyorkos T. Bayesian Sample size          #
+#  determiniation for estimating binomial parameters from          #
+#  data subject to misclassification.                              #
+#             (Applied Statistics, 1999, to appear)                #
+#                                                                  #
+#        This article is available upon request from               #
+#              lawrence.joseph@mcgill.ca                           #
+#                                                                  #
+# The basic setup is as follows:  In planning a prevalence         #
+# study for a certain disease (or other similar misclassified      #
+# binomial data situation), an imperfect diagnostic test will      #
+# be used.  Sample size estimates are required to estimate the     #
+# disease to an accuracy of l.                                     #
+# Prior information about the test is summarized by the following  #
+# beta densities for the test sensitivity and specificity:         #
+#                                                                  #
+#     sens ~ beta(sens.alpha, sens.beta)   and                     #
+#                                                                  #
+#     spec ~ beta(spec.alpha, spec.beta)                           #
+#                                                                  #
+# Prior information on the prevalence of the disease is also       #
+# given by a beta density:                                         #
+#                                                                  #
+#     prev ~ beta(prev.alpha, prev.beta)                           #
+#                                                                  #
+# Given the above prior densities, as well as the desired length   #
+# of the credible set (l), the function computes the average       #
+# coverage probability over the predictive distribution of the     #
+# data.                                                            #
+####################################################################
+#                                                                  #
+# In order to run the program, type:                               #
+#                                                                  #
+# > avgcov(n, l, size, sens.alpha, sens.beta, spec.alpha,          #
+#    spec.beta, prev.alpha, prev.beta)                             #
+#                                                                  #
+#  where n is the sample size for which the average coverage is    #
+#  desired, l is the length of each credible interval, size is     #
+#  the size of the Monte Carlo simulation required for the         #
+#  calculations (larger valuse for size produce more accurate      #
+#  results at the expense of running time), and the rest of the    #
+#  parameters are beta prior parameters as defined above.          #
+#                                                                  #
+#  The output will then be the average coverage probability        #
+#  for this input.                                                 #
+####################################################################
+#                                                                  #
+#          Please send any questions or comments to:               #
+#                                                                  #
+#                lawrence.joseph@mcgill.ca                         #
+#                                                                  #
+####################################################################
+        lowerpi <- vector()
+        upperpi <- vector()
+        probability <- vector()
+        sw <- vector()
+        thetahat <- vector()
+        marginal <- vector()
+        weight <- matrix(NA, n + 1, size)
+        postpi <- matrix(NA, n + 1, size)
+        sens <- rbeta(size, sens.alpha, sens.beta)
+        spec <- rbeta(size, spec.alpha, spec.beta)
+        prev <- rbeta(size, prev.alpha, prev.beta)
+        p <- prev * sens + (1 - prev) * (1 - spec)
+        for(i in 1:(n + 1)) {
+                weight[i,  ] <- dbinom(i - 1, n, p)
+                sw[i] <- sum(weight[i,  ])
+                if(sw[i] > 0) {
+                        postpi[i,  ] <- weight[i,  ]/sw[i]
+                }
+                else {
+                        postpi[i,  ] <- rep(0, size)
+                }
+                marginal[i] <- sum(weight[i,  ])/size
+                thetahat[i] <- sum(prev * postpi[i,  ])
+                lowerpi[i] <- thetahat[i] - l/2
+                upperpi[i] <- thetahat[i] + l/2
+                probability[i] <- sum(postpi[i,  ][prev >= lowerpi[i] & prev <=
+                        upperpi[i]])
+        }
+        avgcov.prob <- sum(probability * marginal)
+        return(avgcov.prob)
+}

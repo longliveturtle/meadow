@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/strict.dtd">
+<html>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/courses/common/Tricks.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 10:00:48 GMT -->
+<head>
+        <title>Zero and Ones Tricks</title>
+</head>
+
+<body>
+
+<p><a id="SpecifyingANewSamplingDistribution"/><font face="Arial" size="5"><strong>Specifying a new sampling distribution</strong></font><font face="Arial"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></p>
+<p>Suppose we wish to use a sampling distribution that is not included in the list of standard distributions, in which an <font color="#000000">observation x[i] contributes a likelihood term L[i]</font>. <font color="#000000">We may use the &quot;zeros trick&quot;: a Poisson(phi) observation of zero has likelihood exp(-phi), so if our observed data is a set of 0's, and</font><font color="#000000"><em> </em></font><font color="#000000">phi[i] is set to </font><font face="Symbol">-</font><font color="#000000">log(L[i]), we will obtain the correct likelihood contribution. (Note that phi[i] should always be &gt; 0 as it is a Poisson mean, and so we may need to add a suitable constant to ensure that it is positive.) This trick is illustrated by an example new-sampling in which a normal likelihood is constructed (using the zeros trick) and compared to the standard analysis.</fon
+t></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">C &lt;- 10000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000"># this just has to be large enough to ensure all phi[i]'s &gt; 0</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">for (i in 1:N) {</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">zeros[i] &lt;- 0</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">phi[i] &lt;- -log(L[i]) + C</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">zeros[i] ~ dpois(phi[i])</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">}</font></p>
+<p><font color="#000000">This trick allows arbitrary sampling distributions to be used, and is particularly suitable when, say, dealing with truncated distributions.</font></p>
+<p><font color="#000000">A new observation x.pred can be predicted by specifying it as missing in the data-file and assigning it a uniform prior, e.g.</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">x.pred ~ dflat()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000"># improper uniform prior on new x</font></p>
+<p><font color="#000000">However our example shows that this method can be very inefficient and give a very high MC error.</font></p>
+<p><font color="#000000">An alternative to using 'zeros' is the &quot;ones trick&quot;, where the data is a set of 1's assumed to be the results of Bernoulli trials with probabilities p[i]. By making each p[i] proportional to L[i] (i.e. by specifying a scaling constant large enough to ensure all p[i]'s are &lt; 1) the required likelihood term is provided.</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">C &lt;- 10000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000"># this just has to be large enough to ensure all p[i]'s &lt; 1</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">for (i in 1:N) {</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">ones[i] &lt;- 1</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">p[i] &lt;- L[i] / C</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">ones[i] ~ dbern(p[i])</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier" size="3">}</font></p>
+
+
+</body>
+
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/courses/common/Tricks.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 10:00:48 GMT -->
+</html>

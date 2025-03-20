@@ -1,0 +1,45 @@
+* plasma.day1.sas, Table 11.19, p382;
+;
+* This program requires 3 runs, adding more information in each run;
+DATA ONE;
+  INPUT BLOCK TRTMT Y;
+  LINES;
+  1 4 0.459
+  1 5 0.458
+  1 1 0.482
+  2 5 0.465
+  2 6 0.467
+  2 2 0.464
+  3 6 0.472
+  3 1 0.495
+  3 3 0.473
+;
+* Get block effect estimates;
+PROC GLM;
+  CLASS BLOCK TRTMT;
+  MODEL Y = BLOCK TRTMT / SOLUTION;
+  LSMEANS TRTMT / PDIFF = ALL CL ADJUST=SCHEFFE;
+PROC SORT; BY BLOCK;
+;
+* Add the following code for the second run;
+* values BHAT are solutions for block parameters from first run;
+DATA TWO;
+  INPUT BLOCK BHAT;
+  LINES;
+  1 -.0126666667
+  2 -.0053333333
+  3 0.0000000000
+;
+PROC MEANS MEAN; * print average of BHAT values;
+  VAR BHAT;
+;
+* Add the following code for the third run;
+* The number -0.006 below is average BHAT calculated in second run;
+DATA THREE;
+  MERGE ONE TWO;
+  BY BLOCK;
+  Y_ADJ = Y - (BHAT - (-0.006));
+PROC SGPLOT data = THREE;
+  SCATTER X = TRTMT Y = Y_ADJ / GROUP = BLOCK;
+;
+run;

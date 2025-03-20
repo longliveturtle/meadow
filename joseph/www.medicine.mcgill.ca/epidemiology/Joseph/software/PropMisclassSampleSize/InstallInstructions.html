@@ -1,0 +1,109 @@
+<html>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/PropMisclassSampleSize/InstallInstructions.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:13 GMT -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><style type="text/css">
+body
+{
+  font-family: Arial, Helvetica, sans-serif; background-color: white; font-size: 14px;
+  padding-left: 50px; padding-right: 30px; color: black;
+}
+div.pkg
+{
+  color: darkgoldenrod; font-size: 18px;
+}
+div.section
+{
+  color: darkgoldenrod;
+  border-color: darkgoldenrod; border-style: solid; border-width: 3px 0 0 0;
+  font-size: 16px; padding-bottom: 20px;
+}
+div.title
+{
+  color: navy; font-size: 20px;
+}
+td.leftcell
+{
+  font-size: 14px; vertical-align: top; padding-right: 50px;
+}
+</style></head>
+<body bgcolor="white" link="blue" text="blue" vlink="purple">
+<title> Bayesian sample size / PropMisclassSampleSize </title>
+<div class="pkg">PropMisclassSampleSize</div>
+<div class="title">
+Bayesian sample size determination for prevalence and diagnostic studies in the absence of a gold standard
+</div>
+<br><br><br>
+<div class="section">Install Instructions</div>
+<b>PropMisclassSampleSize</b> was developed to estimate sample size
+in the context of prevalence and diagnostic test studies, along the lines of our paper
+<br><br>
+<b> Bayesian Sample Size Determination for Prevalence and Diagnostic Test Studies in the Absence of a Gold Standard Test </b><br>
+Nandini Denukuri, Elham Rahme, Patrick Bélisle and Lawrence Joseph <br>
+Biometrics 60, pp. 388-397 <br>
+June 2004
+<br><br>
+We recommend that you read this paper carefully before using this software.
+<br><br>
+The three free software packages listed below must be installed on your
+computer to use
+PropMisclassSampleSize:
+<ul>
+<li> <a href="http://www.mrc-bsu.cam.ac.uk/bugs"> WinBugs 1.4 </a>
+  (make sure to remove the restrictions by installing the
+  <a href="../../../../../www.mrc-bsu.cam.ac.uk/wp-content/uploads/WinBUGS14_immortality_key.html">immortality key</a>)
+</li>
+<li> <a href="http://www.r-project.org/"> R (version 2.12.1 or later)</a></li>
+<li> <a href="https://strawberryperl.com/"> Strawberry Perl</a></li>
+  <ul>
+  <li> Make sure to <a href="../How2InstallShortcutPerlModule.html">install <i>Shortcut</i> Perl Module</a>.</li>
+  </ul>
+</ul>
+
+All packages install easily in a few minutes.<br>
+<br>
+<a href="http://msdn.microsoft.com/scripting"> Microsoft Windows Script </a> is also necessary 
+but should already be sitting on your computer if you have a recent Windows operating system<br>
+(search for wscript.exe on your computer; if you can't find it, download it from the download section of
+<a href="http://msdn.microsoft.com/scripting"> Microsoft Windows Script webpage</a>).
+<br>
+<br>
+Once you have installed the necessary software, PropMisclassSampleSize is ready to run;
+see <a href="InstructionManual-2.pdf">Instruction Manual</a> for detailed
+instructions.<br>
+<br>
+On first use, PropMisclassSampleSize will present a graphical user interface asking you
+to point to the most recent locations of executable files R.exe and WinBugs*.exe. 
+Whenever possible, paths to the R and WinBugs executable files
+will be displayed as default values that you might want to use if they are indeed the most recent; if not,
+a browse button will allow you to indicate the actual executable files to use. Program may be slow to start when first run.
+<br><br><br>
+<div class="section">Avoiding trap errors from permission settings on Windows 7 and Windows Vista platforms</div>
+<table border="0" cellpadding="0"><tbody><tr><td class="leftcell">
+If you are working on a Windows 7 or Windows Vista platform and have run WinBUGS before, y
+ou may have already run into the cryptic <b>Trap #060</b> error message illustrated to the right. 
+This is due to restricted write permissions in <i>c:\Program Files</i>, where you may have installed WinBUGS.
+<br><br>
+WinBUGS must be installed in a directory where you have write permissions (e.g. in <i>C:\Users\user name\Documents</i>) for 
+<b>PropMisclassSampleSize</b> to run smoothly.
+</td><td><img src="../img/Trap060.gif"></td></tr></tbody></table>
+<br><br><br>
+<div class="section">FAQ</div>
+<font color="darkgoldenrod">
+When I try to run <b>PropMisclassSampleSize</b>, I get the message 
+<i>This application has failed to start because R.dll was not found. Re-installing the application may fix this problem.</i>
+How can I fix it?
+</font>
+<br>
+<ol>
+<li>Make sure the version for R you have installed is 2.11.1 or later;</li>
+<li>Add R bin directory to your system path, that is, through the <b>Start</b> menu, select <b>Settings</b>, then <b>Control panel</b> and double-click the <b>System</b> icon:
+click the <b>Advanced</b> tab and the <b>Environment variables</b> button. Scroll down the <b>System variables</b> list box, select <b>Path</b> and click the <b>Edit</b> button. 
+At the end of the <b>Variable value</b> text box, add a semi-colon and enter the path to R bin directory, e.g. <i>;c:\Program Files\R\R-2.11.1\bin</i>, and click the <b>Ok</b> button.
+Click the next few <b>Ok</b> buttons to exit the Control panel.
+</li>
+</ol>
+
+
+</body>
+<!-- Mirrored from www.medicine.mcgill.ca/epidemiology/Joseph/software/PropMisclassSampleSize/InstallInstructions.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Feb 2025 09:59:13 GMT -->
+</html>

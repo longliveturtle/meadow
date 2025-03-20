@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.bio.ic.ac.uk	TRUE	/	FALSE	1999999999	ARRAffinity-WindowsWF	1e7adbf5b48493fcb3f9d30c4d15863f5d0e6dcc34ee20fdda09204db2c94644
+

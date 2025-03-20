@@ -1,0 +1,74 @@
+{smcl}
+{* 31mar2006}
+{cmd:help nlog}
+{hline}
+
+{title:Title}
+
+{p 4 8 2}
+{bf:nlog -- Opens output log in NoteTab Light}
+
+
+{title:Syntax}
+
+{p 8 17 2}
+{cmd:nlog}
+
+
+{title:Description}
+
+{p 4 4 2}
+{cmd:nlog} opens the current output log in the text 
+editor NoteTab Light. The output log must be in text 
+format.
+
+
+{title:Remarks}
+
+{p 4 4 2}
+The advantage of using NoteTab Light compared with opening the log in Stata's
+Viewer is better editing facilities, e.g., deleting mistakes, adding comments,
+and making selections before printing.
+
+{p 4 4 2}
+NoteTab Light is freely available from 
+{browse "http://www.notetab.com":http://www.notetab.com}. You
+may need to modify {hi:nlog.ado} depending on where the 
+NoteTab program is installed on your computer. 
+
+{p 4 4 2}
+You may also want to modify {hi:nlog.ado} if you prefer to use 
+another text editor. You can find a comprehensive guide to text
+editors at 
+{browse "http://fmwww.bc.edu/repec/bocode/t/texteditors.html":http://fmwww.bc.edu/repec/bocode/t/texteditors.html}.
+
+{p 4 4 2}
+The command's intended use is described in more detail in Juul (2006, sec. 1.7).
+
+{p 4 4 2}
+The command {cmd:newlog} may be useful in closing the 
+current log and opening a new log; see {help newlog}.
+
+
+{title:Author}
+
+{p 4 4 2}
+{browse "sj@soci.au.dk":Svend Juul}, Department of Epidemiology, 
+Institute of Public Health, University of Aarhus, Aarhus, Denmark.
+
+
+{title:Reference}
+
+{p 4 8 2} 
+Juul, S. 2006. {it:Introduction to Stata for Health Researchers}.
+ College Station, TX: Stata Press.
+
+
+{title:Also see}
+
+{p 4 13 2}
+Manual:  {hi:[U] 15 Printing and preserving output}, {hi:[R] log}
+
+{p 4 13 2}
+Online:  {help log}
+{p_end}

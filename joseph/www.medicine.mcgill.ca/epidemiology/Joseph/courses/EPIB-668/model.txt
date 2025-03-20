@@ -1,0 +1,10 @@
+model
+{
+    for (i in 1:n)
+      {
+         x[i]   ~  dnorm(mu,tau)     #  Likelihood function for each data point
+       }
+         mu     ~  dnorm(0,0.0001)   #  Prior for mu
+         tau    <- 1/(sigma*sigma)   #  Prior for tau (as function of sigma)
+         sigma  ~  dunif(0,20)       #  Prior for sigma
+}

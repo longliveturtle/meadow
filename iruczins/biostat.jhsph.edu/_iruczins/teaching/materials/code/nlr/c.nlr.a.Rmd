@@ -1,0 +1,200 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Non-linear Regression
+
+#### Example from class: Michaelis-Menten equations
+
+The data.
+
+```{r}
+library(SPH.140.615)
+puro
+```
+
+Plot the data, just for the untreated cells.
+
+```{r}
+plot(vel ~ conc, data=puro, subset=(state=="untreated"), xlab="concentration", ylab="initial velocity", lwd=2)
+```
+
+The regression of 1/V on 1/C, just with the data on untreated cells.
+
+```{r}
+temp <- lm(1/vel ~ I(1/conc), data=puro, subset=(state=="untreated"))
+summary(temp)$coef
+vmax <- 1/temp$coef[1]
+vmax
+km <- temp$coef[2]*vmax
+km
+```
+
+Plot the data with the regression line.
+
+```{r}
+plot(I(1/vel) ~ I(1/conc), data=puro, subset=(state=="untreated"), 
+     xlab="1 / concentration", ylab="1 / initial velocity", lwd=2)
+abline(temp$coef, col="red", lty=2, lwd=2)
+```
+
+The non-linear fit.
+
+```{r}
+nls.out <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, subset=(state=="untreated"), start = c(Vm=143,K=0.031))
+summary(nls.out)$param
+```
+
+Plot the data, with both fitted curves.
+
+```{r}
+plot(vel ~ conc, data=puro, subset=(state=="untreated"), xlab="concentration", ylab="initial velocity", lwd=2)
+u <- par("usr")
+x <- seq(u[1],u[2],length=250)
+y1 <- 1/predict(temp, data.frame(conc=x))
+y2 <- predict(nls.out, data.frame(conc=x))
+lines(x,y2, lwd=2, col="blue")
+lines(x,y1, lwd=2, col="red", lty=2)
+```
+
+Non-linear regression estimation for just the treated cells.
+
+```{r}
+nls.outB <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, subset=(puro$state=="treated"), start=c(Vm=160,K=0.048))
+summary(nls.outB)$param
+```
+
+Fit both regressions all in one.
+
+```{r}
+puro$x <- ifelse(puro$state=="treated",1,0)
+nls.outC <- nls(vel ~ ((Vm+dV*x)*conc)/(K+dK*x+conc), data=puro, start=c(Vm=160,K=0.048,dV=0,dK=0))
+summary(nls.outC)$param
+```
+
+Fit with the K's constrained to be equal.
+
+```{r}
+nls.outD <- nls(vel ~ ((Vm+dV*x)*conc)/(K+conc), data=puro, start=c(Vm=160,K=0.048,dV=0))
+summary(nls.outD)$param
+```
+
+Plot data and both fits.
+
+```{r}
+plot(vel ~ conc, data=puro, xlab="concentration", ylab="initial velocity", lwd=2,
+     pch=as.numeric(puro$state)-1, col=ifelse(puro$state=="treated","blue","red"))
+u <- par("usr")
+x <- seq(u[1],u[2],len=250)
+y1 <- predict(nls.out, data.frame(conc=x))
+y2 <- predict(nls.outB, data.frame(conc=x))
+y3 <- predict(nls.outD, data.frame(conc=x, x=rep(0,length(x))))
+y4 <- predict(nls.outD, data.frame(conc=x, x=rep(1,length(x))))
+lines(x, y1, lwd=2, col="red", lty=2)
+lines(x, y2, lwd=2, col="blue", lty=2)
+lines(x, y3, lwd=2, col="red")
+lines(x, y4, lwd=2, col="blue")
+```
+
+#### Example from class: the mud snails
+
+The data.
+
+```{r}
+sediment
+```
+
+Fit a cubic model. We need to use I() to get the square and cubic terms to work.
+
+```{r}
+lm.out <- lm(pellets ~ time + I(time^2) + I(time^3), data=sediment)
+summary(lm.out)
+```
+
+Fit a "linear spline" model.
+
+```{r}
+f <- function(x,b0,b1,x0) ifelse(x<x0, b0+b1*x, b0+b1*x0)
+nls.out <- nls(pellets ~ f(time,b0,b1,x0), data=sediment, start=c(b0=0,b1=50,x0=30))
+summary(nls.out)$param
+```
+
+Plot the data and the fitted curves.
+
+```{r}
+plot(pellets ~ time, data=sediment)
+u <- par("usr") 
+x <- seq(u[1],u[2],length=250)
+y <- predict(lm.out, data.frame(time=x))
+lines(x, y, col="blue", lwd=2)
+y2 <- predict(nls.out, data.frame(time=x))
+lines(x,y2,col="red",lwd=2)
+```
+
+#### Example from class: Michaelis-Menten equations (revisited)
+
+A closer look at the residual sum of squares and the inference for the parameters Vmax and K.
+
+We are using the data from the untreated cells first.
+
+```{r}
+nls.out <- nls(vel ~ (Vm*conc)/(K+conc), data=puro, subset=(state=="untreated"), start = c(Vm=143,K=0.031))
+summary(nls.out)$param
+```
+
+Visualize the residual sum of squares in a neighborhood of the parameter estimates, show the location of the least squares estimates, and show the confidence intervals from the `confint` function. We are truncating the RSS in the image (red colors).
+
+```{r,fig.width=8,fig.height=7}
+dat <- subset(puro,state=="untreated")
+f <- function(z,dat) sum((dat$vel-(z[2]*dat$conc)/(z[1]+dat$conc))^2)
+hm <- 101
+K <- seq(0.01,0.1,length=hm)
+V <- seq(130,200,length=hm)
+z <- expand.grid(K,V)
+rss <- apply(z,1,f,dat=dat)
+cut <- 5000
+rss[rss>cut] <- cut
+fit <- summary(nls.out)$param[,1]
+cis <- suppressMessages(confint(nls.out))
+par(las=1)
+image(V,K,matrix(rss,ncol=hm,byrow=T),xlab="Vmax",col=rev(rainbow(256,start=0,end=2/3)))
+text(fit[1],fit[2],"x",col="white")
+lines(cis[1,],rep(0.012,2),col="white",lwd=3)
+lines(rep(fit[1],2),c(0.011,0.013),col="white",lwd=3)
+lines(rep(132,2),cis[2,],col="white",lwd=3)
+lines(c(131,133),rep(fit[2],2),col="white",lwd=3)
+```
+
+Notice that the confidence intervals are not symmetric! The `confint` function uses a more complicated method (profiling) to generate these intervals. The methods are described in ore detail in the book <i>Modern Applied Statistics with S</i> by Venables and Ripley. 
+
+https://www.stats.ox.ac.uk/pub/MASS4/
+
+```{r}
+confint(nls.out)
+```
+
+Below are the symmetric confidence intervals based on a normality assumption of the parameter estimates. Note that the p-values in the summary are derived making that normality assumption! 
+
+```{r}
+fit <- summary(nls.out)$param
+fit[1,1]+c(-1,1)*qt(0.975,9)*fit[1,2]
+fit[2,1]+c(-1,1)*qt(0.975,9)*fit[2,2]
+```
+
+Revisiting our model using both the treated and untreated cells.
+
+```{r}
+nls.outC <- nls(vel ~ ((Vm+dV*x)*conc)/(K+dK*x+conc), data=puro, start=c(Vm=160,K=0.048,dV=0,dK=0))
+summary(nls.outC)$param
+confint(nls.outC)
+```
+
+The confidence interval for dK contains zero, so it is plausible that the rate constant K is the same for the treated and untreated cells.
+
+
+
+
+
+

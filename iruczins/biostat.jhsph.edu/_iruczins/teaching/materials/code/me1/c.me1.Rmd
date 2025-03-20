@@ -1,0 +1,240 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center")
+```
+
+#### Statistics for Laboratory Scientists ( 140.615 )
+
+## Linear Mixed Effects - Longitudinal Data Analysis
+
+The data used in the following examples are in the SPH.140.615 package.
+
+```{r}
+library(SPH.140.615)
+```
+
+Use the function install.packages() if you haven't installed the following packages, i.e. use install.packages("lme4") etc in the code chunk. Alternatively, hit the 'Knit' button, and you should be prompted about installing the packages.
+
+```{r}
+library(lattice)
+library(Matrix)
+library(lme4)
+```
+
+#### Example 1
+
+A figure of the data.
+
+```{r}
+xyplot(y ~ x|id, data=dat.ex1, type=c("p","r"), layout=c(6,2), as.table=TRUE, xlab="Time", ylab="Response")
+```
+
+We can think of the data being described by a "random intercept" model, i.e.
+
+Y<sub>ij</sub> = b<sub>0</sub> + B<sub>i</sub> + b<sub>1</sub>x<sub>j</sub> + &epsilon;<sub>ij</sub>,
+
+where i referes to the subject and x<sub>j</sub> to the j<sup>th</sup> time point.
+
+```{r}
+lme.fit <- lmer(y ~ x + (1|id), data=dat.ex1)
+summary(lme.fit)
+```
+
+How to extract some of the statistics.
+
+```{r}
+fixef(lme.fit)
+vcov(lme.fit)
+diag(vcov(lme.fit))
+sqrt(diag(vcov(lme.fit)))
+fixef(lme.fit)/sqrt(diag(vcov(lme.fit)))
+```
+
+Testing the regression, fitting a reduced model with slope zero.
+
+```{r}
+lme.fit.red <- lmer(y ~ 1 + (1|id), dat.ex1)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Note that the 'lmer' function does not return p-values for the fixed effects in the output. See the end of this markdown how to use the 'lmerTest' package to add those p-values.
+
+#### Example 2
+
+A figure of the data.
+
+```{r}
+xyplot(y ~ x|id, data=dat.ex2, type=c("p","r"), layout=c(6,2), as.table=TRUE, xlab="Time", ylab="Response")
+```
+
+We can think of the data being described by a model with a random intercept and a random slope, i.e.
+
+Y<sub>ij</sub> = b<sub>0</sub> + B<sub>i</sub> + b<sub>1</sub>x<sub>j</sub> + C<sub>i</sub>x<sub>j</sub> + &epsilon;<sub>ij</sub>,
+
+where i referes to the subject and x<sub>j</sub> to the j<sup>th</sup> time point.
+
+```{r}
+lme.fit <- lmer(y ~ x + (x|id), dat.ex2)
+summary(lme.fit)
+```
+
+Do we need the random slope?
+
+```{r}
+lme.fit.red <- lmer(y ~ x + (1|id), dat.ex2)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Note the degrees of freedom - there is also a correlation parameter between the random effects in the full model.
+
+#### Example 1 continued
+
+The same data as above, but now with a treatment and a control group.
+
+```{r}
+xyplot(y~x|group:id,data=dat.ex1,type=c("p","r"),layout=c(6,2),as.table=TRUE,
+       xlab="Time",ylab="Response",strip=strip.custom(var.name=c("id","group")))
+```
+
+We can again think of the data being described by a random intercept model, with possible differences in the average intercept between treatment and control groups:
+
+Y<sub>ij</sub> = b<sub>0</sub> +  c<sub>0</sub>I<sub>{subject i is in treatment}</sub> + B<sub>i</sub> + b<sub>1</sub>x<sub>j</sub> + &epsilon;<sub>ij</sub>,
+
+where i referes to the subject and x<sub>j</sub> to the j<sup>th</sup> time point, and I<sub>{subject i is in treatment}</sub> indicates whether subject i is in the treatment or control arm.
+
+```{r}
+lme.fit <- lmer(y ~ group + x + (1|id), data=dat.ex1)
+summary(lme.fit)
+```
+
+Testing for treatment effect:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + (1|id), dat.ex1)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+#### Example 2 continued
+
+The same data as above, but now with a treatment and a control group.
+
+```{r}
+xyplot(y ~ x|group:id, data=dat.ex2, type=c("p","r"), layout=c(6,2), as.table=TRUE,
+       xlab="Time", ylab="Response", strip=strip.custom(var.name=c("id","group")))
+```
+
+We can think of the data being described by a model with a random intercept and a random slope, with possible differences in the average intercept and slope between treatment and control groups.
+
+Y<sub>ij</sub> = b<sub>0</sub> + c<sub>0</sub>I<sub>{subject i is in treatment}</sub> + B<sub>i</sub> + b<sub>1</sub>x<sub>j</sub> + c<sub>1</sub>I<sub>{subject i is in treatment}</sub>x<sub>j</sub> + C<sub>i</sub>x<sub>j</sub> + &epsilon;<sub>ij</sub>,
+
+where i referes to the subject and x<sub>j</sub> to the j<sup>th</sup> time point, and I<sub>{subject i is in treatment}</sub> indicates whether subject i is in the treatment or control arm.
+
+```{r}
+lme.fit <- lmer(y ~ group*x + (x|id), dat.ex2)
+summary(lme.fit)
+```
+
+Testing for differences in intercepts:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + group:x + (x|id), dat.ex2)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Testing for differences in slopes:
+
+```{r}
+lme.fit.red <- lmer(y ~ group + x + (x|id), dat.ex2)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Testing jointly for differences in intercepts and slopes:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + (x|id), dat.ex2)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+#### Example 3
+
+An example with large differences in slopes, comparing treatment and control group.
+
+```{r}
+xyplot(y ~ x|group:id, data=dat.ex3, type=c("p","r"), layout=c(6,2),as.table=TRUE, 
+       xlab="Time" ,ylab="Response", strip=strip.custom(var.name=c("id","group")))
+```
+
+As above, we can think of the data being described by a model with a random intercept and a random slope, with possible differences in the average intercept and slope between treatment and control groups.
+
+Y<sub>ij</sub> = b<sub>0</sub> + c<sub>0</sub>I<sub>{subject i is in treatment}</sub> + B<sub>i</sub> + b<sub>1</sub>x<sub>j</sub> + c<sub>1</sub>I<sub>{subject i is in treatment}</sub>x<sub>j</sub> + C<sub>i</sub>x<sub>j</sub> + &epsilon;<sub>ij</sub>,
+
+where i referes to the subject and x<sub>j</sub> to the j<sup>th</sup> time point, and I<sub>{subject i is in treatment}</sub> indicates whether subject i is in the treatment or control arm.
+
+```{r}
+lme.fit <- lmer(y ~ group*x + (x|id), dat.ex3)
+summary(lme.fit)
+```
+
+Testing for differences in intercepts:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + group:x + (x|id), dat.ex3)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Testing for differences in slopes:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + group + (x|id), dat.ex3)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+Testing jointly for differences in intercepts and slopes:
+
+```{r}
+lme.fit.red <- lmer(y ~ x + (x|id), dat.ex3)
+summary(lme.fit.red)
+anova(lme.fit,lme.fit.red)
+```
+
+### Linear mixed effects: longitudinal data analysis with lmerTest
+
+The 'lmerTest' package overwrites the 'lmer' function in the 'lme4' package, and adds p-values to the fixed effects in the output.
+
+```{r}
+library(lmerTest)
+```
+
+#### Example 1 
+
+```{r}
+xyplot(y ~ x|group:id, data=dat.ex1, type=c("p","r"), layout=c(6,2), as.table=TRUE,
+       xlab="Time", ylab="Response", strip=strip.custom(var.name=c("id","group")))
+lme.fit <- lmer(y ~ group + x + (1|id), data=dat.ex1)
+summary(lme.fit)
+```
+
+#### Example 2 
+
+```{r}
+xyplot(y ~ x|group:id, data=dat.ex2, type=c("p","r"), layout=c(6,2), as.table=TRUE,
+       xlab="Time", ylab="Response", strip=strip.custom(var.name=c("id","group")))
+lme.fit <- lmer(y ~ group*x + (x|id), dat.ex2)
+summary(lme.fit)
+```
+
+#### Example 3
+
+```{r}
+xyplot(y ~ x|group:id, data=dat.ex3, type=c("p","r"), layout=c(6,2), as.table=TRUE,
+       xlab="Time", ylab="Response", strip=strip.custom(var.name=c("id","group")))
+lme.fit <- lmer(y ~ group*x + (x|id), dat.ex3)
+summary(lme.fit)
+```

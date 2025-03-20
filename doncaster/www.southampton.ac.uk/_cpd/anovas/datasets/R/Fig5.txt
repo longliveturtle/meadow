@@ -1,0 +1,17 @@
+A	B	Y
+Control	Low	1.146
+Control	Low	1.78
+Control	Low	4
+Control	Low	9.05
+Control	High	15.878
+Control	High	22.871
+Control	High	21
+Control	High	24.042
+Water	Low	11.4
+Water	Low	20
+Water	Low	15
+Water	Low	13.651
+Water	High	15.14
+Water	High	7
+Water	High	12
+Water	High	14.043

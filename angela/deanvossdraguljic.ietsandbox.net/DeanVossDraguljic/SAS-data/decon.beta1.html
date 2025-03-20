@@ -1,0 +1,48 @@
+* decon.beta1.sas, decontamination (beta-particle) experiment, Table 13.24, p467;
+;
+* Data as arranged in Table 13.24;
+data beta1 (keep=block trtmt A B C D) beta2 (keep=block count);
+  do block=1 to 2;
+    do col=1 to 8; 
+      input trtmt $ @@;
+      A=substr(trtmt,1,1);
+      B=substr(trtmt,2,1);        
+      C=substr(trtmt,3,1);
+      D=substr(trtmt,4,1);
+      output beta1;
+    end;
+    do col=1 to 8;
+      input count @@;
+      output beta2;
+    end;
+  end;
+  lines;
+  1010 1111 0110 0000 1100 0101 0011 1001
+   716  686  498 1437  527  579 1433  906 
+  0010 0001 0111 1000 1101 0100 1110 1011
+  1024 1364  475  574  664  579  507 1130 
+;
+data beta; merge beta1 beta2;
+;
+* Data by observation;
+data beta;
+  input block trtmt $ A B C D count;
+  lines;
+          1    1010   1 0 1 0  716
+          1    1111   1 1 1 1  686
+          1    0110   0 1 1 0  498
+          1    0000   0 0 0 0 1437
+          1    1100   1 1 0 0  527
+          1    0101   0 1 0 1  579
+          1    0011   0 0 1 1 1433
+          1    1001   1 0 0 1  906
+          2    0010   0 0 1 0 1024
+          2    0001   0 0 0 1 1364
+          2    0111   0 1 1 1  475
+          2    1000   1 0 0 0  574
+          2    1101   1 1 0 1  664
+          2    0100   0 1 0 0  579
+          2    1110   1 1 1 0  507
+          2    1011   1 0 1 1 1130
+; 
+run;

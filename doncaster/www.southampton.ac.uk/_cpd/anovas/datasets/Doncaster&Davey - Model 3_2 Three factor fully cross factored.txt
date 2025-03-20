@@ -1,0 +1,206 @@
+3.2 THREE FACTOR FULLY CROSS-FACTORED MODEL Y = C|B|A + e  
+
+Analysis of terms: C|B|A
+
+Data:
+
+A	B	C	Y
+1	1	1	-3.8558
+1	1	1	 4.4076
+1	1	2	-4.1752
+1	1	2	 1.4913
+1	2	1	 5.9699
+1	2	1	 5.2141
+1	2	2	 9.1467
+1	2	2	 5.8209
+2	1	1	 9.4082
+2	1	1	 6.0296
+2	1	2	15.3014
+2	1	2	12.1900
+2	2	1	 6.9754
+2	2	1	14.3012
+2	2	2	10.4266
+2	2	2	 2.3707
+3	1	1	19.1834
+3	1	1	18.3855
+3	1	2	23.3385
+3	1	2	21.9134
+3	2	1	16.4482
+3	2	1	11.6765
+3	2	2	17.9727
+3	2	2	15.1760
+
+
+COMMENT: This example is balanced and therefore orthogonal, 
+so uses Type I (sequential) SS. In the event of non-orthogonality, 
+for categorical fixed effects get Type II adjusted SS for main 
+effects by running the model three times and each time using only 
+the SS of the last entered main effect and two-way interaction, or 
+for random effects use Type III adjusted SS.           
+
+
+Model 3.2(i) A, B and C are all fixed factors:
+
+  Source   DF       SS      MS      F      P
+1 A         2   905.27  452.63  38.12 <0.001
+2 B         1     0.19    0.19   0.02  0.902
+3 B*A       2   167.65   83.82   7.06  0.009
+4 C         1    11.80   11.80   0.99  0.338
+5 C*A       2    10.02    5.01   0.42  0.665
+6 C*B       1    10.90   10.90   0.92  0.357
+7 C*B*A     2    48.84   24.42   2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+
+Model 3.2(ii) A and C are fixed factors, B is a random factor:
+
+  			         Restricted Unrestricted
+  Source   DF       SS      MS     F      P     F      P
+1 A         2   905.27  452.63  5.40  0.156  5.40  0.156
+2 B         1     0.19    0.19  0.02  0.902  0.00  0.966*
+3 B*A       2   167.65   83.82  7.06  0.009  3.43  0.226
+4 C         1    11.80   11.80  1.08  0.487  1.08  0.487
+5 C*A       2    10.02    5.01  0.21  0.830  0.21  0.830
+6 C*B       1    10.90   10.90  0.92  0.357  0.45  0.573
+7 C*B*A     2    48.84   24.42  2.06  0.171  2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+* Quasi F-ratio.
+
+
+Model 3.2(iii) A is a fixed factor, B and C are random factors:
+
+			         Restricted Unrestricted
+  Source   DF       SS      MS     F      P     F      P
+1 A         2   905.27  452.63  7.03  0.239* 7.03  0.239*
+2 B         1     0.19    0.19  0.02  0.917  0.00  0.966*
+3 B*A       2   167.65   83.82  3.43  0.226  3.43  0.226
+4 C         1    11.80   11.80  1.08  0.487     x      x
+5 C*A       2    10.02    5.01  0.21  0.830  0.21  0.830
+6 C*B       1    10.90   10.90  0.92  0.357  0.45  0.573
+7 C*B*A     2    48.84   24.42  2.06  0.171  2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+* Quasi F-ratio.
+x Not an exact F-test; estimated denominator MS is <0.
+
+
+Model 3.2(iv) A, B and C are all random factors:
+ 
+  Source   DF       SS      MS     F      P  
+1 A         2   905.27  452.63  7.03  0.239*
+2 B         1     0.19    0.19  0.00  0.966*
+3 B*A       2   167.65   83.82  3.43  0.226
+4 C         1    11.80   11.80     x      x
+5 C*A       2    10.02    5.01  0.21  0.830
+6 C*B       1    10.90   10.90  0.45  0.573
+7 C*B*A     2    48.84   24.42  2.06  0.171
+8 S(C*B*A) 12   142.47   11.87  
+  Total    23  1297.13
+
+* Quasi F-ratio.
+x Not an exact F-test; estimated denominator MS is <0.
+
+
+Model 3.2(v) A and B are fixed factors, C is a covariate of the response:
+ 
+  Source   DF       SS      MS      F      P
+1 A         2   905.27  452.63  38.12 <0.001
+2 B         1     0.19    0.19   0.02  0.902
+3 B*A       2   167.65   83.82   7.06  0.009
+4 C         1    11.80   11.80   0.99  0.338
+5 C*A       2    10.02    5.01   0.42  0.665
+6 C*B       1    10.90   10.90   0.92  0.357
+7 C*B*A     2    48.84   24.42   2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+
+Model 3.2(vi) A is a fixed factor, B is a random factor, C is a covariate of the response:
+
+			         Restricted Unrestricted
+  Source   DF       SS      MS     F      P     F      P
+1 A         2   905.27  452.63  5.40  0.156  5.40  0.156
+2 B         1     0.19    0.19  0.02  0.902  0.00  0.966
+3 B*A       2   167.65   83.82  7.06  0.009  7.06  0.009
+4 C         1    11.80   11.80  1.08  0.487  1.08  0.487
+5 C*A       2    10.02    5.01  0.21  0.830  0.21  0.830
+6 C*B       1    10.90   10.90  0.92  0.357  0.92  0.357
+7 C*B*A     2    48.84   24.42  2.06  0.171  2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+ 
+Model 3.2(vii) A and B are random factors, C is a covariate of the response:
+
+  Source   DF       SS      MS     F      P
+1 A         2   905.27  452.63  5.40  0.156
+2 B         1     0.19    0.19  0.00  0.967
+3 B*A       2   167.65   83.82  7.06  0.009
+4 C         1    11.80   11.80     x      x
+5 C*A       2    10.02   10.02  1.23  0.326
+6 C*B       1    10.90   10.90  2.68  0.128
+7 C*B*A     2    48.84   24.42  2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+x Not an exact F-test; estimated denominator MS is <0.
+
+
+Model 3.2(viii) A is a fixed factor, B and C are covariates of the response:
+
+  Source   DF       SS      MS      F      P
+1 A         2   905.27  452.63  38.12 <0.001
+2 B         1     0.19    0.19   0.02  0.902
+3 B*A       2   167.65   83.82   7.06  0.009
+4 C         1    11.80   11.80   0.99  0.338
+5 C*A       2    10.02    5.01   0.42  0.665
+6 C*B       1    10.90   10.90   0.92  0.357
+7 C*B*A     2    48.84   24.42   2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+
+Model 3.2(ix) A is a random factor, B and C are covariates of the response:
+
+  Source   DF       SS      MS      F      P
+1 A         2   905.27  452.63  38.12 <0.001
+2 B         1     0.19    0.19   0.00  0.966
+3 B*A       2   167.65   83.82   7.06  0.009
+4 C         1    11.80   11.80   2.36  0.265
+5 C*A       2    10.02    5.01   0.42  0.665
+6 C*B       1    10.90   10.90   0.45  0.573
+7 C*B*A     2    48.84   24.42   2.06  0.171
+8 S(C*B*A) 12   142.47   11.87
+  Total    23  1297.13
+
+
+COMMENT: Covariates A, B and C (below) are all orthogonal so use Type I SS. 
+In the event of non-orthogonality,get Type II SS for main effects by running the 
+model three times and each time using only the SS of the last entered main 
+effect and two-way interaction.
+
+
+Model 3.2(x) A, B and C are all covariates of the response:
+ 
+  Source   DF       SS      MS      F      P
+1 A         1   901.12  901.12  71.08  0.000
+2 B         1     0.19    0.19   0.01  0.905
+3 B*A       1   155.20  155.20  12.24  0.003
+4 C         1    11.80   11.80   0.93  0.349
+5 C*A       1     9.24    9.24   0.73  0.406
+6 C*B       1    10.90   10.90   0.86  0.368
+7 C*B*A     1     5.85    5.85   0.46  0.506
+8 S(C*B*A) 16   202.84   12.68
+  Total    23  1297.13
+
+
+__________________________________________________________________
+
+Doncaster, C. P. & Davey, A. J. H. (2007) Analysis of Variance and
+Covariance: How to Choose and Construct Models for the Life Sciences.
+Cambridge: Cambridge University Press.
+http://www.southampton.ac.uk/~cpd/anovas/datasets/

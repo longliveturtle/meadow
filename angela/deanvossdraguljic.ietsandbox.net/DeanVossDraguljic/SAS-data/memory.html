@@ -1,0 +1,59 @@
+* memory.sas, memory experiment, Table 6.23, p197;
+;
+* Data as arranged in Table 6.23;
+data memory1 memory2;
+  input wordtype @@;
+  do distract=1 to 3; 
+     trtmt = 10*wordtype + distract;
+    do rep=1 to 3; drop=rep;
+	  input y @@;
+	  output memory1;
+	end; end;
+  do distract=1 to 3;
+	do rep=1 to 3;
+	  input z @@;
+	  output memory2;
+  end; end;
+  lines;
+  1     20    14    24      15    22    17      17    13    12
+      0.27 -2.16  1.89   -1.21  1.62 -0.40    1.21 -0.40 -0.81
+  2     19    14    19      12    11    14      12    15     8
+      0.67 -1.35  0.67   -0.13 -0.54  0.67    0.13  1.35 -1.48
+  3     11    12    15       8     8     9      12     7    10
+     -0.67 -0.27  0.94   -0.13 -0.13  0.27    0.94 -1.08  0.13
+;
+data memory; merge memory1 (drop = z) memory2 (drop = y);
+;
+* Data by observation;
+data memory;
+  input wordtype distract trtmt    y   z;
+  lines;
+           1        1      13     20  0.27
+           1        1      13     14 -2.16
+           1        1      13     24  1.89
+           1        2      13     15 -1.21
+           1        2      13     22  1.62
+           1        2      13     17 -0.40
+           1        3      13     17  1.21
+           1        3      13     13 -0.40
+           1        3      13     12 -0.81
+           2        1      23     19  0.67
+           2        1      23     14 -1.35
+           2        1      23     19  0.67
+           2        2      23     12 -0.13
+           2        2      23     11 -0.54
+           2        2      23     14  0.67
+           2        3      23     12  0.13
+           2        3      23     15  1.35
+           2        3      23      8 -1.48
+           3        1      33     11 -0.67
+           3        1      33     12 -0.27
+           3        1      33     15  0.94
+           3        2      33      8 -0.13
+           3        2      33      8 -0.13
+           3        2      33      9  0.27
+           3        3      33     12  0.94
+           3        3      33      7 -1.08
+           3        3      33     10  0.13
+;
+run;
