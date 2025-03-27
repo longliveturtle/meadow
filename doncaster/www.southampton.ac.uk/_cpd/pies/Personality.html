@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/pies/Personality.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 03:48:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personality</title>
+
+<base target="_blank">
+<style>
+body, html {
+ margin: 6px;
+ max-width: 540px;
+ -webkit-text-size-adjust: none; 
+ text-size-adjust: none;
+}
+a {
+ text-decoration: none;
+}
+.sup-ref {
+  vertical-align: super;
+  font-size: 7pt;
+}
+/* Container for the link and thumbnail */
+.thumbnail-container {
+}
+/* Thumbnail image */
+.thumbnail {
+ display: none; /* Hidden by default */
+ position: fixed;
+ top: 50%;
+ left: calc(50% - (50vw - 190px)); /* Center relative to content */
+ transform: translate(-50%, -50%);
+ z-index: 100; /* Ensures it appears above other content */
+ max-width: 90vw; /* 90% of viewport width */
+ max-height: 90vh; /* 90% of viewport height */
+ width: 350px;
+ height: 600px;
+ border: 2px solid #ccc;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+ background-color: rgba(253, 249, 250, 0.9); /* opaque white background */
+}
+/* Show thumbnail on hover */
+.thumbnail-container:hover .thumbnail {
+ display: inline-block;
+ }
+/* Show thumbnail on touch (for mobile) */
+.thumbnail-container.touch .thumbnail {
+ display: inline-block;
+ }
+
+.s0 {
+ color: black;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 12.5pt;
+ padding-top: 0pt;
+ margin-top: 6pt;
+ margin-bottom: 6pt;
+ text-align: left;
+}
+.s1 {
+ color: black;
+ font-family: "Times New Roman", Times, serif;
+ font-size: 12pt;
+ padding-top: 0pt;
+ margin-bottom: 6pt;
+ text-align: left;
+}
+.s2 {
+ color: black;
+ font-family: "Times New Roman", Times, serif;
+ font-style: italic;
+ font-weight: normal; 
+ font-size: 12.5pt;
+ margin-top: 6pt;
+}
+.s3 {
+ color: black;
+ font-family: "Times New Roman", Times, serif;
+ font-size: 11pt;
+ padding-top: 0pt;
+ text-align: left;
+}
+ul.list {
+ margin-top: 11pt;
+ list-style-type:decimal; /* Number style */
+ list-style-position: outside; /* Ensures proper alignment */
+ padding-left: 20px; /* Controls indentation */
+ margin-left: 0; /* Resets unnecessary margins */
+}
+* {
+ margin: 0;
+ padding: 0;
+}
+
+</style>
+</head>
+
+<body>
+<p class="s0">Personality</font></p>
+
+<p class="s1">Nematodes (roundworms) occupy every part of the world&#x2019;s oceans and terrestrial and aquatic landmasses, numbering perhaps 1 million species. The temperate soil-living species <em>Caenorhabditis elegans</em> has a nervous system of only 302 neurons, yet its neuromodulators regulate consistent variation between individual worms in their patterns of roaming and dwelling behaviour<span class="sup-ref">1</span>. This non-genetic signature of personality may change with development stage or persist throughout development.</p>
+<p class="s1">Humans express complex personalities, commonly framed by five continuous dimensions: openness to experience, conscientiousness, extraversion, agreeableness, neuroticism. Within these dimensions, patterns of self-reported behaviour tend to cluster around four personality types: self-centred (more likely in younger people), reserved, role-model (more frequently in older people), and average (in-between and overlapping the other three clusters)<span class="sup-ref">2, 3</span>.</p>
+<p class="s1">As we age, we grow out of one dominant personality type into another, depicted since antiquity as the seasons of life and caricatured by Shakespeare&#x2019;s Jaques in <em>As You Like It</em> (<a href="https://digitalcollections.folger.edu/img5303">1623</a>), entwining life with theatre: <span class="thumbnail-container"><a href="#" class="thumbnail-link">&#x201C;All the world&#x2019;s a stage, and all the men and women merely players &#x2026;&#x201D;</a><iframe src="Personality-AllTheWorld.html" alt="Thumbnail" class="thumbnail"></iframe></span></p>
+<p class="s1">For humans, as for nematodes, it remains unclear what personality really is. Genes and environment likely constitute the distal causes of a personality that is instantiated in the brain and expressed in individually distinct behaviours<span class="sup-ref">4</span>. Without personality, we would have no personhood. We would be as we become at the seventh and final age in Jaques&#x2019; soliloquy &ndash; &#x201C;mere oblivion; sans teeth, sans eyes, sans taste, sans everything.&#x201D;</p>
+<ul class="list">
+<li class="s3">Stern, S., Kirst, C., and Bargmann, C. I. (<a href="https://doi.org/10.1016/j.cell.2017.10.041">2017</a>) <em>Cell</em>.</li>
+<li class="s3">Gerlach, M., Farb, B., Revelle, W., and Nunes Amaral, L. A. (<a href="https://doi.org/10.1038/s41562-018-0419-z">2018</a>) <em>Nature Human Behaviour</em>.</li>
+<li class="s3">Price, M. (<a href="https://doi.org/10.1126/science.aav4499">2018</a>) <em>Science</em> News.</li>
+<li class="s3">Dubois, J., Eberhardt, F., Paul, L. K., and Adolphs, R. (<a href="https://doi.org/10.1038/s41562-020-00989-3">2020</a>) <em>Nature Human Behaviour</em>.</li>
+</ul>
+
+<br><p align="right"><a href="../history.html"><em>Timeline of the Human Condition</em></a></p>
+
+<script>
+ // Add touch event for mobile devices
+ const thumbnailContainer = document.querySelector('.thumbnail-container');
+ const thumbnailLink = document.querySelector('.thumbnail-link');
+ // Prevent default link behavior
+ thumbnailLink.addEventListener('click', (e) => {
+ e.preventDefault();
+ });
+ // Add touch event to show thumbnail on mobile
+ thumbnailContainer.addEventListener('touchstart', () => {
+ thumbnailContainer.classList.add('touch');
+ });
+ // Hide thumbnail when touching outside
+ document.addEventListener('touchstart', (e) => {
+ if (!thumbnailContainer.contains(e.target)) {
+ thumbnailContainer.classList.remove('touch');
+ }
+ });
+</script>
+
+</body>
+
+<!-- Mirrored from www.southampton.ac.uk/~cpd/pies/Personality.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 03:48:37 GMT -->
+</html>

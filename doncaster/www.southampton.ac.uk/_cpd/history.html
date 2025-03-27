@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from www.southampton.ac.uk/~cpd/history.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:38:35 GMT -->
+<!-- Mirrored from www.southampton.ac.uk/~cpd/history.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 03:21:28 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
 
@@ -9,10 +9,12 @@
 <meta name="author" content="C.P. Doncaster">
 <meta name="robots" content="noodp,noydir" />
 <meta name="format-detection" content="telephone=no">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <title>Timeline of the human condition | Milestones in evolution and history</title>
 
+<!-- ----------------------------------------------------------------------- -->
+<!-- Scripts---------------------------------------------------------------- -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8Z4S9KBGN"></script>
 <script>
@@ -21,23 +23,29 @@
  gtag('js', new Date());
  gtag('config', 'G-C8Z4S9KBGN');
 </script>
-
-<!-- For calculated ages, separate '000s with commas -->
+<!-- Script for calculated ages, separate '000s with commas -->
 <script>
 function numberWithCommas(x) {
  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }
 </script>
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
 <base target="_blank" rel="noopener noreferrer">
 
+<!-- ----------------------------------------------------------------------- -->
+<!-- Styles----------------------------------------------------------------- -->
 <style>
 body {
  margin: 0;
+ -webkit-text-size-adjust: 100%;
 }
 p {
  margin: 0px 0px 0px 0px;
 }
+
+/*----------------------------------------------------------------------------*/
 /* Styles for table design */
 table {
  width:100%;
@@ -66,11 +74,13 @@ td.left-header {
  width:126px;
  text-align:right;
  vertical-align:bottom;
+ font-size:11pt; 
 }
 td.right-header {
  padding: 9px 6px 9px 6px;
  text-align:right;
  vertical-align:bottom;
+ font-size:12pt; 
 }
 td.left-cell {
  width:126px; 
@@ -172,6 +182,9 @@ span.bracket {
  padding-top:0px;
  text-align:right;
 }
+/* End of styles for table design */
+
+/*----------------------------------------------------------------------------*/
 /* Styles for within-table contents */
 a {
  text-decoration: none;
@@ -217,12 +230,6 @@ img.arrow {
  vertical-align:bottom;
  display:inline-block;
 }
-img.key-arrow {
- height:13px;
- width:13px;
- vertical-align:middle;
- display:inline-block;
-}
 #down-arrow {
  cursor: pointer;
 }
@@ -236,8 +243,11 @@ img.key-arrow {
  cursor: pointer;
  display::inline-block;
 }
-#bullseyekey {
- cursor: pointer;
+img.bull-style {
+ height:13px;
+ float:none;
+ vertical-align:middle;
+ margin-top:0px;
 }
 .icon { /*location symbol: polo mint*/
  display: inline-block;
@@ -258,6 +268,29 @@ img.key-arrow {
  border-top: 6px solid blue; /*depth*/
  border-bottom: none; /*let it drop*/
 }
+.n-w { /*prevent line break between icon and next non-space element*/
+ white-space: nowrap;
+}
+/* End of styles for within-table contents */
+
+/*----------------------------------------------------------------------------*/
+/* Styles for key contents */
+img.key-arrow {
+ height:13px;
+ width:13px;
+ vertical-align:middle;
+ display:inline-block;
+}
+img.find-style-key {
+ cursor: pointer;
+ height:16px;
+ float:none;
+ vertical-align:middle;
+ margin-top:0px;
+}
+#bullseyekey {
+ cursor: pointer;
+}
 .key-icon { /*location symbol in key: polo mint*/
  display: inline-block;
  box-sizing: border-box;
@@ -276,9 +309,9 @@ img.key-arrow {
  border-top: 6px solid blue;
  border-bottom: none;
 }
-.n-w { /*prevent line break between icon and next non-space element*/
- white-space: nowrap;
-}
+/* End of styles for key contents */
+
+/*----------------------------------------------------------------------------*/
 /* Styles for popup images bedded in overlay */
 #popupId { /* pointing-finger cursor as for html link */
  cursor: pointer;
@@ -289,7 +322,7 @@ img.key-arrow {
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- z-index: 2;
+ z-index: 3;
 }
 #overlay { /* overlay style to bed popup */
  display: none;
@@ -299,7 +332,7 @@ img.key-arrow {
  width: 100%;
  height: 100%;
  background-color: rgba(0, 0, 0, 0.8);
- z-index: 1; /* stacking on z-axis, above background */
+ z-index: 2; /* stacking on z-axis, above background */
 }
 @media only screen and (min-height: 480px) { /* desktop devices */
 #fullsizeImage { /* full-size popup image style to half-fill screen */
@@ -321,7 +354,7 @@ img.key-arrow {
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- z-index: 2; /* stacking on z-axis, above 'z-index: 1' */
+ z-index: 3; /* stacking on z-axis, above background */
 }
 #overlay2 { /* overlay style to bed popup2 */
  display: none;
@@ -331,7 +364,7 @@ img.key-arrow {
  width: 100%;
  height: 100%;
  background-color: rgba(0, 0, 0, 0.7);
- z-index: 1;
+ z-index: 2;
 }
 #fullsizeImage2 { /* full-size popup2 image style to fill screen */
  max-height: 90vh; /* Set the maximum height of the image */
@@ -340,7 +373,140 @@ img.key-arrow {
 }
 /* End styles for popup images bedded in overlay */
 
+/*----------------------------------------------------------------------------*/
+/* Styles for the find button and search box*/
+img.find-style {
+ cursor: pointer;
+ height:20px;
+ float:none;
+ vertical-align:middle;
+ margin-top:0px;
+ margin-left:-6px;
+}
+.find-button {
+ vertical-align:middle;
+ display::inline-block;
+ touch-action: manipulation; 
+}
+.search-box {
+ position: fixed;
+ background: white;
+ padding: 10px;
+ border: 1px solid #ccc;
+ display: none;
+ z-index: 1;
+ touch-action: manipulation;
+ font-size: 16px;
+ box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+ width: 100% /* calc(100% - 34px); */
+ max-width: 400px;
+ height: 80px;
+ left: 3px;
+ pointer-events: auto;
+}
+.search-input {
+ font-size: 16px;
+ padding: 5px;
+ width: 100%;
+ box-sizing: border-box;
+}
+.highlight {
+ background-color: yellow;
+ font-weight: bold;
+}
+.active-highlight {
+ background-color: orange;
+}
+.search-controls {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 5px;
+ margin-top: 8px;
+}
+.nav-controls {
+ display: flex;
+ align-items: center;
+}
+.match-count {
+ margin-left: 10px;
+ font-size: 14px;
+ color: #666;
+}
+.right-controls {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+}
+.search-options {
+ display: flex;
+ align-items: center;
+ font-size: 14px;
+ white-space: nowrap;
+}
+.nav-button {
+ transform: rotate(-90deg);
+ display: inline-block;
+ font-weight: bold;
+ width: 30px;
+ height: 30px;
+ text-align: center;
+ line-height: 30px;
+ cursor: pointer;
+ user-select: none;
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ touch-action: manipulation;
+ font-size: 16px;
+}
+.close-button {
+ cursor: pointer;
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ padding: 5px 5px;
+ touch-action: manipulation;
+ font-size: 12px;
+}
+input[type="checkbox"] {
+ cursor: pointer;
+ width: 16px;
+ height: 16px;
+ margin-right: 4px;
+ -webkit-appearance: none;
+ appearance: none;
+ background-color: #fff;
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ position: relative;
+}
+input[type="checkbox"]:checked {
+ background-color: #4a90e2;
+ border-color: #4a90e2;
+}
+input[type="checkbox"]:checked:after {
+ content: '';
+ position: absolute;
+ left: 5px;
+ top: 1px;
+ width: 4px;
+ height: 8px;
+ border: solid white;
+ border-width: 0 2px 2px 0;
+ transform: rotate(45deg);
+ left: 50%;
+ top: 40%;
+ transform: translate(-50%, -50%) rotate(45deg);
+}
+label[for="wholeWordCheckbox"] {
+ cursor: pointer;
+ padding: 6px 4px;
+ user-select: none;
+}
+/* End of styles for the find button and search box */
+/*----------------------------------------------------------------------------*/
 </style>
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 </head>
 
 <body lang=EN-GB link=blue vlink=purple>
@@ -352,17 +518,18 @@ img.key-arrow {
  <br><br>
  <span style="font-size:18px;">&mdash; Milestones in Evolution and History &mdash;</span>
  <br><br><br>
- <p class="key"><span style="font-size:14px;"><strong>Key:</strong></span>&nbsp;<img class="legend" alt="" src="pies/13800mya.png">&nbsp;pies fill with colour as time passes towards the present (click on boxed pies <img id="popupId" class="legend" alt="popup timeline" title="popup 13.8 Bya birth of Universe &rarr; 4 Bya emergence of sustained life" src="pies/13800mya-pop.png" onClick="showPopup('pies/13800mya-popup.png')">, further explanation <a title="bottom" href="#Ages" target="_self"><img class="key-arrow" alt="bottom" src="pies/BottomArrow.png"></a> below); click on <img id="bullseyekey" class="legend" alt="targets random age" title="go to random age" src="pies/Bullseye.png" onClick="gotoRandomRow()"> to explore random ages; click on arrows to go <a title="next section" href="#II-1" target="_self"><img class="key-arrow" alt="down" src="pies/NextDownArrow.png"></a> to next section, <span title="top of section"><img class="key-arrow" alt="up" src="pies/NextUpArrow.png"></span> to top of current section, <a title="Summary" href="history-summary.html" target="_self"><img class="key-arrow" alt="to Summary" src="pies/SummaryArrowR.png"></a> to Summary, and <a title="Synopsis" href="history-synopsis.html" target="_self"><img class="key-arrow" alt="to Synopsis" src="pies/SynopsisArrowR.png"></a> to Synopsis; click on <a href="pies/1640mya-tectonics.html"><img class="globe-legend" alt="" src="pies/Globe.svg"></a> to see a global map of contemporaneous tectonic plates; click on <span class="n-w"><a href="https://earth.google.com/web/@0.00,-17.34,-12861.9a,63182866d,35y,0h,0t,0r/"><i class='key-icon'></i></a></span> to go to the location in Google Earth (desk browser or mobile App); click <span class="n-w">on <a href="pies/Colour-indigo.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a></span>&#8239;for illustrations</p>
+ <p class="key"><span style="font-size:14px;"><strong>Key:</strong></span>&nbsp;<img class="legend" alt="" src="pies/13800mya.png">&nbsp;pies fill with colour as time passes towards the present (click on boxed pies <img id="popupId" class="legend" alt="popup timeline" title="popup 13.8 Bya birth of Universe &rarr; 4 Bya emergence of sustained life" src="pies/13800mya-pop.png" onClick="showPopup('pies/13800mya-popup.png')">, further explanation <a title="bottom" href="#Ages" target="_self"><img class="key-arrow" alt="bottom" src="pies/BottomArrow.png"></a> below); click on <img id="find-button" class="find-style-key" alt="find text" title="find text" src="pies/Magnifyer.png" onClick="toggleSearchBox()"> to find a word or phrase; click on <img id="bullseyekey" class="legend" alt="targets random age" title="go to random age" src="pies/Bullseye.png" onClick="gotoRandomRow()"> to explore random ages; click on arrows to go <a title="next section" href="#II-1" target="_self"><img class="key-arrow" alt="down" src="pies/NextDownArrow.png"></a> to next section, <span title="top of section"><img class="key-arrow" alt="up" src="pies/NextUpArrow.png"></span> to top of current section, <a title="Summary" href="history-summary.html" target="_self"><img class="key-arrow" alt="to Summary" src="pies/SummaryArrowR.png"></a> to Summary, and <a title="Synopsis" href="history-synopsis.html" target="_self"><img class="key-arrow" alt="to Synopsis" src="pies/SynopsisArrowR.png"></a> to Synopsis; click on <a href="pies/1640mya-tectonics.html"><img class="globe-legend" alt="" src="pies/Globe.svg"></a> to see a global map of contemporaneous tectonic plates; click on <span class="n-w"><a href="https://earth.google.com/web/@0.00,-17.34,-12861.9a,63182866d,35y,0h,0t,0r/"><i class='key-icon'></i></a></span> to go to the location in Google Earth (desk browser or mobile App); click <span class="n-w">on <a href="pies/Colour-indigo.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a></span>&#8239;for illustrations</p>
  </td>
  </tr>
 </table>
  
 <table class="header" id="sticky-header" border=1>
  <tr>
- <td class="left-header"><img id="bullseye" class="legend" alt="targets random age" title="go to random age" src="pies/Bullseye.png" onClick="gotoRandomRow()"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years&nbsp;ago</strong></td>
+ <td class="left-header"><img id="find-button" class="find-style" alt="find text" title="find text" src="pies/Magnifyer.png" onClick="toggleSearchBox()">&nbsp;&nbsp;&nbsp;<img id="bullseye" class="bull-style" alt="targets random age" title="go to random age" src="pies/Bullseye.png" onClick="gotoRandomRow()">&nbsp;&nbsp;<strong>Years&nbsp;ago</strong></td>
  <td class="right-header"><span style='float:left;'><div id="popupId" title="popup timeline of events after the birth of the Universe each more-or-less half way to the present from the preceding event" onClick="showPopup2('pies/Ages.png')"><font color = blue><strong>Event</strong></font></div></span><a title="bottom" href="#Ages" target="_self"><img class="arrow" alt="bottom" src="pies/BottomArrow.png"></a>&nbsp;&nbsp;&nbsp;<span title="next section" id="down-arrow"><img class="arrow" alt="down" src="pies/NextDownArrow.png"></span>&nbsp;&nbsp;&nbsp;<a title="9500 BCE" href="#BCE" target="_self"><font color = #C90><strong>BCE</strong></font></a>&nbsp;&nbsp;&nbsp;<a title="CE 1" href="#CE" target="_self"><font color = #900><strong>CE</strong></font></a>&nbsp;&nbsp;&nbsp;<span title="top of section" id="up-arrow"><img class="arrow" alt="up" src="pies/NextUpArrow.png"></span>&nbsp;&nbsp;&nbsp;<a title="top" href="#" target="_self"><img class="arrow" alt="top" src="pies/TopArrow.png"></a>&nbsp;</td>
  </tr>
 </table>
+
 <section id="section0">
 <table>
  <tr>
@@ -441,7 +608,7 @@ img.key-arrow {
  </tr>
  <tr>
  <td class="left-cell"><img id="popupId" class="cell" alt="popup timeline" title="popup 2.1 Bya multicellular life &rarr; 890 Mya earliest animals" src="pies/2100mya-pop.png" onClick="showPopup('pies/2100mya-popup.png')">2,100,000,000</td>
- <td>early multicellular life, with cell-to-cell signalling and coordinated responses (<a href="https://doi.org/10.1038/nature09166">Proterozoic</a> <a href="https://doi.org/10.1016/j.precamres.2024.107453">Eon</a>) &rarr; the human body containing <a href="https://doi.org/10.1073/pnas.2303077120">28-36</a>&nbsp;trillion cells in <a href="https://www.nature.com/immersive/d42859-024-00060-5/index.html">hundreds</a> of mutually-dependent <a href="https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Fimmersive%2Fd42859-024-00060-5%2Fassets%2FXJJzBVVnRK%2Fhca-body-18nov-900x1006.jpg&amp;code=3099210b-3538-4689-bc3e-c9f7f3c74a84">types</a>, plus a similar order of commensal <a href="https://doi.org/10.1371/journal.pbio.1002533">microbes</a> without which <a href="https://doi.org/10.1016/j.mayocp.2013.10.011">we die</a></td>
+ <td>early multicellular life, with cell-to-cell signalling and coordinated responses (<a href="https://doi.org/10.1038/nature09166">Proterozoic</a> <a href="https://doi.org/10.1016/j.precamres.2024.107453">Eon</a>) &rarr; the human body containing <a href="https://doi.org/10.1073/pnas.2303077120">28-36</a>&nbsp;trillion cells in <a href="https://www.nature.com/immersive/d42859-024-00060-5/index.html">hundreds</a> of mutually-dependent <a href="../../www.nature.com/immersive/d42859-024-00060-5/assets/XJJzBVVnRK/hca-body-18nov-900x1006.jpg">types</a>, plus a similar order of commensal <a href="https://doi.org/10.1371/journal.pbio.1002533">microbes</a> without which <a href="https://doi.org/10.1016/j.mayocp.2013.10.011">we die</a></td>
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/1640mya.png">1,640,000,000</td>
@@ -473,7 +640,7 @@ img.key-arrow {
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/550mya.png">550,000,000</td>
- <td>earliest bilaterian animals, with left-right symmetry (<a href="https://doi.org/10.1038/d41586-020-02985-z">Ediacaran</a> Period): burrowing <em>Ikaria</em> with mouth and gut; segmented <em>Yilingia</em> with paired legs and musculature; roundworm <a href="https://doi.org/10.1016/j.cub.2024.10.030"><em>Uncus</em></a>, earliest of now the most plentiful animal group</td>
+ <td>earliest bilaterian animals, with left-right symmetry (<a href="https://doi.org/10.1038/d41586-020-02985-z">Ediacaran</a> Period): burrowing <em>Ikaria</em> with mouth and gut; segmented <em>Yilingia</em> with paired legs and musculature; roundworm <a href="https://doi.org/10.1016/j.cub.2024.10.030"><em>Uncus</em></a>, earliest of now the most numerous and diverse animal phylum, variable also in <span class="n-w">personality<a href="pies/Personality.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a></span></td>
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/540mya.png">540,000,000</td>
@@ -549,7 +716,7 @@ img.key-arrow {
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/350mya.png">350,000,000</td>
- <td>earliest land vertebrates (<a href="https://doi.org/10.1038/418035a">Early Carboniferous</a> Period, Britain, Euramerica <a href="https://earth.google.com/web/@55.95597289,-4.53073752,112.27716938a,13644.98724221d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a> <span class="n-w"><a href="pies/350mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>):</span> semi-aquatic amphibian tetrapods, with <a href="https://doi.org/10.1073/pnas.2220404120">blinking</a> eyes and <a href="https://doi.org/10.1126/science.adi8592">tongues</a> &rarr; human tongues detecting sweet, sour, salty, bitter and savoury tastes</td>
+ <td>earliest land vertebrates (<a href="https://doi.org/10.1038/418035a">Early Carboniferous</a> Period, Britain, Euramerica <a href="https://earth.google.com/web/@55.95597289,-4.53073752,112.27716938a,13644.98724221d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a> <span class="n-w"><a href="pies/350mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>):</span> semi-aquatic amphibian tetrapods, with <a href="https://doi.org/10.1073/pnas.2220404120">blinking</a> eyes and <a href="https://doi.org/10.1126/science.adi8592">tongue</a> &rarr; the human tongue detecting sweet, sour, salty, bitter and savoury tastes</td>
  </tr>
  <tr>
  <td class="left-cell"><img id="popupId" class="cell" alt="popup timeline" title="popup 340 Mya fully-terrestrial vertebrates &rarr; 178 Mya true mammals" src="pies/340mya-pop.png" onClick="showPopup('pies/340mya-popup.png')">340,000,000</td>
@@ -572,6 +739,10 @@ img.key-arrow {
  <td>dawn of the modern world: major biological turnover linked to volcanism (<a href="https://doi.org/10.1126/sciadv.aba0099">Late Triassic</a> Period <span class="n-w"><a href="pies/233mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>)</span> &rarr; rapid diversifications and originations of conifers, insects, <a href="https://doi.org/10.1038/d41586-024-03889-y">dinosaurs</a>, reptiles and stem mammals</td>
  </tr>
  <tr>
+ <td class="left-cell">228,000,000</td>
+ <td>earliest pterosaur reptiles (<a href="https://doi.org/10.1144/GSL.SP.2003.217.01.10">Late Triassic</a>), the earliest flying vertebrates, and one of only four animal groups known to have evolved powered flight: insects, pterosaurs, birds and bats</td>
+ </tr>
+ <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/210mya.png">210,000,000</td>
  <td>earliest warm-blooded stem mammals (<a href="https://doi.org/10.1038/d41586-022-01975-7">Late Triassic</a> <span class="n-w"><a href="pies/210mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>):</span> faster metabolism sustaining endothermy in a cooler climate</td>
  </tr>
@@ -585,7 +756,7 @@ img.key-arrow {
  </tr>
  <tr>
  <td class="left-cell"><img id="popupId" class="cell" alt="popup timeline" title="popup 150 Mya transition to birds &rarr; 66 Mya extinction of non-avian dinosaurs" src="pies/150mya-pop.png" onClick="showPopup('pies/150mya-popup.png')">150,000,000</td>
- <td>evolutionary transition to birds from therapod dinosaurs (<a href="https://doi.org/10.1038/d41586-023-02757-5">Late Jurassic</a> <span class="n-w"><a href="pies/150mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>):</span> <a href="https://doi.org/10.1098/rstl.1863.0003"><em>Archaeopteryx</em></a>, with feathered <a href="https://doi.org/10.1038/nature13467">body</a> and <a href="https://doi.org/10.1038/ncomms1642">wings</a>, <a href="https://doi.org/10.1038/s41467-018-03296-8">active flight</a>, <a href="https://doi.org/10.1126/science.1120331">toothed beak</a> and <a href="https://www.biodiversitylibrary.org/item/297106#page/340/mode/2up">bony tail</a>; birds sharing the air with reptilian <a href="https://doi.org/10.1016/j.cub.2024.10.023">pterosaurs</a></td>
+ <td>evolutionary transition to birds from therapod dinosaurs (<a href="https://doi.org/10.1038/d41586-023-02757-5">Late Jurassic</a> <span class="n-w"><a href="pies/150mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>):</span> <a href="https://doi.org/10.1098/rstl.1863.0003"><em>Archaeopteryx</em></a>, with feathered <a href="https://doi.org/10.1038/nature13467">body</a> and <a href="https://doi.org/10.1038/ncomms1642">wings</a>, <a href="https://doi.org/10.1038/s41467-018-03296-8">active flight</a>, <a href="https://doi.org/10.1126/science.1120331">toothed beak</a> and <a href="https://www.biodiversitylibrary.org/item/297106#page/340/mode/2up">bony tail</a>; birds sharing the air with <a href="https://doi.org/10.1016/j.cub.2024.10.023">pterosaurs</a> until 66 million years ago</td>
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/135mya.png">135,000,000</td>
@@ -698,6 +869,10 @@ img.key-arrow {
  <td>earliest stone hand axes (<a href="https://doi.org/10.1038/srep17839">Olduvai Gorge</a>, Tanzania <span class="n-w"><a href="https://earth.google.com/web/@-2.99032342,35.34963753,1426.7278a,44595.7541d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>):</span> Acheulean tools, standardised for butchering, cutting, stripping, hammering, drilling &rarr; population mobility</td>
  </tr>
  <tr>
+ <td class="left-cell"><img class="cell" alt="" src="pies/1.5mya.png">1,500,000</td>
+ <td>earliest organic tools: heavy-duty bone implements (<a href="https://doi.org/10.1038/s41586-025-08652-5">Olduvai Gorge</a>, Tanzania <span class="n-w"><a href="https://earth.google.com/web/@-2.98984721,35.34796861,1439.17863035a,3373.48364063d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>),</span> copying multistep know-how on stone knapping and trimming &rarr; spread of <a href="https://doi.org/10.1038/d41586-024-00427-8">cumulative culture</a> by <a href="https://doi.org/10.1073/pnas.2319175121">600,000 years ago</a></td>
+ </tr>
+ <tr>
  <td class="left-cell"><img id="popupId" class="cell" alt="popup timeline" title="popup 1.5 Mya earliest control of fire &rarr; 780 Kya cooked food" src="pies/1.5mya-pop.png" onClick="showPopup('pies/1.5mya-popup.png')">1,500,000</td>
  <td>earliest control of fire, by <em>Homo erectus</em> (<a href="https://doi.org/10.1016/j.jhevol.2019.01.010">Koobi Fora</a>, Kenya <span class="n-w"><a href="https://earth.google.com/web/@4.15,36.4,527.87438a,37060.29d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>):</span> uniquely human capability, extending the day with <a href="https://doi.org/10.1073/pnas.1404212111">firelight</a> &rarr; cooked food improving nutrient uptake by <a href="https://doi.org/10.1038/s41559-022-01910-z">780,000 years ago</a>; widespread use of fire by 400,000 years ago</td>
  </tr>
@@ -711,11 +886,7 @@ img.key-arrow {
  </tr>
  <tr>
  <td class="left-cell"><img class="cell" alt="" src="pies/1.4mya.png">1,400,000</td>
- <td>earliest organic tools: a hand axe made from hippopotamus bone (<a href="https://doi.org/10.1073/pnas.2006370117">Konso-Gardula</a>, Ethiopia <span class="n-w"><a href="https://earth.google.com/web/@5.43,37.42,1232.283a,7659.1716d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>);</span> perhaps conscious <a href="https://doi.org/10.1073/pnas.2016482117">symbolism</a>, or proforma: copying multistep know-how from others &rarr; <a href="https://doi.org/10.1038/d41586-024-00427-8">cumulative culture</a> by <a href="https://doi.org/10.1073/pnas.2319175121">600,000 years ago</a></td>
- </tr>
- <tr>
- <td class="left-cell"><img class="cell" alt="" src="pies/1.4mya.png">1,400,000</td>
- <td>replacement of <em>Homo habilis</em> by <em>Homo erectus</em> in <a href="https://doi.org/10.1126/science.abb4590">Africa</a>, also dispersing into eastern <a href="https://doi.org/10.1038/d41586-024-00627-2">Europe</a> and spreading west, establishing in Europe at least by <a href="https://doi.org/10.1126/science.z9ievmh">900,000 years ago</a></td>
+ <td>replacement of <em>Homo habilis</em> by <em>Homo erectus</em> in <a href="https://doi.org/10.1126/science.abb4590">Africa</a>, also dispersing into eastern <a href="https://doi.org/10.1038/d41586-024-00627-2">Europe</a> and spreading west, establishing in western Europe by <a href="https://doi.org/10.1126/science.zpcszwz">1.1 million years ago</a> <span class="n-w"><a href="https://earth.google.com/web/@42.3499922,-3.5193975,1004.51571738a,4501.00598547d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a></span></td>
  </tr>
  <tr>
  <td class="left-cell"><img id="popupId" class="cell" alt="popup timeline" title="popup 1 Mya extinction of last sibling genus &rarr; 315 Kya earliest evidence of Homo sapiens" src="pies/1mya-pop.png" onClick="showPopup('pies/1mya-popup.png')">1,000,000</td>
@@ -1319,7 +1490,7 @@ img.key-arrow {
  <tr>
  <td class="left-cell-BCE">6500</td>
  <td class="left-cell-ya"><script>document.write(numberWithCommas((Math.round(Math.abs(new Date().getFullYear() + 6500) * 0.01) * 100)));</script></td>
- <td>beginning of a wave of migrations from the <a href="https://doi.org/10.1073/pnas.1920051117">Middle East</a> northwest through Anatolia, spreading farming practices into Europe</td>
+ <td>beginning of a wave of migrations from the <a href="https://doi.org/10.1073/pnas.1920051117">Middle East</a> northwest through Anatolia, spreading farming practices into Europe; sea voyages south across the Mediterranean to North Africa by at least <a href="https://doi.org/10.1038/d41586-025-00764-2">6000<font size="-1"> BCE</font></a></td>
  </tr>
  <tr>
  <td class="left-cell-BCE">6100</td>
@@ -1950,7 +2121,7 @@ img.key-arrow {
  <tr>
  <td class="left-cell-BCE">550</td>
  <td class="left-cell-ya"><script>document.write(numberWithCommas((Math.round(Math.abs(new Date().getFullYear() + 550) * 0.02) * 50)));</script></td>
- <td>first Persian Empire (Cyrus the Great, <a href="https://www.britishmuseum.org/collection/object/W_1880-0617-1941">Persia</a>), connecting the Mediterranean to the Indus Valley &rarr; code of just rule that respects others&#x2019; faiths</td>
+ <td>first Persian Empire (Cyrus the Great, <a href="https://www.britishmuseum.org/collection/object/W_1880-0617-1941">Persia</a>), connecting the Mediterranean to the Indus Valley; code of just rule that respects others&#x2019; faiths</td>
  </tr>
  <tr>
  <td class="left-cell-BCE">550</td>
@@ -2513,7 +2684,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1610</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1610));</script></td>
- <td>observations of the orbits of Jupiter&#x2019;s moons (Galileo Galilei, Italy, <em>Sidereus Nuncius</em> <a href="https://www.loc.gov/resource/gdcwdl.wdl_04170/?sp=48">1610</a>), falsifying church doctrine of Earth as the only centre of movement in the Universe &rarr; authority of evidence-based science</td>
+ <td>observations of the orbits of Jupiter&#x2019;s moons (Galileo Galilei, Italy, <em>Sidereus Nuncius</em> <a href="https://www.loc.gov/resource/gdcwdl.wdl_04170/?sp=48">1610</a>), falsifying church doctrine of Earth as the only centre of motion in the Universe &rarr; authority of evidence-based science</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1612</td>
@@ -2538,7 +2709,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1632</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1632));</script></td>
- <td>basic principle of relativity: the laws of nature apply equally to any frame of reference in constant linear motion, regardless of its speed (Galileo Galilei, Italy, <em>Dialogo</em> <a href="https://www.loc.gov/resource/rbc0001.2013rosen1350/?sp=124">1632</a>)</td>
+ <td>basic principle of relativity: the laws of nature apply equally to any frame of reference in constant linear motion, regardless of its speed (Galileo Galilei, Italy, <em>Dialogo</em> <a href="https://www.loc.gov/resource/rbc0001.2013rosen1350/?sp=124">1632</a><span class="n-w">)<a href="pies/Relativity.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a></span></td>
  </tr>
  <tr>
  <td class="left-cell-CE">1637</td>
@@ -2729,12 +2900,12 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1798</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1798));</script></td>
- <td>calculation of Earth&#x2019;s density, using a torsion balance (Henry Cavendish, Britain, <a href="https://doi.org/10.1098/rstl.1798.0022">1798</a>) &rarr; Newton&#x2019;s gravitational constant <em>G</em> determining the gravitational force between two masses</td>
+ <td>calculation of Earth&#x2019;s density, using a torsion balance (Henry Cavendish, Britain, <a href="https://doi.org/10.1098/rstl.1798.0022">1798</a>) &rarr; Newton&#x2019;s universal gravitational constant <em>G</em> determining the force of attraction between any two objects with mass</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1798</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1798));</script></td>
- <td>observation that population growth capacity always outpaces improvements in resources (Thomas Malthus, Britain, <a href="https://www.econlib.org/library/Malthus/malPlong.html">1798</a>) &rarr; the struggle for existence facing all organisms; the challenge to human wellbeing, until the advent of oil-based economies</td>
+ <td>observation that population growth capacity always outpaces improvements in resources (Thomas Malthus, Britain, <a href="https://www.econlib.org/library/Malthus/malPlong.html">1798</a>) &rarr; the struggle for existence facing all organisms; the challenge to <a href="https://ourworldindata.org/breaking-the-malthusian-trap">human wellbeing</a>, until the advent of oil-based economies</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1799</td>
@@ -2797,6 +2968,11 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <td>first scheduled trans-Atlantic steamer: coal-fired Great Western (Isambard Kingdom Brunel, UK, <a href="https://collections.rmg.co.uk/collections/objects/148808.html">1838</a>) &rarr; globalisation of economies</td>
  </tr>
  <tr>
+ <td class="left-cell-CE">1838</td>
+ <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1838));</script></td>
+ <td>proof of Copernicus&#x2019; 1543 heliocentric model (Friedrich Bessel, Germany, <a href="https://doi.org/10.1093/mnras/4.17.152">1838</a>): observation of apparent shifts in position of nearby star 61 Cygni, consistent with Earth orbiting the Sun</td>
+ </tr>
+ <tr>
  <td class="left-cell-CE">1846</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1846));</script></td>
  <td>first use of quinine, from Andean <em>Cinchona</em> trees, as a malaria prophylaxis (Thomas Thomson, UK, <a href="https://doi.org/10.1016/S0140-6736(02)89770-7">1846</a>), enabling European <a href="https://doi.org/10.1257/jep.24.2.163">colonisation</a> of tropical Africa and Asia &rarr; malaria vaccine by <a href="https://doi.org/10.1126/science.acx9310">2021</a> boosting childhood <a href="https://doi.org/10.1126/science.adl5503">survival</a></td>
@@ -2839,7 +3015,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1860</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1860));</script></td>
- <td>factory production of internal-combustion engines (Jean Lenoir, Belgium, <a href="https://worldwide.espacenet.com/patent/search/family/051987758/publication/FR43624A?q=pn%3DFR43624A">1860</a>; user manual <a href="https://gallica.bnf.fr/ark:/12148/bpt6k3705453/f5.image">1864</a>) &rarr; electricity generators, motorised transport</td>
+ <td>factory production of internal-combustion engines (Jean Lenoir, Belgium, <a href="https://worldwide.espacenet.com/patent/search/family/051987758/publication/FR43624A?q=pn%3DFR43624A">1860</a>; user manual <a href="https://gallica.bnf.fr/ark:/12148/bpt6k3705453/f5.image">1864</a>) &rarr; electricity generators, motorised transport; Second Industrial Revolution</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1860</td>
@@ -2889,7 +3065,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1880</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1880));</script></td>
- <td>adult literacy reaches 20% of the global population by <a href="https://ourworldindata.org/literacy">1880</a> &rarr; 85% by 2010</td>
+ <td>adult literacy reaches one-fifth of the global population by <a href="https://ourworldindata.org/literacy">1880</a> &rarr; four-fifths by 2000; still much regional variation by <a href="https://ourworldindata.org/grapher/cross-country-literacy-rates?country=OWID_WRL~WB_ECA~WB_SSA~WB_LAC~WB_NA~WB_SA~TCD~PAK~LBR~MLI~WB_MENA~East+Asia+and+the+Pacific+%28WB%29~AFG">2023</a>, from one-quarter in Chad to 99% in North America, Europe and Central Asia</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1880</td>
@@ -3040,6 +3216,11 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <td class="left-cell-CE">1909</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1909));</script></td>
  <td>first people to set foot on Earth&#x2019;s poles (North Pole <span class="n-w"><a href="https://earth.google.com/web/@90,0,-2076.3083a,17768686.35d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>:</span> Robert Peary and Matthew Henson, USA, <a href="https://www.canadiana.ca/view/oocihm.17541/7?r=0&amp;s=1">1909</a>; South Pole <span class="n-w"><a href="https://earth.google.com/web/@-90,0,-2076.3083a,17768686.35d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>:</span> Roald Amundsen, Norway, <a href="https://nla.gov.au/nla.obj-142166976/view">1911</a>)</td>
+ </tr>
+ <tr>
+ <td class="left-cell-CE">1910</td>
+ <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1910));</script></td>
+ <td>a painter out walking with two friends at sunset experiences angst (Edvard Munch, Norway, <em>The Scream</em> <a href="https://artsandculture.google.com/asset/the-scream-edvard-munch/eQFdRTFKDtVQ1A">1910</a>): the anxiety of modern humanity, adrift from the comforts of religious certainty</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1911</td>
@@ -3400,7 +3581,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">1960</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 1960));</script></td>
- <td>descent to the deepest point in the oceans: Mariana Trench at 10,911 m <span class="n-w"><a href="https://earth.google.com/web/@11.36110304,142.41950034,-99.60940716a,1341100.93989238d,35y,-0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a></span> (Jacques Piccard, Switzerland, and Don Walsh, USA, in the bathyscaphe Trieste, <a href="https://britishpathe.com/video/they-dived-7-miles/">23/1/1960</a>), the last frontier of Earth exploration</td>
+ <td>descent to the deepest point in the oceans: Mariana Trench at 10,935 m <span class="n-w"><a href="https://earth.google.com/web/@11.371667,142.588333,-12.37608776a,1152047.91481286d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a></span> (Jacques Piccard, Switzerland, and Don Walsh, USA, in the bathyscaphe Trieste, <a href="https://britishpathe.com/video/they-dived-7-miles/">23/1/1960</a>), the last frontier of Earth exploration</td>
  </tr>
  <tr>
  <td class="left-cell-CE">1960</td>
@@ -3915,7 +4096,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2015</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2015));</script></td>
- <td>invention of the optical lattice clock (Hidetoshi Katori, Japan, <a href="https://doi.org/10.1038/nphoton.2015.5">2015</a>) &rarr; accuracy of 1 second in 15 billion <a href="https://doi.org/10.1038/ncomms7896">years</a>; ticking detectably faster with each centimetre of <a href="https://doi.org/10.1038/s41566-020-0619-8">altitude</a>, as predicted by <a href="https://doi.org/10.1038/d41586-022-03297-0">general relativity</a></td>
+ <td>invention of the optical lattice clock (Hidetoshi Katori, Japan, <a href="https://doi.org/10.1038/nphoton.2015.5">2015</a>) &rarr; accuracy of 1 second in <a href="https://doi.org/10.1038/d41586-024-02199-7">40 billion years</a>; ticking detectably faster with each centimetre of <a href="https://doi.org/10.1038/s41566-020-0619-8">altitude</a>, as predicted by <a href="https://doi.org/10.1038/d41586-022-03297-0">general relativity</a></td>
  </tr>
  <tr>
  <td class="left-cell-CE">2015</td>
@@ -3986,7 +4167,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2017</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2017));</script></td>
- <td>accumulation since <a href="https://www.esa.int/Safety_Security/Space_Debris/Space_debris_by_the_numbers">1957</a> of 23,000 space objects bigger than an apple, travelling at up to 28,000 km/hr in Earth orbit &rarr; 100,000 by <a href="https://doi.org/10.1038/s41893-024-01308-8">2034</a>; debris risk to satellites and <a href="https://doi.org/10.1126/science.abf2682">space stations</a>, a <a href="https://doi.org/10.1126/science.abf9608">problem</a> for government space agencies of their own making</td>
+ <td>accumulation since <a href="https://www.esa.int/Safety_Security/Space_Debris/Space_debris_by_the_numbers">1957</a> of 23,000 space objects bigger than an apple, travelling at up to 28,000 km/hr in Earth orbit &rarr; 100,000 by <a href="https://doi.org/10.1038/s41893-024-01308-8">2034</a>; debris risk to satellites, <a href="https://doi.org/10.1126/science.abf2682">space stations</a> and <a href="https://doi.org/10.1038/d41586-025-00797-7">people everywhere</a>; a <a href="https://doi.org/10.1126/science.abf9608">problem</a> for government space agencies of their own making</td>
  </tr>
  <tr>
  <td class="left-cell-CE">2017</td>
@@ -4036,7 +4217,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2019</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2019));</script></td>
- <td>first global assessment of biodiversity finds 1 million of Earth&#x2019;s 8 million species threatened by accelerating extinction rates (IPBES, <a href="https://www.ipbes.net/news/Media-Release-Global-Assessment">2019</a>): Earth&#x2019;s <a href="https://doi.org/10.1073/pnas.1922686117">sixth mass extinction</a> imperils humanity&#x2019;s life support systems, calling for <a href="https://doi.org/10.1126/science.aax3100">transformative</a> <a href="https://www.gov.uk/government/publications/final-report-the-economics-of-biodiversity-the-dasgupta-review">change</a> in human activities</td>
+ <td>first global assessment of biodiversity finds 1 million of Earth&#x2019;s 8 million species threatened by accelerating extinction rates (<a href="https://www.ipbes.net/about">IPBES</a>, <a href="https://www.ipbes.net/news/Media-Release-Global-Assessment">2019</a>): Earth&#x2019;s <a href="https://doi.org/10.1073/pnas.1922686117">sixth mass extinction</a> imperils humanity&#x2019;s life support systems, calling for <a href="https://doi.org/10.1126/science.aax3100">transformative</a> <a href="https://www.gov.uk/government/publications/final-report-the-economics-of-biodiversity-the-dasgupta-review">change</a> in human activities</td>
  </tr>
  <tr>
  <td class="left-cell-CE">2019</td>
@@ -4051,7 +4232,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2019</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2019));</script></td>
- <td>acidification of almost all open-ocean surface by absorption of anthropogenic CO&#x2082;, losing 0.02 pH units per decade since <a href="https://www.ipcc.ch/srocc/chapter/summary-for-policymakers/">1990</a>, <a href="https://doi.org/10.1038/s41598-020-58501-w">harming</a> shell-forming species; <a href="https://doi.org/10.1126/science.adg3427">ocean liming</a> a potential <a href="https://doi.org/10.1038/d41586-024-04254-9">geoengineering</a> solution</td>
+ <td>acidification of almost all open-ocean surface by absorption of anthropogenic CO&#x2082;, losing 0.02 pH units per decade since <a href="https://www.ipcc.ch/srocc/chapter/summary-for-policymakers/">1990</a>, harming <a href="https://doi.org/10.1038/s41598-020-58501-w">shell-forming</a> and <a href="https://doi.org/10.1073/pnas.2423680122">carbon-sequestering </a>plankton; <a href="https://doi.org/10.1126/science.adg3427">ocean liming</a> a potential <a href="https://doi.org/10.1038/d41586-024-04254-9">geoengineering</a> solution</td>
  </tr>
  <tr>
  <td class="left-cell-CE">2019</td>
@@ -4066,7 +4247,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2019</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2019));</script></td>
- <td>first demonstration of quantum supremacy over conventional computers (Google AI Quantum, USA, <a href="https://doi.org/10.1038/s41586-019-1666-5">2019</a>) &rarr; double-exponential growth in <a href="https://doi.org/10.1038/d41586-019-03173-4">computing power</a>; <a href="https://doi.org/10.1038/d41586-024-01445-2">quantum internet</a></td>
+ <td>first demonstration of quantum supremacy over conventional computers (Google AI Quantum, USA, <a href="https://doi.org/10.1038/s41586-019-1666-5">2019</a>) &rarr; practical applications by <a href="https://doi.org/10.1038/d41586-025-00765-1">2025</a>; <a href="https://doi.org/10.1038/d41586-024-01445-2">quantum internet</a></td>
  </tr>
  <tr>
  <td class="left-cell-CE">2019</td>
@@ -4101,7 +4282,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2020</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2020));</script></td>
- <td>launch of first commercial space taxi (SpaceX, <a href="https://www.nasa.gov/news-release/nasa-astronauts-launch-from-america-in-historic-test-flight-of-spacex-crew-dragon/">30/5/2020</a>), taking NASA astronauts to the International Space Station</td>
+ <td>launch of first commercial space taxi (SpaceX, <a href="https://www.nasa.gov/news-release/nasa-astronauts-launch-from-america-in-historic-test-flight-of-spacex-crew-dragon/">30/5/2020</a>), taking NASA astronauts to the International Space Station &rarr; by <a href="https://doi.org/10.1038/d41586-025-00670-7">2025</a>, first private spacecraft lands successfully on the moon</td>
  </tr>
  <tr>
  <td class="left-cell-CE">2020</td>
@@ -4361,7 +4542,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <tr>
  <td class="left-cell-CE">2025</td>
  <td class="left-cell-ya"><script>document.write(Math.abs(new Date().getFullYear() - 2025));</script></td>
- <td>global sea ice shrinks to the lowest extent since records began 46 years ago (<a href="https://cpd57.shinyapps.io/globalseaice/">February 2025</a>): year-by-year declines in seasonal ice at both poles, weakening its planetary <a href="https://doi.org/10.1029/2024GL109608">cooling</a> effect</td>
+ <td>global sea ice shrinks to the lowest extent since records began 46 years ago (<a href="https://cpd57.shinyapps.io/globalseaice/">February-March 2025</a>): year-by-year declines in seasonal ice at both poles, weakening its planetary <a href="https://doi.org/10.1029/2024GL109608">cooling</a> effect</td>
  </tr>
 </table>
 </section><section id="section10">
@@ -4381,7 +4562,7 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
  <p><strong>Distances</strong>: 10&#x2079; nanometres in 1 m; 1,000 m in 1 km; 9.46 trillion km in 1 light-year. <em>For example</em>: 0.1-nanometre diameter of a hydrogen atom; 9.81 m/s&sup2; acceleration due to gravity at Earth&#x2019;s surface; 40,000-km circumference of Earth (<em>clickable</em>: <span class="n-w"><a href="https://earth.google.com/web/@26.849,54.559,1017.42449a,212804709d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>);</span> 150 million km from the Sun to Earth (<em>clickable</em>:<span class="n-w"><a href="pies/Distances.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a>);</span> 300,000 km travelled by light in 1 second, and almost 10 trillion km in 1 year; 27 thousand light-years from Earth to the Galactic Center of the Milky Way; 46.5 billion light-years from Earth to the edge of the observable Universe.</p>
  <br><p><strong>Areas</strong>: 100&times;100 m or 10,000 m&sup2; in 1 ha; 100 ha in 1 km&sup2; <span class="n-w"><a href="pies/Areas.html"><img class="star" alt="illustration" title="" src="pies/Star.png"></a>.</span> <em>For example</em>: 3 million ha (30,000 km&sup2;) area of Belgium <span class="n-w"><a href="https://earth.google.com/web/@51.0147014,4.21999983,-444.906a,1737802d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>;</span> 4 billion ha (40 million km&sup2;) of livestock grazing on Earth; 14.9 billion ha (149 million km&sup2;) of global land area, about 10% more than the supercontinent of Pangaea (<em>clickable</em>: <span class="n-w"><a href="pies/200mya-tectonics.html"><img class="globe" alt="" src="pies/Globe.svg"></a>)</span> at its maximum area.</p>
  <br>
- <p><strong>Volumes</strong>: 1 billion mm&sup3; in 1 m&sup3;; 1 billion m&sup3; in 1 km&sup3;. <em>For example</em>: 1 billion grains in 1 m&sup3; of sand; 7.7 billion m&sup3; (7.7 km&sup3;) of <a href="https://doi.org/10.1126/science.zxav6v4">volcanic debris</a> deposited by the <font size="-1">CE </font>79 eruption of Vesuvius <span class="n-w"><a href="https://earth.google.com/web/@40.7829871,14.45102822,183.59425561a,23431.20012261d,35y,0h,0t,0r/data=CsQBGpUBEo4BCiUweDEzM2JiY2JhZjdlZmVlZWY6MHg3ZmU1ZWFjOTM4ZTY4NDI5GeEH51PHX0RAITrgX6nT9ixAKlNQb21wZWlpIChVTkVTQ08pLCBWaWNvbG8gZGVsIFBhbmV0dGllcmUsIFBvbXBlaSwgTWV0cm9wb2xpdGFuIENpdHkgb2YgTmFwbGVzLCBJdGFseRgBIAEiJgokCUxQ3969d0RAEWydlI8iV0RAGTBtnNGPTy1AIdhC4NQSbixAQgIIAToDCgEwQgIIAEoNCP___________wEQAA"><i class='icon'></i></a>;</span> 2,500 km&sup3; of water in Lake Victoria <span class="n-w"><a href="https://earth.google.com/web/@-0.999,32.746,1509.52a,1133655d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>.</span></p>
+ <p><strong>Volumes</strong>: 1 billion mm&sup3; in 1 m&sup3;; 1 billion m&sup3; in 1 km&sup3;. <em>For example</em>: 1 billion grains in 1 m&sup3; of sand; 7.7 billion m&sup3; (7.7 km&sup3;) of <a href="https://doi.org/10.1126/science.zxav6v4">volcanic debris</a> deposited from the <font size="-1">CE </font>79 eruption of Vesuvius <span class="n-w"><a href="https://earth.google.com/web/@40.7829871,14.45102822,183.59425561a,23431.20012261d,35y,0h,0t,0r/data=CsQBGpUBEo4BCiUweDEzM2JiY2JhZjdlZmVlZWY6MHg3ZmU1ZWFjOTM4ZTY4NDI5GeEH51PHX0RAITrgX6nT9ixAKlNQb21wZWlpIChVTkVTQ08pLCBWaWNvbG8gZGVsIFBhbmV0dGllcmUsIFBvbXBlaSwgTWV0cm9wb2xpdGFuIENpdHkgb2YgTmFwbGVzLCBJdGFseRgBIAEiJgokCUxQ3969d0RAEWydlI8iV0RAGTBtnNGPTy1AIdhC4NQSbixAQgIIAToDCgEwQgIIAEoNCP___________wEQAA"><i class='icon'></i></a>;</span> 2,500 km&sup3; of water in Lake Victoria <span class="n-w"><a href="https://earth.google.com/web/@-0.999,32.746,1509.52a,1133655d,35y,0h,0t,0r/data=CgRCAggBOgMKATBCAggASg0I____________ARAA"><i class='icon'></i></a>.</span></p>
  <br>
  <p><strong>Masses</strong>: 1,000 g in 1 kg; 1,000 kg in 1 tonne. <em>For example</em>: 100-tonne mass of a blue whale; 500 million tonnes of global human biomass.</p>
  <br>
@@ -4400,12 +4581,481 @@ Reformation, splitting the universal Christian world into sects (Martin Luther, 
 <table class="bottom" style='border:#FFF;'>
  <tr>
  <td style='border:#FFF;'>
- <p>Compiled by <a href="index.html"><strong>C. Patrick Doncaster</strong></a>, 2 March 2025, one of the then 8,103,797,860 (rising by <a href="https://www.census.gov/popclock/world">130</a> per minute, <a href="https://ourworldindata.org/world-population-growth">68 million</a> per year)</p></td>
+ <p>Compiled by <a href="index.html"><strong>C. Patrick Doncaster</strong></a>, 22 March 2025, one of the then 8,107,760,540 (rising by <a href="https://www.census.gov/popclock/world">130</a> per minute, <a href="https://ourworldindata.org/world-population-growth">68 million</a> per year)</p></td>
  </tr>
 </table>
 </section>
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
 
-<!-- Create a sticky header -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- Script for activating the find button and search box -->
+<div class="search-box" id="searchBox">
+ <input type="text" id="searchInput" class="search-input" placeholder="Find..." oninput="highlightText()">
+ <div class="search-controls">
+ <div class="nav-controls">
+ <div class="nav-button touch-target" id="nextButton">&lt;</div>&nbsp;&nbsp;&nbsp;
+ <div class="nav-button touch-target" id="prevButton">&gt;</div>
+ <span class="match-count" id="matchCount"></span>
+ </div>
+ <div class="right-controls">
+ <div class="search-options touch-target">
+ <input type="checkbox" id="wholeWordCheckbox">
+ <label for="wholeWordCheckbox">Whole words</label>&nbsp;
+ </div>
+ <button class="close-button touch-target" id="closeButton">❌</button>
+ </div>
+ </div>
+</div>
+<script>
+let searchResults = [];
+let currentIndex = -1;
+let isMobileKeyboardVisible = false;
+let lastActiveHighlight = null;
+let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+let isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+// Track if a button is being pressed to prevent double-triggering
+let buttonTouched = false;
+// Function to check if device is mobile
+function isMobileDevice() {
+ return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+// Function to position search box based on current view
+function positionSearchBox() {
+ let box = document.getElementById("searchBox");
+ let headerHeight = document.querySelector('.header').offsetHeight;
+ // Position below header
+ box.style.top = headerHeight + 'px';
+}
+function toggleSearchBox() {
+ let box = document.getElementById("searchBox");
+ let isVisible = box.style.display === "block";
+ box.style.display = isVisible ? "none" : "block";
+ if (!isVisible) {
+ positionSearchBox();
+ // Focus after a slight delay on mobile to ensure the box is positioned correctly
+ setTimeout(() => {
+ document.getElementById("searchInput").focus();
+ }, 50);
+ }
+}
+// Explicitly blur the search input to dismiss keyboard
+function blurSearchInput() {
+ document.getElementById("searchInput").blur();
+}
+// Event delegation for touch events in Safari
+function setupTouchEvents() {
+ // Setup event listeners for buttons using proper touch events
+ document.getElementById("prevButton").addEventListener("touchstart", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ findNext(true);
+ }, { passive: false });
+ document.getElementById("nextButton").addEventListener("touchstart", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ findNext(false);
+ }, { passive: false });
+ // Add touchend handlers to reset the buttonTouched flag
+ document.getElementById("prevButton").addEventListener("touchend", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ // Reset the buttonTouched flag after a delay
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 300);
+ }, { passive: false });
+ document.getElementById("nextButton").addEventListener("touchend", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ // Reset the buttonTouched flag after a delay
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 300);
+ }, { passive: false });
+ document.getElementById("closeButton").addEventListener("touchstart", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ clearSearch();
+ // Reset buttonTouched on touchend
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 300);
+ }, { passive: false });
+ // Enhanced checkbox handling for Safari/iOS
+ const checkbox = document.getElementById("wholeWordCheckbox");
+ const checkboxLabel = document.querySelector('label[for="wholeWordCheckbox"]');
+ // Use a single touchstart handler for the whole checkbox area
+ document.querySelector(".search-options").addEventListener("touchstart", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return;
+ buttonTouched = true;
+ // Blur the search input
+ blurSearchInput();
+ // Toggle checkbox state
+ const currentState = checkbox.checked;
+ checkbox.checked = !currentState;
+ // Perform highlighting with the new state
+ highlightText();
+ // Wait a moment for highlighting to complete, then navigate
+ setTimeout(() => {
+ if (searchResults.length > 0) {
+ findNext(false);
+ }
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 200);
+ }, 100);
+ }, { passive: false });
+ // Prevent default behavior for the entire search box to avoid conflicts
+ document.getElementById("searchBox").addEventListener("touchmove", function(e) {
+ e.stopPropagation();
+ }, { passive: false });
+}
+// Track focus/blur on search input to detect keyboard visibility
+document.getElementById("searchInput").addEventListener('focus', function() {
+ if (isMobileDevice()) {
+ isMobileKeyboardVisible = true;
+ // When keyboard appears, reposition the search box to stay in view
+ setTimeout(function() {
+ positionSearchBox();
+ }, 300); // Small delay to let the keyboard fully appear
+ }
+});
+document.getElementById("searchInput").addEventListener('blur', function() {
+ if (isMobileDevice()) {
+ isMobileKeyboardVisible = false;
+ // When keyboard disappears, restore normal positioning
+ setTimeout(function() {
+ positionSearchBox();
+ }, 300);
+ }
+});
+// Add event listener for Enter/Return key in the search input
+document.getElementById("searchInput").addEventListener('keydown', function(e) {
+ if (e.key === 'Enter' || e.keyCode === 13) {
+ e.preventDefault();
+ e.stopPropagation(); // Stop the event from bubbling up to the document level
+ // Blur the input to dismiss keyboard
+ this.blur();
+ // If we have search results, navigate to the next match
+ if (searchResults.length > 0) {
+ findNext(false);
+ }
+ }
+});
+// Add document-level Enter key listener for continuing search
+document.addEventListener('keydown', function(e) {
+ // Only handle Enter if search box is visible, input is not focused,
+ // and the event didn't originate from the search input
+ if ((e.key === 'Enter' || e.keyCode === 13) && 
+ document.getElementById("searchBox").style.display === "block" &&
+ document.activeElement !== document.getElementById("searchInput") &&
+ e.target !== document.getElementById("searchInput")) {
+ e.preventDefault();
+ if (searchResults.length > 0) {
+ findNext(false);
+ }
+ }
+});
+// Tap to refocus search box if it loses focus
+document.getElementById("searchBox").addEventListener('touchstart', function(e) {
+ // If the tap is on the search box itself but not on child elements
+ if (e.target === this) {
+ e.preventDefault();
+ document.getElementById("searchInput").focus();
+ }
+});
+function highlightText() {
+ clearHighlights();
+ let text = document.getElementById("searchInput").value.trim();
+ let wholeWord = document.getElementById("wholeWordCheckbox").checked;
+ if (!text) {
+ updateMatchCount(0);
+ return;
+ }
+ searchResults = [];
+ // Create the regex pattern based on search options
+ let pattern;
+ if (wholeWord) {
+ // Whole word match - word boundary markers
+ pattern = '\\b' + text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b';
+ } else {
+ // Normal search - escape special characters
+ pattern = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+ }
+ let regex = new RegExp(pattern, 'gi');
+ // Process text nodes one by one
+ function processNode(node) {
+ let content = node.textContent;
+ let match;
+ let lastIndex = 0;
+ let fragment = document.createDocumentFragment();
+ // Reset regex state
+ regex.lastIndex = 0;
+ // Find all matches in this text node
+ while ((match = regex.exec(content)) !== null) {
+ // Add text before the match
+ if (match.index > lastIndex) {
+ fragment.appendChild(document.createTextNode(
+ content.substring(lastIndex, match.index)
+ ));
+ }
+ // Create highlighted span for the match
+ let span = document.createElement('span');
+ span.className = 'highlight';
+ span.textContent = match[0];
+ fragment.appendChild(span);
+ searchResults.push(span);
+ lastIndex = regex.lastIndex;
+ }
+ // Add remaining text after last match
+ if (lastIndex < content.length) {
+ fragment.appendChild(document.createTextNode(
+ content.substring(lastIndex)
+ ));
+ }
+ // Replace the original node with our processed fragment
+ if (lastIndex > 0) { // Only replace if we found matches
+ node.parentNode.replaceChild(fragment, node);
+ return true;
+ }
+ return false;
+ }
+ // Find all text nodes in the document
+ let walker = document.createTreeWalker(
+ document.body,
+ NodeFilter.SHOW_TEXT,
+ {
+ acceptNode: function(node) {
+ // Skip script and style nodes
+ if (node.parentNode.nodeName === 'SCRIPT' || 
+ node.parentNode.nodeName === 'STYLE' ||
+ node.parentNode.className === 'search-box') {
+ return NodeFilter.FILTER_REJECT;
+ }
+ return NodeFilter.FILTER_ACCEPT;
+ }
+ }
+ );
+ // Process all text nodes
+ let nodesToProcess = [];
+ while (walker.nextNode()) {
+ nodesToProcess.push(walker.currentNode);
+ }
+ // Process nodes (we collect them first to avoid walker issues when DOM changes)
+ nodesToProcess.forEach(processNode);
+ // Update match count but DO NOT highlight first match yet
+ updateMatchCount(searchResults.length);
+ if (searchResults.length > 0) {
+ currentIndex = -1;
+ // We don't call findNext() here, so no auto-scrolling happens
+ // Just update the match count
+ }
+}
+function updateMatchCount(count) {
+ let matchCountElement = document.getElementById("matchCount");
+ matchCountElement.textContent = count > 0 ? 
+ `${currentIndex + 1} of ${count}` : 
+ "No matches";
+}
+function findNext(backward) {
+ if (searchResults.length === 0) return;
+ // Remove highlight from previous match
+ if (currentIndex !== -1) {
+ searchResults[currentIndex].classList.remove("active-highlight");
+ }
+ // Calculate new index
+ currentIndex = backward ? currentIndex - 1 : currentIndex + 1;
+ if (currentIndex >= searchResults.length) currentIndex = 0;
+ if (currentIndex < 0) currentIndex = searchResults.length - 1;
+ // Add highlight to new match
+ searchResults[currentIndex].classList.add("active-highlight");
+ lastActiveHighlight = searchResults[currentIndex];
+ // Improved scrolling that ensures both the match and search box are visible
+ ensureElementsVisible(searchResults[currentIndex]);
+ updateMatchCount(searchResults.length);
+}
+// Function to ensure both the match and search box remain visible
+function ensureElementsVisible(highlightElement) {
+ const searchBox = document.getElementById("searchBox");
+ const searchBoxHeight = searchBox.offsetHeight;
+ // Get viewport dimensions
+ let viewportHeight = window.innerHeight;
+ // Estimate keyboard height on mobile if keyboard is visible
+ if (isMobileDevice() && isMobileKeyboardVisible) {
+ // Rough estimate of keyboard height (varies by device)
+ const estimatedKeyboardHeight = viewportHeight * 0.4; // 40% of viewport
+ viewportHeight -= estimatedKeyboardHeight;
+ }
+ // First ensure the highlight is visible
+ highlightElement.scrollIntoView({ 
+ behavior: "smooth", 
+ block: "center" 
+ });
+ // Then ensure the search box is visible (with a slight delay to let scrolling finish)
+ setTimeout(() => {
+ // Get current positions after scrolling
+ const searchBoxTop = searchBox.getBoundingClientRect().top;
+ const searchBoxBottom = searchBoxTop + searchBoxHeight;
+ // If search box is out of view, adjust position
+ if (searchBoxTop < 0 || searchBoxBottom > viewportHeight) {
+ // Scroll to make sure the search box is visible at the top
+ window.scrollBy({
+ top: searchBoxTop < 0 ? searchBoxTop - 10 : 0,
+ behavior: 'smooth'
+ });
+ }
+ }, 300);
+}
+function clearHighlights() {
+ document.querySelectorAll('.highlight').forEach(el => {
+ const parent = el.parentNode;
+ const text = document.createTextNode(el.textContent);
+ parent.replaceChild(text, el);
+ // Normalize to combine adjacent text nodes
+ parent.normalize();
+ });
+ searchResults = [];
+ currentIndex = -1;
+ lastActiveHighlight = null;
+ updateMatchCount(0);
+}
+
+function clearSearch() {
+ clearHighlights();
+ document.getElementById("searchInput").value = "";
+ document.getElementById("searchBox").style.display = "none";
+}
+// Handle window resize and orientation change
+window.addEventListener('resize', positionSearchBox);
+window.addEventListener('orientationchange', positionSearchBox);
+
+// Setup click handlers for non-Safari browsers
+if (!isSafari) {
+ document.getElementById("prevButton").addEventListener("click", function() {
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ findNext(true);
+ setTimeout(() => { buttonTouched = false; }, 300);
+ });
+ document.getElementById("nextButton").addEventListener("click", function() {
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ findNext(false);
+ setTimeout(() => { buttonTouched = false; }, 300);
+ });
+ document.getElementById("closeButton").addEventListener("click", function() {
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ blurSearchInput(); // Blur the search input first
+ clearSearch();
+ setTimeout(() => { buttonTouched = false; }, 300);
+ });
+ document.getElementById("wholeWordCheckbox").addEventListener("change", function() {
+ blurSearchInput(); // Blur the search input first
+ highlightText();
+ // If we have search results, navigate to the next match after highlighting
+ if (searchResults.length > 0) {
+ findNext(false);
+ }
+ });
+}
+// Initialize the search box position
+positionSearchBox();
+// Setup Safari-specific touch event handlers if needed
+if (isSafari && isMobileDevice()) {
+ setupTouchEvents();
+ // Special handling for Safari's touch behavior
+ document.addEventListener('touchstart', function(e) {
+ // If touch is on the search box or its children, make sure it takes priority
+ if (e.target.closest('.search-box')) {
+ e.stopPropagation();
+ }
+ }, {passive: false});
+ // Prevent scroll bleed-through
+ document.getElementById('searchBox').addEventListener('touchmove', function(e) {
+ e.stopPropagation();
+ }, {passive: false});
+}
+// Add specific tap handlers for navigation controls on mobile
+if (isMobileDevice()) {
+ // Only add touchend handlers for elements that don't have touchstart handlers
+ // already set up by the Safari-specific code above
+ if (!isSafari) {
+ // Add touchend handlers to ensure proper interaction on iPhone
+ document.querySelectorAll('.nav-button, .close-button').forEach(elem => {
+ elem.addEventListener('touchstart', function(e) {
+ // Prevent default to avoid any unwanted behaviors
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return; // Prevent double triggering
+ buttonTouched = true;
+ // Blur the search input explicitly to dismiss the keyboard
+ blurSearchInput();
+ // Short delay to ensure the blur takes effect before proceeding
+ setTimeout(() => {
+ // Simulate the appropriate action based on the element
+ if (this.id === "prevButton") {
+ findNext(true);
+ } else if (this.id === "nextButton") {
+ findNext(false);
+ } else if (this.id === "closeButton") {
+ clearSearch();
+ }
+ }, 50);
+ }, { passive: false });
+ // Reset the buttonTouched flag on touchend
+ elem.addEventListener('touchend', function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 300);
+ }, { passive: false });
+ });
+ // For non-Safari mobile browsers, use the same approach as Safari
+ document.querySelector(".search-options").addEventListener("touchstart", function(e) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (buttonTouched) return;
+ buttonTouched = true;
+ // Blur the search input
+ blurSearchInput();
+ // Toggle checkbox state immediately
+ const checkbox = document.getElementById("wholeWordCheckbox");
+ const currentState = checkbox.checked;
+ checkbox.checked = !currentState;
+ // Perform highlighting with the new state
+ highlightText();
+ // Wait a moment for highlighting to complete, then navigate
+ setTimeout(() => {
+ if (searchResults.length > 0) {
+ findNext(false);
+ }
+ setTimeout(() => {
+ buttonTouched = false;
+ }, 200);
+ }, 100);
+ }, { passive: false });
+ }
+}
+</script>
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- Script for sticky header -->
 <script>
 window.onscroll = function() {myFunction()};
 var header = document.getElementById("sticky-header");
@@ -4419,7 +5069,8 @@ function myFunction() {
 }
 </script>
 
-<!-- Scroll arrows in sticky header:
+<!-- ----------------------------------------------------------------------- -->
+<!-- Script for scroll arrows in sticky header:
  down to next section, up to top of current section -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -4467,7 +5118,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- Function to scroll to a random row in a randomly selected table -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- Script for scrolling to a random row in a randomly selected table -->
 <script>
 function gotoRandomRow() {
 // Get all tables on the page
@@ -4498,7 +5150,8 @@ setTimeout(function() {
 }
 </script>
 
-<!-- Popups for 'Event' and selected dates -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- Script for popup 'Event' and selected dates -->
 <div id="overlay" onClick="hidePopup()"></div>
 <div id="overlay2" onClick="hidePopup2()"></div>
 <div id="popup"><img src="#" id="fullsizeImage"></div>
@@ -4555,6 +5208,7 @@ document.getElementById('fullsizeImage').addEventListener('click', togglePopup);
 document.getElementById('fullsizeImage2').addEventListener('click', togglePopup2);
 </script>
 
+<!-- ----------------------------------------------------------------------- -->
 <!-- Default Statcounter code for History
 http://www.southampton.ac.uk/~cpd/history.html -->
 <script type="text/javascript">
@@ -4575,5 +5229,5 @@ StatCounter"></a></div></noscript>
 
 </body>
 
-<!-- Mirrored from www.southampton.ac.uk/~cpd/history.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Mar 2025 06:45:54 GMT -->
+<!-- Mirrored from www.southampton.ac.uk/~cpd/history.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 03:27:33 GMT -->
 </html>
